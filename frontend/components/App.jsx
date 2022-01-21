@@ -8,7 +8,7 @@ const App = () => (
       <Link to='/' >SparrowHood</Link>
     </header>
     <div>
-      Inside App
+      
     </div>
   </div>
 )
