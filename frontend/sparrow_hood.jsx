@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import { fetchAsset } from './util/api_util';
+import Root from './components/root'
 
 
 
@@ -12,5 +13,5 @@ document.addEventListener('DOMContentLoaded', () => {
   window.store = store;
 
   const root = document.getElementById('root');
-  ReactDOM.render(<h1>SparrowHood</h1>, root);
+  ReactDOM.render(<Root store={store} />, root);
 });
