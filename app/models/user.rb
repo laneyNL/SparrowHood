@@ -16,7 +16,7 @@ class User < ApplicationRecord
   attr_reader :password
   validates :first_name, :last_name, :username, :password_digest, :session_token, :buying_power, presence: true
   validates :username, :session_token, uniqueness: true
-  validates :password, length: { minimum: 6, allow_nil: true }
+  validates :password, length: { minimum: 10, allow_nil: true }
   after_initialize :ensure_session_token
 
   def self.find_by_credentials(username, password)
