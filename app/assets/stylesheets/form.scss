@@ -1,9 +1,9 @@
-.login {
+.login,  .signup{
   font-family: 'Roboto', sans-serif;
   font-family: 'Signika Negative', sans-serif;
   display: flex;
 }
-.login-img, .form {
+.login-img, .form, .name-input, .signup-sidebar {
   flex: 1;
 }
 
