@@ -8,9 +8,17 @@ export default class Splash extends React.Component {
 
     return (
       <div>
-        splash
-
-
+        <nav>
+          <div>Robinhood</div>
+          <div>Products</div>
+          <div>Learn</div>
+          <div>Support</div>
+          <div>Who we are</div>
+          <Link to='/login'>Log In</Link>
+          <Link to='/login'>Sign Up</Link>
+        </nav>
+        <div>
+        </div>
       </div>
     )
   }

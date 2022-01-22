@@ -9,7 +9,7 @@ export default class Portfolio extends React.Component {
     return (
       <div>
         Portfolio
-
+      <button onClick={ this.props.logout }>Logout</button>
 
       </div>
     )
