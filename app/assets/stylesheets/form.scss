@@ -2,13 +2,18 @@
   font-family: 'Roboto', sans-serif;
   font-family: 'Signika Negative', sans-serif;
   display: flex;
+  width: 100%;
 }
 .login-img, .form, .name-.signup-form, .signup-sidebar {
-  flex: 1;
 }
 
 .login-title {
   font-size: 21px;
+}
+
+.login-img {
+  height: 100%;
+  width:100%;
 }
 
 .login-form {

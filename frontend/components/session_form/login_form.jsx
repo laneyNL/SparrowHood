@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +24,7 @@ export default class LoginForm extends React.Component {
     return (
       <div className='login'>
         <div className='login-img'>
-          <img src="" alt="" /> Placeholder
+          <img src='https://cdn.robinhood.com/assets/generated_assets/web-bundle-lazy-route-prod-experiment/member/632fcb3e7ed928b2a960f3e003d10b44.jpg' alt="" className='login-img' />
         </div>
         <div className='form'>
           
