@@ -41,10 +41,15 @@ export default class SignUpForm extends React.Component {
           <button>Continue</button>
             <Link to='/login'>Login</Link>
           </div>
-          <div className='signup-sidebar'>
-            Placeholder
-          </div>
         </form>
+        <div className='signup-sidebar'>
+          <p className='subheading'>Commission-free trading</p>
+          <p>Break free from commission-fees and make unlimited commission-free trades in stocks, funds, and options with Robinhood Financial. Other fees may apply. View our <span className='green'>fee schedule</span> to learn more.</p>
+          <p className='subheading'>Account Protection</p>
+          <p>Robinhood Financial is a member of SIPC. Securities in your account protected up to $500,000. For details, please see <span className='green'>www.sipc.org.</span></p>
+          <p className='subheading'>Stay on top of your portfolio</p>
+          <p>Set up customized news and notifications to stay on top of your assets as casually or as relentlessly as you like. Controlling the flow of info is up to you.</p>
+        </div>
 
         
       </div>
