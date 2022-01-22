@@ -25,17 +25,17 @@ export default class LoginForm extends React.Component {
     return (
       <div className='login'>
         <div className = 'logo'>
-        <img src="assets/images/green_feather.png" alt="green feather" />
+        <img src="assets/images/green_feather.png" alt="green feather" className='green-feather'/>
         </div>
         <div className='form'>
           
           <form onSubmit={this.handleSubmit} className='login-form'>
             <p>Log in to Sparrowhood</p>
-            <label> Username
+            <label> Username <br />
               <input type="text" value={this.state.username} onChange={this.update('username')} />
             </label>
 
-            <label> Password
+            <label> Password <br />
               <input type="password" value={this.state.password} onChange={this.update('password')} />
             </label>
 

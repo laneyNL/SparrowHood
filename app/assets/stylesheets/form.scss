@@ -1,4 +1,13 @@
+.login {
+  font-family: "FF DIN"; src: url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.eot"); src: url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.woff") format("woff"), url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.svg#FF DIN") format("svg");
+}
 
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+}
 
 .green {
   color: #00C805;
@@ -12,4 +21,10 @@
 
 .incomplete-app {
   font-size: 18px;
+}
+
+.green-feather {
+  margin: auto;
+  width: 64px;
+  height: 64px;
 }
