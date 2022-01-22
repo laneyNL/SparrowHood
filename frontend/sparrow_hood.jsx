@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root'
 
-import { fetchAsset } from './util/api_util';
-
+import { logout } from './actions/session_actions'
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -20,8 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     store = configureStore();
   }
-  window.fetchAsset = fetchAsset;
-  window.store = store;
+  
+  // window.logout = () => store.dispatch(logout());
+  // window.store = store;
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);
