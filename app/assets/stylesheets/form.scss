@@ -1,5 +1,10 @@
 .login {
-  font-family: "FF DIN"; src: url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.eot"); src: url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.woff") format("woff"), url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/cab3e909a9de32e7e39645e54fc81941.svg#FF DIN") format("svg");
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Signika Negative', sans-serif;
+}
+
+.login-title {
+  font-size: 21px;
 }
 
 .login-form {
@@ -7,24 +12,23 @@
   flex-direction: column;
   align-items: center;
   padding-top: 60px;
+  font-size: 13px;
 }
 
-.green {
-  color: #00C805;
-}
-
-.login-footer {
-  color: #B4BDC2;
-  font-size: 12.75px;
-  margin: auto;
-}
-
-.incomplete-app {
-  font-size: 18px;
-}
 
 .green-feather {
   margin: auto;
   width: 64px;
   height: 64px;
+}
+
+input[type=text], input[type=password] {
+  width: 225px;
+  height: 34px;
+}
+
+.link  {
+  text-decoration: underline;
+  font-weight: bolder;
+  color: #000000;
 }
