@@ -3,13 +3,25 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root'
 
-import { fetchAsset } from './util/api_util';
-
+import { logout } from './actions/session_actions'
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const store = configureStore();
-  // window.fetchAsset = fetchAsset;
+  let store;
+  if (window.currentUser) {
+    const preloadedState = {
+      entities: {
+        users: { [window.currentUser.id]: window.currentUser }
+      },
+      session: { id: window.currentUser.id }
+    };
+    store = configureStore(preloadedState);
+    delete window.currentUser;
+  } else {
+    store = configureStore();
+  }
+  
+  // window.logout = () => store.dispatch(logout());
   // window.store = store;
 
   const root = document.getElementById('root');
