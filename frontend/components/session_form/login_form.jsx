@@ -32,11 +32,11 @@ export default class LoginForm extends React.Component {
           <form onSubmit={this.handleSubmit} className='login-form'>
             <p className='login-title'>Log in to Sparrowhood</p>
             <label> Username <br />
-              <input type="text" value={this.state.username} onChange={this.update('username')} />
+              <input type="text" value={this.state.username} onChange={this.update('username')} className='login-input'/>
             </label> <br />
 
             <label> Password <br />
-              <input type="password" value={this.state.password} onChange={this.update('password')} />
+              <input type="password" value={this.state.password} onChange={this.update('password')} className='login-input'/>
             </label>
 
             <p className='link'>Forgot your password?</p>
@@ -45,7 +45,7 @@ export default class LoginForm extends React.Component {
               {this.props.errors.map((error, i) => <li key={i}>{error}</li>)}
             </ul>
 
-            <button>Log In</button>
+            <button className='login-button'>Log In</button>
             <p>Not on Robinhood? <Link to='/signup' className='link'>Create an account</Link></p>
 
 
