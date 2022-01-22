@@ -13,6 +13,7 @@ export default class LoginForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.props.login(this.state);
   }
 
   update(field) {
@@ -23,14 +24,21 @@ export default class LoginForm extends React.Component {
 
     return (
       <div>
-
+        <ul>
+          {this.props.errors.map((error, i) => <li key={i}>{error}</li>)}
+        </ul>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.firstName} onChange={this.update('firstName')} placeholder='First name' />
-          <input type="text" value={this.state.lastName} onChange={this.update('lastName')} placeholder='Last name' />
-          <input type="text" value={this.state.username} onChange={this.update('username')} placeholder='Username' />
-          <input type="password" value={this.state.password} onChange={this.update('password')} placeholder='Password (min. 10 characters)' />
-          <button>Continue</button>
+          <label> Username
+            <input type="text" value={this.state.username} onChange={this.update('username')} />
+          </label>
+
+          <label> Password
+            <input type="password" value={this.state.password} onChange={this.update('password')} />
+            <button>Log In</button>
+          </label>
+
         </form>
+        <Link to='/signup'>Sign Up</Link>
       </div>
     )
   }

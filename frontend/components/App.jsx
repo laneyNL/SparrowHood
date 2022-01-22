@@ -9,8 +9,8 @@ const App = () => (
       <Link to='/' >SparrowHood</Link>
     </header>
     <div>
-      <Route path='/signup' component={SignUpContainer} />
-      <Route path='/login' component={LoginContainer} />
+      <AuthRoute path='/signup' component={SignUpContainer} />
+      <AuthRoute path='/login' component={LoginContainer} />
     </div>
   </div>
 )

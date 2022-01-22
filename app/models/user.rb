@@ -43,7 +43,7 @@ class User < ApplicationRecord
   private 
 
   def ensure_session_token
-    @session_token ||= SecureRandom::urlsafe_base64(16)
+    self.session_token ||= SecureRandom::urlsafe_base64(16)
   end
 
 end
