@@ -13,6 +13,10 @@ export default class SignUpForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    document.title = "Sign up | Robinhood"
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     this.props.signup(this.state);
@@ -25,6 +29,7 @@ export default class SignUpForm extends React.Component {
   render() {
     
     return(
+
       <div className ='signup'>
         
         <form onSubmit={this.handleSubmit} className='signup-form'>
