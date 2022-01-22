@@ -31,21 +31,21 @@ export default class LoginForm extends React.Component {
           <form onSubmit={this.handleSubmit} className='login-form'>
             <p className='login-title'>Log in to Sparrowhood</p>
             <label> Username <br />
-              <input type="text" value={this.state.username} onChange={this.update('username')} className='login-input'/>
+              <input type="text" value={this.state.username} onChange={this.update('username')} required className='login-input'/>
             </label> <br />
 
             <label> Password <br />
-              <input type="password" value={this.state.password} onChange={this.update('password')} className='login-input'/>
+              <input type="password" value={this.state.password} onChange={this.update('password')} required className='login-input'/>
             </label>
 
-            <p className='link'>Forgot your password?</p>
+            <p className='link forgot'>Forgot your password?</p>
 
-            <ul className='errors'>
-              {this.props.errors.map((error, i) => <li key={i}>{error}</li>)}
-            </ul>
+            <p className='errors'>
+              {this.props.errors.map((error, i) => <span key={i}><i className="fas fa-exclamation-circle"></i> {error}</span>)}
+            </p>
 
             <button className='login-button'>Log In</button>
-            <p>Not on Robinhood? <Link to='/signup' className='link'>Create an account</Link></p>
+            <p className='create-acc'>Not on Robinhood? <Link to='/signup' className='link'>Create an account</Link></p>
 
 
           </form>

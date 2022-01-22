@@ -1,4 +1,6 @@
-
+div {
+  box-sizing: border-box;
+}
 .login,  .signup{
   font-family: 'Roboto', sans-serif;
   font-family: 'Signika Negative', sans-serif;
@@ -7,28 +9,39 @@
 }
 .login-img, .form, .name-.signup-form, .signup-sidebar {
   flex: 1 1 50%;
-  height: 100%;
-  width: 100%;
 }
 
 .login-title {
   font-size: 21px;
+  margin: 12px 0px 36px;
 }
 
 .login-img {
   object-fit: cover;
   overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  align-items: center;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
   font-size: 13px;
+  margin-left: 52px;
+  margin-right: 52px;
+  line-height: 20px
 }
 
 .login-input {
   width: 282px;
   height: 36px;
+  padding: 0 12px;
+  margin: 0 0 8px;
 }
 
 .link  {
@@ -36,6 +49,7 @@
   font-weight: bolder;
   color: #000000;
   cursor: pointer;
+  margin: 12px 0;
 }
 
 .login-button {
@@ -46,4 +60,23 @@
   // padding: 0 48px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.errors {
+  margin: 12px 0;
+}
+
+.create-acc {
+  margin: 25px 0 0;
+}
+
+.fas {
+  
+}
+
+.forgot:hover {
+  .forgot::before {
+
+    content: 'Please sign up'
+  }
 }
