@@ -20,7 +20,6 @@ export default class LoginForm extends React.Component {
   }
 
   render() {
-    const { formType } = this.props;
 
     return (
       <div>
