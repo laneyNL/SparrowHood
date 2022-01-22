@@ -9,9 +9,9 @@ import { connect } from 'react-redux';
 
 const App = ({loggedIn}) => (
   <div>
-    <header>
+    {/* <header>
       <Link to='/' >SparrowHood</Link>
-    </header>
+    </header> */}
     <div>
       <AuthRoute path='/signup' component={SignUpContainer} />
       <AuthRoute path='/login' component={LoginContainer} />

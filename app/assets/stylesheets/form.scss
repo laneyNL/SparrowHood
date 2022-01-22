@@ -1,6 +1,10 @@
 .login {
   font-family: 'Roboto', sans-serif;
   font-family: 'Signika Negative', sans-serif;
+  display: flex;
+}
+.login-img, .form {
+  flex: 1;
 }
 
 .login-title {
@@ -10,8 +14,6 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding-top: 60px;
   font-size: 13px;
 }
 
