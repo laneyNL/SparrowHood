@@ -31,11 +31,16 @@ export default class LoginForm extends React.Component {
           <form onSubmit={this.handleSubmit} className='login-form'>
             <p className='login-title'>Log in to Sparrowhood</p>
             <label> Username <br />
-              <input type="text" value={this.state.username} onChange={this.update('username')} required className='login-input'/>
+              <div className='input-box'>
+                <input type="text" value={this.state.username} onChange={this.update('username')} required className='login-input'/>
+              </div>
             </label> <br />
 
             <label> Password <br />
-              <input type="password" value={this.state.password} onChange={this.update('password')} required className='login-input'/>
+              <div className='input-box'>
+                <input type="password" value={this.state.password} onChange={this.update('password')} required className='login-input'/>
+              <button>Eye</button>
+              </div>
             </label>
 
             <p className='link forgot'>Forgot your password?</p>

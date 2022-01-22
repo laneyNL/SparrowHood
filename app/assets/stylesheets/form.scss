@@ -37,11 +37,19 @@ div {
   line-height: 20px
 }
 
-.login-input {
+.input-box {
   width: 282px;
   height: 36px;
   padding: 0 12px;
   margin: 0 0 8px;
+  border: 1px solid lightgray;
+}
+
+.login-input {
+  height: 100%;
+  border: none;
+  padding: 0;
+  background-color: transparent;
 }
 
 .link  {
