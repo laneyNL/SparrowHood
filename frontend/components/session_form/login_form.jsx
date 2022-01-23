@@ -8,6 +8,7 @@ export default class LoginForm extends React.Component {
       password: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
   }
 
   handleSubmit(e) {
@@ -19,9 +20,13 @@ export default class LoginForm extends React.Component {
     return (e) => this.setState({ [field]: e.currentTarget.value })
   }
 
-  toggleView(e) {
+  toggleView() {
     const passwdInput = document.getElementById('password');
     passwdInput.type = (passwdInput.type === 'password') ? 'text' : 'password';
+  }
+
+  demoLogin() {
+    this.props.login({ username: 'demo', password: 'demopassword' })
   }
 
   render() {
@@ -48,7 +53,7 @@ export default class LoginForm extends React.Component {
               </div>
             </label>
 
-            <p className='link forgot'>Forgot your password?</p>
+            <p className='link forgot' onClick={this.demoLogin}>Forgot your password?</p>
 
             <p className='errors'>
               {this.props.errors.map((error, i) => <span key={i}><i className="fas fa-exclamation-circle"></i> {error}</span>)}
