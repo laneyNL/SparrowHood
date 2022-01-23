@@ -23,7 +23,7 @@ div {
   width: 60%;
   display: flex;
   flex-direction: column;
-  padding: 0 15%;
+  padding: 0 10%;
 
 }
 
@@ -38,7 +38,7 @@ div {
 }
 
 .title-left {
-  margin-top: 161px;
+  margin-top: 121px;
   font-weight: bold;
   font-size: 24px;
 
@@ -152,6 +152,10 @@ input[type=text]:focus .input-box {
   font-size: 12.75px;;
 }
 
+.header {
+  padding-top: 60px;
+}
+
 .subheading {
   margin: 40px 0px 8px;
   font-weight: bolder;
@@ -161,4 +165,17 @@ input[type=text]:focus .input-box {
   color: rgb(255,80,0);
   list-style-type: disc;
   list-style-position: inside;
+}
+
+.submit-form {
+  display: flex;
+}
+
+.continue {
+  background-color: rgba(0,180,5,1);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0px 48px;
+  margin-right: 24px;
 }

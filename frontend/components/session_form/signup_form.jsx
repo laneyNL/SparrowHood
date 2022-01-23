@@ -48,7 +48,7 @@ export default class SignUpForm extends React.Component {
         
           <div className='left-signup'>
             <h2 className='header'>Robinhood</h2>
-            <h2 className='title-left'>Make Your Money Move</h2>
+            <h2 className='title-left'>Make Your Money Move</h2><br />
             <p>Robinhood lets you invest in companies you love, commission-free.</p><br/>
             <p>Please enter your full legal name. Your legal name should match any form of government ID.</p><br />
             <form onSubmit={this.handleSubmit} className='signup-form'>
@@ -67,8 +67,8 @@ export default class SignUpForm extends React.Component {
               </div>
 
               
-              <div>
-                <button>Continue</button>
+              <div className ='submit-form'>
+                <button className='continue'>Continue</button>
                 <div className=''>
                   <div>Already started?</div>
                   <Link to='/login' className='green'>Login in</Link>
