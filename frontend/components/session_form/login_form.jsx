@@ -32,13 +32,13 @@ export default class LoginForm extends React.Component {
             <p className='login-title'>Log in to Sparrowhood</p>
             <label> Username <br />
               <div className='input-box'>
-                <input type="text" value={this.state.username} onChange={this.update('username')} required className='login-input'/>
+                <input type="text" value={this.state.username} onChange={this.update('username')} required autocomplete="off" className='login-input'/>
               </div>
             </label> <br />
 
             <label> Password <br />
               <div className='input-box'>
-                <input type="password" value={this.state.password} onChange={this.update('password')} required className='login-input'/>
+                <input type="password" value={this.state.password} onChange={this.update('password')} autocomplete="off" required className='login-input'/>
               <button>Eye</button>
               </div>
             </label>
