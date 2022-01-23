@@ -19,6 +19,11 @@ export default class LoginForm extends React.Component {
     return (e) => this.setState({ [field]: e.currentTarget.value })
   }
 
+  toggleView(e) {
+    const passwdInput = document.getElementById('password');
+    passwdInput.type = (passwdInput.type === 'password') ? 'text' : 'password';
+  }
+
   render() {
 
     return (
@@ -32,14 +37,14 @@ export default class LoginForm extends React.Component {
             <p className='login-title'>Log in to Sparrowhood</p>
             <label> Username <br />
               <div className='input-box'>
-                <input type="text" value={this.state.username} onChange={this.update('username')} required autocomplete="off" className='login-input'/>
+                <input type="text" value={this.state.username} onChange={this.update('username')} required autoComplete="off" className='login-input'/>
               </div>
             </label> <br />
 
             <label> Password <br />
               <div className='input-box'>
-                <input type="password" value={this.state.password} onChange={this.update('password')} autocomplete="off" required className='login-input'/>
-              <button>Eye</button>
+                <input type="password" value={this.state.password} onChange={this.update('password')} autoComplete="off" required className='login-input' id='password'/>
+                <div className='eye' onClick={this.toggleView}><i className="fas fa-eye"></i></div>
               </div>
             </label>
 

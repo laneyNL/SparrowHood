@@ -60,6 +60,7 @@ input[type=text]:focus .input-box {
   padding: 0;
   background-color: transparent;
   border: none;
+  width: 240px
 }
 
 .link  {
@@ -75,9 +76,12 @@ input[type=text]:focus .input-box {
   background-color: black;
   width: 132px;
   height: 48px;
-  // padding: 0 48px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.eye {
+  display: inline;
 }
 
 .errors {
@@ -86,10 +90,6 @@ input[type=text]:focus .input-box {
 
 .create-acc {
   margin: 25px 0 0;
-}
-
-.fas {
-  
 }
 
 .forgot:hover {
