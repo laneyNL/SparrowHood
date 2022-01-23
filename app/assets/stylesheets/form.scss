@@ -47,9 +47,11 @@ div {
   margin: 0 0 8px;
   border: 1px solid lightgray;
 }
+
 input[type=text]:focus, input[type=password]:focus {
   outline: none;
 }
+
 input[type=text]:focus .input-box {
   border: 1px solid blue;
 }
@@ -60,7 +62,7 @@ input[type=text]:focus .input-box {
   padding: 0;
   background-color: transparent;
   border: none;
-  width: 240px
+  width: 230px
 }
 
 .link  {
@@ -79,9 +81,21 @@ input[type=text]:focus .input-box {
   border-radius: 5px;
   cursor: pointer;
 }
-
+.login-button:hover {
+  background-color: rgba(38,38,38,1);
+}
 .eye {
   display: inline;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.eye:hover {
+  background-color: rgba(242,242,242,1);
+}
+
+.forgot:hover {
+  color: rgba(0,180,5,1);
 }
 
 .errors {
@@ -90,11 +104,4 @@ input[type=text]:focus .input-box {
 
 .create-acc {
   margin: 25px 0 0;
-}
-
-.forgot:hover {
-  .forgot::before {
-
-    content: 'Please sign up'
-  }
 }

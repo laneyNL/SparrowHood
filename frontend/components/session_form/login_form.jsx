@@ -23,6 +23,9 @@ export default class LoginForm extends React.Component {
   toggleView() {
     const passwdInput = document.getElementById('password');
     passwdInput.type = (passwdInput.type === 'password') ? 'text' : 'password';
+    const eyeIcon = document.querySelector('#eye-icon');
+    eyeIcon.classList.toggle('fa-eye');
+    eyeIcon.classList.toggle('fa-eye-slash');
   }
 
   demoLogin() {
@@ -49,11 +52,11 @@ export default class LoginForm extends React.Component {
             <label> Password <br />
               <div className='input-box'>
                 <input type="password" value={this.state.password} onChange={this.update('password')} autoComplete="off" required className='login-input' id='password'/>
-                <div className='eye' onClick={this.toggleView}><i className="fas fa-eye"></i></div>
+                <div className='eye' onClick={this.toggleView}><i className="fas fa-eye" id='eye-icon'></i></div>
               </div>
             </label>
 
-            <p className='link forgot' onClick={this.demoLogin}>Forgot your password?</p>
+            <p className='link forgot' onClick={this.demoLogin}>Login as Demo User</p>
 
             <p className='errors'>
               {this.props.errors.map((error, i) => <span key={i}><i className="fas fa-exclamation-circle"></i> {error}</span>)}
