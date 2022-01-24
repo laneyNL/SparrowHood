@@ -3,14 +3,14 @@ div {
 }
 @font-face {
   font-family: 'AvenirLTStd-Book';
-  src: url('../fonts/avenir_ff/AvenirLTStd-Book.otf');
+  src: url('../fonts/FontsFree-Net-AvenirLTStd-Book.ttf') format('ttf');
 }
 
 .login,  .signup{
   font-family: 'Roboto', sans-serif;
-  // font-family: Arial, Helvetica, sans-serif;
-  // font-family: 'Signika Negative', sans-serif;
-  // font-family: 'AvenirLTStd-Book';
+  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Signika Negative', sans-serif;
+  font-family: 'AvenirLTStd-Book', sans-serif;
   display: flex;
   height: 100vh;
 }
