@@ -6,7 +6,8 @@ export default class LoginForm extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      errors: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
@@ -14,7 +15,9 @@ export default class LoginForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.login(this.state);
+    this.props.login(this.state).fail(() => {
+      this.setState({ errors: this.props.errors })
+    });
   }
 
   update(field) {
@@ -60,7 +63,7 @@ export default class LoginForm extends React.Component {
             <p className='link forgot' onClick={this.demoLogin}>Login as Demo User</p>
 
             <p className='errors'>
-              {this.props.errors.map((error, i) => <span key={i}><i className="fas fa-exclamation-circle"></i> {error}</span>)}
+              {this.state.errors.map((error, i) => <span key={i}><i className="fas fa-exclamation-circle"></i> {error}</span>)}
             </p>
 
             <button className='login-button'>Log In</button>

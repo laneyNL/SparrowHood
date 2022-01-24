@@ -8,7 +8,8 @@ export default class SignUpForm extends React.Component {
       first_name: '',
       last_name: '',
       username: '',
-      password: ''
+      password: '',
+      errors: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
@@ -21,7 +22,9 @@ export default class SignUpForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.signup(this.state);
+    this.props.signup(this.state).fail(() => {
+      this.setState({errors: this.props.errors })
+    })
   }
 
   update(field) {
@@ -76,7 +79,7 @@ export default class SignUpForm extends React.Component {
               </div><br />
               <p onClick={this.demoLogin} className='link green font13'>Login with demo user</p>
               <ul className='errors-list'>
-                {this.props.errors.map((error, i) => <li key={i}>{error}</li>)}
+                {this.state.errors.map((error, i) => <li key={i}>{error}</li>)}
               </ul><br />
             </form>
 
