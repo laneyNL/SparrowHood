@@ -203,3 +203,7 @@ input[type=text]:focus .input-box {
 .demo {
   cursor: pointer;
 }
+
+.input-box:focus-within,  .name-input input:focus{
+  border: 1px solid rgba(0,180,5,1);
+}

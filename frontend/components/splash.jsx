@@ -33,7 +33,7 @@ export default class Splash extends React.Component {
     return (
       <div className='splash'>
         <nav>
-          <Link to='/' className='nav-home'>Robinhood <img src={feather} alt="feather" id='feather' /></Link>
+          <Link to='/' className='nav-home'>Sparrowhood <img src={feather} alt="feather" id='feather' /></Link>
           <div className='hide-nav'><a href="https://github.com/laneyNL">GitHub <i className="fab fa-github"></i></a></div>
           <div className='hide-nav'><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn <i className="fab fa-linkedin"></i></a></div>
           <div className='hide-nav'>Support</div>
@@ -68,7 +68,7 @@ export default class Splash extends React.Component {
         </nav>
         <div className='banner'>
           <div className='left-banner'>
-            <h1>Investing for Everyone</h1><br />
+            <div className='banner-title'>Investing for Everyone</div><br />
             <p className='banner-info'>Commission-free investing, plus the tools you need to put your money in motion. Sign up and get your first stock for free. Certain limitations and fees apply</p><br /><br />
             <Link to='/signup' className='signup-button'>Sign Up</Link><br /><br />
             <p className='bold'><i className="fas fa-info-circle"></i> Commissions & Free Stock Disclosures</p>
