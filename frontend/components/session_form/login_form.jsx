@@ -13,6 +13,10 @@ export default class LoginForm extends React.Component {
     this.demoLogin = this.demoLogin.bind(this);
   }
 
+  componentDidMount() {
+    document.title = "Log In | Robinhood"
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     this.props.login(this.state).fail(() => {

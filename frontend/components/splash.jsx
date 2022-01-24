@@ -82,11 +82,33 @@ export default class Splash extends React.Component {
 
         <div className='fee'>See our <span className='underline'>fee schedule</span> to learn more about cost.</div>
 
-        <div className='balloon'>
+        {/* <div className='balloon'>
           <div><img src={splashBalloon} alt="hot air balloon" />
           </div>
           <div></div>
-        </div>
+        </div> */}
+        <footer>
+          <div>
+            <ul className='whiteText'>
+              <li><Link to='/signup'>Sign Up</Link></li>
+              <li><Link to='/login'>Login</Link></li>
+            </ul>
+          </div>
+          <div>
+            <ul className='whiteText'>
+              <li>About Me</li>
+              <li><a href="https://github.com/laneyNL" className='nav-link'>GitHub</a></li>
+              <li><a href="https://www.linkedin.com/in/laneyluong/" className='nav-link'>LinkedIn</a></li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>Links</li>
+              <li><i className="fab fa-github"></i> <span id='icon-links'><i className="fab fa-linkedin"></i></span></li>
+            </ul>
+          </div>
+          
+        </footer>
       </div>
     )
   }

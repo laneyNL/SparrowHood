@@ -167,3 +167,24 @@ a {
 #feather {
   height: 1em;
 }
+
+footer {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 20px;
+  display: flex;
+}
+
+footer li {
+  padding: 10px;
+  margin: 0 10px;
+}
+
+.whiteText li a, .whiteText li Link {
+  color: white;
+}
+#icon-links {
+  padding-left: 8px;
+}
