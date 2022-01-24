@@ -6,12 +6,37 @@
 nav {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   border-bottom: 1px solid grey;
-  padding: 10px;
+  height: 50px;
+  color: black;
 }
+.nav-home {
+  font-size: 20px;
+}
+.nav-links {
+  flex-basis: 20%;
+  text-align: right;
+}
+
+a {
+  color: black;
+  cursor: pointer;
+}
+
+.nav-login-link {
+  margin-right: 15px;
+}
+.nav-login-link:hover {
+  color: rgba(0,180,5,1);
+}
+
+
+// main banner css
 
 .banner h1 {
   font-size: 52px;
+  padding-top: 50px;
 }
 .banner-info {
   font-size: 24px;

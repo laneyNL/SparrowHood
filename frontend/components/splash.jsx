@@ -12,13 +12,15 @@ export default class Splash extends React.Component {
     return (
       <div className='splash'>
         <nav>
-          <div>Robinhood</div>
-          <div>Products</div>
-          <div>Learn</div>
+          <Link to='/' className='nav-home'>Robinhood</Link>
+          <div><a href="https://github.com/laneyNL">GitHub</a></div>
+          <div><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn</a></div>
           <div>Support</div>
           <div>Who we are</div>
-          <Link to='/login'>Log In</Link>
-          <Link to='/signup'>Sign Up</Link>
+          <div className='nav-links bold'>
+            <Link to='/login' className='nav-login-link'>Log In</Link>
+            <Link to='/signup'>Sign Up</Link>
+          </div>
         </nav>
         <div className='banner'>
           <div className='left-banner'>
