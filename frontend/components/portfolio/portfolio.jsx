@@ -8,7 +8,7 @@ export default class Portfolio extends React.Component {
 
     return (
       <div>
-        Portfolio
+        Welcome {this.props.user.username}!
       <button onClick={ this.props.logout }>Logout</button>
 
       </div>

@@ -10,7 +10,7 @@ export default class Splash extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className='splash'>
         <nav>
           <div>Robinhood</div>
           <div>Products</div>
@@ -25,11 +25,19 @@ export default class Splash extends React.Component {
             <h1>Investing for Everyone</h1>
             <p>Commission-free investing, plus the tools you need to put your money in motion. Sign up and get your first stock for free. Certain limitations and fees apply</p>
             <Link to='/signup'>Sign Up</Link>
-            <p><i class="fas fa-info-circle"></i> Commissions & Free Stock Disclosures</p>
+            <p><i className="fas fa-info-circle"></i> Commissions & Free Stock Disclosures</p>
           </div>
           <div className='right-banner'>
-
+            <img src={splashBanner} alt="phone and credit card" id='splashPhone'/>
+            <div className='video'>
+              <video src={splashVideo} autoPlay loop muted preload='auto' id='splashVideo'></video></div>
           </div>
+        </div>
+        <div>See our fee schedule to learn more about cost.</div>
+        <div className='balloon'>
+          <div><img src={splashBalloon} alt="hot air balloon" />
+          </div>
+          <div></div>
         </div>
       </div>
     )

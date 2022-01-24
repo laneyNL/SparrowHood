@@ -1,6 +1,59 @@
+.splash {
+  display: flex;
+  flex-direction: column;
+}
+
 nav {
   display: flex;
   justify-content: space-around;
   border-bottom: 1px solid grey;
   padding: 10px;
 }
+
+.banner, .balloon {
+  min-width: 320px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+@media (min-width: 1024px){
+  .right-banner {
+    width: calc(58.333 - 18px);
+  }
+  .left-banner {
+    width: calc(41.667% - 18px);
+  }
+}
+
+.left-banner {
+  background-color: rgb(195,245,60);
+  padding: 0 9px;
+}
+
+.right-banner {
+  background-color: rgb(195,245,60);
+  width: 100%;
+
+}
+
+.splashPhone {
+  position: relative;
+  z-index: 4;
+  width: 50%;
+  object-fit: contain;
+
+}
+
+.video {
+  width: 200px;
+}
+
+#splashVideo {
+  position: absolute;
+  width: 100%;
+  object-fit: contain;
+  left: 0;
+  // z-index: -1;
+}
+
