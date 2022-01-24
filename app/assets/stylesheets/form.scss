@@ -1,16 +1,12 @@
 div {
   box-sizing: border-box;
 }
-@font-face {
-  font-family: 'AvenirLTStd-Book';
-  src: url('../fonts/FontsFree-Net-AvenirLTStd-Book.ttf') format('ttf');
-}
 
 .login,  .signup{
   font-family: 'Roboto', sans-serif;
   font-family: Arial, Helvetica, sans-serif;
   font-family: 'Signika Negative', sans-serif;
-  font-family: 'AvenirLTStd-Book', sans-serif;
+  font-family: sans-serif;
   display: flex;
   height: 100vh;
 }
@@ -30,17 +26,18 @@ div {
 .right-signup {
   width: 40%;
   background-color: rgb(245,248,250);
-  padding: 174px 4% 0px;
+  padding: 15% 4% 0px;
 }
 
 .header {
   font-size: 24px;
+  margin: 15% 0 25% 0;
 }
 
 .title-left {
-  margin-top: 121px;
-  font-weight: bold;
-  font-size: 24px;
+  // margin-top: 30%;
+  font-weight: 500;
+  font-size: 24px; 
 
 }
 
@@ -67,23 +64,24 @@ div {
   font-size: 13px;
   margin-left: 52px;
   margin-right: 52px;
-  line-height: 20px
+  line-height: 20px;
+  width: 100%;
 }
 
 
 .input-box, .name-input input {
-  width: 282px;
+  width: 90%;
   height: 36px;
   padding: 0 12px;
-  margin: 0 0 8px;
   border: 1px solid lightgray;
   border-radius: 5px;
 }
 
  .name-input input {
-  width: 100px;
+  width: 34%;
   margin-right: 20px;
  }
+
 
 input[type=text]:focus, input[type=password]:focus {
   outline: none;
@@ -99,10 +97,14 @@ input[type=text]:focus .input-box {
   padding: 0;
   background-color: transparent;
   border: none;
-  width: 230px
+  width: 90%;
 }
 
-.link  {
+.name-input, .signup-form .input-box {
+ margin-bottom: 20px;
+}
+
+.link {
   text-decoration: underline;
   font-weight: bolder;
   color: #000000;
@@ -118,13 +120,16 @@ input[type=text]:focus .input-box {
   border-radius: 5px;
   cursor: pointer;
 }
+
 .login-button:hover {
   background-color: rgba(38,38,38,1);
 }
+
 .eye {
   display: inline;
-  padding: 2px;
+  padding: 1%;
   border-radius: 5px;
+  font-size: 12px;
 }
 
 .eye:hover {
@@ -133,6 +138,7 @@ input[type=text]:focus .input-box {
 
 .forgot:hover, .green {
   color: rgba(0,180,5,1);
+  font-weight: bold;
 }
 
 .errors {
@@ -143,22 +149,15 @@ input[type=text]:focus .input-box {
   margin: 25px 0 0;
 }
 
-.signup-form {
-  width: 80%;
-}
-
 .disclaimer {
   color: rgb(180, 189, 194);
-  font-size: 12.75px;;
-}
-
-.header {
-  padding-top: 60px;
+  font-size: 12.75px;
+  padding-top: 64px;
 }
 
 .subheading {
   margin: 40px 0px 8px;
-  font-weight: bolder;
+  font-weight: 600;
 }
 
 .errors-list {
@@ -176,6 +175,25 @@ input[type=text]:focus .input-box {
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 0px 48px;
+  padding: 18px 48px;
   margin-right: 24px;
+  margin-top: 10px;
+}
+
+.bold {
+  font-weight: 550;
+}
+
+.font13{
+  font-size: 13px;
+}
+
+.already div{
+  padding-top: 4px;
+  margin-top: 10px;
+}
+
+
+.demo {
+  cursor: pointer;
 }

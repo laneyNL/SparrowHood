@@ -49,8 +49,8 @@ export default class SignUpForm extends React.Component {
           <div className='left-signup'>
             <h2 className='header'>Robinhood</h2>
             <h2 className='title-left'>Make Your Money Move</h2><br />
-            <p>Robinhood lets you invest in companies you love, commission-free.</p><br/>
-            <p>Please enter your full legal name. Your legal name should match any form of government ID.</p><br />
+            <p>Robinhood lets you invest in companies you love, commission-free.</p><br/><br />
+            <p className='font13 bold'>Please enter your full legal name. Your legal name should match any form of government ID.</p><br />
             <form onSubmit={this.handleSubmit} className='signup-form'>
               <div className='name-input'>
                 <input type="text" value={this.state.first_name} onChange={this.update('first_name')} placeholder='First name' />
@@ -58,25 +58,26 @@ export default class SignUpForm extends React.Component {
               </div>
               
               <div className='input-box'>
-              <input type="text" value={this.state.username} onChange={this.update('username')} placeholder='Username' required autoComplete="off" className='login-input'/>
+                <input type="text" value={this.state.username} onChange={this.update('username')} placeholder='Username' required autoComplete="off" className='login-input'/>
               </div>
 
               <div className='input-box'>
                 <input type="password" value={this.state.password} onChange={this.update('password')} autoComplete="off" required className='login-input' id='password' placeholder='Password (min. 10 characters)' />
-                <div className='eye' onClick={this.toggleView}><i className="fas fa-eye" id='eye-icon'></i></div>
+                <span className='eye' onClick={this.toggleView}><i className="fas fa-eye" id='eye-icon'></i></span>
               </div>
 
               
               <div className ='submit-form'>
                 <button className='continue'>Continue</button>
-                <div className=''>
-                  <div>Already started?</div>
+                <div className='font13 already'>
+                  <div>Already started?</div><br />
                   <Link to='/login' className='green'>Login in</Link>
                 </div>
-              </div>
+              </div><br />
+              <p onClick={this.demoLogin} className='link green font13'>Login with demo user</p>
               <ul className='errors-list'>
                 {this.props.errors.map((error, i) => <li key={i}>{error}</li>)}
-              </ul>
+              </ul><br />
             </form>
 
             <div className='disclaimer'>
