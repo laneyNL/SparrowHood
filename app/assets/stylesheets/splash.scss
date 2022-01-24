@@ -10,39 +10,49 @@ nav {
   padding: 10px;
 }
 
+.banner h1 {
+  font-size: 52px;
+}
+.banner-info {
+  font-size: 24px;
+}
+
 .banner, .balloon {
   min-width: 320px;
   display: flex;
   flex-wrap: wrap;
+  width: 90%;
+  justify-content: center;
 }
 
 
+.left-banner {
+  background-color: rgb(195,245,60);
+  padding: 0 9px;
+  display: flex;
+  flex-direction: column;
+  padding: 9px;
+}
+
+.right-banner {
+  background-color: rgb(195,245,60);
+  width: 100%;
+}
 @media (min-width: 1024px){
   .right-banner {
-    width: calc(58.333 - 18px);
+    width: calc(58.333% - 18px);
   }
   .left-banner {
     width: calc(41.667% - 18px);
   }
 }
 
-.left-banner {
-  background-color: rgb(195,245,60);
-  padding: 0 9px;
-}
-
-.right-banner {
-  background-color: rgb(195,245,60);
-  width: 100%;
-
-}
 
 .splashPhone {
   position: relative;
   z-index: 4;
-  width: 50%;
+  // width: 50%;
   object-fit: contain;
-
 }
 
 .video {

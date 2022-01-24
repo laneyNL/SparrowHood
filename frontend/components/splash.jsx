@@ -22,15 +22,15 @@ export default class Splash extends React.Component {
         </nav>
         <div className='banner'>
           <div className='left-banner'>
-            <h1>Investing for Everyone</h1>
-            <p>Commission-free investing, plus the tools you need to put your money in motion. Sign up and get your first stock for free. Certain limitations and fees apply</p>
-            <Link to='/signup'>Sign Up</Link>
-            <p><i className="fas fa-info-circle"></i> Commissions & Free Stock Disclosures</p>
+            <h1>Investing for Everyone</h1><br />
+            <p className='banner-info'>Commission-free investing, plus the tools you need to put your money in motion. Sign up and get your first stock for free. Certain limitations and fees apply</p><br />
+            <Link to='/signup'>Sign Up</Link><br />
+            <p className='bold'><i className="fas fa-info-circle"></i> Commissions & Free Stock Disclosures</p>
           </div>
           <div className='right-banner'>
             <img src={splashBanner} alt="phone and credit card" id='splashPhone'/>
-            <div className='video'>
-              <video src={splashVideo} autoPlay loop muted preload='auto' id='splashVideo'></video></div>
+            {/* <div className='video'>
+              <video src={splashVideo} autoPlay loop muted preload='auto' id='splashVideo'></video></div> */}
           </div>
         </div>
         <div>See our fee schedule to learn more about cost.</div>
