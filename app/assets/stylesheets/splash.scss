@@ -21,21 +21,21 @@ nav {
   min-width: 320px;
   display: flex;
   flex-wrap: wrap;
-  width: 90%;
+  width: 100%;
   justify-content: center;
 }
-
-
+.banner {
+  background-color: rgb(195,245,60);
+}
 .left-banner {
   background-color: rgb(195,245,60);
-  padding: 0 9px;
   display: flex;
   flex-direction: column;
   padding: 9px;
 }
 
 .right-banner {
-  background-color: rgb(195,245,60);
+  position: relative;
   width: 100%;
 }
 @media (min-width: 1024px){
@@ -48,22 +48,24 @@ nav {
 }
 
 
-.splashPhone {
+#splashPhone {
   position: relative;
-  z-index: 4;
-  // width: 50%;
+  z-index: 2;
+  width: 100%;
   object-fit: contain;
 }
 
 .video {
-  width: 200px;
+  width: 100%;
 }
 
 #splashVideo {
   position: absolute;
   width: 100%;
+  // height: auto;
   object-fit: contain;
   left: 0;
-  // z-index: -1;
+  top: 0;
+  z-index: 1;
 }
 
