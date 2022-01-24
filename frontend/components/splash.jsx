@@ -5,7 +5,17 @@ import splashBalloon from '../../app/assets/images/splash-balloon.svg';
 import splashVideo from '../../app/assets/videos/splash-video.mp4';
 
 export default class Splash extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   
+  dropdown() {
+    const menu = document.getElementById('menu');
+    menu.classList.toggle('fa-bars');
+    menu.classList.toggle('fa-times');
+    const dropdown = document.querySelector('.dropdown');
+    dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
+  }
 
   render() {
 
@@ -13,14 +23,25 @@ export default class Splash extends React.Component {
       <div className='splash'>
         <nav>
           <Link to='/' className='nav-home'>Robinhood</Link>
-          <div ><a href="https://github.com/laneyNL">GitHub</a></div>
-          <div><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn</a></div>
-          <div>Support</div>
-          <div>Who we are</div>
-          <div className='nav-links bold'>
+          <div className='hide-nav'><a href="https://github.com/laneyNL">GitHub</a></div>
+          <div className='hide-nav'><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn</a></div>
+          <div className='hide-nav'>Support</div>
+          <div className='hide-nav'>Who we are</div>
+          <div className='nav-links bold hide-nav'>
             <Link to='/login' className='nav-login-link'>Log In</Link>
             <Link to='/signup' className='nav-signup-link'>Sign Up</Link>
           </div>
+          <div className='show' onClick={this.dropdown}><i className="fas fa-bars" id='menu'></i></div>
+          <ul className='dropdown'> 
+            <li className=''><a href="https://github.com/laneyNL">GitHub</a></li>
+            <li className=''><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn</a></li>
+            <li className=''>Support</li>
+            <li className=''>Who we are</li>
+            {/* <li className='nav-links bold hide-nav'> */}
+              <li><Link to='/login' className='nav-login-link'>Log In</Link></li>
+            <li><Link to='/signup' className='nav-login-link'>Sign Up</Link></li>
+            {/* </li> */}
+          </ul>
         </nav>
         <div className='banner'>
           <div className='left-banner'>
