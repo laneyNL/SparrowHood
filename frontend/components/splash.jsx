@@ -17,6 +17,16 @@ export default class Splash extends React.Component {
     dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
   }
 
+  toggleList(sublist) {
+    return () => {
+      const list = document.getElementById(sublist);
+      list.style.display = (list.style.display === 'block') ? 'none' : 'block';
+      const caret = document.getElementById(`${sublist}-caret`);
+      caret.classList.toggle('fa-angle-down');
+      caret.classList.toggle('fa-angle-up');
+    }
+  }
+
   render() {
 
     return (
@@ -28,20 +38,32 @@ export default class Splash extends React.Component {
           <div className='hide-nav'>Support</div>
           <div className='hide-nav'>Who we are</div>
           <div className='nav-links bold hide-nav'>
-            <Link to='/login' className='nav-login-link'>Log In</Link>
+            <Link to='/login' className='nav-link'>Log In</Link>
             <Link to='/signup' className='nav-signup-link'>Sign Up</Link>
           </div>
           <div className='show' onClick={this.dropdown}><i className="fas fa-bars" id='menu'></i></div>
-          <ul className='dropdown'> 
-            <li className=''><a href="https://github.com/laneyNL">GitHub</a></li>
-            <li className=''><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn</a></li>
-            <li className=''>Support</li>
-            <li className=''>Who we are</li>
-            {/* <li className='nav-links bold hide-nav'> */}
-              <li><Link to='/login' className='nav-login-link'>Log In</Link></li>
-            <li><Link to='/signup' className='nav-login-link'>Sign Up</Link></li>
-            {/* </li> */}
-          </ul>
+          <div className='dropdown'>
+            <ul > 
+              <li className='sublist nav-link' onClick={this.toggleList('info-list')}><div className='flex'><span>Laney's Information</span><span><i className="fas fa-angle-down" id='info-list-caret'></i></span></div></li>
+                <ul className='toggle-list' id="info-list">
+                <li className='sublist-item'><a href="https://github.com/laneyNL" className='nav-link'>GitHub</a></li>
+                <li className='sublist-item'><a href="https://www.linkedin.com/in/laneyluong/" className='nav-link'>LinkedIn</a></li>
+                </ul>
+              
+
+              <li className='sublist nav-link' onClick={this.toggleList('learn-list')}><div className='flex'><span>Learn</span><span><i className="fas fa-angle-down" id='learn-list-caret'></i></span></div></li>
+                <ul className='toggle-list' id="learn-list">
+                  <li className='sublist-item'>Support</li>
+                  <li className='sublist-item'>Who we are</li>
+                </ul>
+
+              <li className='sublist nav-link' onClick={this.toggleList('login-list')}><div className='flex'><span>Sign In to View More Features</span><span><i className="fas fa-angle-down" id='login-list-caret'></i></span></div></li>
+                <ul className='toggle-list' id="login-list">
+                  <li className='sublist-item'><Link to='/login' className='nav-link'>Log In</Link></li>
+                  <li className='sublist-item'><Link to='/signup' className='nav-link'>Sign Up</Link></li>
+                </ul>
+            </ul>
+          </div>
         </nav>
         <div className='banner'>
           <div className='left-banner'>
