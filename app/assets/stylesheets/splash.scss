@@ -15,7 +15,7 @@ nav {
   font-size: 20px;
 }
 .nav-links {
-  flex-basis: 20%;
+  flex: 0 0 20%;
   text-align: right;
 }
 
@@ -30,9 +30,18 @@ a {
 .nav-login-link:hover {
   color: rgba(0,180,5,1);
 }
+.nav-signup-link, .signup-button {
+  background-color: #00C805;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-align: center;
+}
 
-
-// main banner css
+.signup-button {
+  background-color: black;
+  color: white;
+  width: 8%;
+}
 
 .banner h1 {
   font-size: 52px;
@@ -63,15 +72,6 @@ a {
   position: relative;
   width: 100%;
 }
-@media (min-width: 1024px){
-  .right-banner {
-    width: calc(58.333% - 18px);
-  }
-  .left-banner {
-    width: calc(41.667% - 18px);
-  }
-}
-
 
 #splashPhone {
   position: relative;
@@ -94,3 +94,12 @@ a {
   z-index: 1;
 }
 
+@media (min-width: 900px){
+  .right-banner {
+    width: calc(58.333% - 18px);
+  }
+  .left-banner {
+    width: calc(41.667% - 18px);
+  }
+
+}

@@ -13,20 +13,20 @@ export default class Splash extends React.Component {
       <div className='splash'>
         <nav>
           <Link to='/' className='nav-home'>Robinhood</Link>
-          <div><a href="https://github.com/laneyNL">GitHub</a></div>
+          <div ><a href="https://github.com/laneyNL">GitHub</a></div>
           <div><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn</a></div>
           <div>Support</div>
           <div>Who we are</div>
           <div className='nav-links bold'>
             <Link to='/login' className='nav-login-link'>Log In</Link>
-            <Link to='/signup'>Sign Up</Link>
+            <Link to='/signup' className='nav-signup-link'>Sign Up</Link>
           </div>
         </nav>
         <div className='banner'>
           <div className='left-banner'>
             <h1>Investing for Everyone</h1><br />
             <p className='banner-info'>Commission-free investing, plus the tools you need to put your money in motion. Sign up and get your first stock for free. Certain limitations and fees apply</p><br />
-            <Link to='/signup'>Sign Up</Link><br />
+            <Link to='/signup' className='signup-button'>Sign Up</Link><br />
             <p className='bold'><i className="fas fa-info-circle"></i> Commissions & Free Stock Disclosures</p>
           </div>
           <div className='right-banner'>
