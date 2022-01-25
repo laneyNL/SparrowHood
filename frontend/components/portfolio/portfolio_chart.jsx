@@ -23,17 +23,15 @@ export default class PortfolioChart extends React.Component {
       Tooltip,
       Legend
     );
-
   }
   chartData () {
     return {
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
       datasets: [
         {
-          label: 'cost',
           data: [12, 19, 3, 5, 2],
           fill: false,
-          borderColor: 'rgb(75, 192, 192)'
+          borderColor: 'green'
         }
       ]
     }
@@ -41,10 +39,16 @@ export default class PortfolioChart extends React.Component {
 
   chartOptions() {
     return {
-      maintainAspectRatio: false,
       scales: {
+        x: {
+          ticks: {
+            display: false
+          }
+        },
         y: {
-          beginAtZero: true
+          ticks: {
+            display: false
+          }
         }
       }
     }
@@ -54,12 +58,22 @@ export default class PortfolioChart extends React.Component {
     console.log(this.props.transactions)
     return (
       <div className='chart'>
-        <Line 
-          data= {this.chartData()}
-          height={400} 
-          width={600}
-          options={this.chartOptions()}
-        />
+        <div>
+          <Line 
+            data= {this.chartData()}
+            height={400} 
+            width={600}
+            options={this.chartOptions()}
+          />
+        </div>
+        <div>
+          <span>1D</span>
+          <span>1W</span>
+          <span>1M</span>
+          <span>3M</span>
+          <span>1Y</span>
+          <span>ALL</span>
+        </div>
       </div>
     )
   }

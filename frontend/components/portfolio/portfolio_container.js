@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions'
+import { fetchTransactions } from '../../actions/transaction_action';
 import Portfolio from './portfolio';
 
 const mapStateToProps = (state) => ({
@@ -9,7 +10,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
-  
+  fetchTransactions: (userId) => dispatch(fetchTransactions(userId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);
