@@ -32,8 +32,8 @@ export default class Splash extends React.Component {
           <Link to='/' className='nav-home'>Sparrowhood <img src={window.greenFeatherImg}alt="feather" id='feather' /></Link>
           <div className='hide-nav'><a href="https://github.com/laneyNL">GitHub <i className="fab fa-github"></i></a></div>
           <div className='hide-nav'><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn <i className="fab fa-linkedin"></i></a></div>
-          <div className='hide-nav'>Support</div>
-          <div className='hide-nav'>Who we are</div>
+          <div className='hide-nav'>Placeholder</div>
+          <div className='hide-nav'>Placeholder</div>
           <div className='nav-links bold hide-nav'>
             <Link to='/login' className='nav-link'>Log In</Link>
             <Link to='/signup' className='nav-signup-link'>Sign Up</Link>
@@ -86,21 +86,26 @@ export default class Splash extends React.Component {
         <footer>
           <div>
             <ul className='whiteText'>
-              <li><Link to='/signup'>Sign Up</Link></li>
-              <li><Link to='/login'>Login</Link></li>
+              <li><Link to='/signup' className='nav-link'>Sign Up</Link></li>
+              <li><Link to='/login' className='nav-link'>Login</Link></li>
             </ul>
           </div>
           <div>
             <ul className='whiteText'>
-              <li>About Me</li>
+              <li>About Me:</li>
               <li><a href="https://github.com/laneyNL" className='nav-link'>GitHub</a></li>
               <li><a href="https://www.linkedin.com/in/laneyluong/" className='nav-link'>LinkedIn</a></li>
             </ul>
           </div>
           <div>
             <ul>
-              <li>Links</li>
-              <li><i className="fab fa-github"></i> <span id='icon-links'><i className="fab fa-linkedin"></i></span></li>
+              <li>Links:</li>
+              <li id='icon-links'>
+                <a href="https://github.com/laneyNL" className='nav-link whiteText'><i className="fab fa-github"></i></a> 
+                <span id='icon-links'>
+                  <a href="https://www.linkedin.com/in/laneyluong/" className='nav-link whiteText'><i className="fab fa-linkedin"></i></a>
+                </span>
+                </li>
             </ul>
           </div>
           

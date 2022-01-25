@@ -8,11 +8,18 @@ export default class Portfolio extends React.Component {
 
     return (
       <div>
-        <nav>
-          {/* <Link><img src={window.greenFeatherImg} alt="green feather" /></Link> */}
+        <nav className='port-nav'>
+          <Link to='/'><img src={window.greenFeatherImg} alt="green feather" id='feather' /></Link>
+          <div><input type="text" placeholder='Search' /></div>
+          <Link to='/' className='white'>Portfolio</Link>
+          <button onClick={this.props.logout}>Logout</button>
+          <Link to='/'>Cash</Link>
         </nav>
-        Welcome {this.props.user.username}!
-      <button onClick={ this.props.logout }>Logout</button>
+        <div className='portfolio'>
+          <div id='graph'>Graph</div>
+        </div>
+        
+      
 
       </div>
     )
