@@ -28,7 +28,7 @@ export default class Splash extends React.Component {
 
     return (
       <div className='splash'>
-        {/* <nav>
+        <nav>
           <Link to='/' className='nav-home'>Sparrowhood <img src={window.greenFeatherImg}alt="feather" id='feather' /></Link>
           <div className='hide-nav'><a href="https://github.com/laneyNL">GitHub <i className="fab fa-github"></i></a></div>
           <div className='hide-nav'><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn <i className="fab fa-linkedin"></i></a></div>
@@ -109,7 +109,7 @@ export default class Splash extends React.Component {
             </ul>
           </div>
           
-        </footer> */}
+        </footer>
       </div>
     )
   }
