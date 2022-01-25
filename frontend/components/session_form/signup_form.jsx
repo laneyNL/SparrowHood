@@ -74,7 +74,7 @@ export default class SignUpForm extends React.Component {
                 <button className='continue'>Continue</button>
                 <div className='font13 already'>
                   <div>Already started?</div><br />
-                  <Link to='/login' className='green'>Login in</Link>
+                  <Link to='/login' className='green'>Login</Link>
                 </div>
               </div><br />
               <p onClick={this.demoLogin} className='link green font13'>Login with demo user</p>
