@@ -1,29 +1,65 @@
 import React from 'react';
-// import Chart from 'chart.js/auto';
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
 export default class PortfolioChart extends React.Component {
+  constructor(props) {
+    super(props);
+    ChartJS.register(
+      CategoryScale,
+      LinearScale,
+      PointElement,
+      LineElement,
+      Title,
+      Tooltip,
+      Legend
+    );
 
-  chart () {
-    let chartDiv = document.getElementById('chart').getContext('2d');
-    let chart = new Chart(chartDiv, {
-      type: 'line',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr'],
-        datasets: [{
+  }
+  chartData () {
+    return {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+      datasets: [
+        {
           label: 'cost',
-          data: [100, 400, 200, 2100],
-          backgroundColor: 'green'
-        }]
-      },
-      options: {}
-    })
+          data: [12, 19, 3, 5, 2],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)'
+        }
+      ]
+    }
+  }
+
+  chartOptions() {
+    return {
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
   }
 
   render() {
+    console.log(this.props.transactions)
     return (
-      <div>
-        <canvas id="chart" width="600" height="400"></canvas>
-        {/* {this.props.transactions.map(tran => <div>${tran}</div>)} */}
+      <div className='chart'>
+        <Line 
+          data= {this.chartData()}
+          height={400} 
+          width={600}
+          options={this.chartOptions()}
+        />
       </div>
     )
   }
