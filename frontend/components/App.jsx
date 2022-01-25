@@ -12,12 +12,12 @@ const App = ({loggedIn}) => (
     <div>
       <Switch>
         <AuthRoute path='/signup' component={SignUpContainer} />
-        {/* <AuthRoute path='/login' component={LoginContainer} />
+        <AuthRoute path='/login' component={LoginContainer} />
 
         {(loggedIn) ?
           <Route exact path='/' component={PortfolioContainer} /> :
           <Route exact path='/' component={Splash} />}
-        <Redirect to='/' /> */}
+        <Redirect to='/' />
       </Switch>
 
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import loginImg from '../../../app/assets/images/login-side.jpeg'
+
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -45,8 +45,7 @@ export default class LoginForm extends React.Component {
     return (
       <div className='login'>
         <div className='login-img'>
-          {/* <img src={loginImg} alt="" className='login-img' /> */}
-          <img src={window.loginImg} alt="" className='login-img' />
+          {/* <img src={window.loginImg} alt="" className='login-img' /> */}
         </div>
         <div className='form'>
           
