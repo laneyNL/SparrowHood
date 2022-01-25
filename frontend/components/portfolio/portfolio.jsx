@@ -16,9 +16,10 @@ export default class Portfolio extends React.Component {
           <button onClick={this.props.logout}>Logout</button>
           <Link to='/'>Cash</Link>
         </nav>
+
         <div className='portfolio'>
           <div id='graph'>
-            <PortfolioChart />
+            <PortfolioChart transactions={this.props.transactions}/>
           </div>
         </div>
         

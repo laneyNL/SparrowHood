@@ -3,7 +3,8 @@ import { logout } from '../../actions/session_actions'
 import Portfolio from './portfolio';
 
 const mapStateToProps = (state) => ({
-  user: state.entities.users[state.session.id]
+  user: state.entities.users[state.session.id],
+  transactions: state.entities.transactions
 })
 
 const mapDispatchToProps = dispatch => ({

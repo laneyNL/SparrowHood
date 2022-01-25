@@ -20,7 +20,9 @@
     <script type='text/javascript'>  window.splashVideo = "<%= asset_url('splash-video.mp4') %>";</script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-   
+   <script type="text/javascript">
+      window.alphaAPIKey = "<%= Rails.application.credentials.alpha[:api_key] %>"
+  </script>
   </head>
 
   <body>

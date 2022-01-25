@@ -3,9 +3,9 @@ import { RECEIVE_SESSION_ERRORS } from './session_actions';
 
 export const RECEIVE_ASSET = 'RECEIVE_ASSET';
 
-const receiveAsset = (asset) => ({
+const receiveAsset = (payload) => ({
   type: RECEIVE_ASSET,
-  asset
+  payload
 })
 
 const receiveErrors = (errors) => ({
@@ -13,8 +13,18 @@ const receiveErrors = (errors) => ({
   errors
 })
 
-export const fetchAsset = (symbol) => dispatch => {
-  return AssetApiUtil.fetchAsset(symbol)
-    .then(asset => dispatch(receiveAsset(asset)))
+export const fetchAssetInterval = (symbol, interval) => dispatch => {
+  return AssetApiUtil.fetchAssetInterval(symbol, interval)
+    .then(payload => dispatch(receiveAsset(JSON.parse(payload))))
+    .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+}
+export const fetchAssetDaily = (symbol) => dispatch => {
+  return AssetApiUtil.fetchAssetDaily(symbol)
+    .then(payload => dispatch(receiveAsset(payload)))
+    .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+}
+export const fetchAssetWeekly = (symbol) => dispatch => {
+  return AssetApiUtil.fetchAssetWeekly(symbol)
+    .then(payload => dispatch(receiveAsset(payload)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
