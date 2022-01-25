@@ -19,6 +19,11 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 10, allow_nil: true }
   after_initialize :ensure_session_token
 
+
+  has_many :transactions,
+  foreign_key: :owner_id,
+  class_name: "PortolioTransaction"
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil if user.nil?

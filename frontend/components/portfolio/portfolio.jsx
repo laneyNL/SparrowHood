@@ -19,8 +19,6 @@ export default class Portfolio extends React.Component {
           <div id='graph'>Graph</div>
         </div>
         
-      
-
       </div>
     )
   }
