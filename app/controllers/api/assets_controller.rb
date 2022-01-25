@@ -4,7 +4,7 @@ class Api::AssetsController < ApplicationController
     if @asset
       render :show
     else
-      render json: ["This asset does not exist"], status 404
+      render json: ["This asset does not exist"], status: 404
     end
   end
 end
