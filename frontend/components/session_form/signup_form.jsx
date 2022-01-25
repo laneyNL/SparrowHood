@@ -17,7 +17,7 @@ export default class SignUpForm extends React.Component {
   }
 
   componentDidMount() {
-    document.title = "Sign up | Robinhood"
+    document.title = "Sign up | Sparrowhood"
   }
 
   handleSubmit(e) {
