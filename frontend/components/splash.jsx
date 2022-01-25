@@ -1,9 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import splashBanner from '../../app/assets/images/splash-phone.png';
-import splashBalloon from '../../app/assets/images/splash-balloon.svg';
-import splashVideo from '../../app/assets/videos/splash-video.mp4';
-import feather from '../../app/assets/images/green-feather.png'
 
 export default class Splash extends React.Component {
   constructor(props) {
@@ -33,8 +29,7 @@ export default class Splash extends React.Component {
     return (
       <div className='splash'>
         <nav>
-          {/* <Link to='/' className='nav-home'>Sparrowhood <img src={feather} alt="feather" id='feather' /></Link> */}
-          <Link to='/' className='nav-home'>Sparrowhood <img src={"https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFgaCXVzLXdlc3QtMSJIMEYCIQCxXVW1s%2Fj3Q4oGQauwlBdK7yXBrPWrle%2B2DhQQiamR9gIhAKeecWG2IdsQuesgEbFL7mpH%2Fv0y0PWQvDJw23THfiBnKu0CCIH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3Nzg1NzY0MTE5Igyph95wD%2FuGNI2ne10qwQJsO%2FIgS0EaXad5lvoDPRtJXZSeitY5wSiMVuMW6gaZgmz4tRl%2FXbEqSI03eZmdbPnuDF9Cj%2FHyC8glk1M23CyDL78fWWI7Q4gCqKz%2FRg103UFrmHNEiF5y%2B9df4atjvgZT7dQkFhi9aKMEKXElzKu%2FxUcZE6K6zNvJfrKnzpJ9hZkxYGy5n1tE7ZSgvCkiJPiJRy9DCyG4t7Hb%2FF3ZJuv4LfusiMH%2BenNxy7g52ax54ZjP7MI7HXc1Uq5jFcx6HSby5lTySj8Puj90Voz7BwDkR%2BWtQzmaFSmJz7TKEtCOrpJHzq7Tlop9RgyTTK%2Fx4Ux4IY9LZ14fUQ5rbsjfv4BVBY5cQcu%2F6TryYIWnsbDoAIOQVJVALin8FbI%2B2IW7sdADWnUrjQhoHuWUaSJaQ%2ByA6w9gpL1yf%2FmR5Dmoz0wzQDEwh%2Be8jwY6sgIaxpu6ZxJqj8aphP%2BpfOTVDHnbUMn5PTtvI1%2FKHe2WUf3HUpnPqS%2BVz%2FPITlOFmqu%2BBV%2BYR8qXKGSp8T1fA7cJe%2BukNX5zRm8U6EoJ6pUvFx6nPcEd%2BUKCdJ7qne9UiS3ABrqxHyhXFf8dpL4%2F%2F1Izgaw9EBcoBNqqhFGHzJnku85XjC70zebMT5%2Bh2NMMSrXADif7KgcHRFFzrx6jgjWNQL9bb5woFp72qa4w9KCNpDb64TesK5i2buD2b7RuYgto8dxyNuvl%2BRDPnmGcVEsWU2RfhXaUKzgIqj5Jn3Y5RalcRWKdVooHidPe5QwU%2F8ItsI4G01Vl15KFkqRe%2F%2BaqII6FVLmD9WJvGuECfrhnqnzcAn4XhTA2dd1qttsttkBjuJmuxf%2BLBS2HSmK3FToo5Mg%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220125T005810Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=ASIAZI7X6OEL3A6UFZ6Z%2F20220125%2Fus-west-1%2Fs3%2Faws4_request&X-Amz-Signature=0a918478d61cd39a328cebc16dc7b4d675626de1f7768d841d82ca736f16abc2" }alt="feather" id='feather' /></Link>
+          <Link to='/' className='nav-home'>Sparrowhood <img src={window.greenFeatherImg}alt="feather" id='feather' /></Link>
           <div className='hide-nav'><a href="https://github.com/laneyNL">GitHub <i className="fab fa-github"></i></a></div>
           <div className='hide-nav'><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn <i className="fab fa-linkedin"></i></a></div>
           <div className='hide-nav'>Support</div>
@@ -75,11 +70,9 @@ export default class Splash extends React.Component {
             <p className='bold'><i className="fas fa-info-circle"></i> Commissions & Free Stock Disclosures</p>
           </div>
           <div className='right-banner'>
-            {/* <img src={splashBanner} alt="phone and credit card" id='splashPhone'/> */}
-            <img src="https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/splash-phone.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFgaCXVzLXdlc3QtMSJIMEYCIQCxXVW1s%2Fj3Q4oGQauwlBdK7yXBrPWrle%2B2DhQQiamR9gIhAKeecWG2IdsQuesgEbFL7mpH%2Fv0y0PWQvDJw23THfiBnKu0CCIH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3Nzg1NzY0MTE5Igyph95wD%2FuGNI2ne10qwQJsO%2FIgS0EaXad5lvoDPRtJXZSeitY5wSiMVuMW6gaZgmz4tRl%2FXbEqSI03eZmdbPnuDF9Cj%2FHyC8glk1M23CyDL78fWWI7Q4gCqKz%2FRg103UFrmHNEiF5y%2B9df4atjvgZT7dQkFhi9aKMEKXElzKu%2FxUcZE6K6zNvJfrKnzpJ9hZkxYGy5n1tE7ZSgvCkiJPiJRy9DCyG4t7Hb%2FF3ZJuv4LfusiMH%2BenNxy7g52ax54ZjP7MI7HXc1Uq5jFcx6HSby5lTySj8Puj90Voz7BwDkR%2BWtQzmaFSmJz7TKEtCOrpJHzq7Tlop9RgyTTK%2Fx4Ux4IY9LZ14fUQ5rbsjfv4BVBY5cQcu%2F6TryYIWnsbDoAIOQVJVALin8FbI%2B2IW7sdADWnUrjQhoHuWUaSJaQ%2ByA6w9gpL1yf%2FmR5Dmoz0wzQDEwh%2Be8jwY6sgIaxpu6ZxJqj8aphP%2BpfOTVDHnbUMn5PTtvI1%2FKHe2WUf3HUpnPqS%2BVz%2FPITlOFmqu%2BBV%2BYR8qXKGSp8T1fA7cJe%2BukNX5zRm8U6EoJ6pUvFx6nPcEd%2BUKCdJ7qne9UiS3ABrqxHyhXFf8dpL4%2F%2F1Izgaw9EBcoBNqqhFGHzJnku85XjC70zebMT5%2Bh2NMMSrXADif7KgcHRFFzrx6jgjWNQL9bb5woFp72qa4w9KCNpDb64TesK5i2buD2b7RuYgto8dxyNuvl%2BRDPnmGcVEsWU2RfhXaUKzgIqj5Jn3Y5RalcRWKdVooHidPe5QwU%2F8ItsI4G01Vl15KFkqRe%2F%2BaqII6FVLmD9WJvGuECfrhnqnzcAn4XhTA2dd1qttsttkBjuJmuxf%2BLBS2HSmK3FToo5Mg%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220125T005649Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=ASIAZI7X6OEL3A6UFZ6Z%2F20220125%2Fus-west-1%2Fs3%2Faws4_request&X-Amz-Signature=58dd34ea4fd292b427ee5ab3e81d3a21af53228491ef98722e44853b589af4c4" alt="phone and credit card" id='splashPhone'/>
+            <img src={window.splashPhoneImg} alt="phone and credit card" id='splashPhone'/>
             <div className='video'>
-              {/* <video src={splashVideo} autoPlay loop muted preload='auto' id='splashVideo'></video></div> */}
-              <video src={"https://sparrowhood-dev.s3.us-west-1.amazonaws.com/videos/splash-video.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFgaCXVzLXdlc3QtMSJIMEYCIQCxXVW1s%2Fj3Q4oGQauwlBdK7yXBrPWrle%2B2DhQQiamR9gIhAKeecWG2IdsQuesgEbFL7mpH%2Fv0y0PWQvDJw23THfiBnKu0CCIH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3Nzg1NzY0MTE5Igyph95wD%2FuGNI2ne10qwQJsO%2FIgS0EaXad5lvoDPRtJXZSeitY5wSiMVuMW6gaZgmz4tRl%2FXbEqSI03eZmdbPnuDF9Cj%2FHyC8glk1M23CyDL78fWWI7Q4gCqKz%2FRg103UFrmHNEiF5y%2B9df4atjvgZT7dQkFhi9aKMEKXElzKu%2FxUcZE6K6zNvJfrKnzpJ9hZkxYGy5n1tE7ZSgvCkiJPiJRy9DCyG4t7Hb%2FF3ZJuv4LfusiMH%2BenNxy7g52ax54ZjP7MI7HXc1Uq5jFcx6HSby5lTySj8Puj90Voz7BwDkR%2BWtQzmaFSmJz7TKEtCOrpJHzq7Tlop9RgyTTK%2Fx4Ux4IY9LZ14fUQ5rbsjfv4BVBY5cQcu%2F6TryYIWnsbDoAIOQVJVALin8FbI%2B2IW7sdADWnUrjQhoHuWUaSJaQ%2ByA6w9gpL1yf%2FmR5Dmoz0wzQDEwh%2Be8jwY6sgIaxpu6ZxJqj8aphP%2BpfOTVDHnbUMn5PTtvI1%2FKHe2WUf3HUpnPqS%2BVz%2FPITlOFmqu%2BBV%2BYR8qXKGSp8T1fA7cJe%2BukNX5zRm8U6EoJ6pUvFx6nPcEd%2BUKCdJ7qne9UiS3ABrqxHyhXFf8dpL4%2F%2F1Izgaw9EBcoBNqqhFGHzJnku85XjC70zebMT5%2Bh2NMMSrXADif7KgcHRFFzrx6jgjWNQL9bb5woFp72qa4w9KCNpDb64TesK5i2buD2b7RuYgto8dxyNuvl%2BRDPnmGcVEsWU2RfhXaUKzgIqj5Jn3Y5RalcRWKdVooHidPe5QwU%2F8ItsI4G01Vl15KFkqRe%2F%2BaqII6FVLmD9WJvGuECfrhnqnzcAn4XhTA2dd1qttsttkBjuJmuxf%2BLBS2HSmK3FToo5Mg%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220125T005927Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=ASIAZI7X6OEL3A6UFZ6Z%2F20220125%2Fus-west-1%2Fs3%2Faws4_request&X-Amz-Signature=7e8c20a69fa40274d5e552777a6a4a7a66872ef38e2b0735507751d51f730c40"} autoPlay loop muted preload='auto' id='splashVideo'></video></div>
+              <video src={window.splashVideo} autoPlay loop muted preload='auto' id='splashVideo'></video></div>
           </div>
         </div>
 
