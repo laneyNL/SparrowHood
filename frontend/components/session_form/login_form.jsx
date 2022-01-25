@@ -48,7 +48,7 @@ export default class LoginForm extends React.Component {
           <img src={window.loginImg} alt="" className='login-img' />
         </div>
         <div className='form'>
-          
+        
           <form onSubmit={this.handleSubmit} className='login-form'>
             <p className='login-title'>Log in to Sparrowhood</p>
             <label> Username <br />
