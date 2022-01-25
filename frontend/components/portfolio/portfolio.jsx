@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PortfolioChart from './portfolio_chart';
 
 export default class Portfolio extends React.Component {
 
@@ -16,7 +17,9 @@ export default class Portfolio extends React.Component {
           <Link to='/'>Cash</Link>
         </nav>
         <div className='portfolio'>
-          <div id='graph'>Graph</div>
+          <div id='graph'>
+            <PortfolioChart />
+          </div>
         </div>
         
       </div>
