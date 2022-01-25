@@ -11,7 +11,7 @@ class Api::PortfolioTransactionsController < ApplicationController
       @asset = Asset.find_by(id: params[:portfolio_transaction][:asset_id])
       render '/api/assets/show'
     else
-      render json: @transaction.errors.full_messages, status 404
+      render json: @transaction.errors.full_messages, status: 404
     end
   end
 
