@@ -46,7 +46,6 @@ export default class LoginForm extends React.Component {
       <div className='login'>
         <div className='login-img'>
           <img src={window.loginImg} alt="" className='login-img' />
-          {/* <img src={"https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png"} alt="" className='login-img' /> */}
         </div>
         <div className='form'>
         
