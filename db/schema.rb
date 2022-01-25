@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_25_052527) do
+ActiveRecord::Schema.define(version: 2022_01_25_054241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2022_01_25_052527) do
     t.index ["symbol"], name: "index_assets_on_symbol", unique: true
   end
 
-  create_table "portolio_transactions", force: :cascade do |t|
+  create_table "portfolio_transactions", force: :cascade do |t|
     t.integer "asset_id"
     t.integer "owner_id"
     t.boolean "is_purchase"
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 2022_01_25_052527) do
     t.float "transaction_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["asset_id"], name: "index_portolio_transactions_on_asset_id"
-    t.index ["owner_id"], name: "index_portolio_transactions_on_owner_id"
+    t.index ["asset_id"], name: "index_portfolio_transactions_on_asset_id"
+    t.index ["owner_id"], name: "index_portfolio_transactions_on_owner_id"
   end
 
   create_table "users", force: :cascade do |t|

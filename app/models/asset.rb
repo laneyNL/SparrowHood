@@ -16,5 +16,5 @@ class Asset < ApplicationRecord
 
   has_many :transactions,
   foreign_key: :asset_id,
-  class_name: "PortolioTransaction"
+  class_name: "PortfolioTransaction"
 end
