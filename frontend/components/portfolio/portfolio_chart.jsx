@@ -24,12 +24,13 @@ export default class PortfolioChart extends React.Component {
       Legend
     );
   }
+
   chartData () {
     return {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+      labels: this.props.transactions.map(action => action.createdAt),
       datasets: [
         {
-          data: [12, 19, 3, 5, 2],
+          data: this.props.transactions.map(action => action.currentTotal),
           fill: false,
           borderColor: 'green'
         }
@@ -38,32 +39,52 @@ export default class PortfolioChart extends React.Component {
   }
 
   chartOptions() {
+    const change = (tooltipItem) => {
+      let time = new Date(tooltipItem.label)
+      console.log(time.toDateString().split(' ').slice(1).join(' '));
+      return time.toDateString().split(' ').slice(1).join(' ');
+    }
+
     return {
       scales: {
         x: {
-          ticks: {
-            display: false
-          }
+          ticks: { display: false }
         },
         y: {
-          ticks: {
-            display: false
-          }
+          ticks: { display: false }
         }
       },
       plugins: {
-        legend: {
-          display: false
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: change
+          }
         }
       }
     }
   }
 
+  renderSummary() {
+    const change = (tooltipItems) => {
+      console.log('toolitems', tooltipItems)
+      let initialTotal = this.props.transactions[0].currentTotal;
+      let currTotal = tooltipItems[0].currentTotal;
+      let diff = currTotal - initialTotal;
+      let percent_diff = (diff / initialTotal) * 100;
+      const symbol = diff > 0 ? '+' : '-';
+      return `${symbol}${diff}(${symbol}${percent_diff}%)`;
+    }
+  }
+
+  onClick() {
+
+  }
+
   render() {
-    console.log(this.props.transactions)
     return (
       <div className='chart'>
-        <div>
+        <div className = 'graph'>
           <Line 
             data= {this.chartData()}
             height={400} 
@@ -72,12 +93,12 @@ export default class PortfolioChart extends React.Component {
           />
         </div>
         <div className='chartOptions'>
-          <span>1D</span>
-          <span>1W</span>
-          <span>1M</span>
-          <span>3M</span>
-          <span>1Y</span>
-          <span>ALL</span>
+          <span className='nav-link'>1D</span>
+          <span className='nav-link'>1W</span>
+          <span className='nav-link'>1M</span>
+          <span className='nav-link'>3M</span>
+          <span className='nav-link'>1Y</span>
+          <span className='nav-link'>ALL</span>
         </div>
       </div>
     )

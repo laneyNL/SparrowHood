@@ -12,7 +12,6 @@ export default class Portfolio extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         <nav className='port-nav'>
