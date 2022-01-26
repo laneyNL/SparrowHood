@@ -14,9 +14,9 @@ import {
 export default class PortfolioChart extends React.Component {
   constructor(props) {
     super(props);
-    ChartJS.register(
-      CategoryScale, LinearScale, PointElement, LineElement, Title,
-      Tooltip, Legend);
+    // ChartJS.register(
+    //   CategoryScale, LinearScale, PointElement, LineElement, Title,
+    //   Tooltip, Legend);
 
     this.state = {
       difference: 0,
