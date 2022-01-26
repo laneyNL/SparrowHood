@@ -50,6 +50,11 @@ export default class PortfolioChart extends React.Component {
             display: false
           }
         }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
       }
     }
   }
@@ -66,7 +71,7 @@ export default class PortfolioChart extends React.Component {
             options={this.chartOptions()}
           />
         </div>
-        <div>
+        <div className='chartOptions'>
           <span>1D</span>
           <span>1W</span>
           <span>1M</span>

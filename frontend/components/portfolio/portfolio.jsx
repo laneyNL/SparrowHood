@@ -28,7 +28,7 @@ export default class Portfolio extends React.Component {
             <PortfolioChart transactions={this.props.transactions}/>
           </div>
         </div>
-        
+
       </div>
     )
   }
