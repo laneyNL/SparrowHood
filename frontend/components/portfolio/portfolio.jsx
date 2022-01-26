@@ -43,11 +43,11 @@ export default class Portfolio extends React.Component {
           </div>
           <aside className='asset-list'>
             <p>Stocks</p>
-            {/* {
+            {
               this.state.symbols.map((symbol, idx) => 
                 <AssetListItem symbol={symbol} assets={this.props.assets} key={idx}/>
                 )
-            } */}
+            }
           </aside>
         </div>
       </div>
