@@ -1,0 +1,614 @@
+/* line 1, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+div {
+  box-sizing: border-box;
+}
+
+/* line 5, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.login, .signup {
+  font-family: 'Roboto', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Signika Negative', sans-serif;
+  font-family: sans-serif;
+  display: flex;
+  height: 100vh;
+}
+
+@media (max-width: 700px) {
+  /* line 15, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+  .login-img {
+    display: none;
+  }
+}
+/* line 20, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.login-img, .form {
+  flex: 1 1 50%;
+}
+
+/* line 24, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.left-signup {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10%;
+}
+
+/* line 32, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.right-signup {
+  width: 40%;
+  background-color: #f5f8fa;
+  padding: 15% 4% 0px;
+}
+
+/* line 38, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.header {
+  font-size: 24px;
+  margin: 15% 0 25% 0;
+}
+
+/* line 43, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.title-left {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+/* line 50, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.login-title {
+  font-size: 21px;
+  margin: 12px 0px 36px;
+}
+
+/* line 55, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.login-img {
+  object-fit: cover;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+/* line 62, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.form {
+  display: flex;
+  align-items: center;
+}
+
+/* line 67, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  margin-left: 52px;
+  margin-right: 52px;
+  line-height: 20px;
+  width: 100%;
+}
+
+/* line 78, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.input-box, .name-input input {
+  width: 90%;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+/* line 86, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.name-input input {
+  width: 34%;
+  margin-right: 20px;
+}
+
+/* line 92, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+input[type=text]:focus, input[type=password]:focus {
+  outline: none;
+}
+
+/* line 96, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+input[type=text]:focus .input-box {
+  border: 1px solid blue;
+}
+
+/* line 100, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.login-input {
+  height: 100%;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  width: 90%;
+}
+
+/* line 109, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.name-input, .signup-form .input-box {
+  margin-bottom: 20px;
+}
+
+/* line 113, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.link {
+  text-decoration: underline;
+  font-weight: bolder;
+  color: #000000;
+  cursor: pointer;
+  margin: 12px 0;
+}
+
+/* line 121, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.login-button {
+  color: white;
+  background-color: black;
+  width: 132px;
+  height: 48px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* line 130, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.login-button:hover {
+  background-color: #262626;
+}
+
+/* line 134, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.eye {
+  display: inline;
+  padding: 1%;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+/* line 141, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.eye:hover {
+  background-color: #f2f2f2;
+}
+
+/* line 145, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.forgot:hover, .green {
+  color: #00b405;
+  font-weight: bold;
+}
+
+/* line 150, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.errors {
+  margin: 12px 0;
+}
+
+/* line 154, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.create-acc {
+  margin: 25px 0 0;
+}
+
+/* line 158, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.disclaimer {
+  color: #b4bdc2;
+  font-size: 12.75px;
+  padding-top: 64px;
+}
+
+/* line 164, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.subheading {
+  margin: 40px 0px 8px;
+  font-weight: 600;
+}
+
+/* line 169, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.errors-list {
+  color: #ff5000;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+/* line 175, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.submit-form {
+  display: flex;
+}
+
+/* line 179, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.continue {
+  background-color: #00b405;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 18px 48px;
+  margin-right: 24px;
+  margin-top: 10px;
+}
+
+/* line 189, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.bold {
+  font-weight: 550;
+}
+
+/* line 193, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.font13 {
+  font-size: 13px;
+}
+
+/* line 197, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.already div {
+  padding-top: 4px;
+  margin-top: 10px;
+}
+
+/* line 203, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.demo {
+  cursor: pointer;
+}
+
+/* line 207, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/form.scss */
+.input-box:focus-within, .name-input input:focus {
+  border: 1px solid #00b405;
+}
+/* line 1, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/portfolio.scss */
+.portfolio-splash, .port-nav {
+  background-color: black;
+  color: white;
+}
+
+/* line 6, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/portfolio.scss */
+.portfolio-splash {
+  height: 100vh;
+}
+
+/* line 10, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/portfolio.scss */
+.portfolio {
+  display: flex;
+  width: 100%;
+  margin: 5%;
+}
+
+/* line 16, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/portfolio.scss */
+.graph {
+  margin-bottom: 20px;
+}
+
+/* line 21, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/portfolio.scss */
+.main-chart {
+  width: 600px;
+  height: 300px;
+}
+
+/* line 25, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/portfolio.scss */
+.chartOptions span {
+  padding-right: 15px;
+}
+
+/* line 29, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/portfolio.scss */
+.asset-list {
+  border: 1px solid grey;
+  width: 275px;
+  max-height: 550px;
+  margin-left: 50px;
+}
+
+/* line 35, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/portfolio.scss */
+.asset-list p {
+  box-sizing: border-box;
+  padding: 20px;
+  border-bottom: 1px solid grey;
+  width: 100%;
+}
+
+/* line 42, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/portfolio.scss */
+.buying-power {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  padding: 20px;
+  width: 100%;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+/* line 7, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/reset.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: black;
+  vertical-align: baseline;
+  font-family: sans-serif;
+  text-decoration: none;
+}
+
+/* HTML5 display-role reset for older browsers */
+/* line 30, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/reset.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+/* line 34, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/reset.scss */
+body {
+  line-height: 1;
+}
+
+/* line 37, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/reset.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 40, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/reset.scss */
+blockquote, q {
+  quotes: none;
+}
+
+/* line 43, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/reset.scss */
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* line 48, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/reset.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* line 1, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.splash {
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 6, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid grey;
+  height: 50px;
+  color: black;
+  z-index: 5;
+  background-color: white;
+}
+
+/* line 18, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.nav-home {
+  font-size: 20px;
+}
+
+/* line 21, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.nav-links {
+  flex: 0 0 20%;
+  text-align: right;
+}
+
+/* line 26, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+a {
+  color: black;
+  cursor: pointer;
+}
+
+/* line 31, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.nav-link {
+  margin-right: 15px;
+}
+
+/* line 34, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.nav-link:hover {
+  color: #00b405;
+}
+
+/* line 37, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.nav-signup-link, .signup-button {
+  background-color: #00C805;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-align: center;
+  width: max-content;
+}
+
+/* line 45, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.signup-button {
+  background-color: black;
+  color: white;
+}
+
+/* line 49, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.dropdown {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 51px;
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  padding-top: 20px;
+}
+
+/* line 61, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.sublist-item {
+  padding: 20px 30px;
+  margin: auto;
+  width: 75%;
+}
+
+/* line 67, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.sublist {
+  background-color: #efefef;
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+}
+
+/* line 76, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.show, .toggle-list {
+  display: none;
+}
+
+/* line 79, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+  /* line 84, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+  nav {
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
+  /* line 88, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+  .hide-nav {
+    display: none;
+  }
+
+  /* line 91, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+  .show {
+    display: inline;
+  }
+}
+/* line 96, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.banner-title {
+  font-size: 40px;
+  padding-top: 50px;
+}
+
+/* line 100, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.banner-info {
+  font-size: 24px;
+}
+
+/* line 104, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.banner, .balloon {
+  min-width: 320px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+/* line 111, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.banner {
+  background-color: #c3f53c;
+}
+
+/* line 114, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.left-banner {
+  background-color: #c3f53c;
+  display: flex;
+  flex-direction: column;
+  padding: 9px;
+}
+
+/* line 121, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.right-banner {
+  position: relative;
+  width: 100%;
+}
+
+/* line 126, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+#splashPhone {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  object-fit: contain;
+}
+
+/* line 133, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.video {
+  width: 100%;
+}
+
+/* line 137, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+#splashVideo {
+  position: absolute;
+  width: 100%;
+  object-fit: contain;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+@media (min-width: 900px) {
+  /* line 148, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+  .right-banner {
+    width: calc(58.333% - 18px);
+  }
+
+  /* line 151, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+  .left-banner {
+    width: calc(41.667% - 18px);
+  }
+}
+/* line 156, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.underline {
+  text-decoration: underline;
+}
+
+/* line 160, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.fee {
+  text-align: center;
+  padding: 45px;
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
+}
+
+/* line 167, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+#feather {
+  height: 2em;
+}
+
+/* line 171, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+footer {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 20px;
+  display: flex;
+}
+
+/* line 180, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+footer li {
+  padding: 10px;
+  margin: 0 10px;
+}
+
+/* line 185, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+.whiteText li a, .whiteText li Link, .whiteText {
+  color: white;
+}
+
+/* line 188, /Users/laney/Desktop/SparrowHood/app/assets/stylesheets/splash.scss */
+#icon-links {
+  padding-left: 8px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+
+ 
