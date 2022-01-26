@@ -8,7 +8,7 @@ export default class Portfolio extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchTransactions(this.props.user.id)
+    // this.props.fetchTransactions(this.props.user.id)
   }
 
   render() {
@@ -24,7 +24,7 @@ export default class Portfolio extends React.Component {
 
         <div className='portfolio'>
           <div id='graph'>
-            <PortfolioChart transactions={this.props.transactions}/>
+            <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={this.props.transactions}/>
           </div>
         </div>
 

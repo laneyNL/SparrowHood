@@ -14,15 +14,21 @@ import {
 export default class PortfolioChart extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      totalValue: '',
+      difference: ''
+    }
+    this.updateSummary.bind(this)
+  }
+
+  componentDidMount() {
     ChartJS.register(
-      CategoryScale,
-      LinearScale,
-      PointElement,
-      LineElement,
-      Title,
-      Tooltip,
-      Legend
-    );
+      CategoryScale, LinearScale, PointElement, LineElement, Title,
+      Tooltip, Legend);
+    this.props.fetchTransactions(this.props.user.id)
+      .then(() => this.setState({ 
+        totalValue: this.props.transactions[this.props.transactions.length - 1].currentTotal 
+      }));
   }
 
   chartData () {
@@ -41,7 +47,6 @@ export default class PortfolioChart extends React.Component {
   chartOptions() {
     const change = (tooltipItem) => {
       let time = new Date(tooltipItem.label)
-      console.log(time.toDateString().split(' ').slice(1).join(' '));
       return time.toDateString().split(' ').slice(1).join(' ');
     }
 
@@ -55,26 +60,37 @@ export default class PortfolioChart extends React.Component {
         }
       },
       plugins: {
-        legend: { display: false },
+        legend: { 
+          display: false,
+          onHover: this.updateSummary,
+         },
         tooltip: {
+          displayColors: false,
           callbacks: {
-            label: change
+            label: change,
+            labelTextColor: () => 'green',
+            labelColor: () => ({
+              backgroundColor: 'transparent'
+            }),
+            title: () => ''
           }
         }
       }
     }
   }
 
-  renderSummary() {
-    const change = (tooltipItems) => {
-      console.log('toolitems', tooltipItems)
-      let initialTotal = this.props.transactions[0].currentTotal;
-      let currTotal = tooltipItems[0].currentTotal;
-      let diff = currTotal - initialTotal;
-      let percent_diff = (diff / initialTotal) * 100;
-      const symbol = diff > 0 ? '+' : '-';
-      return `${symbol}${diff}(${symbol}${percent_diff}%)`;
-    }
+  updateSummary(e) {
+    console.log(e)
+    console.log(...arguments)
+    // const change = (tooltipItems) => {
+    //   console.log('toolitems', tooltipItems)
+    //   let initialTotal = this.props.transactions[0].currentTotal;
+    //   let currTotal = tooltipItems[0].currentTotal;
+    //   let diff = currTotal - initialTotal;
+    //   let percent_diff = (diff / initialTotal) * 100;
+    //   const symbol = diff > 0 ? '+' : '-';
+    //   return `${symbol}${diff}(${symbol}${percent_diff}%)`;
+    // }
   }
 
   onClick() {
@@ -84,10 +100,13 @@ export default class PortfolioChart extends React.Component {
   render() {
     return (
       <div className='chart'>
+        <div>{this.state.totalValue}</div>
+        <div>{this.state.difference}</div>
+        <div></div>
         <div className = 'graph'>
           <Line 
             data= {this.chartData()}
-            height={400} 
+            height={200} 
             width={600}
             options={this.chartOptions()}
           />
