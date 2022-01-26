@@ -29,6 +29,7 @@ export default class PortfolioChart extends React.Component {
       .then(() => this.setState({ 
         totalValue: `$${this.props.transactions[this.props.transactions.length - 1].currentTotal.toFixed(2)}`
       }));
+
   }
 
   chartData () {
