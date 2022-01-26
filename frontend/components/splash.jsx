@@ -29,7 +29,7 @@ export default class Splash extends React.Component {
     return (
       <div className='splash'>
         <nav>
-          {/* <Link to='/' className='nav-home'>Sparrowhood <img src={window.greenFeatherImg}alt="feather" id='feather' /></Link> */}
+          <Link to='/' className='nav-home'>Sparrowhood <img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png'}alt="feather" id='feather' /></Link>
           <div className='hide-nav'><a href="https://github.com/laneyNL">GitHub <i className="fab fa-github"></i></a></div>
           <div className='hide-nav'><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn <i className="fab fa-linkedin"></i></a></div>
           <div className='hide-nav'>Placeholder</div>
@@ -70,9 +70,9 @@ export default class Splash extends React.Component {
             <p className='bold'><i className="fas fa-info-circle"></i> Commissions & Free Stock Disclosures</p>
           </div>
           <div className='right-banner'>
-            {/* <img src={window.splashPhoneImg} alt="phone and credit card" id='splashPhone'/> */}
-            {/* <div className='video'>
-              <video src={window.splashVideo} autoPlay loop muted preload='auto' id='splashVideo'></video></div> */}
+            <img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/splash-phone.png'} alt="phone and credit card" id='splashPhone'/>
+            <div className='video'>
+              <video src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/videos/splash-video.mp4'} autoPlay loop muted preload='auto' id='splashVideo'></video></div>
           </div>
         </div>
 
