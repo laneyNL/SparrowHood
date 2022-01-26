@@ -71,8 +71,8 @@ export default class Splash extends React.Component {
           </div>
           <div className='right-banner'>
             {/* <img src={window.splashPhoneImg} alt="phone and credit card" id='splashPhone'/> */}
-            <div className='video'>
-              {/* <video src={window.splashVideo} autoPlay loop muted preload='auto' id='splashVideo'></video></div> */}
+            {/* <div className='video'>
+              <video src={window.splashVideo} autoPlay loop muted preload='auto' id='splashVideo'></video></div> */}
           </div>
         </div>
 
