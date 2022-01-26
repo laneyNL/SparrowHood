@@ -9,15 +9,16 @@ export default class Portfolio extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.fetchTransactions(this.props.user.id).then( 
-    //   () => {
-    //     this.props.transactions.forEach( tran => {
-    //       this.props.fetchAssetPrice(tran.symbol);
-    //     })
-    //   })
+    this.props.fetchTransactions(this.props.user.id).then( 
+      () => {
+        this.props.transactions.forEach( tran => {
+          this.props.fetchAssetPrice(tran.symbol);
+        })
+      })
   }
 
   render() {
+    console.log('assets', this.props.assets)
     return (
       <div className='portfolio-splash'>
         <nav className='port-nav'>

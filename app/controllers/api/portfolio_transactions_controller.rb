@@ -18,6 +18,6 @@ class Api::PortfolioTransactionsController < ApplicationController
 
   private
   def transaction_params
-    params.require(:transaction).permit(:asset_id, :owner_id, :is_purchase, :quantity, :transaction_price)
+    params.require(:transaction).permit(:asset_id, :owner_id, :is_purchase, :quantity, :transaction_price, :symbol)
   end
 end

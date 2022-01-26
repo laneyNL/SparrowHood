@@ -1,7 +1,7 @@
 export const fetchAssetPrice = (symbol) => {
   return $.ajax({
     method: 'GET', 
-    url: `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey={window.alphaAPIKey}`
+    url: `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${window.alphaAPIKey}`
   })
 }
 export const fetchAssetInterval = (symbol, interval='5min') => {

@@ -12,7 +12,7 @@
 #  updated_at        :datetime         not null
 #
 class PortfolioTransaction < ApplicationRecord
-  validates :asset_id, :owner_id, :quantity, :transaction_price, presence: true
+  validates :symbol, :owner_id, :quantity, :transaction_price, presence: true
   validates :is_purchase, inclusion: { in: [true, false] }
   belongs_to :owner,
   foreign_key: :owner_id,

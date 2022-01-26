@@ -17,10 +17,10 @@ ActiveRecord::Base.transaction do
   asset2 = Asset.create!(name: 'Gamestop', symbol: 'GME', is_stock: true, current_price: 200.43)
   asset3 = Asset.create!(name: 'Disney', symbol: 'DIS', is_stock: true, current_price: 77.23)
 
-  tran1 = PortfolioTransaction.create!(asset_id: asset1.id, owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: asset1.current_price)
-  tran2 = PortfolioTransaction.create!(asset_id: asset1.id, owner_id: user1.id, is_purchase: false, quantity: 5, transaction_price: 99.99)
-  tran3 = PortfolioTransaction.create!(asset_id: asset2.id, owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: asset1.current_price)
-  tran3 = PortfolioTransaction.create!(asset_id: asset2.id, owner_id: user1.id, is_purchase: false, quantity: 3, transaction_price: 88)
-  tran3 = PortfolioTransaction.create!(asset_id: asset3.id, owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: asset1.current_price)
+  tran1 = PortfolioTransaction.create!(asset_id: asset1.id, owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: asset1.current_price, symbol: 'AMC')
+  tran2 = PortfolioTransaction.create!(asset_id: asset1.id, owner_id: user1.id, is_purchase: false, quantity: 5, transaction_price: 99.99, symbol: 'AMC')
+  tran3 = PortfolioTransaction.create!(asset_id: asset2.id, owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: asset1.current_price, symbol: 'GME')
+  tran3 = PortfolioTransaction.create!(asset_id: asset2.id, owner_id: user1.id, is_purchase: false, quantity: 3, transaction_price: 88, symbol: 'GME')
+  tran3 = PortfolioTransaction.create!(asset_id: asset3.id, owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: asset1.current_price, symbol: 'DIS')
 
 end
