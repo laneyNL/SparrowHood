@@ -6,7 +6,8 @@ import Portfolio from './portfolio';
 
 const mapStateToProps = (state) => ({
   user: state.entities.users[state.session.id],
-  transactions: Object.values(state.entities.transactions),
+  transactions: state.entities.transactions.data,
+  symbols: state.entities.transactions.symbols,
   assets: state.entities.assets
 })
 

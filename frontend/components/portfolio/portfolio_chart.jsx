@@ -14,22 +14,15 @@ import {
 export default class PortfolioChart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      totalValue: '',
-      difference: ''
-    }
-    this.updateSummary.bind(this)
-  }
-
-  componentDidMount() {
     ChartJS.register(
       CategoryScale, LinearScale, PointElement, LineElement, Title,
       Tooltip, Legend);
-    this.props.fetchTransactions(this.props.user.id)
-      .then(() => this.setState({ 
-        totalValue: `$${this.props.transactions[this.props.transactions.length - 1].currentTotal.toFixed(2)}`
-      }));
 
+    this.state = {
+      difference: 0,
+      transactions: []
+    }
+    this.updateSummary = this.updateSummary.bind(this);
   }
 
   chartData () {
@@ -101,10 +94,14 @@ export default class PortfolioChart extends React.Component {
   }
 
   render() {
+    if (!this.props.transactions.length) return null;
+    const totalValue = `$${this.props.transactions[this.props.transactions.length - 1].currentTotal.toFixed(2)}`;
+    const difference = '';
+    
     return (
       <div className='chart'>
-        <div>{this.state.totalValue}</div>
-        <div>{this.state.difference}</div>
+        <div className='totalValue'>{totalValue}</div>
+        <div className='difference'>{difference}</div>
         <div></div>
         <div className = 'graph'>
           <Line 

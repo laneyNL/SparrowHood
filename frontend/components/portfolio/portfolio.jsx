@@ -1,24 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AssetListItemContainer from './asset_list_item_container';
+import AssetListItem from './asset_list_item';
 import PortfolioChart from './portfolio_chart';
 
 export default class Portfolio extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      transactions: [],
+      symbols: []
+    }
   }
 
   componentDidMount() {
     this.props.fetchTransactions(this.props.user.id).then( 
       () => {
-        this.props.transactions.forEach( tran => {
-          this.props.fetchAssetPrice(tran.symbol);
+        this.setState({ transactions: Object.values(this.props.transactions), symbols: this.props.symbols})
+        this.props.symbols.forEach(symbol => {
+          this.props.fetchAssetPrice(symbol);
         })
       })
   }
 
   render() {
-    console.log('assets', this.props.assets)
     return (
       <div className='portfolio-splash'>
         <nav className='port-nav'>
@@ -31,7 +35,7 @@ export default class Portfolio extends React.Component {
 
         <div className='portfolio'>
           <div className='main-chart'>
-            <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={this.props.transactions}/>
+            <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={this.state.transactions}/>
             <div className='buying-power'>
               <div>Buying Power</div>
               <div>${this.props.user.buyingPower}</div>
@@ -39,7 +43,11 @@ export default class Portfolio extends React.Component {
           </div>
           <aside className='asset-list'>
             <p>Stocks</p>
-            <AssetListItemContainer />
+            {
+              this.state.symbols.map((symbol, idx) => 
+                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx}/>
+                )
+            }
           </aside>
         </div>
       </div>
