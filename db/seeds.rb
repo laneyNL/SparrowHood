@@ -11,7 +11,7 @@ ActiveRecord::Base.transaction do
   PortfolioTransaction.destroy_all
   Asset.destroy_all
 
-  user1 = User.create!(first_name: 'Demo', last_name: 'User', username: 'demo', password:'demopassword')
+  user1 = User.create!(first_name: 'Demo', last_name: 'User', username: 'demo', password:'demopassword', buying_power: 579.18)
 
   asset1 = Asset.create!(name: 'Amc', symbol: 'AMC', is_stock: true, current_price: 20.15)
   asset2 = Asset.create!(name: 'Gamestop', symbol: 'GME', is_stock: true, current_price: 200.43)

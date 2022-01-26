@@ -27,7 +27,7 @@ export default class PortfolioChart extends React.Component {
       Tooltip, Legend);
     this.props.fetchTransactions(this.props.user.id)
       .then(() => this.setState({ 
-        totalValue: this.props.transactions[this.props.transactions.length - 1].currentTotal 
+        totalValue: `$${this.props.transactions[this.props.transactions.length - 1].currentTotal.toFixed(2)}`
       }));
   }
 
@@ -49,7 +49,7 @@ export default class PortfolioChart extends React.Component {
       let time = new Date(tooltipItem.label)
       return time.toDateString().split(' ').slice(1).join(' ');
     }
-
+ 
     return {
       scales: {
         x: {
@@ -62,7 +62,9 @@ export default class PortfolioChart extends React.Component {
       plugins: {
         legend: { 
           display: false,
-          onHover: this.updateSummary,
+          onHover: (e, legendItem, legend) => {
+            this.setState({ difference: 10 })
+            console.log('hover', e, legendItem, legend) }
          },
         tooltip: {
           displayColors: false,
@@ -79,8 +81,8 @@ export default class PortfolioChart extends React.Component {
     }
   }
 
-  updateSummary(e) {
-    console.log(e)
+  updateSummary(event, legendItem, legend) {
+    console.log('hover', event, legendItem, legend)
     console.log(...arguments)
     // const change = (tooltipItems) => {
     //   console.log('toolitems', tooltipItems)

@@ -31,6 +31,6 @@ class PortfolioTransaction < ApplicationRecord
        prev_price = 0
     end
 
-    self.current_total =  (prev_price + price).round(2)
+    self.current_total =  prev_price + price
   end
 end

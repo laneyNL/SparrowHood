@@ -1,22 +1,51 @@
-.portfolio, .port-nav {
+.portfolio-splash, .port-nav {
   background-color: black;
   color: white;
 }
 
-.portfolio {
+.portfolio-splash {
   height: 100vh;
-  // margin: 0;
 }
 
-.chart {
+.portfolio {
+  display: flex;
+  width: 100%;
   margin: 5%;
 }
 
 .graph {
-  border-bottom: 1px solid gray;
   margin-bottom: 20px;
+
 }
 
+.main-chart {
+  margin: 20px;
+  width: 600px;
+  height: 300px;
+}
 .chartOptions span{
   padding-right: 15px;
+}
+
+.asset-list {
+ border: 1px solid grey;
+ width: 275px;
+ max-height: 550px;
+ margin-left: 50px;
+}
+.asset-list p {
+  box-sizing: border-box;
+  padding: 20px;
+  border-bottom: 1px solid grey;
+  width: 100%;
+}
+
+.buying-power {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  padding: 20px;
+  width: 100%;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
 }

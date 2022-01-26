@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AssetListItemContainer from './asset_list_item_container';
 import PortfolioChart from './portfolio_chart';
 
 export default class Portfolio extends React.Component {
@@ -13,7 +14,7 @@ export default class Portfolio extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='portfolio-splash'>
         <nav className='port-nav'>
           <Link to='/'><img src={window.greenFeatherImg} alt="green feather" id='feather' /></Link>
           <div><input type="text" placeholder='Search' /></div>
@@ -23,11 +24,18 @@ export default class Portfolio extends React.Component {
         </nav>
 
         <div className='portfolio'>
-          <div id='graph'>
+          <div className='main-chart'>
             <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={this.props.transactions}/>
+            <div className='buying-power'>
+              <div>Buying Power</div>
+              <div>${this.props.user.buyingPower}</div>
+            </div>
           </div>
+          <aside className='asset-list'>
+            <p>Stocks</p>
+            <AssetListItemContainer />
+          </aside>
         </div>
-
       </div>
     )
   }
