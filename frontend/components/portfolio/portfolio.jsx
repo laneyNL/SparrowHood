@@ -25,7 +25,7 @@ export default class Portfolio extends React.Component {
   render() {
     return (
       <div className='portfolio-splash'>
-        <nav className='port-nav'>
+        {/* <nav className='port-nav'>
           <Link to='/'><img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png'} alt="green feather" id='feather' /></Link>
           <div><input type="text" placeholder='Search' /></div>
           <Link to='/' className='white'>Portfolio</Link>
@@ -49,7 +49,7 @@ export default class Portfolio extends React.Component {
                 )
             }
           </aside>
-        </div>
+        </div> */}
       </div>
     )
   }
