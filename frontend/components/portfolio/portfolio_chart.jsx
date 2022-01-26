@@ -94,23 +94,23 @@ export default class PortfolioChart extends React.Component {
   // }
 
   render() {
-    if (!this.props.transactions.length) return null;
-    const totalValue = `$${this.props.transactions[this.props.transactions.length - 1].currentTotal.toFixed(2)}`;
-    const difference = '';
+    // if (!this.props.transactions.length) return null;
+    // const totalValue = `$${this.props.transactions[this.props.transactions.length - 1].currentTotal.toFixed(2)}`;
+    // const difference = '';
     
     return (
       <div className='chart'>
-        <div className='totalValue'>{totalValue}</div>
+        {/* <div className='totalValue'>{totalValue}</div>
         <div className='difference'>{difference}</div>
         <div></div>
-        <div className = 'graph'>
+        <div className = 'graph'> */}
           {/* <Line 
             data= {this.chartData()}
             height={200} 
             width={600}
             options={this.chartOptions()}
           /> */}
-        </div>
+        {/* </div> */}
         <div className='chartOptions'>
           <span className='nav-link'>1D</span>
           <span className='nav-link'>1W</span>
