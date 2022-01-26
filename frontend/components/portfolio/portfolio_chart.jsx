@@ -22,7 +22,7 @@ export default class PortfolioChart extends React.Component {
       difference: 0,
       transactions: []
     }
-    this.updateSummary = this.updateSummary.bind(this);
+    // this.updateSummary = this.updateSummary.bind(this);
   }
 
   // chartData () {
