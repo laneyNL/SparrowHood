@@ -121,7 +121,7 @@ export default class PortfolioChart extends React.Component {
           <span className='nav-link'>1Y</span>
           <span className='nav-link'>ALL</span>
         </div>
-      </div> 
+      </div>
     )
   }
 }
