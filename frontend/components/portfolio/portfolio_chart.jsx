@@ -81,7 +81,7 @@ export default class PortfolioChart extends React.Component {
     }
   }
 
-  updateSummary(event, legendItem, legend) { 
+  updateSummary(event, legendItem, legend) {
     console.log('hover', event, legendItem, legend)
     console.log(...arguments)
     // const change = (tooltipItems) => {
