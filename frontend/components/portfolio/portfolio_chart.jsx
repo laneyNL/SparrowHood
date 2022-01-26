@@ -56,9 +56,9 @@ export default class PortfolioChart extends React.Component {
       plugins: {
         legend: { 
           display: false,
-          onHover: (e, legendItem, legend) => {
-            this.setState({ difference: 10 })
-            console.log('hover', e, legendItem, legend) }
+          // onHover: (e, legendItem, legend) => {
+          //   this.setState({ difference: 10 })
+          //   console.log('hover', e, legendItem, legend) }
          },
         tooltip: {
           displayColors: false,
@@ -75,23 +75,23 @@ export default class PortfolioChart extends React.Component {
     }
   }
 
-  updateSummary(event, legendItem, legend) {
-    console.log('hover', event, legendItem, legend)
-    console.log(...arguments)
-    // const change = (tooltipItems) => {
-    //   console.log('toolitems', tooltipItems)
-    //   let initialTotal = this.props.transactions[0].currentTotal;
-    //   let currTotal = tooltipItems[0].currentTotal;
-    //   let diff = currTotal - initialTotal;
-    //   let percent_diff = (diff / initialTotal) * 100;
-    //   const symbol = diff > 0 ? '+' : '-';
-    //   return `${symbol}${diff}(${symbol}${percent_diff}%)`;
-    // }
-  }
+  // updateSummary(event, legendItem, legend) {
+  //   console.log('hover', event, legendItem, legend)
+  //   console.log(...arguments)
+  //   // const change = (tooltipItems) => {
+  //   //   console.log('toolitems', tooltipItems)
+  //   //   let initialTotal = this.props.transactions[0].currentTotal;
+  //   //   let currTotal = tooltipItems[0].currentTotal;
+  //   //   let diff = currTotal - initialTotal;
+  //   //   let percent_diff = (diff / initialTotal) * 100;
+  //   //   const symbol = diff > 0 ? '+' : '-';
+  //   //   return `${symbol}${diff}(${symbol}${percent_diff}%)`;
+  //   // }
+  // }
  
-  onClick() {
+  // onClick() {
 
-  }
+  // }
 
   render() {
     if (!this.props.transactions.length) return null;
