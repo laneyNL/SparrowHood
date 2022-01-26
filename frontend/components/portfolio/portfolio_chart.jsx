@@ -94,7 +94,7 @@ export default class PortfolioChart extends React.Component {
     //   return `${symbol}${diff}(${symbol}${percent_diff}%)`;
     // }
   }
-
+ 
   onClick() {
 
   }
