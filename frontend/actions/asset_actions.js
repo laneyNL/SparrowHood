@@ -13,9 +13,14 @@ const receiveErrors = (errors) => ({
   errors
 })
 
+export const fetchAssetPrice= (symbol) => dispatch => {
+  return AssetApiUtil.fetchAssetPrice(symbol)
+    .then(payload => dispatch(receiveAsset((payload))))
+    .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+}
 export const fetchAssetInterval = (symbol, interval) => dispatch => {
   return AssetApiUtil.fetchAssetInterval(symbol, interval)
-    .then(payload => dispatch(receiveAsset(JSON.parse(payload))))
+    .then(payload => dispatch(receiveAsset((payload))))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
 export const fetchAssetDaily = (symbol) => dispatch => {

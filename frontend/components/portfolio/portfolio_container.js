@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions'
 import { fetchTransactions } from '../../actions/transaction_action';
-import { fetchAssetPrice } from '../../util/asset_api_util';
+import { fetchAssetPrice } from '../../actions/asset_actions';
 import Portfolio from './portfolio';
 
 const mapStateToProps = (state) => ({
