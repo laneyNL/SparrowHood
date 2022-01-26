@@ -14,7 +14,7 @@ export default class Portfolio extends React.Component {
     //     this.props.transactions.forEach( tran => {
     //       this.props.fetchAssetPrice(tran.symbol);
     //     })
-    //   }) 
+    //   })
   }
 
   render() {
