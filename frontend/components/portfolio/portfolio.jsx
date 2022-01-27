@@ -15,10 +15,12 @@ export default class Portfolio extends React.Component {
   componentDidMount() {
     this.props.fetchTransactions(this.props.user.id).then( 
       () => {
-        this.setState({ transactions: Object.values(this.props.transactions), symbols: this.props.symbols})
-        this.props.symbols.forEach(symbol => {
-          this.props.fetchAssetPrice(symbol);
+        this.setState({ 
+          transactions: Object.values(this.props.transactions), symbols: this.props.symbols
         })
+        // this.props.symbols.forEach(symbol => {
+        //   this.props.fetchAssetPrice(symbol);
+        // })
       })
   }
 
@@ -45,9 +47,11 @@ export default class Portfolio extends React.Component {
             <p>Stocks</p>
             {
               this.state.symbols.map((symbol, idx) => 
-                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx}/>
+                <AssetListItem symbol={symbol} assets={this.props.assets} fetchAssetPrice={this.props.fetchAssetPrice} key={idx} />
                 )
             }
+            <p>Cryptocurrencies</p>
+            <p>Lists</p>
           </aside>
         </div>
       </div>

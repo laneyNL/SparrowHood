@@ -1,5 +1,4 @@
 import React from 'react';
-import { $CombinedState } from 'redux';
 
 export default class PortfolioChart extends React.Component {
   constructor(props) {
@@ -28,7 +27,7 @@ export default class PortfolioChart extends React.Component {
   }
 
   chartOptions() {
-    const change = (tooltipItem) => {
+    const date = (tooltipItem) => {
       let time = new Date(tooltipItem.label)
       return time.toDateString().split(' ').slice(1).join(' ');
     }
@@ -45,22 +44,39 @@ export default class PortfolioChart extends React.Component {
       plugins: {
         legend: { 
           display: false,
-          // onHover: (e, legendItem, legend) => {
-          //   this.setState({ difference: 10 })
-          //   console.log('hover', e, legendItem, legend) }
+          onHover: (e, legendItem, legend) => {
+            this.setState({ difference: 10 })
+            console.log('hover', e, legendItem, legend) }
          },
         tooltip: {
           displayColors: false,
           callbacks: {
-            label: change,
+            label: date,
             labelTextColor: () => 'green',
-            labelColor: () => ({
-              backgroundColor: 'transparent'
-            }),
+            labelColor: () => ({ backgroundColor: 'transparent' }),
             title: () => ''
           }
         }
+      },
+      hover: {
+        onHover: (e) => console.log('event', e)
       }
+    }
+  }
+
+  componentDidUpdate() {
+    const config = {
+      type: 'line',
+      data: this.chartData(),
+      options: this.chartOptions()
+    };
+
+    $('#myChart').remove();
+    $('#chartDiv').append("<canvas id='myChart' width={600} height={200}/>");
+    const canvas = document.getElementById('myChart');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      const myChart = new Chart(ctx, config)
     }
   }
 
@@ -82,34 +98,7 @@ export default class PortfolioChart extends React.Component {
 
   }
 
-  componentDidUpdate() {
-    const labels = [
-      'January','February','March','April','May', 'June',];
 
-    const data = {
-      labels: labels,
-      datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45],
-      }]
-    };
-
-    const config = {
-      type: 'line',
-      data: data,
-      options: {}
-    };
-
-    $('#myChart').remove();
-    $('#chartDiv').append("<canvas id='myChart' width={600} height={200}/>");
-    const canvas = document.getElementById('myChart');
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      const myChart = new Chart(ctx, config)
-    }
-  }
 
   render() {
     if (!this.props.transactions.length) return null;
@@ -118,21 +107,15 @@ export default class PortfolioChart extends React.Component {
     return (
         
       <div className='chart'>
-        <div id='chartDiv'>
-          <canvas id='myChart' width={600} height={200}/>
-        </div>
+        
 
         <div className='totalValue'>{totalValue}</div>
         <div className='difference'>{difference}</div>
-        <div></div>
-        <div className = 'graph'>
-          {/* <Line 
-            data= {this.chartData()}
-            height={200} 
-            width={600}
-            options={this.chartOptions()}
-          /> */}
+        <div id='chartDiv'>
+            <canvas id='myChart' width={600} height={200} />
         </div>
+
+
         <div className='chartOptions'>
           <span className='nav-link'>1D</span>
           <span className='nav-link'>1W</span>

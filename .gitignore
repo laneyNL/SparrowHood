@@ -36,3 +36,5 @@ npm-debug.log
 .env
 /public/assets
 /config/initializers/keys.rb
+# Ignore application configuration
+/config/application.yml

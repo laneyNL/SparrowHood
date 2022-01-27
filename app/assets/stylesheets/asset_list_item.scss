@@ -1,0 +1,32 @@
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+}
+
+.asset-sidebar {
+  justify-content: space-between;
+  height: 60px;
+  padding: 10px 24px;
+  color: white;
+  font-size: 13px;
+}
+
+.asset-sidebar:hover {
+  background-color: rgba(102,109,113,1);;
+}
+
+.asset-sidebar-item {
+  justify-content: space-between;
+}
+
+.positive {
+  color: #00C805;
+}
+
+.negative {
+  color: #FF5000;
+}

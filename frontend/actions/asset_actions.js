@@ -13,8 +13,8 @@ const receiveErrors = (errors) => ({
   errors
 })
 
-export const fetchAssetPrice = (symbol) => dispatch => {
-  return AssetApiUtil.fetchAssetPrice(symbol)
+export const fetchAssetPrice = (symbol, key) => dispatch => {
+  return AssetApiUtil.fetchAssetPrice(symbol, key)
     .then(payload => dispatch(receiveAsset((payload))))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }

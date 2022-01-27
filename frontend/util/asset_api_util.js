@@ -1,4 +1,4 @@
-export const fetchAssetPrice = (symbol) => {
+export const fetchAssetPrice = (symbol, key) => {
   return $.ajax({
     method: 'GET', 
     url: `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${window.alphaAPIKey}`
