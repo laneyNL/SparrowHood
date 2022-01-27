@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default class PortfolioChart extends React.Component {
+export default class Chart extends React.Component {
   constructor(props) {
     super(props);
 
-      
+
     this.state = {
       currentTotal: 0,
       // difference: 0,
@@ -15,7 +15,7 @@ export default class PortfolioChart extends React.Component {
     // this.updateSummary = this.updateSummary.bind(this);
   }
 
-  chartData () {
+  chartData() {
     return {
       labels: this.props.transactions.map(action => action.createdAt),
       datasets: [
@@ -34,18 +34,18 @@ export default class PortfolioChart extends React.Component {
       let time = new Date(tooltipItem.label)
       return time.toDateString().split(' ').slice(1).join(' ');
     }
- 
-    
+
+
     return {
       scales: {
         x: {
           ticks: { display: false }
         },
         y: {
-          ticks: { 
+          ticks: {
             display: false,
             beginAtZero: false
-           },
+          },
         }
       },
       // onHover: (e, legendItem, legend) => {
@@ -69,9 +69,9 @@ export default class PortfolioChart extends React.Component {
       //   }
       // },
       plugins: {
-        legend: { 
+        legend: {
           display: false,
-         },
+        },
         tooltip: {
           displayColors: false,
           yAlign: top,
@@ -137,7 +137,7 @@ export default class PortfolioChart extends React.Component {
       </div>
     )
   }
- 
+
   onClick() {
 
   }
@@ -146,18 +146,18 @@ export default class PortfolioChart extends React.Component {
 
   render() {
     if (!this.props.transactions.length) return null;
-  
+
     return (
-        
+
       <div className='chart'>
-        
+
 
         <div className='totalValue'>{this.state.currentTotal}</div>
         {this.renderTotal()}
-          
-        
+
+
         <div id='chartDiv'>
-            <canvas id='myChart' width={600} height={200} />
+          <canvas id='myChart' width={600} height={200} />
         </div>
 
 
@@ -169,7 +169,7 @@ export default class PortfolioChart extends React.Component {
           <span className='nav-link'>1Y</span>
           <span className='nav-link'>ALL</span>
         </div>
-        
+
       </div>
     )
   }

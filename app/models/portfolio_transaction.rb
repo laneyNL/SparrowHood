@@ -22,15 +22,21 @@ class PortfolioTransaction < ApplicationRecord
   before_validation :update_total
 
   def update_total()
-    price = -self.quantity * self.transaction_price
-    price = price.abs unless (self.is_purchase) 
+    price = self.quantity * self.transaction_price
+    owner = User.find_by(id: self.owner_id)
+    lastTransaction = PortfolioTransaction.where(owner_id: self.owner_id).last
+    lastTransaction ? prev_price = lastTransaction.current_total : prev_price = 0
 
-    if (PortfolioTransaction.where(owner_id: self.owner_id)).last
-      prev_price = PortfolioTransaction.where(owner_id: self.owner_id).last.current_total
+    if (self.is_purchase)
+      errors[:message] << 'Insufficent Funds' if (owner.buying_power < price)
     else
-       prev_price = 0
+      # errors[:message] << 'Not Enough Shares' if (owner.quantity < self.quantity)
+      price = -price.abs
     end
 
+    owner.buying_power = owner.buying_power - price
+    owner.save
     self.current_total =  prev_price + price
   end
+
 end

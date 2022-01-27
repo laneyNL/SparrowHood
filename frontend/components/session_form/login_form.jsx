@@ -71,7 +71,7 @@ export default class LoginForm extends React.Component {
             </p>
 
             <button className='login-button'>Log In</button>
-            <p className='create-acc'>Not on Robinhood? <Link to='/signup' className='link'>Create an account</Link></p>
+            <p className='create-acc'>Not on Sparrowhood? <Link to='/signup' className='link'>Create an account</Link></p>
 
 
           </form>
