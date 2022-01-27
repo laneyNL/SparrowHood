@@ -35,3 +35,4 @@ bundle.js.map
 npm-debug.log
 .env
 /public/assets
+/config/initializers/keys.rb
