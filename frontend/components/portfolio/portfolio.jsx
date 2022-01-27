@@ -18,9 +18,7 @@ export default class Portfolio extends React.Component {
         this.setState({ 
           transactions: Object.values(this.props.transactions), symbols: this.props.symbols
         })
-        // this.props.symbols.forEach(symbol => {
-        //   this.props.fetchAssetPrice(symbol);
-        // })
+        this.props.symbols.forEach(symbol => this.props.fetchAssetPrice(symbol))
       })
   }
 

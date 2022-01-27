@@ -29,4 +29,7 @@ ActiveRecord::Base.transaction do
 
   tran5 = PortfolioTransaction.create!(asset_id: asset3.id, owner_id: user1.id, is_purchase: true, quantity: 3, transaction_price: asset3.current_price, symbol: 'DIS')
 
+  tran1.created_at = 10.days.ago
+  tran1.save
+
 end

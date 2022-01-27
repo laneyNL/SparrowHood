@@ -36,7 +36,7 @@ class PortfolioTransaction < ApplicationRecord
       else
         return PortfolioTransaction.where(owner_id: owner_id)
     end
-    PortfolioTransaction.where(owner_id: 31).where("created_at > ?", days_ago)
+    PortfolioTransaction.where(owner_id: owner_id).where("created_at > ?", days_ago)
   end
 
   def update_total()
