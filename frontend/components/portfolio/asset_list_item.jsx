@@ -7,6 +7,7 @@ export default class AssetListItem extends React.Component {
   }
 
   componentDidMount() {
+    // console.log(process.env.REACT_APP_ALPHA_KEY)
     this.props.fetchAssetPrice(this.props.symbol);
   }
   render() {

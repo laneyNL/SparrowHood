@@ -1,6 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const PortfolioChart = (props) => {
+  if (!props.transactions.length) return null;
+
+  let currentTotal = props.transactions[props.transactions.length - 1].currentTotal;
+  const initial = props.transactions[0].currentTotal;
+  let interval = '';
+
   const chartData = {
     labels: props.transactions.map(action => action.createdAt),
     datasets: [
@@ -32,8 +38,12 @@ const PortfolioChart = (props) => {
     },
     onHover: (e, legendItem, legend) => {
       if(legendItem[0]) {
-        console.log(props.transactions[legendItem[0].index].currentTotal)
-        // this.setState({ currentTotal: this.props.transactions[legendItem[0].index].currentTotal })
+        currentTotal = props.transactions[legendItem[0].index].currentTotal;
+        const difference = (currentTotal) - initial;
+        const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
+        const symbol = difference > 0 ? '+' : '-';
+        document.getElementById('currentTotal').innerHTML = currentTotal;
+        document.getElementById('difference').innerHTML = `${symbol}${Math.abs(difference).toLocaleString("en-US")} (${symbol}${percDiff}%)`
       }
     },
     plugins: {
@@ -86,14 +96,23 @@ const PortfolioChart = (props) => {
     $('#chartDiv').append("<canvas id='myChart' width={600} height={200}/>");
     const canvas = document.getElementById('myChart');
     if (canvas) {
-      // const ctx = canvas.getContext('2d');
       const myChart = new Chart(canvas, config)
     }
-  })
+    })
+
+    const difference = (currentTotal) - initial;
+    const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
+    const symbol = difference > 0 ? '+' : '-';
+  
+
   return (
 
       <div className='chart'>
-        <div className='totalValue'></div>
+      <div className='totalValue' id ='currentTotal'>{`$${currentTotal.toFixed(2).toLocaleString("en-US")}`}</div>
+      <div className='difference'>
+        <span id='difference'>{symbol}{Math.abs(difference).toLocaleString("en-US")} ({symbol}{`${percDiff}%`})</span>
+        <span id='interval'> {interval}</span>
+      </div>
 
 
         <div id='chartDiv'>
