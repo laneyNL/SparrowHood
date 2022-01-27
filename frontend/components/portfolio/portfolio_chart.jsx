@@ -106,7 +106,10 @@ const PortfolioChart = (props) => {
     })
 
     const handleClick = (interval) => {
-      props.fetchTransactions(props.user.id, interval)
+      return () => {
+        console.log('click')
+        props.fetchTransactions(props.user.id, interval)
+      }
     }
   
 
@@ -129,11 +132,11 @@ const PortfolioChart = (props) => {
 
         <div className='chartOptions'>
           <span className='nav-link' onClick={handleClick('day')}>1D</span>
-        <span className='nav-link' onClick={handleClick('week')}>1W</span>
-        <span className='nav-link' onClick={handleClick('month')}>1M</span>
-        <span className='nav-link' onClick={handleClick('threeMonths')}>3M</span>
-        <span className='nav-link' onClick={handleClick('year')}>1Y</span>
-        <span className='nav-link' onClick={handleClick('all')}>ALL</span>
+          <span className='nav-link' onClick={handleClick('week')}>1W</span>
+          <span className='nav-link' onClick={handleClick('month')}>1M</span>
+          <span className='nav-link' onClick={handleClick('threeMonths')}>3M</span>
+          <span className='nav-link' onClick={handleClick('year')}>1Y</span>
+          <span className='nav-link' onClick={handleClick('all')}>ALL</span>
         </div>
 
       </div>

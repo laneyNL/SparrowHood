@@ -24,19 +24,19 @@ class PortfolioTransaction < ApplicationRecord
   def self.in_interval(owner_id, interval)
     case interval
       when 'day'
-        days = 1.day.ago
+        days_ago = 1.day.ago
       when 'week'
-        days = 7.day.ago
+        days_ago = 7.day.ago
       when 'month'
-        days = 30.day.ago
+        days_ago = 30.day.ago
       when 'threeMonths'
-        days = 90.day.ago
+        days_ago = 90.day.ago
       when 'year'
-        days = 365.day.ago
+        days_ago = 365.day.ago
       else
-        return PortfolioTransaction.where(owner_id: params[:user_id])
+        return PortfolioTransaction.where(owner_id: owner_id)
     end
-    PortfolioTransaction.where(owner_id: 31).where("created_at > ?", day)
+    PortfolioTransaction.where(owner_id: 31).where("created_at > ?", days_ago)
   end
 
   def update_total()
