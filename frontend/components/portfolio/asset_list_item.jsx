@@ -18,7 +18,7 @@ export default class AssetListItem extends React.Component {
     const colorClass = percentDiff < 0 ? 'negative' : 'positive';
     const sign = percentDiff < 0 ? '' : '+';
     return (
-      <Link>
+      <Link to='/'>
         <div className='asset-sidebar row'>
           <div className='column asset-sidebar-item'>
             <div className=''>{this.props.symbol}</div>
