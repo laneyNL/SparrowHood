@@ -1,29 +1,15 @@
 import React from 'react';
-// import { Line } from 'react-chartjs-2';
-// import {
-//   Chart as ChartJS,
-//   CategoryScale,
-//   LinearScale,
-//   PointElement,
-//   LineElement,
-//   Title,
-//   Tooltip,
-//   Legend,
-// } from 'chart.js';
-
-
+import { $CombinedState } from 'redux';
 
 export default class PortfolioChart extends React.Component {
   constructor(props) {
     super(props);
 
-    // ChartJS.register(
-    //   CategoryScale, LinearScale, PointElement, LineElement, Title,
-    //   Tooltip, Legend);
       
     this.state = {
       difference: 0,
-      transactions: []
+      transactions: [],
+      chart: ''
     }
     // this.updateSummary = this.updateSummary.bind(this);
   }
@@ -96,13 +82,46 @@ export default class PortfolioChart extends React.Component {
 
   }
 
+  componentDidUpdate() {
+    const labels = [
+      'January','February','March','April','May', 'June',];
+
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'My First dataset',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [0, 10, 5, 2, 20, 30, 45],
+      }]
+    };
+
+    const config = {
+      type: 'line',
+      data: data,
+      options: {}
+    };
+
+    $('#myChart').remove();
+    $('#chartDiv').append("<canvas id='myChart' width={600} height={200}/>");
+    const canvas = document.getElementById('myChart');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      const myChart = new Chart(ctx, config)
+    }
+  }
+
   render() {
     if (!this.props.transactions.length) return null;
     const totalValue = `$${this.props.transactions[this.props.transactions.length - 1].currentTotal.toFixed(2)}`;
     const difference = '';
-    
     return (
+        
       <div className='chart'>
+        <div id='chartDiv'>
+          <canvas id='myChart' width={600} height={200}/>
+        </div>
+
         <div className='totalValue'>{totalValue}</div>
         <div className='difference'>{difference}</div>
         <div></div>
@@ -122,6 +141,7 @@ export default class PortfolioChart extends React.Component {
           <span className='nav-link'>1Y</span>
           <span className='nav-link'>ALL</span>
         </div>
+        
       </div>
     )
   }
