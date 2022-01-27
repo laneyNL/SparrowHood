@@ -1,26 +1,26 @@
-export const fetchAssetPrice = (symbol) => {
+export const fetchAssetPrice = (symbol, key) => {
   return $.ajax({
     method: 'GET', 
-    url: `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${process.env.ALPHA_KEY}`
+    url: `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${key}`
   })
 }
 export const fetchAssetInterval = (symbol, interval='5min') => {
   return $.ajax({
     method: 'GET', 
-    url: `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=${interval}&apikey=${window.alphaAPIKey}`
+    url: `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=${interval}&apikey=${key}`
   })
 }
 
 export const fetchAssetDaily = (symbol) => {
   return $.ajax({
     method: 'GET', 
-    url: `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${window.alphaAPIKey}`
+    url: `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${key}`
   })
 }
 
 export const fetchAssetWeekly = (symbol) => {
   return $.ajax({
     method: 'GET', 
-    url: `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=${symbol}&apikey=${window.alphaAPIKey}`
+    url: `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=${symbol}&apikey=${key}`
   })
 }
