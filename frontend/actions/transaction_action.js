@@ -18,8 +18,8 @@ const receiveErrors = (errors) => ({
   errors
 })
 
-export const fetchTransactions = (userId) => dispatch => {
-  return TransactionApiUtil.fetchTransactions(userId)
+export const fetchTransactions = (userId, interval) => dispatch => {
+  return TransactionApiUtil.fetchTransactions(userId, interval)
     .then(transactions => dispatch(receiveTransactions(transactions)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }

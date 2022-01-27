@@ -63,7 +63,7 @@ const PortfolioChart = (props) => {
         mode: 'nearest',
         callbacks: {
           label: date,
-          labelTextColor: () => 'white',
+          labelTextColor: () => '#919FA6',
           labelColor: () => ({ backgroundColor: 'transparent' }),
           title: () => ''
         }
@@ -76,16 +76,14 @@ const PortfolioChart = (props) => {
       id: 'tooltipLine',
       beforeDraw: chart => {
         if (chart.tooltip._active && chart.tooltip._active.length) {
-          // console.log(chart)
           const ctx = chart.ctx;
           ctx.save();
           const activePoint = chart.tooltip._active[0];
-          // console.log(activePoint)
           ctx.beginPath();
           ctx.moveTo(activePoint.element.x, 0);
           ctx.lineTo(activePoint.element.x, chart.chartArea.height);
           ctx.lineWidth = 2;
-          ctx.strokeStyle = '#919FA6';
+          ctx.strokeStyle = 'white';
           ctx.stroke();
           ctx.restore();
         }
@@ -107,14 +105,20 @@ const PortfolioChart = (props) => {
     }
     })
 
-    
+    const handleClick = (interval) => {
+      props.fetchTransactions(props.user.id, interval)
+    }
   
 
   return (
       <div className='chart'>
-      <div className='totalValue' id ='currentTotal'>{`$${currentTotal.toFixed(2).toLocaleString("en-US")}`}</div>
+      <div className='totalValue' id ='currentTotal'>
+        {`$${currentTotal.toFixed(2).toLocaleString("en-US")}`}
+        </div>
       <div className='difference'>
-        <span id='difference'>{symbol}${Math.abs(difference).toLocaleString("en-US")} ({symbol}{`${percDiff}%`})</span>
+        <span id='difference'>
+          {symbol}${Math.abs(difference).toLocaleString("en-US")} ({symbol}{`${percDiff}%`})
+        </span>
         <span id='interval'> {interval}</span>
       </div>
 
@@ -124,12 +128,12 @@ const PortfolioChart = (props) => {
         </div>
 
         <div className='chartOptions'>
-          <span className='nav-link'>1D</span>
-          <span className='nav-link'>1W</span>
-          <span className='nav-link'>1M</span>
-          <span className='nav-link'>3M</span>
-          <span className='nav-link'>1Y</span>
-          <span className='nav-link'>ALL</span>
+          <span className='nav-link' onClick={handleClick('day')}>1D</span>
+        <span className='nav-link' onClick={handleClick('week')}>1W</span>
+        <span className='nav-link' onClick={handleClick('month')}>1M</span>
+        <span className='nav-link' onClick={handleClick('threeMonths')}>3M</span>
+        <span className='nav-link' onClick={handleClick('year')}>1Y</span>
+        <span className='nav-link' onClick={handleClick('all')}>ALL</span>
         </div>
 
       </div>

@@ -1,7 +1,8 @@
 class Api::PortfolioTransactionsController < ApplicationController
 
   def index
-    @transactions = PortfolioTransaction.where(owner_id: params[:user_id])
+    # @transactions = PortfolioTransaction.where(owner_id: params[:user_id])
+    @transactions = PortfolioTransaction.in_interval(params[:user_id], params[:interval])
     @symbols= @transactions.select('symbol').distinct.map(&:symbol)
     render :index
   end

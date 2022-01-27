@@ -21,6 +21,24 @@ class PortfolioTransaction < ApplicationRecord
   belongs_to :asset
   before_validation :update_total
 
+  def self.in_interval(owner_id, interval)
+    case interval
+      when 'day'
+        days = 1.day.ago
+      when 'week'
+        days = 7.day.ago
+      when 'month'
+        days = 30.day.ago
+      when 'threeMonths'
+        days = 90.day.ago
+      when 'year'
+        days = 365.day.ago
+      else
+        return PortfolioTransaction.where(owner_id: params[:user_id])
+    end
+    PortfolioTransaction.where(owner_id: 31).where("created_at > ?", day)
+  end
+
   def update_total()
     price = self.quantity * self.transaction_price
     owner = User.find_by(id: self.owner_id)

@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
-  fetchTransactions: (userId) => dispatch(fetchTransactions(userId)),
+  fetchTransactions: (userId, interval) => dispatch(fetchTransactions(userId, interval)),
   fetchAssetPrice: (symbol) => dispatch(fetchAssetPrice(symbol))
 })
 

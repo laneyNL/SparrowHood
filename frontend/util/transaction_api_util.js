@@ -1,8 +1,9 @@
 
-export const fetchTransactions = (userId) => {
+export const fetchTransactions = (userId, interval='all') => {
   return $.ajax({
     method: 'GET',
-    url: `/api/users/${userId}/portfolio_transactions`
+    url: `/api/users/${userId}/portfolio_transactions`,
+    data: { interval }
   })
 }
 
