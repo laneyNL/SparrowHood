@@ -1,98 +1,65 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-export default class PortfolioChart extends React.Component {
-  constructor(props) {
-    super(props);
-
-      
-    this.state = {
-      currentTotal: 0,
-      // difference: 0,
-      transactions: [],
-      chart: '',
-      interval: 'Today'
-    }
-    // this.updateSummary = this.updateSummary.bind(this);
+const PortfolioChart = (props) => {
+  const chartData = {
+    labels: props.transactions.map(action => action.createdAt),
+    datasets: [
+      {
+        data: props.transactions.map(action => action.currentTotal),
+        fill: false,
+        borderColor: 'green',
+        tension: 0.4,
+      }
+    ]
   }
 
-  chartData () {
-    return {
-      labels: this.props.transactions.map(action => action.createdAt),
-      datasets: [
-        {
-          data: this.props.transactions.map(action => action.currentTotal),
-          fill: false,
-          borderColor: 'green',
-          tension: 0.4,
-        }
-      ]
-    }
+  const date = (tooltipItem) => {
+    let time = new Date(tooltipItem.label)
+    return time.toDateString().split(' ').slice(1).join(' ');
   }
 
-  chartOptions() {
-    const date = (tooltipItem) => {
-      let time = new Date(tooltipItem.label)
-      return time.toDateString().split(' ').slice(1).join(' ');
-    }
- 
-    
-    return {
-      scales: {
-        x: {
-          ticks: { display: false }
-        },
-        y: {
-          ticks: { 
-            display: false,
-            beginAtZero: false
-           },
-        }
+  const chartOptions = {
+    scales: {
+      x: {
+        ticks: { display: false }
       },
-      // onHover: (e, legendItem, legend) => {
-      //   if(legendItem[0]) {
-      //     this.setState({ currentTotal: this.props.transactions[legendItem[0].index].currentTotal })
-      //   }
-      //   console.log(e, legendItem, legend)
-      //   if (e.chart) {
-      //     const ctx = e.chart.ctx;
-      //     console.log(e.chart);
-      //     ctx.save();
-      //     // const activePoint = chart.tooltip._active[0];
-      //     // console.log(activePoint)
-      //     ctx.beginPath();
-      //     ctx.moveTo(e.x, 0);
-      //     ctx.lineTo(e.x, e.chart.chartArea.height);
-      //     ctx.lineWidth = 2;
-      //     ctx.strokeStyle = 'white';
-      //     ctx.stroke();
-      //     ctx.restore();
-      //   }
-      // },
-      plugins: {
-        legend: { 
+      y: {
+        ticks: {
           display: false,
-         },
-        tooltip: {
-          displayColors: false,
-          yAlign: top,
-          mode: 'nearest',
-          callbacks: {
-            label: date,
-            labelTextColor: () => 'green',
-            labelColor: () => ({ backgroundColor: 'transparent' }),
-            title: () => ''
-          }
-        }
+          beginAtZero: false
+        },
+      }
+    },
+    onHover: (e, legendItem, legend) => {
+      if(legendItem[0]) {
+        console.log(props.transactions[legendItem[0].index].currentTotal)
+        // this.setState({ currentTotal: this.props.transactions[legendItem[0].index].currentTotal })
+      }
+    },
+    plugins: {
+      legend: {
+        display: false,
       },
-    }
+      tooltip: {
+        displayColors: false,
+        yAlign: top,
+        mode: 'nearest',
+        callbacks: {
+          label: date,
+          labelTextColor: () => 'green',
+          labelColor: () => ({ backgroundColor: 'transparent' }),
+          title: () => ''
+        }
+      }
+    },
   }
 
-  componentDidUpdate() {
+  useEffect(() => {
     const tooltipLine = {
       id: 'tooltipLine',
       beforeDraw: chart => {
         if (chart.tooltip._active && chart.tooltip._active.length) {
-          console.log(chart)
+          // console.log(chart)
           const ctx = chart.ctx;
           ctx.save();
           const activePoint = chart.tooltip._active[0];
@@ -110,8 +77,8 @@ export default class PortfolioChart extends React.Component {
 
     const config = {
       type: 'line',
-      data: this.chartData(),
-      options: this.chartOptions(),
+      data: chartData,
+      options: chartOptions,
       plugins: [tooltipLine]
     };
 
@@ -122,44 +89,16 @@ export default class PortfolioChart extends React.Component {
       // const ctx = canvas.getContext('2d');
       const myChart = new Chart(canvas, config)
     }
-  }
+  })
+  return (
 
-  renderTotal() {
-    const initial = this.props.transactions[0].currentTotal;
-    const difference = (this.state.currentTotal) - initial;
-    const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
-    const symbol = difference > 0 ? '+' : '-';
-
-    return (
-      <div className='difference'>
-        <span>{symbol}{Math.abs(difference).toLocaleString("en-US")} ({symbol}{`${percDiff}%`})</span>
-        <span> {this.state.interval}</span>
-      </div>
-    )
-  }
- 
-  onClick() {
-
-  }
-
-
-
-  render() {
-    if (!this.props.transactions.length) return null;
-  
-    return (
-        
       <div className='chart'>
-        
+        <div className='totalValue'></div>
 
-        <div className='totalValue'>{this.state.currentTotal}</div>
-        {this.renderTotal()}
-          
-        
+
         <div id='chartDiv'>
             <canvas id='myChart' width={600} height={200} />
         </div>
-
 
         <div className='chartOptions'>
           <span className='nav-link'>1D</span>
@@ -169,8 +108,9 @@ export default class PortfolioChart extends React.Component {
           <span className='nav-link'>1Y</span>
           <span className='nav-link'>ALL</span>
         </div>
-        
+
       </div>
-    )
-  }
+  )
 }
+
+export default PortfolioChart
