@@ -1,4 +1,5 @@
 import React from 'react';
+import * as d3 from "d3";
 
 export default class AssetChart extends React.Component {
   constructor(props) {
