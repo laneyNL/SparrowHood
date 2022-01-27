@@ -11,10 +11,8 @@ export default class AssetListItem extends React.Component {
   }
   render() {
     if (!this.props.assets || !this.props.symbol || !this.props.assets[this.props.symbol]) return null;
-    // console.log(this.props.symbol, this.props.assets[this.props.symbol])
   
     const quote = this.props.assets[this.props.symbol]['Global Quote'];
-    console.log((quote['05.price']))
     const percentDiff = ((parseFloat(quote['05. price']) - parseFloat(quote['02. open'])) / parseFloat(quote['02. open'])) * 100;
 
     const colorClass = percentDiff < 0 ? 'negative' : 'positive';

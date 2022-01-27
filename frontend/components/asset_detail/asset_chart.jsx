@@ -37,10 +37,7 @@ export default class AssetChart extends React.Component {
       plugins: {
         legend: {
           display: false,
-          onHover: (e, legendItem, legend) => {
-            this.setState({ difference: 10 })
-            console.log('hover', e, legendItem, legend)
-          }
+          
         },
         tooltip: {
           displayColors: false,
@@ -52,6 +49,10 @@ export default class AssetChart extends React.Component {
           }
         }
       },
+      hover: (e, legendItem, legend) => {
+        this.setState({ difference: 10 })
+        console.log('hover', e, legendItem, legend)
+      }
     }
   }
 
