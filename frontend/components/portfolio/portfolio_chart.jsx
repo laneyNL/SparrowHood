@@ -1,5 +1,5 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+// import { Line } from 'react-chartjs-2';
 // import {
 //   Chart as ChartJS,
 //   CategoryScale,
@@ -107,12 +107,12 @@ export default class PortfolioChart extends React.Component {
         <div className='difference'>{difference}</div>
         <div></div>
         <div className = 'graph'>
-          <Line 
+          {/* <Line 
             data= {this.chartData()}
             height={200} 
             width={600}
             options={this.chartOptions()}
-          />
+          /> */}
         </div>
         <div className='chartOptions'>
           <span className='nav-link'>1D</span>

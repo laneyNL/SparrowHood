@@ -13,23 +13,23 @@ const receiveErrors = (errors) => ({
   errors
 })
 
-export const fetchAssetPrice= (symbol, key=process.env.ALPHA_KEY) => dispatch => {
-  return AssetApiUtil.fetchAssetPrice(symbol, key)
+export const fetchAssetPrice = (symbol) => dispatch => {
+  return AssetApiUtil.fetchAssetPrice(symbol)
     .then(payload => dispatch(receiveAsset((payload))))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
 export const fetchAssetInterval = (symbol, interval) => dispatch => {
-  return AssetApiUtil.fetchAssetInterval(symbol, interval, key)
+  return AssetApiUtil.fetchAssetInterval(symbol, interval)
     .then(payload => dispatch(receiveAsset((payload))))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
 export const fetchAssetDaily = (symbol) => dispatch => {
-  return AssetApiUtil.fetchAssetDaily(symbol, key)
+  return AssetApiUtil.fetchAssetDaily(symbol)
     .then(payload => dispatch(receiveAsset(payload)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
 export const fetchAssetWeekly = (symbol) => dispatch => {
-  return AssetApiUtil.fetchAssetWeekly(symbol, key)
+  return AssetApiUtil.fetchAssetWeekly(symbol)
     .then(payload => dispatch(receiveAsset(payload)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
