@@ -5,7 +5,13 @@ const PortfolioChart = (props) => {
 
   let currentTotal = props.transactions[props.transactions.length - 1].currentTotal;
   const initial = props.transactions[0].currentTotal;
-  let interval = '';
+  let interval = 'Today';
+
+  const difference = (currentTotal) - initial;
+  const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
+  let symbol = ''
+  if (Math.floor(percDiff) !== 0) symbol = (difference > 0 ? '+' : '-');
+  
 
   const chartData = {
     labels: props.transactions.map(action => action.createdAt),
@@ -13,7 +19,7 @@ const PortfolioChart = (props) => {
       {
         data: props.transactions.map(action => action.currentTotal),
         fill: false,
-        borderColor: 'green',
+        borderColor: symbol === '+' ? 'green' : 'red',
         tension: 0.4,
       }
     ]
@@ -40,10 +46,11 @@ const PortfolioChart = (props) => {
       if(legendItem[0]) {
         currentTotal = props.transactions[legendItem[0].index].currentTotal;
         const difference = (currentTotal) - initial;
-        const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
-        const symbol = difference > 0 ? '+' : '-';
-        document.getElementById('currentTotal').innerHTML = currentTotal;
-        document.getElementById('difference').innerHTML = `${symbol}${Math.abs(difference).toLocaleString("en-US")} (${symbol}${percDiff}%)`
+        const percDiff = Math.abs((difference / initial) * 100).toFixed(2).toLocaleString("en-US");
+        let symbol = '';
+        if (Math.floor(difference) !== 0) symbol = (difference > 0 ? '+' : '-');
+        document.getElementById('currentTotal').innerHTML = `$${currentTotal.toFixed(2).toLocaleString("en-US")}`;
+        document.getElementById('difference').innerHTML = `${symbol}$${Math.abs(difference).toLocaleString("en-US")} (${symbol}${percDiff}%)`
       }
     },
     plugins: {
@@ -56,7 +63,7 @@ const PortfolioChart = (props) => {
         mode: 'nearest',
         callbacks: {
           label: date,
-          labelTextColor: () => 'green',
+          labelTextColor: () => 'white',
           labelColor: () => ({ backgroundColor: 'transparent' }),
           title: () => ''
         }
@@ -78,7 +85,7 @@ const PortfolioChart = (props) => {
           ctx.moveTo(activePoint.element.x, 0);
           ctx.lineTo(activePoint.element.x, chart.chartArea.height);
           ctx.lineWidth = 2;
-          ctx.strokeStyle = 'white';
+          ctx.strokeStyle = '#919FA6';
           ctx.stroke();
           ctx.restore();
         }
@@ -100,17 +107,14 @@ const PortfolioChart = (props) => {
     }
     })
 
-    const difference = (currentTotal) - initial;
-    const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
-    const symbol = difference > 0 ? '+' : '-';
+    
   
 
   return (
-
       <div className='chart'>
       <div className='totalValue' id ='currentTotal'>{`$${currentTotal.toFixed(2).toLocaleString("en-US")}`}</div>
       <div className='difference'>
-        <span id='difference'>{symbol}{Math.abs(difference).toLocaleString("en-US")} ({symbol}{`${percDiff}%`})</span>
+        <span id='difference'>{symbol}${Math.abs(difference).toLocaleString("en-US")} ({symbol}{`${percDiff}%`})</span>
         <span id='interval'> {interval}</span>
       </div>
 
