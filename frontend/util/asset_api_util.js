@@ -24,3 +24,11 @@ export const fetchAssetWeekly = (symbol) => {
     url: `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=${symbol}&apikey=${window.alphaAPIKey}`
   })
 }
+
+export const fetchCryptoDaily = (symbol) => {
+  return $.ajax({
+    method: 'GET', 
+    url: `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${symbol}&market=CNY&apikey=${window.alphaAPIKey}`
+  })
+}
+

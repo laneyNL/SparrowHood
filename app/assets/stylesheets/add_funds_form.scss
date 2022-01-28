@@ -5,6 +5,7 @@
   width: 100%;
   z-index: 100;
 }
+
 .add-funds-form-div {
   display: flex;
   justify-content: center;
@@ -37,6 +38,9 @@
   background-color: #FF5000;
   border-radius: 5px;
   border: none;
+}
+.review-button:hover {
+  background-color: rgba(255,106,38,1);
 }
 
 .deposit-form input {

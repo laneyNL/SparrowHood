@@ -6,8 +6,12 @@ const assetReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_ASSET_DAILY:
       // console.log(action.payload)
-      if (!action.payload["Time Series (Daily)"]) return state;
-      nextState[action.payload["Meta Data"]["2. Symbol"]] = action.payload['Time Series (Daily)'];
+      if (action.payload["Time Series (Daily)"]) {
+        nextState[action.payload["Meta Data"]["2. Symbol"]] = action.payload['Time Series (Daily)'];
+      }
+      if (action.payload["Time Series (Digital Currency Daily)"]) {
+        nextState[action.payload["Meta Data"]["2. Digital Currency Code"]] = action.payload["Time Series (Digital Currency Daily)"];
+      }
       return nextState;
     default:
       return state;

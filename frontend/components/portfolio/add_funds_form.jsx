@@ -23,8 +23,9 @@ export default class AddFundsForm extends React.Component {
     let numValue = this.state.amount.split('$').join('')
     numValue = numValue.split(',').join('');
     numValue = parseInt(numValue);
+
     this.props.addFunds(this.props.user.id, numValue).then(() => document.querySelector('.funds-modal').classList.toggle('hidden'), (error) => {
-      $('#add-amount').append(`<div>${error.responseJSON.map(err => <div>err</div>)}</div>`)
+      $('#add-amount').append(`<div>{error.responseJSON.map(err => <div>err</div>)}</div>`)
     });
     ;
   }
@@ -44,7 +45,7 @@ export default class AddFundsForm extends React.Component {
             <label>From</label>
               <input type="text" value='A BANK' disabled/>
             <label htmlFor='add-amount'> Amount</label>
-              <input type="text" value={this.state.amount} placeholder='$0.00' onChange={this.handleChange} id='add-amount'/>
+              <input type="text" value={this.state.amount} placeholder='$0.00' onChange={this.handleChange} id='add-amount' required/>
             <button className='review-button'>Confirm</button>
           </form>
         </div>

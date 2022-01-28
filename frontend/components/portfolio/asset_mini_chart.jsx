@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 
-const MiniChart = ({ symbol, dailyValues, colorClass }) => {
+const MiniChart = ({ symbol, dailyValues, colorClass, closeKey}) => {
   if (!symbol) return null;
   
   const labels = Object.keys(dailyValues);
-  const data = Object.values(dailyValues).map(value => value["4. close"]);
+  const data = Object.values(dailyValues).map(value => value[closeKey]);
 
   const chartData = {
     labels: labels,

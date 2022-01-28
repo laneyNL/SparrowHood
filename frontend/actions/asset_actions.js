@@ -43,3 +43,9 @@ export const fetchAssetWeekly = (symbol) => dispatch => {
     .then(payload => dispatch(receiveAsset(payload)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
+
+export const fetchCryptoDaily = (symbol) => dispatch => {
+  return AssetApiUtil.fetchCryptoDaily(symbol)
+    .then(payload => dispatch(receiveAssetDaily(payload)))
+    .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+}

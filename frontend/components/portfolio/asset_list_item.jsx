@@ -7,10 +7,6 @@ export default class AssetListItem extends React.Component {
     super(props)
   }
 
-  componentDidMount() {
-    // console.log(process.env.REACT_APP_ALPHA_KEY)
-    // this.props.fetchAssetPrice(this.props.symbol);
-  }
   render() {
     if (!this.props.assets || !this.props.symbol || !this.props.assets[this.props.symbol]) return null;
     const quote = Object.values(this.props.assets[this.props.symbol]);
@@ -83,14 +79,12 @@ export default class AssetListItem extends React.Component {
     // }
     // const quote = Object.values(assets);
 
-    const closePrice = parseFloat(quote[0]["4. close"]);
-    const openPrice = parseFloat(quote[0]["3. low"]);
+    const closePrice = parseFloat(quote[0][this.props.closeKey]);
+    const openPrice = parseFloat(quote[0][this.props.openKey]);
     const percentDiff = ((closePrice - openPrice) / openPrice) * 100;
 
     const colorClass = percentDiff < 0 ? 'negative' : 'positive';
     const sign = percentDiff < 0 ? '' : '+';
-
-
 
     return (
       <Link to='/'>
@@ -100,7 +94,7 @@ export default class AssetListItem extends React.Component {
             <div>Shares</div>
           </div>
           <div>
-            <MiniChart symbol={this.props.symbol} dailyValues={this.props.assets[this.props.symbol]} colorClass={colorClass}/>
+            <MiniChart symbol={this.props.symbol} dailyValues={this.props.assets[this.props.symbol]} colorClass={colorClass} closeKey={this.props.closeKey}/>
           </div>
           <div className='column asset-sidebar-item'>
             <div className=''>{`$${closePrice.toFixed(2)}`}</div>

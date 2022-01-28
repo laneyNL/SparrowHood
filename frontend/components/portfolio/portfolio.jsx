@@ -9,8 +9,8 @@ export default class Portfolio extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      transactions: [],
-      symbols: [],
+      // transactions: [],
+      // symbols: [],
       loading: true
     }
   }
@@ -18,16 +18,16 @@ export default class Portfolio extends React.Component {
   componentDidMount() {
     this.props.fetchTransactions(this.props.user.id).then( 
       () => {
-        this.props.symbols.forEach((symbol, idx) => {
-          if (idx === this.props.symbols.length-1) {
-            this.props.fetchAssetDaily(symbol).then(this.setState({ loading: false }))
-          } else {
-            this.props.fetchAssetDaily(symbol)
-          }
-        })
-        this.setState({ 
-          transactions: Object.values(this.props.transactions), symbols: this.props.symbols
-        })
+        // this.props.symbols.forEach((symbol, idx) => {
+        //   if (idx === this.props.symbols.length-1) {
+        //     this.props.fetchAssetDaily(symbol).then(this.setState({ loading: false }))
+        //   } else {
+        //     this.props.fetchAssetDaily(symbol)
+        //   }
+        // })
+        // this.setState({ 
+        //   transactions: Object.values(this.props.transactions), symbols: this.props.symbols
+        // })
       })
   }
 
@@ -94,10 +94,15 @@ export default class Portfolio extends React.Component {
             <p>Stocks</p>
             {
               this.props.symbols.map((symbol, idx) => 
-                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} />
+                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} closeKey="4. close" openKey="3. low"/>
                 )
             }
             <p>Cryptocurrencies</p>
+            {
+              this.props.cryptSymbols.map((symbol, idx) =>
+                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} closeKey="4b. close (USD)" openKey="3b. low (USD)" />
+              )
+            }
             <p>Lists</p>
           </aside>
         </div>
