@@ -28,7 +28,7 @@ export default class AssetListItem extends React.Component {
             <div>Shares</div>
           </div>
           <div>
-            <MiniChart symbol={this.props.symbol} assets={this.props.assets}/>
+            <MiniChart symbol={this.props.symbol} dailyValues={this.props.assets[this.props.symbol]["Time Series (Daily)"]}/>
           </div>
           <div className='column asset-sidebar-item'>
             <div className=''>{`$${closePrice.toFixed(2)}`}</div>
