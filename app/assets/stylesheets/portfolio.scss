@@ -4,14 +4,16 @@
 }
 
 .portfolio-splash {
-  height: 100vh;
   width: 100%;
+  height: 100%;
 }
 
 .portfolio {
+  background-color: black;
   display: flex;
   width: 100%;
-  margin: 5%;
+  height: 100%;
+  padding: 5%;
 }
 
 .asset-list {

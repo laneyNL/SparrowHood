@@ -1,8 +1,9 @@
 .funds-modal {
   background-color: black;
-  position: sticky;
+  position: fixed;
   height: 100%;
   width: 100%;
+  z-index: 100;
 }
 .add-funds-form-div {
   display: flex;
@@ -21,12 +22,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  // align-items: center;
   width: 570px;
   margin: auto;
-  // padding-top: 30%;
-  // top: 50%;
-
 }
 
 .deposit-form label {

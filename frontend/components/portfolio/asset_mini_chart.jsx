@@ -5,6 +5,7 @@ const MiniChart = ({ symbol, dailyValues, colorClass }) => {
   
   const labels = Object.keys(dailyValues);
   const data = Object.values(dailyValues).map(value => value["4. close"]);
+
   const chartData = {
     labels: labels,
     datasets: [
@@ -12,7 +13,7 @@ const MiniChart = ({ symbol, dailyValues, colorClass }) => {
         data: data,
         fill: false,
         borderColor: colorClass === 'positive' ? 'green' : 'red',
-        tension: 0.2,
+        tension: 0.4,
       }
     ]
   }
@@ -20,12 +21,14 @@ const MiniChart = ({ symbol, dailyValues, colorClass }) => {
   const chartOptions = {
     scales: {
       x: {
-        ticks: { display: false }
+        ticks: { display: false },
+        grid: {display: false }
       },
       y: {
         ticks: {
           display: false,
-          beginAtZero: false
+          beginAtZero: false,
+          grid: { display: false }
         },
       }
     },
@@ -35,14 +38,13 @@ const MiniChart = ({ symbol, dailyValues, colorClass }) => {
       },
       tooltip: {
         displayColors: false,
-        callbacks: {
-          title: () => ''
-        }
+        enabled: false
       }
     },
     elements: {
       point: { radius: 0 }
-    }
+    },
+    hover: { mode: null },
   }
 
   useEffect(() => {
@@ -55,6 +57,7 @@ const MiniChart = ({ symbol, dailyValues, colorClass }) => {
 
     const newCanvas = document.createElement('canvas');
     newCanvas.setAttribute('id', `miniChart${symbol}`);
+    newCanvas.setAttribute('class', 'miniChart');
     newCanvas.setAttribute('width', `60`);
     newCanvas.setAttribute('height', `20`);
 
@@ -67,7 +70,7 @@ const MiniChart = ({ symbol, dailyValues, colorClass }) => {
 
   return (
     <div className='miniChartDiv' id={`miniChartDiv${symbol}`}>
-      <canvas id={`miniChart${symbol}`} width={60} height={20} /> 
+      <canvas className='miniChart' id={`miniChart${symbol}`} width={60} height={20} /> 
     </div>
   )
 }

@@ -8,8 +8,7 @@ import PortfolioContainer from './portfolio/portfolio_container'
 import { connect } from 'react-redux';
 
 const App = ({loggedIn}) => (
-  <div>
-    <div>
+  <div id='App'>
       <Switch>
         <AuthRoute path='/signup' component={SignUpContainer} />
         <AuthRoute path='/login' component={LoginContainer} />
@@ -19,8 +18,6 @@ const App = ({loggedIn}) => (
           <Route exact path='/' component={Splash} />}
         <Redirect to='/' />
       </Switch>
-
-    </div>
   </div>
 )
 

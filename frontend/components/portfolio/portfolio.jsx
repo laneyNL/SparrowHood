@@ -18,12 +18,15 @@ export default class Portfolio extends React.Component {
   componentDidMount() {
     this.props.fetchTransactions(this.props.user.id).then( 
       () => {
-        // this.props.symbols.forEach(symbol => {
-        //   this.props.fetchAssetDaily(symbol)
-        // })
+        this.props.symbols.forEach((symbol, idx) => {
+          if (idx === this.props.symbols.length-1) {
+            this.props.fetchAssetDaily(symbol).then(this.setState({ loading: false }))
+          } else {
+            this.props.fetchAssetDaily(symbol)
+          }
+        })
         this.setState({ 
-          transactions: Object.values(this.props.transactions), symbols: this.props.symbols,
-          loading: false
+          transactions: Object.values(this.props.transactions), symbols: this.props.symbols
         })
       })
   }
@@ -43,7 +46,6 @@ export default class Portfolio extends React.Component {
 
   render() {
     if (this.state.loading || !this.props.transactions || !this.props.symbols) return <div>Loading Animation</div>;
-    // console.log(this.props.assets)
     return (
       
       <div className='portfolio-splash'>

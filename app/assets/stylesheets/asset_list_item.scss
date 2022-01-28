@@ -15,7 +15,7 @@
   font-size: 13px;
 }
 
-.asset-sidebar:hover {
+.asset-sidebar:hover, .miniChartDiv:hover {
   background-color: rgba(102,109,113,1);;
 }
 
@@ -36,4 +36,9 @@
   height: 100%;
   display: flex;
   align-items: center;
+  border: none;
+}
+
+.miniChart {
+  border: none;
 }
