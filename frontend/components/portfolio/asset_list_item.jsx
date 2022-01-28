@@ -13,7 +13,7 @@ export default class AssetListItem extends React.Component {
   }
   render() {
     if (!this.props.assets || !this.props.symbol || !this.props.assets[this.props.symbol]) return null;
-    const quote = Object.values(this.props.assets[this.props.symbol]["Time Series (Daily)"]);
+    const quote = Object.values(this.props.assets[this.props.symbol]);
     const closePrice = parseFloat(quote[0]["4. close"]);
     const openPrice = parseFloat(quote[quote.length - 1]["1. open"]);
     const percentDiff = ((closePrice - openPrice) / openPrice) * 100;
@@ -28,7 +28,7 @@ export default class AssetListItem extends React.Component {
             <div>Shares</div>
           </div>
           <div>
-            <MiniChart symbol={this.props.symbol} dailyValues={this.props.assets[this.props.symbol]["Time Series (Daily)"]}/>
+            <MiniChart symbol={this.props.symbol} dailyValues={this.props.assets[this.props.symbol]}/>
           </div>
           <div className='column asset-sidebar-item'>
             <div className=''>{`$${closePrice.toFixed(2)}`}</div>

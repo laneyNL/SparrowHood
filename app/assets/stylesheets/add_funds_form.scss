@@ -1,5 +1,12 @@
 .funds-modal {
   background-color: black;
+  height: 100%;
+}
+.add-funds-form-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .close-modal {
@@ -15,7 +22,8 @@
   // align-items: center;
   width: 570px;
   margin: auto;
-  padding-top: 30%;
+  // padding-top: 30%;
+  // top: 50%;
 
 }
 
@@ -24,7 +32,7 @@
 }
 
 .review-button {
-  margin: 20px 0 ;
+  margin: 50px 0 ;
   width: 150px;
   height: 50px;
   background-color: #FF5000;

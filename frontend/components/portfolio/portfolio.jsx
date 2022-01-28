@@ -27,15 +27,16 @@ export default class Portfolio extends React.Component {
       })
   }
 
-  clickBuyPower() {
+  clickBuyPower(e) {
     const buyPowerDiv = document.querySelector('.buying-power-div');
     const deposit = document.getElementById('add-funds');
     buyPowerDiv.classList.toggle('gray-background');
     deposit.classList.toggle('hidden');
   }
   
-  clickDeposit() {
-
+  clickDeposit(e) {
+    e.preventDefault();
+    document.querySelector('.funds-modal').classList.toggle('hidden');
   }
 
 
@@ -45,8 +46,8 @@ export default class Portfolio extends React.Component {
     return (
       
       <div className='portfolio-splash'>
-        <AddFundsForm />
-        {/* <nav className='port-nav'>
+        <AddFundsForm addFunds={this.props.addFunds} user={this.props.user} />
+        <nav className='port-nav'>
           <Link to='/'><img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png'} alt="green feather" id='feather' /></Link>
           <div><input type="text" placeholder='Search' /></div>
           <Link to='/' className='white'>Portfolio</Link>
@@ -59,8 +60,8 @@ export default class Portfolio extends React.Component {
 
             <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={Object.values(this.props.transactions)} interval={this.props.interval}/>
 
-            <div className='buying-power-div' onClick={this.clickBuyPower}>
-              <div className='buying-power flex-between'>
+            <div className='buying-power-div' >
+              <div className='buying-power flex-between' onClick={this.clickBuyPower}>
                 <div>Buying Power</div>
                 <div>${this.props.user.buyingPower.toLocaleString("en-US")}</div>
               </div>
@@ -76,7 +77,7 @@ export default class Portfolio extends React.Component {
                     <div>${this.props.user.buyingPower.toLocaleString("en-US")}</div>
                   </div>
                   <div className='width-full'>
-                    <button className='deposit-button'>Deposit Funds</button>
+                    <button className='deposit-button' onClick={this.clickDeposit}>Deposit Funds</button>
                     </div>
                   <div></div>
                 </div>
@@ -95,7 +96,7 @@ export default class Portfolio extends React.Component {
             <p>Cryptocurrencies</p>
             <p>Lists</p>
           </aside>
-        </div> */}
+        </div>
       </div>
     )
   }

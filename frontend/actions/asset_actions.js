@@ -19,9 +19,9 @@ const receiveErrors = (errors) => ({
   errors
 })
 
-const loadingAssets = () => ({
-  type: LOADING_ASSETS
-})
+// const loadingAssets = () => ({
+//   type: LOADING_ASSETS
+// })
 
 export const fetchAssetPrice = (symbol, key) => dispatch => {
   return AssetApiUtil.fetchAssetPrice(symbol, key)

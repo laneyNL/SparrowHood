@@ -18,3 +18,11 @@ export const logout = () => {
     url: '/api/session'
   })
 }
+
+export const addFunds = (userId, amount) => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `/api/users/${userId}`,
+    data: { amount }
+  })
+}

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { logout } from '../../actions/session_actions'
+import { addFunds, logout } from '../../actions/session_actions'
 import { fetchTransactions } from '../../actions/transaction_action';
 import { fetchAssetPrice, fetchAssetDaily } from '../../actions/asset_actions';
 import Portfolio from './portfolio';
@@ -16,7 +16,8 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
   fetchTransactions: (userId, interval) => dispatch(fetchTransactions(userId, interval)),
   fetchAssetPrice: (symbol) => dispatch(fetchAssetPrice(symbol)),
-  fetchAssetDaily: (symbol) => dispatch(fetchAssetDaily(symbol))
+  fetchAssetDaily: (symbol) => dispatch(fetchAssetDaily(symbol)),
+  addFunds: (userId, amount) => dispatch(addFunds(userId, amount))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);

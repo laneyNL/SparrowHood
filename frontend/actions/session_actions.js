@@ -33,3 +33,9 @@ export const logout = () => (dispatch) => {
   return SessionApiUtil.logout()
     .then((message) => dispatch(logoutUser(message)), (errors) => dispatch(receiveErrors(errors.responseJSON)))
 }
+
+export const addFunds = (userId, amount) => dispatch => {
+  return SessionApiUtil.addFunds(userId, amount)
+    .then(user => dispatch(receiveUser(user)))
+    .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+}

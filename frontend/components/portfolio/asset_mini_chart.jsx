@@ -50,18 +50,17 @@ const MiniChart = ({ symbol, dailyValues }) => {
       options: chartOptions,
     };
 
-    // $('#miniChart').remove();
-    // $('#miniChartDiv').append("<canvas id='miniChart' width={60} height={20}/>");
-    const canvas = document.getElementById('miniChart');
+    $(`#miniChart${symbol}`).remove();
+    $(`miniChartDiv${symbol}`).append("<canvas id={`miniChart${symbol}`} width={60} height={20} /> ");
+    const canvas = document.getElementById(`miniChart${symbol}`);
     if (canvas) {
       const myChart = new Chart(canvas, config)
     }
   })
 
   return (
-    <div id='miniChartDiv'>
-      <canvas id='miniChart' width={60} height={20} /> 
-      {symbol}
+    <div id={`miniChartDiv${symbol}`}>
+      <canvas id={`miniChart${symbol}`} width={60} height={20} /> 
     </div>
   )
 }
