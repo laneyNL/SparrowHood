@@ -22,7 +22,11 @@ export default class Portfolio extends React.Component {
       })
   }
 
+
+
   render() {
+    if (!this.props.transactions || !this.props.symbols) return null;
+
     return (
       <div className='portfolio-splash'>
         <nav className='port-nav'>
@@ -35,7 +39,7 @@ export default class Portfolio extends React.Component {
 
         <div className='portfolio'>
           <div className='main-chart'>
-            <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={this.state.transactions}/>
+            <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={Object.values(this.props.transactions)}/>
             <div className='buying-power'>
               <div>Buying Power</div>
               <div>${this.props.user.buyingPower.toLocaleString("en-US")}</div>
@@ -44,7 +48,7 @@ export default class Portfolio extends React.Component {
           <aside className='asset-list'>
             <p>Stocks</p>
             {
-              this.state.symbols.map((symbol, idx) => 
+              this.props.symbols.map((symbol, idx) => 
                 <AssetListItem symbol={symbol} assets={this.props.assets} fetchAssetPrice={this.props.fetchAssetPrice} key={idx} />
                 )
             }

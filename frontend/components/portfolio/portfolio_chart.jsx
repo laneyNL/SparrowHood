@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const PortfolioChart = (props) => {
+  console.log('chart', props.transactions)
   if (!props.transactions.length) return null;
 
   let currentTotal = props.transactions[props.transactions.length - 1].currentTotal;
@@ -75,7 +76,7 @@ const PortfolioChart = (props) => {
     const tooltipLine = {
       id: 'tooltipLine',
       beforeDraw: chart => {
-        if (chart.tooltip._active && chart.tooltip._active.length) {
+        if (chart.tooltip && chart.tooltip._active && chart.tooltip._active.length) {
           const ctx = chart.ctx;
           ctx.save();
           const activePoint = chart.tooltip._active[0];
@@ -112,7 +113,7 @@ const PortfolioChart = (props) => {
       }
     }
   
-
+    console.log('chart rerender', props.transactions)
   return (
       <div className='chart'>
       <div className='totalValue' id ='currentTotal'>
