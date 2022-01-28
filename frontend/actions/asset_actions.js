@@ -3,6 +3,7 @@ import { RECEIVE_SESSION_ERRORS } from './session_actions';
 
 export const RECEIVE_ASSET = 'RECEIVE_ASSET';
 export const RECEIVE_ASSET_DAILY = 'RECEIVE_ASSET_DAILY';
+export const LOADING_ASSETS = 'LOADING_ASSETS';
 
 const receiveAsset = (payload) => ({
   type: RECEIVE_ASSET,
@@ -16,6 +17,10 @@ const receiveAssetDaily = (payload) => ({
 const receiveErrors = (errors) => ({
   type: RECEIVE_SESSION_ERRORS,
   errors
+})
+
+const loadingAssets = () => ({
+  type: LOADING_ASSETS
 })
 
 export const fetchAssetPrice = (symbol, key) => dispatch => {

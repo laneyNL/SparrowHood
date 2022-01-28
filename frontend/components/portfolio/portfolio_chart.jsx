@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
   if (!transactions.length) return null;
-
   let currentTotal = transactions[transactions.length - 1].currentTotal;
   const initial = transactions[0].currentTotal;
 
@@ -38,11 +37,11 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
     const dateStringSplit = dateString.split(' ')
      
     switch (interval) {
-      case ('day'):
+      case ('Today'):
         return timeString;
-      case ('week'):
+      case ('Past Week'):
         return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${timeString}`
-      case ('month'):
+      case ('Past Month'):
         return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${timeString}`
       default:
         return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${dateStringSplit[2]}`
@@ -150,12 +149,12 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
         </div>
 
         <div className='chartOptions'>
-          <span className={`chart-filter ${colorClass}`} onClick={handleClick('day')}>1D</span>
-          <span className={`chart-filter ${colorClass}`} onClick={handleClick('week')}>1W</span>
-          <span className={`chart-filter ${colorClass}`} onClick={handleClick('month')}>1M</span>
-          <span className={`chart-filter ${colorClass}`} onClick={handleClick('threeMonths')}>3M</span>
-          <span className={`chart-filter ${colorClass}`} onClick={handleClick('year')}>1Y</span>
-          <span className={`chart-filter ${colorClass}`} onClick={handleClick('all')}>ALL</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('Today')}>1D</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Week')}>1W</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Month')}>1M</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')}>3M</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Year')}>1Y</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('All Time')}>ALL</span>
         </div>
 
       </div>

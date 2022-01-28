@@ -54,10 +54,14 @@
 }
 .buying-power-div {
   margin-top: 20px;
-  background-color: rgb(30,33,36);
   border-radius: 5px;
-  padding: 0 20px 20px 20px;
+  padding: 0 20px 0 20px;
   font-size: 15px;
+  transition: 2s;
+}
+
+.gray-background {
+  background-color: rgb(30,33,36);
 }
 
 .deposit-button {
@@ -70,3 +74,6 @@
   border: none;
 }
 
+.hidden {
+  display: none;
+}

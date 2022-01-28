@@ -1,0 +1,45 @@
+.funds-modal {
+  background-color: black;
+}
+
+.close-modal {
+  float: right;
+  font-size: 30px;
+  padding: 3% 5%;
+}
+
+.deposit-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // align-items: center;
+  width: 570px;
+  margin: auto;
+  padding-top: 30%;
+
+}
+
+.deposit-form label {
+  padding: 20px 0;
+}
+
+.review-button {
+  margin: 20px 0 ;
+  width: 150px;
+  height: 50px;
+  background-color: #FF5000;
+  border-radius: 5px;
+  border: none;
+}
+
+.deposit-form input {
+  height: 40px;
+  padding: 0 13px;
+  background-color: #1E2124;
+  border: none;
+  color: white;
+}
+
+.deposit-form input:focus {
+  border: 1px solid #FF5000;
+}

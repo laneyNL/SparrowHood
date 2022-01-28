@@ -23,15 +23,15 @@ class PortfolioTransaction < ApplicationRecord
 
   def self.in_interval(owner_id, interval)
     case interval
-      when 'day'
+      when 'Today'
         days_ago = 1.day.ago
-      when 'week'
+      when 'Past Week'
         days_ago = 7.day.ago
-      when 'month'
+      when 'Past Month'
         days_ago = 30.day.ago
-      when 'threeMonths'
+      when 'Past 3 Months'
         days_ago = 90.day.ago
-      when 'year'
+      when 'Past Year'
         days_ago = 365.day.ago
       else
         return PortfolioTransaction.where(owner_id: owner_id)
