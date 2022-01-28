@@ -28,7 +28,7 @@ export const fetchAssetWeekly = (symbol) => {
 export const fetchCryptoDaily = (symbol) => {
   return $.ajax({
     method: 'GET', 
-    url: `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${symbol}&market=CNY&apikey=${window.alphaAPIKey}`
+    url: `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${symbol}&market=USD&apikey=${window.alphaAPIKey}`
   })
 }
 

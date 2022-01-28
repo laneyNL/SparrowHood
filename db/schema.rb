@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_26_194335) do
+ActiveRecord::Schema.define(version: 2022_01_28_195730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2022_01_26_194335) do
     t.datetime "updated_at", null: false
     t.float "current_total", default: 0.0
     t.string "symbol"
+    t.boolean "is_stock"
     t.index ["asset_id"], name: "index_portfolio_transactions_on_asset_id"
     t.index ["owner_id"], name: "index_portfolio_transactions_on_owner_id"
     t.index ["symbol"], name: "index_portfolio_transactions_on_symbol"

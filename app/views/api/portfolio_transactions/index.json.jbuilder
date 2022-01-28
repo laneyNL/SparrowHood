@@ -6,5 +6,12 @@ json.set! :data do
   end
 end
 
-json.symbols @symbols
+json.set! :symbols do 
+  @assets.each do |asset|
+    json.set! asset.first do
+      json.quantity @transactions.where(symbol: asset.first).sum('quantity')
+      json.is_stock asset.last
+    end
+  end
+end
 json.interval @interval

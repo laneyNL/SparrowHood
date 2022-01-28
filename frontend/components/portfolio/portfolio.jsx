@@ -9,8 +9,8 @@ export default class Portfolio extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // transactions: [],
-      // symbols: [],
+      stockSymbols: [],
+      cryptoSymbols: [],
       loading: true
     }
   }
@@ -18,16 +18,23 @@ export default class Portfolio extends React.Component {
   componentDidMount() {
     this.props.fetchTransactions(this.props.user.id).then( 
       () => {
-        // this.props.symbols.forEach((symbol, idx) => {
-        //   if (idx === this.props.symbols.length-1) {
-        //     this.props.fetchAssetDaily(symbol).then(this.setState({ loading: false }))
-        //   } else {
-        //     this.props.fetchAssetDaily(symbol)
-        //   }
-        // })
-        // this.setState({ 
-        //   transactions: Object.values(this.props.transactions), symbols: this.props.symbols
-        // })
+        this.setState({
+          stockSymbols: Object.keys(this.props.symbols).filter(symbol => this.props.symbols[symbol].isStock),
+          cryptoSymbols: Object.keys(this.props.symbols).filter(symbol => !this.props.symbols[symbol].isStock),
+        })
+
+        this.state.stockSymbols.forEach((symbol) => {
+          this.props.fetchAssetDaily(symbol);
+        })
+        this.state.cryptoSymbols.forEach((symbol, idx) => {
+          if (idx === this.state.cryptoSymbols.length-1) {
+            this.props.fetchCryptoDaily(symbol).then(this.setState({ loading: false }));
+          } else {
+            this.props.fetchCryptoDaily(symbol);
+          }
+        })
+
+        if (!this.state.cryptoSymbols.length) this.setState({ loading: false });
       })
   }
 
@@ -93,14 +100,14 @@ export default class Portfolio extends React.Component {
           <aside className='asset-list'>
             <p>Stocks</p>
             {
-              this.props.symbols.map((symbol, idx) => 
-                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} closeKey="4. close" openKey="3. low"/>
+              this.state.stockSymbols.map((symbol, idx) =>
+                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} closeKey="4. close" openKey="3. low" quantity={this.props.symbols[symbol].quantity}/>
                 )
             }
             <p>Cryptocurrencies</p>
             {
-              this.props.cryptSymbols.map((symbol, idx) =>
-                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} closeKey="4b. close (USD)" openKey="3b. low (USD)" />
+              this.state.cryptoSymbols.map((symbol, idx) =>
+                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} closeKey="4b. close (USD)" openKey="3b. low (USD)" quantity={this.props.symbols[symbol].quantity}/>
               )
             }
             <p>Lists</p>

@@ -14,6 +14,7 @@
 class PortfolioTransaction < ApplicationRecord
   validates :symbol, :owner_id, :quantity, :transaction_price, presence: true
   validates :is_purchase, inclusion: { in: [true, false] }
+  validates :is_stock, inclusion: { in: [true, false] }
   belongs_to :owner,
   foreign_key: :owner_id,
   class_name: "User"
@@ -45,11 +46,10 @@ class PortfolioTransaction < ApplicationRecord
     lastTransaction = PortfolioTransaction.where(owner_id: self.owner_id).last
     lastTransaction ? prev_price = lastTransaction.current_total : prev_price = 0
 
-    if (self.is_purchase)
+    if (quantity > 0)
       errors[:message] << 'Insufficent Funds' if (owner.buying_power < price)
     else
-      # errors[:message] << 'Not Enough Shares' if (owner.quantity < self.quantity)
-      price = -price.abs
+      # errors[:message] << 'Not Enough Shares' if (owner.quantity < -self.quantity)
     end
 
     owner.buying_power = owner.buying_power - price
