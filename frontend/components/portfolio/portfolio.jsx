@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AssetListItem from './asset_list_item';
 import PortfolioChart from './portfolio_chart';
 import AddFundsForm from './add_funds_form';
+import MiniChart from './asset_mini_chart';
 
 export default class Portfolio extends React.Component {
   constructor(props) {
@@ -17,9 +18,9 @@ export default class Portfolio extends React.Component {
   componentDidMount() {
     this.props.fetchTransactions(this.props.user.id).then( 
       () => {
-        this.props.symbols.forEach(symbol => {
-          this.props.fetchAssetDaily(symbol)
-        })
+        // this.props.symbols.forEach(symbol => {
+        //   this.props.fetchAssetDaily(symbol)
+        // })
         this.setState({ 
           transactions: Object.values(this.props.transactions), symbols: this.props.symbols,
           loading: false
@@ -42,10 +43,11 @@ export default class Portfolio extends React.Component {
 
   render() {
     if (this.state.loading || !this.props.transactions || !this.props.symbols) return <div>Loading Animation</div>;
-    
+    // console.log(this.props.assets)
     return (
       
       <div className='portfolio-splash'>
+        
         <AddFundsForm addFunds={this.props.addFunds} user={this.props.user} />
         <nav className='port-nav'>
           <Link to='/'><img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png'} alt="green feather" id='feather' /></Link>
@@ -90,7 +92,7 @@ export default class Portfolio extends React.Component {
             <p>Stocks</p>
             {
               this.props.symbols.map((symbol, idx) => 
-                <AssetListItem symbol={symbol} assets={this.props.assets} fetchAssetDaily={this.props.fetchAssetDaily} key={idx} />
+                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} />
                 )
             }
             <p>Cryptocurrencies</p>

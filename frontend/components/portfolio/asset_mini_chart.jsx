@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
 
-const MiniChart = ({ symbol, dailyValues }) => {
+const MiniChart = ({ symbol, dailyValues, colorClass }) => {
   if (!symbol) return null;
-
+  
   const labels = Object.keys(dailyValues);
   const data = Object.values(dailyValues).map(value => value["4. close"]);
-  const is_gain = (data[data.length - 1] - data[0]) > 0;
   const chartData = {
     labels: labels,
     datasets: [
       {
         data: data,
         fill: false,
-        borderColor: is_gain? 'green' : 'red',
-        tension: 0.4,
+        borderColor: colorClass === 'positive' ? 'green' : 'red',
+        tension: 0.2,
       }
     ]
   }
@@ -41,6 +40,9 @@ const MiniChart = ({ symbol, dailyValues }) => {
         }
       }
     },
+    elements: {
+      point: { radius: 0 }
+    }
   }
 
   useEffect(() => {
@@ -49,9 +51,14 @@ const MiniChart = ({ symbol, dailyValues }) => {
       data: chartData,
       options: chartOptions,
     };
-
     $(`#miniChart${symbol}`).remove();
-    $(`miniChartDiv${symbol}`).append("<canvas id={`miniChart${symbol}`} width={60} height={20} /> ");
+
+    const newCanvas = document.createElement('canvas');
+    newCanvas.setAttribute('id', `miniChart${symbol}`);
+    newCanvas.setAttribute('width', `60`);
+    newCanvas.setAttribute('height', `20`);
+
+    document.getElementById(`miniChartDiv${symbol}`).append(newCanvas)
     const canvas = document.getElementById(`miniChart${symbol}`);
     if (canvas) {
       const myChart = new Chart(canvas, config)
@@ -59,7 +66,7 @@ const MiniChart = ({ symbol, dailyValues }) => {
   })
 
   return (
-    <div id={`miniChartDiv${symbol}`}>
+    <div className='miniChartDiv' id={`miniChartDiv${symbol}`}>
       <canvas id={`miniChart${symbol}`} width={60} height={20} /> 
     </div>
   )

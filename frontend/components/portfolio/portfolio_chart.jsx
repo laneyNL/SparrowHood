@@ -116,7 +116,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
     };
 
     $('#myChart').remove();
-    $('#chartDiv').append("<canvas id='myChart' width={600} height={200}/>");
+    $(`#chartDiv`).append("<canvas id='myChart' width={600} height={200}/>");
     const canvas = document.getElementById('myChart');
     if (canvas) {
       const myChart = new Chart(canvas, config)
