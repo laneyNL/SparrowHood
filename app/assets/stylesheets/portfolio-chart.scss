@@ -1,0 +1,51 @@
+.graph {
+  margin-bottom: 20px;
+}
+
+.main-chart {
+  width: 600px;
+  height: 300px;
+}
+
+.chartOptions span{
+  padding-right: 15px;
+}
+
+.chartOptions {
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+}
+.chart-filter {
+  text-align: center;
+  padding-left: 15px;
+  cursor: pointer;
+}
+
+#currentTotal {
+  font-size: 32px;
+  padding-bottom: 10px;
+}
+
+#interval {
+  color: #919FA6
+}
+
+.greenText.active-filter {
+  color: #00C805;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #00C805;;
+}
+
+.redText.active-filter {
+  color: red;
+  padding-bottom: 10px;
+  border-bottom: 1px solid red;;
+}
+
+.greenText:hover {
+  color: #00C805;
+}
+
+.redText:hover {
+  color: red;
+}

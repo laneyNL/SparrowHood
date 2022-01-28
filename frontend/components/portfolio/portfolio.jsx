@@ -40,9 +40,28 @@ export default class Portfolio extends React.Component {
         <div className='portfolio'>
           <div className='main-chart'>
             <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={Object.values(this.props.transactions)}/>
-            <div className='buying-power'>
-              <div>Buying Power</div>
-              <div>${this.props.user.buyingPower.toLocaleString("en-US")}</div>
+            <div className ='buying-power-div'>
+              <div className='buying-power flex-between'>
+                <div>Buying Power</div>
+                <div>${this.props.user.buyingPower.toLocaleString("en-US")}</div>
+              </div>
+              <div className='add-funds row'>
+                <div className='deposit-funds'>
+                  <div className='flex-between'>
+                    <div>Instant Available</div>
+                    <div>hold{}</div>
+                  </div>
+                  <div className='flex-between border-grey'>
+                    <div>Buying Power</div>
+                    <div>${this.props.user.buyingPower.toLocaleString("en-US")}</div>
+                  </div>
+                  <div className='width-full'>
+                    <button className='deposit-button'>Deposit Funds</button>
+                    </div>
+                  <div></div>
+                </div>
+                <div className='deposit-message'>Buying Power represents the total value of assets you can purchase.</div>
+              </div>
             </div>
           </div>
           <aside className='asset-list'>

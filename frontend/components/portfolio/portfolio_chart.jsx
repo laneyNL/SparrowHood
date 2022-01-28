@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 const PortfolioChart = (props) => {
-  console.log('chart', props.transactions)
   if (!props.transactions.length) return null;
 
   let currentTotal = props.transactions[props.transactions.length - 1].currentTotal;
@@ -51,7 +50,7 @@ const PortfolioChart = (props) => {
         let symbol = '';
         if (Math.floor(difference) !== 0) symbol = (difference > 0 ? '+' : '-');
         document.getElementById('currentTotal').innerHTML = `$${currentTotal.toFixed(2).toLocaleString("en-US")}`;
-        document.getElementById('difference').innerHTML = `${symbol}$${Math.abs(difference).toLocaleString("en-US")} (${symbol}${percDiff}%)`
+        document.getElementById('difference').innerHTML = `${symbol}$${Math.abs(difference).toLocaleString("en-US")} (${symbol}${percDiff.toLocaleString("en-US")}%)`
       }
     },
     plugins: {
@@ -107,17 +106,17 @@ const PortfolioChart = (props) => {
     })
 
     const handleClick = (interval) => {
-      return () => {
-        console.log('click')
+      return (e) => {
+        $('.chart-filter').removeClass('active-filter');
+        e.currentTarget.classList.add('active-filter')
         props.fetchTransactions(props.user.id, interval)
       }
     }
-  
-    console.log('chart rerender', props.transactions)
+  let colorClass = symbol === '+' ? 'greenText' : 'redText';
   return (
       <div className='chart'>
       <div className='totalValue' id ='currentTotal'>
-        {`$${currentTotal.toFixed(2).toLocaleString("en-US")}`}
+        {`$${currentTotal.toLocaleString("en-US")}`}
         </div>
       <div className='difference'>
         <span id='difference'>
@@ -132,12 +131,12 @@ const PortfolioChart = (props) => {
         </div>
 
         <div className='chartOptions'>
-          <span className='nav-link' onClick={handleClick('day')}>1D</span>
-          <span className='nav-link' onClick={handleClick('week')}>1W</span>
-          <span className='nav-link' onClick={handleClick('month')}>1M</span>
-          <span className='nav-link' onClick={handleClick('threeMonths')}>3M</span>
-          <span className='nav-link' onClick={handleClick('year')}>1Y</span>
-          <span className='nav-link' onClick={handleClick('all')}>ALL</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('day')}>1D</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('week')}>1W</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('month')}>1M</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('threeMonths')}>3M</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('year')}>1Y</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('all')}>ALL</span>
         </div>
 
       </div>

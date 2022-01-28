@@ -14,19 +14,6 @@
   margin: 5%;
 }
 
-.graph {
-  margin-bottom: 20px;
-
-}
-
-.main-chart {
-  width: 600px;
-  height: 300px;
-}
-.chartOptions span{
-  padding-right: 15px;
-}
-
 .asset-list {
  border: 1px solid grey;
  width: 275px;
@@ -43,19 +30,42 @@
 }
 
 .buying-power {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 0;
-  padding: 20px;
-  width: 100%;
-  border-top: 1px solid gray;
+  // border-top: 1px solid gray;
   border-bottom: 1px solid gray;
 }
 
-#currentTotal {
-  font-size: 32px;
+.border-grey {
+  border-top: 1px solid gray;
+}
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 20px 30px 0;
+  width: 100%;
 }
 
-#interval {
-  color: #919FA6
+.deposit-funds, .deposit-message {
+  width: 50%;
+  padding: 10px 20px 10px 0;
+  border-top: none;
 }
+
+.deposit-message {
+  padding: 40px 20px;
+}
+.buying-power-div {
+  margin-top: 20px;
+  background-color: rgb(30,33,36);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.deposit-button {
+  width: 100%;
+  background-color: #00C805;
+  width: 300px;
+  height: 45px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
