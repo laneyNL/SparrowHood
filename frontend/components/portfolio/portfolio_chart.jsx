@@ -41,9 +41,9 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
       case ('day'):
         return timeString;
       case ('week'):
-        return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${dateStringSplit[2]} ${timeString}`
+        return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${timeString}`
       case ('month'):
-        return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${dateStringSplit[2]} ${timeString}`
+        return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${timeString}`
       default:
         return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${dateStringSplit[2]}`
     }
