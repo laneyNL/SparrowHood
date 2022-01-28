@@ -18,7 +18,9 @@ export default class Portfolio extends React.Component {
         this.setState({ 
           transactions: Object.values(this.props.transactions), symbols: this.props.symbols
         })
-        this.props.symbols.forEach(symbol => this.props.fetchAssetPrice(symbol))
+        this.props.symbols.forEach(symbol => {
+          this.props.fetchAssetDaily(symbol)
+        })
       })
   }
 
@@ -51,7 +53,7 @@ export default class Portfolio extends React.Component {
                 <div className='deposit-funds'>
                   <div className='flex-between'>
                     <div>Instant Available</div>
-                    <div>hold{}</div>
+                    <div>${this.props.user.buyingPower.toLocaleString("en-US")}</div>
                   </div>
                   <div className='flex-between border-grey'>
                     <div>Buying Power</div>
@@ -70,7 +72,7 @@ export default class Portfolio extends React.Component {
             <p>Stocks</p>
             {
               this.props.symbols.map((symbol, idx) => 
-                <AssetListItem symbol={symbol} assets={this.props.assets} fetchAssetPrice={this.props.fetchAssetPrice} key={idx} />
+                <AssetListItem symbol={symbol} assets={this.props.assets} fetchAssetDaily={this.props.fetchAssetDaily} key={idx} />
                 )
             }
             <p>Cryptocurrencies</p>

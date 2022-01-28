@@ -2,9 +2,14 @@ import * as AssetApiUtil from '../util/asset_api_util';
 import { RECEIVE_SESSION_ERRORS } from './session_actions';
 
 export const RECEIVE_ASSET = 'RECEIVE_ASSET';
+export const RECEIVE_ASSET_DAILY = 'RECEIVE_ASSET_DAILY';
 
 const receiveAsset = (payload) => ({
   type: RECEIVE_ASSET,
+  payload
+})
+const receiveAssetDaily = (payload) => ({
+  type: RECEIVE_ASSET_DAILY,
   payload
 })
 
@@ -25,7 +30,7 @@ export const fetchAssetInterval = (symbol, interval) => dispatch => {
 }
 export const fetchAssetDaily = (symbol) => dispatch => {
   return AssetApiUtil.fetchAssetDaily(symbol)
-    .then(payload => dispatch(receiveAsset(payload)))
+    .then(payload => dispatch(receiveAssetDaily(payload)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
 export const fetchAssetWeekly = (symbol) => dispatch => {

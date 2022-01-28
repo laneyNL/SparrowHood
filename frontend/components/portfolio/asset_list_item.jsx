@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import MiniChart from './asset_mini_chart';
 
 export default class AssetListItem extends React.Component {
   constructor(props) {
@@ -12,9 +13,10 @@ export default class AssetListItem extends React.Component {
   }
   render() {
     if (!this.props.assets || !this.props.symbol || !this.props.assets[this.props.symbol]) return null;
-  
-    const quote = this.props.assets[this.props.symbol]['Global Quote'];
-    const percentDiff = ((parseFloat(quote['05. price']) - parseFloat(quote['02. open'])) / parseFloat(quote['02. open'])) * 100;
+    const quote = Object.values(this.props.assets[this.props.symbol]["Time Series (Daily)"]);
+    const closePrice = parseFloat(quote[0]["4. close"]);
+    const openPrice = parseFloat(quote[quote.length - 1]["1. open"]);
+    const percentDiff = ((closePrice - openPrice) / openPrice) * 100;
 
     const colorClass = percentDiff < 0 ? 'negative' : 'positive';
     const sign = percentDiff < 0 ? '' : '+';
@@ -26,10 +28,10 @@ export default class AssetListItem extends React.Component {
             <div>Shares</div>
           </div>
           <div>
-            <div>Chart Placeholder</div>
+            <MiniChart symbol={this.props.symbol} assets={this.props.assets}/>
           </div>
           <div className='column asset-sidebar-item'>
-            <div className=''>{`$${parseFloat(quote['05. price']).toFixed(2)}`}</div>
+            <div className=''>{`$${closePrice.toFixed(2)}`}</div>
             <div className={colorClass}>{`${sign}${percentDiff.toFixed(2)}%`}</div>
           </div>
         </div>
