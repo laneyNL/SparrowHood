@@ -8,7 +8,8 @@ const mapStateToProps = (state) => ({
   user: state.entities.users[state.session.id],
   transactions: state.entities.transactions.data,
   symbols: state.entities.transactions.symbols,
-  assets: state.entities.assets
+  assets: state.entities.assets,
+  interval: state.entities.transactions.interval
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -3,6 +3,7 @@ class Api::PortfolioTransactionsController < ApplicationController
   def index
     @transactions = PortfolioTransaction.in_interval(params[:user_id], params[:interval])
     @symbols= @transactions.select('symbol').distinct.map(&:symbol)
+    @interval = params[:interval]
     render :index
   end
   

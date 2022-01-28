@@ -39,7 +39,9 @@ export default class Portfolio extends React.Component {
 
         <div className='portfolio'>
           <div className='main-chart'>
-            <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={Object.values(this.props.transactions)}/>
+
+            <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={Object.values(this.props.transactions)} interval={this.props.interval}/>
+
             <div className ='buying-power-div'>
               <div className='buying-power flex-between'>
                 <div>Buying Power</div>

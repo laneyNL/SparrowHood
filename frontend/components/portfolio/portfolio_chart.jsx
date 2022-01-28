@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-const PortfolioChart = (props) => {
-  if (!props.transactions.length) return null;
+const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
+  if (!transactions.length) return null;
 
-  let currentTotal = props.transactions[props.transactions.length - 1].currentTotal;
-  const initial = props.transactions[0].currentTotal;
-  let interval = 'Today';
+  let currentTotal = transactions[transactions.length - 1].currentTotal;
+  const initial = transactions[0].currentTotal;
 
   const difference = (currentTotal) - initial;
   const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
   let symbol = ''
   if (Math.floor(percDiff) !== 0) symbol = (difference > 0 ? '+' : '-');
   
-
   const chartData = {
-    labels: props.transactions.map(action => action.createdAt),
+    labels: transactions.map(action => action.createdAt),
     datasets: [
       {
-        data: props.transactions.map(action => action.currentTotal),
+        data: transactions.map(action => action.currentTotal),
         fill: false,
         borderColor: symbol === '+' ? 'green' : 'red',
         tension: 0.4,
@@ -25,9 +23,30 @@ const PortfolioChart = (props) => {
     ]
   }
 
-  const date = (tooltipItem) => {
+  const timeLabel = (tooltipItem) => {
     let time = new Date(tooltipItem.label)
-    return time.toDateString().split(' ').slice(1).join(' ');
+    let hour = time.getHours();
+    let minutes = time.getMinutes();
+    if (minutes < 10) minutes = ` ${minutes}`;
+    let dayTime = 'AM';
+    if (hour > 12) {
+      dayTime = 'PM';
+      hour -= 12;
+    }
+    const timeString = `${hour}:${minutes} ${dayTime}`
+    const dateString = time.toDateString().toUpperCase().split(' ').slice(1).join(' ');
+    const dateStringSplit = dateString.split(' ')
+     
+    switch (interval) {
+      case ('day'):
+        return timeString;
+      case ('week'):
+        return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${dateStringSplit[2]} ${timeString}`
+      case ('month'):
+        return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${dateStringSplit[2]} ${timeString}`
+      default:
+        return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${dateStringSplit[2]}`
+    }
   }
 
   const chartOptions = {
@@ -44,7 +63,7 @@ const PortfolioChart = (props) => {
     },
     onHover: (e, legendItem, legend) => {
       if(legendItem[0]) {
-        currentTotal = props.transactions[legendItem[0].index].currentTotal;
+        currentTotal = transactions[legendItem[0].index].currentTotal;
         const difference = (currentTotal) - initial;
         const percDiff = Math.abs((difference / initial) * 100).toFixed(2).toLocaleString("en-US");
         let symbol = '';
@@ -62,7 +81,7 @@ const PortfolioChart = (props) => {
         yAlign: top,
         mode: 'nearest',
         callbacks: {
-          label: date,
+          label: timeLabel,
           labelTextColor: () => '#919FA6',
           labelColor: () => ({ backgroundColor: 'transparent' }),
           title: () => ''
@@ -109,7 +128,7 @@ const PortfolioChart = (props) => {
       return (e) => {
         $('.chart-filter').removeClass('active-filter');
         e.currentTarget.classList.add('active-filter')
-        props.fetchTransactions(props.user.id, interval)
+        fetchTransactions(user.id, interval)
       }
     }
   let colorClass = symbol === '+' ? 'greenText' : 'redText';

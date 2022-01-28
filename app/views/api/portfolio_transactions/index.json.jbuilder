@@ -7,3 +7,4 @@ json.set! :data do
 end
 
 json.symbols @symbols
+json.interval @interval
