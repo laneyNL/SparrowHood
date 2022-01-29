@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetchCryptoInterval, name, assets, symbol, symbolDetails }) => {
+const AssetChart = ({ name, assets, symbol }) => {
   
   if (jQuery.isEmptyObject(assets) || !assets['interval'] || !assets['full']) return null;
   
   const [days, setDays] = useState(1);
   const [chartInterval, setChartInterval] = useState('Today');
   const period = (days === 1) ? 'interval' : 'full';
-  const assetObject = assets[period]['AMC'];
+  const assetObject = assets[period][symbol];
 
   const assetKeys = Object.keys(assetObject);
   const values = Object.values(assetObject);
@@ -151,7 +151,9 @@ const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetch
 
   const handleClick = (interval) => {
     return (e) => {
-      $('.chart-filter').removeClass('active-filter');
+      e.stopPropagation();
+      $('.asset-chart-filter').removeClass('active-filter');
+      console.log(e.currentTarget)
       e.currentTarget.classList.add('active-filter');
       setChartInterval(interval);
       switch (interval) {
@@ -196,12 +198,12 @@ const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetch
       </div>
 
       <div className='chartOptions'>
-        <span className={`chart-filter ${colorClass} active-filter`} onClick={handleClick('Today')}>1D</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Week')}>1W</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Month')}>1M</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')}>3M</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Year')}>1Y</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 5 Years')}>5Y</span>
+        <span className={`asset-chart-filter ${colorClass} active-filter`} onClick={handleClick('Today')}>1D</span>
+        <span className={`asset-chart-filter ${colorClass}`} onClick={handleClick('Past Week')}>1W</span>
+        <span className={`asset-chart-filter ${colorClass}`} onClick={handleClick('Past Month')}>1M</span>
+        <span className={`asset-chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')}>3M</span>
+        <span className={`asset-chart-filter ${colorClass}`} onClick={handleClick('Past Year')}>1Y</span>
+        <span className={`asset-chart-filter ${colorClass}`} onClick={handleClick('Past 5 Years')}>5Y</span>
       </div>
 
     </div>

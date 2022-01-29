@@ -5,6 +5,13 @@
 //   })
 // }
 
+export const fetchAssetDetails = (symbol) => {
+  return $.ajax({
+    method: 'GET', 
+    url: `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${window.alphaAPIKey}`
+  })
+}
+
 export const fetchAssetInterval = (symbol, interval='5min') => {
   return $.ajax({
     method: 'GET', 

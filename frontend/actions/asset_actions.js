@@ -5,6 +5,7 @@ export const RECEIVE_ASSET = 'RECEIVE_ASSET';
 export const RECEIVE_ASSET_DAILY = 'RECEIVE_ASSET_DAILY';
 export const RECEIVE_ASSET_FULL = 'RECEIVE_ASSET_FULL';
 export const RECEIVE_ASSET_INTERVAL = 'RECEIVE_ASSET_INTERVAL';
+export const RECEIVE_ASSET_DETAILS = 'RECEIVE_ASSET_DETAILS';
 export const RECEIVE_CRYPTO_DAILY = 'RECEIVE_CRYPTO_DAILY';
 export const RECEIVE_CRYPTO_FULL = 'RECEIVE_CRYPTO_FULL';
 export const RECEIVE_CRYPTO_INTERVAL = 'RECEIVE_CRYPTO_INTERVAL';
@@ -25,6 +26,10 @@ const receiveAssetFull = (payload) => ({
 })
 const receiveAssetInterval = (payload) => ({
   type: RECEIVE_ASSET_INTERVAL,
+  payload
+})
+const receiveAssetDetails = (payload) => ({
+  type: RECEIVE_ASSET_DETAILS,
   payload
 })
 const receiveCryptoDaily = (payload) => ({
@@ -72,6 +77,11 @@ const receiveErrors = (errors) => ({
   export const fetchAssetFull = (symbol) => dispatch => {
     return AssetApiUtil.fetchAssetFull(symbol)
       .then(payload => dispatch(receiveAssetFull(payload)))
+      .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+  }
+  export const fetchAssetDetails = (symbol) => dispatch => {
+    return AssetApiUtil.fetchAssetDetails(symbol)
+      .then(payload => dispatch(receiveAssetDetails(payload)))
       .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
   }
   export const fetchCryptoInterval = (symbol, interval) => dispatch => {
