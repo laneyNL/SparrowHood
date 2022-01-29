@@ -1,9 +1,9 @@
-.portfolio-splash, .port-nav {
+.portfolio-splash, .port-nav, .asset-show {
   background-color: black;
   color: white;
 }
 
-.portfolio-splash {
+.portfolio-splash, .asset-show {
   width: 100%;
   height: 100%;
 }
@@ -23,7 +23,9 @@
  max-height: 550px;
  margin-left: 50px;
  background-color: #1E2124;
+ border-radius: 5px;
 }
+
 .asset-list p {
   box-sizing: border-box;
   padding: 20px;

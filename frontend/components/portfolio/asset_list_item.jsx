@@ -87,7 +87,7 @@ export default class AssetListItem extends React.Component {
     const sign = percentDiff < 0 ? '' : '+';
 
     return (
-      <Link to='/'>
+      <Link to={`/assets/${this.props.symbol}`}>
         <div className='asset-sidebar row'>
           <div className='column asset-sidebar-item'>
             <div className=''>{this.props.symbol}</div>
