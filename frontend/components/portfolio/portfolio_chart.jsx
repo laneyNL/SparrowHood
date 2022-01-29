@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
+  
   if (!transactions.length) return null;
   let currentTotal = transactions[transactions.length - 1].currentTotal;
   const initial = transactions[0].currentTotal;

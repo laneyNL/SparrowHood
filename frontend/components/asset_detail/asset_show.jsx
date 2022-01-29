@@ -13,21 +13,23 @@ export default class AssetShow extends React.Component {
   }
 
   componentDidMount() {
-   
+   this.props.fetchTransactions(this.props.user.id);
+  //  this.props.fetchAssetDaily('AMC');
+   this.props.fetchAssetFull('AMC');
   }
 
 
   render() {
-   
+  //  console.log('props', this.props)
     return (
 
       <div className='asset-show'>
         <PortfolioHeader logout={this.props.logout} />
 
-        <div className='portfolio'>
+        <div className='asset-show-body'>
           <div className='main-chart'>
 
-            <AssetChart name={this.props.symbol} assetValues={this.props.assets}  />
+            <AssetChart fetchAssetFull={this.props.fetchAssetFull} name={this.props.symbol} assetValues={this.props.assets}  />
 
             <div className='' >
               <div>Market Value</div>
@@ -41,7 +43,7 @@ export default class AssetShow extends React.Component {
               stats
             </div>
           </div>
-          <TransactionForm symbol={this.props.symbol} user={this.props.user}/>
+          {/* <TransactionForm symbol={this.props.symbol} user={this.props.user}/> */}
         </div>
       </div>
     )

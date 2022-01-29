@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { fetchAssetFull, fetchCryptoFull } from '../../actions/asset_actions';
-import { createTransaction } from '../../actions/transaction_action';
+import { fetchAssetFull, fetchCryptoFull, fetchAssetDaily } from '../../actions/asset_actions';
+import { createTransaction, fetchTransactions } from '../../actions/transaction_action';
 import AssetShow from './asset_show';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -13,7 +13,9 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
   fetchAssetFull: (symbol) => dispatch(fetchAssetFull(symbol)),
   fetchCryptoFull: (symbol) => dispatch(fetchCryptoFull(symbol)),
-  createTransaction: (transaction) => dispatch(createTransaction(transaction))
+  createTransaction: (transaction) => dispatch(createTransaction(transaction)),
+  fetchTransactions: (userId, interval) => dispatch(fetchTransactions(userId, interval)),
+  fetchAssetDaily: (symbol) => dispatch(fetchAssetDaily(symbol)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssetShow);

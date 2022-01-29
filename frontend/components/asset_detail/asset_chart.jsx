@@ -1,25 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const AssetChart = ({ assetValues }) => {
-  if (!assetValues.length) return null;
-  // let day = 1;
+const AssetChart = ({ assetValues, fetchAssetFull, name }) => {
+  if (!assetValues) return null;
+  const [days, setDays] = useState(30);
+  const assetObject = assetValues['AMC']
   // slice based on days
-  const labels = Object.keys(assetValues);
-  const data = Object.values(assetValues).map(value => value["4. close"]);
+  const assetKeys = Object.keys(assetObject);
+  const values = Object.values(assetObject);
 
-  let currentValue = assetValues[assetValues.length - 1].currentValue;
-  const initial = assetValues[0].currentValue;
+  let start = assetKeys.length - days;
 
-  const difference = (currentTotal) - initial;
+  let labels = assetKeys.slice(start, assetKeys.length);
+  let data = values.slice(start, assetKeys.length).map(value => value["4. close"]);
+  
+  let currentValue = data[data.length - 1];
+  const initial = data[0];
+
+  const difference = (currentValue) - initial;
   const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
   let symbol = ''
   if (Math.floor(percDiff) !== 0) symbol = (difference > 0 ? '+' : '-');
 
+  console.log(values)
+  console.log(assetKeys)
+  console.log(labels)
+  console.log(data)
+  console.log(currentValue)
+  console.log(initial)
+  console.log(difference)
+
   const chartData = {
-    labels: assetValues.map(action => action.createdAt),
+    labels: labels,
     datasets: [
       {
-        data: assetValues.map(action => action.currentTotal),
+        data: data,
         fill: false,
         borderColor: symbol === '+' ? 'green' : 'red',
         tension: 0.4,
@@ -28,29 +42,30 @@ const AssetChart = ({ assetValues }) => {
   }
 
   const timeLabel = (tooltipItem) => {
-    let time = new Date(tooltipItem.label)
-    let hour = time.getHours();
-    let minutes = time.getMinutes();
-    if (minutes < 10) minutes = ` ${minutes}`;
-    let dayTime = 'AM';
-    if (hour > 12) {
-      dayTime = 'PM';
-      hour -= 12;
-    }
-    const timeString = `${hour}:${minutes} ${dayTime}`
-    const dateString = time.toDateString().toUpperCase().split(' ').slice(1).join(' ');
-    const dateStringSplit = dateString.split(' ')
+    // let time = new Date(tooltipItem.label)
+    // let hour = time.getHours();
+    // let minutes = time.getMinutes();
+    // if (minutes < 10) minutes = ` ${minutes}`;
+    // let dayTime = 'AM';
+    // if (hour > 12) {
+    //   dayTime = 'PM';
+    //   hour -= 12;
+    // }
+    // const timeString = `${hour}:${minutes} ${dayTime}`
+    // const dateString = time.toDateString().toUpperCase().split(' ').slice(1).join(' ');
+    // const dateStringSplit = dateString.split(' ')
 
-    switch (interval) {
-      case ('Today'):
-        return timeString;
-      case ('Past Week'):
-        return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${timeString}`
-      case ('Past Month'):
-        return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${timeString}`
-      default:
-        return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${dateStringSplit[2]}`
-    }
+    // switch (interval) {
+    //   case ('Today'):
+    //     return timeString;
+    //   case ('Past Week'):
+    //     return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${timeString}`
+    //   case ('Past Month'):
+    //     return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${timeString}`
+    //   default:
+    //     return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${dateStringSplit[2]}`
+    // }
+    return tooltipItem.label
   }
 
   const chartOptions = {
@@ -67,13 +82,13 @@ const AssetChart = ({ assetValues }) => {
     },
     onHover: (e, legendItem, legend) => {
       if (legendItem[0]) {
-        currentValue = assetValues[legendItem[0].index].currentTotal;
-        const difference = (currentTotal) - initial;
+        currentValue = parseFloat(data[legendItem[0].index]);
+        const difference = (currentValue) - initial;
         const percDiff = Math.abs((difference / initial) * 100).toFixed(2).toLocaleString("en-US");
         let symbol = '';
         if (Math.floor(difference) !== 0) symbol = (difference > 0 ? '+' : '-');
-        document.getElementById('currentTotal').innerHTML = `$${currentTotal.toFixed(2).toLocaleString("en-US")}`;
-        document.getElementById('difference').innerHTML = `${symbol}$${Math.abs(difference).toLocaleString("en-US")} (${symbol}${percDiff.toLocaleString("en-US")}%)`
+        document.getElementById('currentValue').innerHTML = `$${currentValue.toFixed(2).toLocaleString("en-US")}`;
+        document.getElementById('difference-value').innerHTML = `${symbol}$${Math.abs(difference).toLocaleString("en-US")} (${symbol}${percDiff.toLocaleString("en-US")}%)`
       }
     },
     plugins: {
@@ -120,9 +135,10 @@ const AssetChart = ({ assetValues }) => {
       plugins: [tooltipLine]
     };
 
-    $('#myChart').remove();
-    $(`#chartDiv`).append("<canvas id='myChart' width={600} height={200}/>");
-    const canvas = document.getElementById('myChart');
+    $('#assetChart').remove();
+    $(`#assetChartDiv`).append("<canvas id='assetChart' width={600} height={200}/>");
+    const canvas = document.getElementById('assetChart');
+    console.log('in effect')
     if (canvas) {
       const myChart = new Chart(canvas, config)
     }
@@ -132,6 +148,7 @@ const AssetChart = ({ assetValues }) => {
     return (e) => {
       $('.chart-filter').removeClass('active-filter');
       e.currentTarget.classList.add('active-filter');
+      let day;
       switch (interval) {
         case 'Today':
           day = 1;
@@ -143,29 +160,34 @@ const AssetChart = ({ assetValues }) => {
           day = 90;
         case 'Past Year':
           day = 365;
-        case 'Past 5 Year':
+        case 'Past 5 Years':
           day = 365;
       }
+      start = assetKeys.length - day;
+      labels = assetKeys.slice(start, assetKeys.length);
+      data = values.slice(start, assetKeys.length).map(value => value["4. close"]);
+      setDays(day);
       // fetchassetValues(user.id, interval)
     }
   }
   let colorClass = symbol === '+' ? 'greenText' : 'redText';
+  console.log(currentValue, 'diff', difference)
   return (
     <div className='chart'>
       <div>{name}</div>
-      <div className='totalValue' id='currentTotal'>
-        {`$${currentTotal.toLocaleString("en-US")}`}
+      <div className='totalValue' id='currentValue'>
+        {`$${currentValue.toLocaleString("en-US")}`}
       </div>
       <div className='difference'>
-        <span id='difference'>
+        <span id='difference-value'>
           {symbol}${Math.abs(difference).toLocaleString("en-US")} ({symbol}{`${percDiff}%`})
         </span>
-        <span id='interval'> {interval}</span>
+        <span id='interval'> {days}</span>
       </div>
 
 
-      <div id='chartDiv'>
-        <canvas id='myChart' width={600} height={200} />
+      <div id='assetChartDiv'>
+        <canvas id='assetChart' width={600} height={200} />
       </div>
 
       <div className='chartOptions'>
@@ -174,7 +196,7 @@ const AssetChart = ({ assetValues }) => {
         <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Month')}>1M</span>
         <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')}>3M</span>
         <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Year')}>1Y</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('All Time')}>ALL</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 5 Years')}>5Y</span>
       </div>
 
     </div>

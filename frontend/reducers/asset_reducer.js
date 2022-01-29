@@ -17,6 +17,7 @@ const assetReducer = (state = {}, action) => {
       }
       return nextState;
     case RECEIVE_ASSET_FULL: // 20 years of data
+    // console.log('reducer', action.payload)
       nextState['full'] = {};
       //stock api
       if (action.payload["Time Series (Daily)"]) {
