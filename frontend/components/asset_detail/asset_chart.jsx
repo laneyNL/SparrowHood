@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from 'react';
 
-const AssetChart = ({ assetValues, fetchAssetFull, name }) => {
-  if (!assetValues) return null;
-  const [days, setDays] = useState(30);
-  const assetObject = assetValues['AMC']
-  // slice based on days
+const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetchCryptoInterval, name, assets, symbol }) => {
+  console.log('symbol', symbol)
+  if (!asset) return null;
+  const [days, setDays] = useState(1);
+  // const assetObject = asset[symbol];
+  const assetObject = asset['AMC'];
+
+  let period = days === 1 ? 'interval' : 'full';
+
   const assetKeys = Object.keys(assetObject);
   const values = Object.values(assetObject);
+  let labels = assetKeys;
+  let data = values.map(value => value["4. close"]);
 
-  let start = assetKeys.length - days;
-
-  let labels = assetKeys.slice(start, assetKeys.length);
-  let data = values.slice(start, assetKeys.length).map(value => value["4. close"]);
+  if (days > 1) {
+    let start = assetKeys.length - 1 - days;
+  
+    labels = assetKeys.slice(start, assetKeys.length);
+    data = values.slice(start, assetKeys.length);
+  }
   
   let currentValue = data[data.length - 1];
   const initial = data[0];
 
-  const difference = (currentValue) - initial;
+  const difference = currentValue - initial;
   const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
   let symbol = ''
   if (Math.floor(percDiff) !== 0) symbol = (difference > 0 ? '+' : '-');
-
-  console.log(values)
-  console.log(assetKeys)
-  console.log(labels)
-  console.log(data)
-  console.log(currentValue)
-  console.log(initial)
-  console.log(difference)
 
   const chartData = {
     labels: labels,
@@ -107,6 +107,9 @@ const AssetChart = ({ assetValues, fetchAssetFull, name }) => {
         }
       }
     },
+    elements: {
+      point: { radius: 0 }
+    },
   }
 
   useEffect(() => {
@@ -138,7 +141,6 @@ const AssetChart = ({ assetValues, fetchAssetFull, name }) => {
     $('#assetChart').remove();
     $(`#assetChartDiv`).append("<canvas id='assetChart' width={600} height={200}/>");
     const canvas = document.getElementById('assetChart');
-    console.log('in effect')
     if (canvas) {
       const myChart = new Chart(canvas, config)
     }
@@ -148,25 +150,24 @@ const AssetChart = ({ assetValues, fetchAssetFull, name }) => {
     return (e) => {
       $('.chart-filter').removeClass('active-filter');
       e.currentTarget.classList.add('active-filter');
-      let day;
       switch (interval) {
         case 'Today':
-          day = 1;
+          setDays(1);
         case 'Past Week':
-          day = 7;
+          setDays(7);
         case 'Past Month':
-          day = 30;
+          setDays(30);
         case 'Past 3 Months':
-          day = 90;
+          setDays(90);
         case 'Past Year':
-          day = 365;
+          setDays(365);
         case 'Past 5 Years':
-          day = 365;
+          setDays(365);
       }
-      start = assetKeys.length - day;
+      start = assetKeys.length - days;
       labels = assetKeys.slice(start, assetKeys.length);
       data = values.slice(start, assetKeys.length).map(value => value["4. close"]);
-      setDays(day);
+      
       // fetchassetValues(user.id, interval)
     }
   }

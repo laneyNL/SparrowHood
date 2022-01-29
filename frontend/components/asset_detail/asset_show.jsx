@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AssetChart from './asset_chart'
+import AssetChartContainer from './asset_chart_cotainer'
 import PortfolioHeader from '../portfolio/portfolio_header'
 import TransactionForm from './transaction_form';
 
@@ -14,8 +14,7 @@ export default class AssetShow extends React.Component {
 
   componentDidMount() {
    this.props.fetchTransactions(this.props.user.id);
-  //  this.props.fetchAssetDaily('AMC');
-   this.props.fetchAssetFull('AMC');
+   this.props.fetchAssetInterval('AMC');
   }
 
 
@@ -29,7 +28,7 @@ export default class AssetShow extends React.Component {
         <div className='asset-show-body'>
           <div className='main-chart'>
 
-            <AssetChart fetchAssetFull={this.props.fetchAssetFull} name={this.props.symbol} assetValues={this.props.assets}  />
+            <AssetChartContainer name={this.props.match.params.assetSymbol} symbol={this.props.match.params.assetSymbol} />
 
             <div className='' >
               <div>Market Value</div>

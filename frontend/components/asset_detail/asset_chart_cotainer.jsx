@@ -1,15 +1,13 @@
 import { connect } from 'react-redux';
 import { fetchAssetFull, fetchCryptoFull, fetchAssetDaily } from '../../actions/asset_actions';
 import { createTransaction, fetchTransactions } from '../../actions/transaction_action';
-import AssetShow from './asset_show';
+import AssetChart from './asset_chart';
 
 const mapStateToProps = (state, ownProps) => ({
   user: state.entities.users[state.session.id],
-  assets: state.entities.assets,
+  assets: state.entities.assets.full,
   // interval: state.entities.transactions.interval,
   data: state.entities.transactions.symbols,
-  symbol: ownProps.symbol,
-  name: ownProps.name,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -21,4 +19,4 @@ const mapDispatchToProps = dispatch => ({
   fetchTransactions: (userId, interval) => dispatch(fetchTransactions(userId, interval)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssetShow);
+export default connect(mapStateToProps, mapDispatchToProps)(AssetChart);
