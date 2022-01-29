@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
 const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetchCryptoInterval, name, assets, symbol, symbolDetails }) => {
-  // console.log('symbol', symbolDetails);
   
   if (jQuery.isEmptyObject(assets) || !assets['interval'] || !assets['full']) return null;
   
   const [days, setDays] = useState(1);
+  const [chartInterval, setChartInterval] = useState('Today');
   const period = (days === 1) ? 'interval' : 'full';
   const assetObject = assets[period]['AMC'];
 
@@ -44,7 +44,7 @@ const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetch
     let time = new Date(tooltipItem.label)
     let hour = time.getHours();
     let minutes = time.getMinutes();
-    if (minutes < 10) minutes = ` ${minutes}`;
+    if (minutes < 10) minutes = `0${minutes}`;
     let dayTime = 'AM';
     if (hour > 12) {
       dayTime = 'PM';
@@ -54,7 +54,7 @@ const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetch
     const dateString = time.toDateString().toUpperCase().split(' ').slice(1).join(' ');
     const dateStringSplit = dateString.split(' ')
 
-    switch (interval) {
+    switch (chartInterval) {
       case ('Today'):
         return timeString;
       case ('Past Week'):
@@ -64,7 +64,6 @@ const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetch
       default:
         return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${dateStringSplit[2]}`
     }
-    return tooltipItem.label
   }
 
   const chartOptions = {
@@ -80,7 +79,6 @@ const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetch
       }
     },
     onHover: (e, legendItem, legend) => {
-      // console.log('hover', e, legendItem, legend)
       if (legendItem[0]) {
         currentValue = parseFloat(data[legendItem[0].index]);
         const difference = (currentValue) - initial;
@@ -90,6 +88,10 @@ const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetch
         document.getElementById('currentValue').innerHTML = `$${currentValue.toFixed(2).toLocaleString("en-US")}`;
         document.getElementById('difference-value').innerHTML = `${sign}$${Math.abs(difference).toLocaleString("en-US")} (${sign}${percDiff.toLocaleString("en-US")}%)`
       }
+    },
+    hover: {
+      mode: 'index',
+      intersect: false
     },
     plugins: {
       legend: {
@@ -151,6 +153,7 @@ const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetch
     return (e) => {
       $('.chart-filter').removeClass('active-filter');
       e.currentTarget.classList.add('active-filter');
+      setChartInterval(interval);
       switch (interval) {
         case 'Today':
           setDays(1);
@@ -175,7 +178,6 @@ const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetch
     }
   }
   let colorClass = sign === '+' ? 'greenText' : 'redText';
-  console.log('data', data)
   return (
     <div className='chart'>
       <div>{name}</div>
@@ -186,7 +188,7 @@ const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetch
         <span id='difference-value'>
           {sign}${Math.abs(difference).toLocaleString("en-US")} ({sign}{`${percDiff}%`})
         </span>
-        <span id='interval'> {days}</span>
+        <span id='interval'> {chartInterval}</span>
       </div>
 
       <div id='assetChartDiv'>
@@ -194,7 +196,7 @@ const AssetChart = ({ fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetch
       </div>
 
       <div className='chartOptions'>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Today')}>1D</span>
+        <span className={`chart-filter ${colorClass} active-filter`} onClick={handleClick('Today')}>1D</span>
         <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Week')}>1W</span>
         <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Month')}>1M</span>
         <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')}>3M</span>

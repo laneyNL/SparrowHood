@@ -27,7 +27,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
     let time = new Date(tooltipItem.label)
     let hour = time.getHours();
     let minutes = time.getMinutes();
-    if (minutes < 10) minutes = ` ${minutes}`;
+    if (minutes < 10) minutes = `0${minutes}`;
     let dayTime = 'AM';
     if (hour > 12) {
       dayTime = 'PM';
@@ -62,6 +62,8 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
       }
     },
     onHover: (e, legendItem, legend) => {
+      console.log('hovering', e, legendItem, legend)
+
       if(legendItem[0]) {
         currentTotal = transactions[legendItem[0].index].currentTotal;
         const difference = (currentTotal) - initial;
@@ -72,6 +74,10 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
         document.getElementById('difference').innerHTML = `${symbol}$${Math.abs(difference).toLocaleString("en-US")} (${symbol}${percDiff.toLocaleString("en-US")}%)`
       }
     },
+    hover: {
+      mode: 'index',
+      intersect: false
+    },
     plugins: {
       legend: {
         display: false,
@@ -79,7 +85,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
       tooltip: {
         displayColors: false,
         yAlign: top,
-        mode: 'nearest',
+        mode: 'index',
         intersect: false,
         callbacks: {
           label: timeLabel,
@@ -159,7 +165,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
           <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Month')}>1M</span>
           <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')}>3M</span>
           <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Year')}>1Y</span>
-          <span className={`chart-filter ${colorClass}`} onClick={handleClick('All Time')}>ALL</span>
+        <span className={`chart-filter ${colorClass} active-filter`} onClick={handleClick('All Time')}>ALL</span>
         </div>
 
       </div>
