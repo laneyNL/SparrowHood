@@ -6,7 +6,6 @@ import AssetShow from './asset_show';
 const mapStateToProps = (state, ownProps) => ({
   user: state.entities.users[state.session.id],
   assets: state.entities.assets,
-  // interval: state.entities.transactions.interval,
   symbolDetails: state.entities.transactions.symbols,
 })
 

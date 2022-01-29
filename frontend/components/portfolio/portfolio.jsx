@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import AssetListItem from './asset_list_item';
 import PortfolioChart from './portfolio_chart';
 import AddFundsForm from './add_funds_form';
-import MiniChart from './asset_mini_chart';
 import PortfolioHeader from './portfolio_header';
+import LoadingSpinner from '../loading_spinner';
 
 export default class Portfolio extends React.Component {
   constructor(props) {
@@ -19,28 +19,30 @@ export default class Portfolio extends React.Component {
   componentDidMount() {
     this.props.fetchTransactions(this.props.user.id).then( 
       () => {
-
         this.setState({
-          stockSymbols: Object.keys(this.props.symbols).filter(symbol => this.props.symbols[symbol].isStock),
-          cryptoSymbols: Object.keys(this.props.symbols).filter(symbol => !this.props.symbols[symbol].isStock),
+          stockSymbols: Object.keys(this.props.symbols)
+            .filter(symbol => this.props.symbols[symbol].isStock),
+          cryptoSymbols: Object.keys(this.props.symbols)
+            .filter(symbol => !this.props.symbols[symbol].isStock),
         })
-        
         // commented out to reduce fetches
-        // this.state.stockSymbols.forEach((symbol) => {
-        //   this.props.fetchAssetDaily(symbol);
-        // })
-        // this.state.cryptoSymbols.forEach((symbol, idx) => {
-        //   if (idx === this.state.cryptoSymbols.length-1) {
-        //     this.props.fetchCryptoDaily(symbol).then(this.setState({ loading: false }));
-        //   } else {
-        //     this.props.fetchCryptoDaily(symbol);
-        //   }
-        // })
-
-        // if (!this.state.cryptoSymbols.length) this.setState({ loading: false });
+        this.state.stockSymbols.forEach((symbol, idx) => {
+          if ((idx === this.state.stockSymbols.length - 1) && !this.state.cryptoSymbols.length) {
+            this.props.fetchAssetDaily(symbol).then(() => this.setState({ loading: false }));
+          } else {
+            this.props.fetchAssetDaily(symbol);
+          }
+        })
+        this.state.cryptoSymbols.forEach((symbol, idx) => {
+          if (idx === this.state.cryptoSymbols.length-1) {
+            this.props.fetchCryptoDaily(symbol).then(() => this.setState({ loading: false }));
+          } else {
+            this.props.fetchCryptoDaily(symbol);
+          }
+        })
 
         // delete after fetches turned back on
-        this.setState({ loading: false });
+        // this.setState({ loading: false });
       })
   }
 
@@ -58,9 +60,8 @@ export default class Portfolio extends React.Component {
 
 
   render() {
-    if (this.state.loading || !this.props.transactions || !this.props.symbols) return <div>Loading Animation</div>;
+    if (this.state.loading || !this.props.transactions || !this.props.symbols) return <LoadingSpinner />;
     return (
-      
       <div className='portfolio-splash'>
         
         <AddFundsForm addFunds={this.props.addFunds} user={this.props.user} />
@@ -100,7 +101,7 @@ export default class Portfolio extends React.Component {
           <aside className='asset-list'>
         
             {/* comment out to reduce fetches */}
-            {/* <p>Stocks</p>
+            <p>Stocks</p>
             {
               this.state.stockSymbols.map((symbol, idx) =>
                 <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} closeKey="4. close" openKey="3. low" quantity={this.props.symbols[symbol].quantity}/>
@@ -111,7 +112,7 @@ export default class Portfolio extends React.Component {
               this.state.cryptoSymbols.map((symbol, idx) =>
                 <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} closeKey="4b. close (USD)" openKey="3b. low (USD)" quantity={this.props.symbols[symbol].quantity}/>
               )
-            } */}
+            }
             <p>Lists</p>
           </aside>
         </div>

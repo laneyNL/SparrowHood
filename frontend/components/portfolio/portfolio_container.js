@@ -15,7 +15,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
   fetchTransactions: (userId, interval) => dispatch(fetchTransactions(userId, interval)),
-  // fetchAssetPrice: (symbol) => dispatch(fetchAssetPrice(symbol)),
   fetchAssetDaily: (symbol) => dispatch(fetchAssetDaily(symbol)),
   addFunds: (userId, amount) => dispatch(addFunds(userId, amount)),
   fetchCryptoDaily: (symbol) => dispatch(fetchCryptoDaily(symbol))

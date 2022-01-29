@@ -1,0 +1,46 @@
+.assetChartContainter {
+  width: 600px;
+  height: 400px;
+  border: 1px solid white;
+}
+
+.main-asset-chart {
+  display: flex;
+  flex-direction: column;
+}
+
+.assetDetailsDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
+}
+
+.assetDetails {
+  border: 1px solid grey;
+  border-radius: 5px;
+  width: 280px;
+  padding: 20px;
+}
+
+.asset-detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.border-bottom {
+  border-bottom: 1px solid gray;
+}
+
+.about-title, .stats-title {
+  width: 100%;
+  font-size: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid gray;
+  margin-bottom: 20px;
+}
+
+.about-body, .stats-body{
+  margin-bottom: 50px;
+}
