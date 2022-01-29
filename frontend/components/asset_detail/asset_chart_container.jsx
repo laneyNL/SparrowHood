@@ -3,12 +3,16 @@ import { fetchAssetFull, fetchCryptoFull, fetchAssetDaily } from '../../actions/
 import { createTransaction, fetchTransactions } from '../../actions/transaction_action';
 import AssetChart from './asset_chart';
 
-const mapStateToProps = (state, ownProps) => ({
-  user: state.entities.users[state.session.id],
-  assets: state.entities.assets.full,
-  // interval: state.entities.transactions.interval,
-  data: state.entities.transactions.symbols,
-})
+const mapStateToProps = (state, ownProps) => {
+    return {
+      // user: state.entities.users[state.session.id],
+      assets: state.entities.assets,
+      // interval: state.entities.transactions.interval,
+      symbolDetails: state.entities.transactions.symbols,
+      symbol: ownProps.symbol,
+      name: ownProps.name,
+    }
+  }
 
 const mapDispatchToProps = dispatch => ({
   fetchAssetFull: (symbol) => dispatch(fetchAssetFull(symbol)),

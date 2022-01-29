@@ -3,7 +3,7 @@ import { RECEIVE_ASSET_DAILY, RECEIVE_ASSET_FULL, RECEIVE_ASSET_INTERVAL, RECEIV
 const assetReducer = (state = {}, action) => {
   Object.freeze(state);
   const nextState = Object.assign({}, state);
-  if (!action.payload["Meta Data"]) return state;
+  if (!action.payload || !action.payload["Meta Data"]) return state;
   switch (action.type) {
     case RECEIVE_ASSET_DAILY: // last 100 days
       nextState[action.payload["Meta Data"]["2. Symbol"]] = action.payload['Time Series (Daily)'];

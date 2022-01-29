@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AssetChartContainer from './asset_chart_cotainer'
+import AssetChartContainer from './asset_chart_container'
 import PortfolioHeader from '../portfolio/portfolio_header'
 import TransactionForm from './transaction_form';
 
@@ -15,8 +15,8 @@ export default class AssetShow extends React.Component {
   componentDidMount() {
    this.props.fetchTransactions(this.props.user.id);
    this.props.fetchAssetInterval('AMC');
+   this.props.fetchAssetFull('AMC');
   }
-
 
   render() {
   //  console.log('props', this.props)

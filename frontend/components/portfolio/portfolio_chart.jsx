@@ -80,6 +80,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
         displayColors: false,
         yAlign: top,
         mode: 'nearest',
+        intersect: false,
         callbacks: {
           label: timeLabel,
           labelTextColor: () => '#919FA6',
@@ -87,6 +88,9 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
           title: () => ''
         }
       }
+    },
+    elements: {
+      point: { radius: 0 }
     },
   }
 
