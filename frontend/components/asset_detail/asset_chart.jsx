@@ -152,7 +152,7 @@ const AssetChart = ({ name, assets, symbol }) => {
   const handleClick = (interval) => {
     return (e) => {
       e.stopPropagation();
-      $('.asset-chart-filter').removeClass('active-filter');
+      $('.chart-filter').removeClass('active-filter');
       console.log(e.currentTarget)
       e.currentTarget.classList.add('active-filter');
       setChartInterval(interval);
@@ -179,6 +179,7 @@ const AssetChart = ({ name, assets, symbol }) => {
 
     }
   }
+  if (days === 1) $('#today-asset-chart').addClass('active-filter');
   let colorClass = sign === '+' ? 'greenText' : 'redText';
   return (
     <div className='chart'>
@@ -198,12 +199,12 @@ const AssetChart = ({ name, assets, symbol }) => {
       </div>
 
       <div className='chartOptions'>
-        <span className={`asset-chart-filter ${colorClass} active-filter`} onClick={handleClick('Today')}>1D</span>
-        <span className={`asset-chart-filter ${colorClass}`} onClick={handleClick('Past Week')}>1W</span>
-        <span className={`asset-chart-filter ${colorClass}`} onClick={handleClick('Past Month')}>1M</span>
-        <span className={`asset-chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')}>3M</span>
-        <span className={`asset-chart-filter ${colorClass}`} onClick={handleClick('Past Year')}>1Y</span>
-        <span className={`asset-chart-filter ${colorClass}`} onClick={handleClick('Past 5 Years')}>5Y</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Today')} id='today-asset-chart'>1D</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Week')}>1W</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Month')}>1M</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')}>3M</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Year')}>1Y</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 5 Years')}>5Y</span>
       </div>
 
     </div>
