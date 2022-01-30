@@ -65,6 +65,7 @@
   height: 50px;
   border-radius: 5px;
   padding:15px 20px 20px 20px;
+  text-align: center;
   vertical-align: center;
   border: none;
   cursor: pointer;
@@ -126,6 +127,28 @@
   text-align: center;
   width: 100%;
   border-top: 1px solid gray;
+}
+
+.complete-title {
+  font-weight: 15px;
+  // padding: 10px 0;
+}
+
+.complete-body {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid gray;
+  padding: 20px;
+}
+
+.complete-text {
+  color: gray;
+  padding: 20px;
+}
+
+.complete-button {
+  margin: 20px;
 }
 
 .transaction-form-buy-power.greenText, .transaction-form-buy-power.green {

@@ -6,7 +6,7 @@ export default class TransactionForm extends React.Component {
 
     this.state = {
       owner_id: this.props.user.id,
-      asset_id: 10,
+      asset_id: 102,
       is_purchase: true,
       quantity: '',
       transaction_price: this.props.currentPrice,
@@ -41,7 +41,7 @@ export default class TransactionForm extends React.Component {
       if (!isNaN(quantity)) {
         if (field === 'dollars') quantity /= this.props.currentPrice;
         if (!this.state.is_purchase) quantity = -quantity;
-        this.setState({ [field]: quantity });
+        this.setState({ quantity: quantity });
       }
     }
   }
@@ -108,24 +108,24 @@ export default class TransactionForm extends React.Component {
 
   renderPurchase() {
     const purchaseTotal = (this.state.quantity * this.props.currentPrice).toFixed(2);
-
+    const transactionType = this.state.is_purchase ? 'buy' : 'sell';
     return(
       <aside className='transaction-form-container'>
         <div className='transaction-form'>
-          <div className='border-bottom'>
+          <div className='complete-body complete-title'>
             <div>{this.props.symbol} Order Completed</div>
           </div>
-          <div className='transaction-form-body'>
-            <div className='transaction-form-selections'>
+          <div className=''>
+            <div className='complete-body'>
               <span>Amount Invested</span>
               <span>{purchaseTotal}</span>
             </div>
-            <div className='transaction-form-body'>
+            <div className='complete-body'>
               <span>Esimated Shares</span>
-              <span>{this.state.quantity.toFixed(10)}</span>
+              <span>{this.state.quantity}</span>
             </div>
-            <div>Your order to market buy {purchaseTotal} of {this.props.symbol} was completed.</div>
-            <button className={`changeColor transaction-button ${this.state.textColor}`} onClick={this.handleReturnClick}>Done</button>
+            <div className=' complete-text'>Your order to market {transactionType} {Math.abs(purchaseTotal)} of {this.props.symbol} was completed.</div>
+            <button className={`changeColor transaction-button ${this.state.textColor} complete-button`} onClick={this.handleReturnClick}>Done</button>
           </div>
         </div>
       </aside>
@@ -148,7 +148,7 @@ export default class TransactionForm extends React.Component {
 
   render() {
     console.log('render', this.state);
-    if (this.state.isSubmitted) return renderPurchase();
+    if (this.state.isSubmitted) return this.renderPurchase();
     const formEnd = (this.state.transaction_unit === 'shares') ? 
       this.renderSharesForm() : this.renderDollarsForm()
     const hoverColor = `${this.state.textColor}Text`;

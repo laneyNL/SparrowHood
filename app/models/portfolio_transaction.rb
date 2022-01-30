@@ -19,7 +19,6 @@ class PortfolioTransaction < ApplicationRecord
   foreign_key: :owner_id,
   class_name: "User"
 
-  belongs_to :asset
   before_validation :update_total
 
   def self.in_interval(owner_id, interval)
