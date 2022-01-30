@@ -147,6 +147,11 @@ const AssetChart = ({ name, assets, symbol }) => {
     if (canvas) {
       const myChart = new Chart(canvas, config)
     }
+    
+    
+   
+    const activeIntervalId = `#${chartInterval.split(' ').join('-')}`;
+    $(activeIntervalId).addClass('active-filter');
   })
 
   const handleClick = (interval) => {
@@ -154,7 +159,6 @@ const AssetChart = ({ name, assets, symbol }) => {
       e.preventDefault();
       $('.chart-filter').removeClass('active-filter');
       e.currentTarget.classList.add('active-filter');
-      console.log('target', e.currentTarget)
       setChartInterval(interval);
       switch (interval) {
         case 'Today':
@@ -179,14 +183,12 @@ const AssetChart = ({ name, assets, symbol }) => {
 
     }
   }
-  const activeIntervalId = chartInterval.split(' ').join('-');
-  $(`#${activeIntervalId}`).addClass('active-filter');
-  console.log('rerender', chartInterval, activeIntervalId);
   let colorClass = sign === '+' ? 'greenText' : 'redText';
-  // changes color for other text on page
+  // changes color for transaction form
   $('.changeColor').removeClass('greenText');
   $('.changeColor').removeClass('redText');
   $('.changeColor').addClass(colorClass);
+
   return (
     <div className='chart'>
       <div className='chart-name'>{name}</div>
@@ -205,7 +207,7 @@ const AssetChart = ({ name, assets, symbol }) => {
       </div>
 
       <div className='chartOptions'>
-        <span className={`chart-filter ${colorClass} active-filter`} onClick={handleClick('Today')} id='Today'>1D</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Today')} id='Today'>1D</span>
         <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Week')} id='Past-Week'>1W</span>
         <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Month')} id='Past-Month'>1M</span>
         <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')} id='Past-3-Months'>3M</span>

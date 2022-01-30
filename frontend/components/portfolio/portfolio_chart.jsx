@@ -131,15 +131,16 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
     if (canvas) {
       const myChart = new Chart(canvas, config)
     }
-    })
+  })
 
-    const handleClick = (interval) => {
-      return (e) => {
-        $('.chart-filter').removeClass('active-filter');
-        e.currentTarget.classList.add('active-filter')
-        fetchTransactions(user.id, interval)
-      }
+  const handleClick = (interval) => {
+    return (e) => {
+      $('.chart-filter').removeClass('active-filter');
+      e.currentTarget.classList.add('active-filter')
+      fetchTransactions(user.id, interval)
     }
+  }
+
   let colorClass = symbol === '+' ? 'greenText' : 'redText';
   return (
       <div className='chart'>
