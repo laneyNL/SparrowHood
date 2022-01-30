@@ -15,8 +15,8 @@ export default class AssetShow extends React.Component {
   }
 
   componentDidMount() {
-  //  this.props.fetchTransactions(this.props.user.id)
-  //    .then(() => this.props.fetchAssetInterval(this.state.symbol))
+   this.props.fetchTransactions(this.props.user.id)
+     .then(() => this.props.fetchAssetInterval(this.state.symbol))
   //    .then(() => this.props.fetchAssetDetails(this.state.symbol))
   //    .then(() => this.props.fetchAssetFull(this.state.symbol))
   //    .then(() => this.setState({loading: false}));
@@ -61,7 +61,7 @@ export default class AssetShow extends React.Component {
             <div className='stats-body'>{`insert description from api`}</div>
           </div>
           </div>
-          <TransactionForm symbol={this.props.symbol} user={this.props.user}/>
+          <TransactionForm symbol={this.props.symbol} user={this.props.user} assets={this.props.assets}/>
         </div>
       </div>
     )
