@@ -153,7 +153,6 @@ const AssetChart = ({ name, assets, symbol }) => {
     return (e) => {
       e.stopPropagation();
       $('.chart-filter').removeClass('active-filter');
-      console.log(e.currentTarget)
       e.currentTarget.classList.add('active-filter');
       setChartInterval(interval);
       switch (interval) {
@@ -181,6 +180,10 @@ const AssetChart = ({ name, assets, symbol }) => {
   }
   if (days === 1) $('#today-asset-chart').addClass('active-filter');
   let colorClass = sign === '+' ? 'greenText' : 'redText';
+  // changes color for other text on page
+  $('.changeColor').removeClass('greenText');
+  $('.changeColor').removeClass('redText');
+  $('.changeColor').addClass(colorClass);
   return (
     <div className='chart'>
       <div>{name}</div>

@@ -14,7 +14,8 @@ export default class TransactionForm extends React.Component {
       is_stock: this.props.isStock,
       color: 'green',
       transaction_unit: 'shares',
-      isSubmitted: false
+      isSubmitted: false,
+      valueOwned: (this.props.currentPrice * this.props.quantityOwned).toFixed(2).toLocaleString("en-US")
     }
     this.handleReturnClick = this.handleReturnClick.bind(this);
   }
@@ -39,7 +40,9 @@ export default class TransactionForm extends React.Component {
       this.setState({ [field]:  quantity})
     }
   }
-
+  handleSelect(e) {
+    this.setState({ transaction_unit: e.currentTarget.value})
+  }
   handleSubmit(e) {
     e.preventDefault();
     this.props.createTransaction(this.state)
@@ -56,7 +59,7 @@ export default class TransactionForm extends React.Component {
 
       <div className='transaction-form-selections'>
         <span>Market Price</span>
-        <span>Price</span>
+        <span>{this.props.currentPrice}</span>
       </div>
 
       <div className='transaction-confirmation'>
@@ -119,10 +122,21 @@ export default class TransactionForm extends React.Component {
     )
   }
 
+  renderAvailable() {
+    let available;
+    if (this.state.isPurchase === 'true') available = `${parseFloat(this.props.user.buyingPower).toFixed(2).toLocaleString("en-US")} buying power available`;
+    if (this.state.transaction_unit === 'shares') available = `${this.props.quantityOwned} Shares Available`;
+    if (this.state.transaction_unit === 'dollars') available = `${this.state.valueOwned} Available`;
+
+
+    return <div className='transaction-form-buy-power'>{available} buying power available</div>
+  }
+
   render() {
     if (this.state.isSubmitted) return renderPurchase();
-    const formEnd = this.state.transaction_unit === 'share' ? 
+    const formEnd = (this.state.transaction_unit === 'shares') ? 
       this.renderSharesForm() : this.renderDollarsForm()
+    
     return (
       <aside className='transaction-form-container'>
         <form className='transaction-form'>
@@ -134,14 +148,14 @@ export default class TransactionForm extends React.Component {
             <div className='transaction-form-selections'><span>Order Type</span><span>Market Order</span></div>
             <div className='transaction-form-selections'>
               <label htmlFor="unit-value">Invest In</label>
-              <select id="unit-value">
+              <select id="unit-value" onChange={this.handleSelect} value={this.state.transaction_unit}>
                 <option value="shares" className='unit-value-input'>Shares</option>
                 <option value="dollars" className='unit-value-input'>Dollars</option>
               </select>
             </div>
             {formEnd}
           </div>
-          <div className='transaction-form-buy-power'>{ } buying power available</div>
+          {this.renderAvailable()}
         </form>
       </aside>
     )
