@@ -186,8 +186,8 @@ const AssetChart = ({ name, assets, symbol }) => {
   $('.changeColor').addClass(colorClass);
   return (
     <div className='chart'>
-      <div>{name}</div>
-      <div className='totalValue' id='currentValue'>
+      <div className='chart-name'>{name}</div>
+      <div className='totalValue chart-name' id='currentValue'>
         {`$${currentValue.toLocaleString("en-US")}`}
       </div>
       <div className='difference'>

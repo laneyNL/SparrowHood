@@ -8,7 +8,6 @@ import LoadingSpinner from '../loading_spinner';
 export default class AssetShow extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.match.params.assetSymbol)
     this.state = {
       symbol: this.props.match.params.assetSymbol,
       loading: true
@@ -26,7 +25,7 @@ export default class AssetShow extends React.Component {
   render() {
     if (this.state.loading || !this.props.assets['interval'] || !this.props.details || !this.props.symbolDetails) return <LoadingSpinner />
     // if (jQuery.isEmptyObject(this.props.assets)) return null;
-    
+
     const quantityOwned = parseFloat(this.props.symbolDetails[this.props.match.params.assetSymbol]['quantity']);
     const isStock = this.props.symbolDetails[this.props.match.params.assetSymbol]['isStock'];
     const details = this.props.details[this.state.symbol];
@@ -36,7 +35,8 @@ export default class AssetShow extends React.Component {
     const initialPrice = parseFloat(assetValues[assetValues.length - 1]["4. close"]);
     const marketValue = (currentPrice * quantityOwned).toFixed(2).toLocaleString("en-US");
     const todayReturn = ((currentPrice - initialPrice) * quantityOwned).toFixed(2).toLocaleString("en-US");
-    // const totalReturn = ((currentPrice - averageCost) * quantityOwned).toFixed(2).toLocaleString("en-US");
+    const averageCost = parseFloat(details.averagePrice);
+    const totalReturn = ((currentPrice - averageCost) * quantityOwned).toFixed(2).toLocaleString("en-US");
     const totalReturn = '';
     const sign = (todayReturn > 0 ) ? '+' : '-';
     return (
@@ -60,7 +60,7 @@ export default class AssetShow extends React.Component {
               </div>
               <div className='assetDetails'>
                 <p>Your average cost</p>
-                <p>{'value'}</p>
+                <p>{`$${averageCost.toFixed(2)}`}</p>
                 <div className='asset-detail-row border-bottom'><span>Shares</span><span>{this.state.quantityOwned}</span></div>
                 <div className='asset-detail-row'><span>Portfolio diversity</span><span>{'value'}</span></div>
               </div>
@@ -70,10 +70,10 @@ export default class AssetShow extends React.Component {
               <div className='about-title'>About Company</div>
               <div className='about-body'>{details['Description']}</div>
             </div>
-            <div className='stats'>
-            <div className='stats-title'>Key statistics</div>
-            <div className='stats-body'>{`insert description from api`}</div>
-          </div>
+            {/* <div className='stats'>
+              <div className='stats-title'>Key statistics</div>
+              <div className='stats-body'>{`insert description from api`}</div>
+            </div> */}
           </div>
           <TransactionForm symbol={this.state.symbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} isStock={isStock} quantityOwned={quantityOwned} sign={sign}/>
         </div>

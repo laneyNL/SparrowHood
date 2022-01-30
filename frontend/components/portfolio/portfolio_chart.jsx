@@ -62,7 +62,6 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
       }
     },
     onHover: (e, legendItem, legend) => {
-      console.log('hovering', e, legendItem, legend)
 
       if(legendItem[0]) {
         currentTotal = transactions[legendItem[0].index].currentTotal;
