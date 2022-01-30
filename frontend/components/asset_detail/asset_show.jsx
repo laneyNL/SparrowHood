@@ -10,21 +10,21 @@ export default class AssetShow extends React.Component {
     super(props);
     this.state = {
       symbol: this.props.match.params.assetSymbol,
-      loading: false
+      loading: true
     }
   }
 
   componentDidMount() {
-   this.props.fetchTransactions(this.props.user.id)
-     .then(() => this.props.fetchAssetInterval(this.state.symbol))
-     .then(() => this.props.fetchAssetDetails(this.state.symbol))
-     .then(() => this.props.fetchAssetFull(this.state.symbol))
-     .then(() => this.setState({loading: false}));
+  //  this.props.fetchTransactions(this.props.user.id)
+  //    .then(() => this.props.fetchAssetInterval(this.state.symbol))
+  //    .then(() => this.props.fetchAssetDetails(this.state.symbol))
+  //    .then(() => this.props.fetchAssetFull(this.state.symbol))
+  //    .then(() => this.setState({loading: false}));
   }
 
   render() {
-    if (this.state.loading || !this.props.assets || !this.props.details || !this.props.symbolDetails) return <LoadingSpinner />
-    const details = this.props.details[this.state.symbol];
+    // if (this.state.loading || !this.props.assets || !this.props.details || !this.props.symbolDetails) return <LoadingSpinner />
+    // const details = this.props.details[this.state.symbol];
     return (
 
       <div className='asset-show'>
@@ -33,7 +33,7 @@ export default class AssetShow extends React.Component {
         <div className='asset-show-body'>
           <div className='main-asset-chart'>
             <div className='assetChartContainter'>
-              <AssetChart assets={this.props.assets} name={details['Name']} symbol={this.state.symbol} />
+              {/* <AssetChart assets={this.props.assets} name={details['Name']} symbol={this.state.symbol} /> */}
             </div>
 
             <div className='assetDetailsDiv' >
@@ -47,14 +47,14 @@ export default class AssetShow extends React.Component {
               <div className='assetDetails'>
                 <p>Your average cost</p>
                 <p>{'value'}</p>
-                <div className='asset-detail-row border-bottom'><span>Shares</span><span>{this.props.symbolDetails[this.state.symbol]['quantity']}</span></div>
+                {/* <div className='asset-detail-row border-bottom'><span>Shares</span><span>{this.props.symbolDetails[this.state.symbol]['quantity']}</span></div> */}
                 <div className='asset-detail-row'><span>Portfolio divrsity</span><span>{'value'}</span></div>
               </div>
             </div>
 
             <div className='about'>
               <div className='about-title'>About Company</div>
-              <div className='about-body'>{details['Description']}</div>
+              {/* <div className='about-body'>{details['Description']}</div> */}
             </div>
             <div className='stats'>
             <div className='stats-title'>Key statistics</div>

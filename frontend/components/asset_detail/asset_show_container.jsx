@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetchCryptoInterval, fetchAssetDetails } from '../../actions/asset_actions';
+import { logout } from '../../actions/session_actions';
 import { createTransaction, fetchTransactions } from '../../actions/transaction_action';
 import AssetShow from './asset_show';
 
@@ -11,6 +12,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout()),
   fetchAssetFull: (symbol) => dispatch(fetchAssetFull(symbol)),
   fetchCryptoFull: (symbol) => dispatch(fetchCryptoFull(symbol)),
   fetchAssetInterval: (symbol) => dispatch(fetchAssetInterval(symbol)),
