@@ -123,7 +123,33 @@
 .transaction-form-buy-power {
   padding: 20px;
   text-align: center;
-  color: green;
   width: 100%;
   border-top: 1px solid gray;
+}
+
+.transaction-form-buy-power.greenText {
+  color: #00C805;
+}
+.transaction-form-buy-power.redText {
+  color: red;
+}
+.transaction-button.greenText {
+  background-color: #00C805;
+}
+.transaction-button.redText {
+  background-color: red;
+}
+
+.transaction-button.greenText, .transaction-button.redText {
+  color: black;
+}
+
+.purchase-option.green {
+  color: #00C805;
+  border-bottom: 1px solid #00C805;
+}
+
+.purchase-option.red {
+  color: red;
+  border-bottom: 1px solid red;
 }

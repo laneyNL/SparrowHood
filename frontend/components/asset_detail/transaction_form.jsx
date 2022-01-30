@@ -26,8 +26,11 @@ export default class TransactionForm extends React.Component {
 
   handleClick(field) {
     return (e) => {
-      const isPurchase = field === 'buy' ? true : false;
+      console.log(field)
+      const isPurchase = (field === 'buy') ? true : false;
       this.setState({ is_purchase: isPurchase})
+      console.log(this.state)
+
     }
   }
 
@@ -50,6 +53,8 @@ export default class TransactionForm extends React.Component {
   }
 
   renderSharesForm () {
+    let estCost = '$0.00';
+    if (this.state.quantity) estCost = (this.state.quantity * this.props.currentPrice).toFixed(2).toLocaleString("en-US");
     return (
     <div>
       <div className='transaction-form-selections' id='transaction-unit'>
@@ -65,7 +70,7 @@ export default class TransactionForm extends React.Component {
       <div className='transaction-confirmation'>
         <div className='transaction-form-selections'>
           <span>Estimated Cost</span>
-          <span>Price</span>
+          <span>{estCost}</span>
         </div>
         <button className='transaction-button changeColor'>Review Order</button>
       </div>
@@ -115,7 +120,7 @@ export default class TransactionForm extends React.Component {
               <span>{this.state.quantity.toFixed(10)}</span>
             </div>
             <div>Your order to market buy {purchaseTotal} of {this.props.symbol} was completed.</div>
-            <button className='transaction-button changeColor' onClick={this.handleReturnClick}>Done</button>
+            <button className={`changeColor transaction-button ${textColor}`} onClick={this.handleReturnClick}>Done</button>
           </div>
         </div>
       </aside>
@@ -129,20 +134,20 @@ export default class TransactionForm extends React.Component {
     if (this.state.transaction_unit === 'dollars') available = `${this.state.valueOwned} Available`;
 
 
-    return <div className='transaction-form-buy-power'>{available} buying power available</div>
+    return <div className='transaction-form-buy-power colorChange'>{available}</div>
   }
 
   render() {
     if (this.state.isSubmitted) return renderPurchase();
     const formEnd = (this.state.transaction_unit === 'shares') ? 
       this.renderSharesForm() : this.renderDollarsForm()
-    
+    const textColor = this.props.symbol === '+' ? 'green' : 'red';
     return (
       <aside className='transaction-form-container'>
         <form className='transaction-form'>
           <div className='transaction-options'>
-            <div className='changeColor' id='buy-option' onClick={this.handleClick('buy')}>Buy {this.props.symbol}</div>
-            <div className='changeColor' id='sell-option' onClick={this.handleClick('sell')}>Sell {this.props.symbol}</div>
+            <div className={`changeColor purchase-option ${textColor}`} id='buy-option' onClick={this.handleClick('buy')}>Buy {this.props.symbol}</div>
+            <div className='changeColor purchase-option' id='sell-option' onClick={this.handleClick('sell')}>Sell {this.props.symbol}</div>
           </div>
           <div className='transaction-form-body'>
             <div className='transaction-form-selections'><span>Order Type</span><span>Market Order</span></div>

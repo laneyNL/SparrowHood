@@ -27,7 +27,7 @@ export default class AssetShow extends React.Component {
     if (this.state.loading || !this.props.assets['interval'] || !this.props.details || !this.props.symbolDetails) return <LoadingSpinner />
     // if (jQuery.isEmptyObject(this.props.assets)) return null;
     const quantityOwned = parseFloat(this.props.symbolDetails[this.props.match.params.assetSymbol]['quantity']);
-    const isStock = parseFloat(this.props.symbolDetails[this.props.match.params.assetSymbol]['isStock']);
+    const isStock = this.props.symbolDetails[this.props.match.params.assetSymbol]['isStock'];
     const details = this.props.details[this.state.symbol];
 
     const assetValues = Object.values(this.props.assets['interval'][this.state.symbol]);
@@ -37,6 +37,7 @@ export default class AssetShow extends React.Component {
     const todayReturn = ((currentPrice - initialPrice) * quantityOwned).toFixed(2).toLocaleString("en-US");
     // const totalReturn = ((currentPrice - averageCost) * quantityOwned).toFixed(2).toLocaleString("en-US");
     const totalReturn = '';
+    const symbol = (todayReturn > 0 ) ? '+' : '-';
     return (
 
       <div className='asset-show'>
@@ -73,7 +74,7 @@ export default class AssetShow extends React.Component {
             <div className='stats-body'>{`insert description from api`}</div>
           </div>
           </div>
-          <TransactionForm symbol={this.state.symbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} isStock={isStock} quantityOwned={this.state.quantityOwned}/>
+          <TransactionForm symbol={this.state.symbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} isStock={isStock} quantityOwned={this.state.quantityOwned} symnol={symbol}/>
         </div>
       </div>
     )
