@@ -37,7 +37,7 @@ export default class AssetShow extends React.Component {
     const todayReturn = ((currentPrice - initialPrice) * quantityOwned).toFixed(2).toLocaleString("en-US");
     // const totalReturn = ((currentPrice - averageCost) * quantityOwned).toFixed(2).toLocaleString("en-US");
     const totalReturn = '';
-    const symbol = (todayReturn > 0 ) ? '+' : '-';
+    const sign = (todayReturn > 0 ) ? '+' : '-';
     return (
 
       <div className='asset-show'>
@@ -74,7 +74,7 @@ export default class AssetShow extends React.Component {
             <div className='stats-body'>{`insert description from api`}</div>
           </div>
           </div>
-          <TransactionForm symbol={this.state.symbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} isStock={isStock} quantityOwned={this.state.quantityOwned} symnol={symbol}/>
+          <TransactionForm symbol={this.state.symbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} isStock={isStock} quantityOwned={quantityOwned} sign={sign}/>
         </div>
       </div>
     )
