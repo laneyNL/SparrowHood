@@ -37,7 +37,6 @@ export default class AssetShow extends React.Component {
     const todayReturn = ((currentPrice - initialPrice) * quantityOwned).toFixed(2).toLocaleString("en-US");
     const averageCost = parseFloat(details.averagePrice);
     const totalReturn = ((currentPrice - averageCost) * quantityOwned).toFixed(2).toLocaleString("en-US");
-    const totalReturn = '';
     const sign = (todayReturn > 0 ) ? '+' : '-';
     return (
 
