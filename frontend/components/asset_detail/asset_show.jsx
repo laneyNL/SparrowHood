@@ -10,7 +10,8 @@ export default class AssetShow extends React.Component {
     super(props);
     this.state = {
       symbol: this.props.match.params.assetSymbol,
-      loading: true
+      loading: true,
+      symbolDetails: {}
     }
   }
 
@@ -19,27 +20,30 @@ export default class AssetShow extends React.Component {
      .then(() => this.props.fetchAssetInterval(this.state.symbol))
      .then(() => this.props.fetchAssetDetails(this.state.symbol))
      .then(() => this.props.fetchAssetFull(this.state.symbol))
-     .then(() => this.setState({loading: false}));
+     .then(() => this.setState({ loading: false, symbolDetails: this.props.symbolDetails[this.props.match.params.assetSymbol]}));
+  }
+
+  formatDollarString(num) {
+    return parseFloat(num.toFixed(2)).toLocaleString("en-US");
   }
 
   render() {
-    if (this.state.loading || !this.props.assets['interval'] || !this.props.details || !this.props.symbolDetails) return <LoadingSpinner />
+    if (this.state.loading || !this.props.assets['interval'] || !this.props.details || !this.state.symbolDetails) return <LoadingSpinner />
     // if (jQuery.isEmptyObject(this.props.assets)) return null;
 
-    const quantityOwned = parseFloat(this.props.symbolDetails[this.props.match.params.assetSymbol]['quantity']);
-    const isStock = this.props.symbolDetails[this.props.match.params.assetSymbol]['isStock'];
+    const quantityOwned = parseFloat(this.state.symbolDetails['quantity']);
+    const isStock = this.state.symbolDetails['isStock'];
     const details = this.props.details[this.state.symbol];
 
     const assetValues = Object.values(this.props.assets['interval'][this.state.symbol]);
     const currentPrice = parseFloat(assetValues[0]["4. close"]);
     const initialPrice = parseFloat(assetValues[assetValues.length - 1]["4. close"]);
-    const marketValue = (currentPrice * quantityOwned).toFixed(2).toLocaleString("en-US");
-    const todayReturn = ((currentPrice - initialPrice) * quantityOwned).toFixed(2).toLocaleString("en-US");
-    const averageCost = parseFloat(details.averagePrice);
-    const totalReturn = ((currentPrice - averageCost) * quantityOwned).toFixed(2).toLocaleString("en-US");
+    const marketValue = this.formatDollarString((currentPrice * quantityOwned));
+    const todayReturn = this.formatDollarString(((currentPrice - initialPrice) * quantityOwned));
+    const averageCost = parseFloat(this.state.symbolDetails.averagePrice);
+    const totalReturn = this.formatDollarString(((currentPrice - averageCost) * quantityOwned));
     const sign = (todayReturn > 0 ) ? '+' : '-';
-    console.log('details', details)
-    console.log('price', details.averagePrice, averageCost, totalReturn)
+
 
     return (
 
@@ -55,15 +59,15 @@ export default class AssetShow extends React.Component {
             <div className='assetDetailsDiv' >
               <div className='assetDetails'>
                 <p>Your market value</p>
-                <p>{marketValue}</p>
-                <div className='asset-detail-row border-bottom'><span >Today's return</span><span>{todayReturn}</span></div>
-                <div className='asset-detail-row'><span>Total return</span><span>{totalReturn}</span></div>
+                <p>{`$${marketValue}`}</p>
+                <div className='asset-detail-row border-bottom'><span >Today's return</span><span>{`$${todayReturn}`}</span></div>
+                <div className='asset-detail-row'><span>Total return</span><span>{`$${totalReturn}`}</span></div>
                 
               </div>
               <div className='assetDetails'>
                 <p>Your average cost</p>
-                <p>{`$${averageCost.toFixed(2)}`}</p>
-                <div className='asset-detail-row border-bottom'><span>Shares</span><span>{this.state.quantityOwned}</span></div>
+                <p className='value-subtitle'>{`$${averageCost.toFixed(2)}`}</p>
+                <div className='asset-detail-row border-bottom'><span>Shares</span><span>{quantityOwned}</span></div>
                 <div className='asset-detail-row'><span>Portfolio diversity</span><span>{'value'}</span></div>
               </div>
             </div>

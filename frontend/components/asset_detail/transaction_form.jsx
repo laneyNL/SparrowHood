@@ -31,7 +31,7 @@ export default class TransactionForm extends React.Component {
       $('.purchase-option').removeClass('active');
       e.currentTarget.classList.add('active');
       const isPurchase = (field === 'buy') ? true : false;
-      this.setState({ is_purchase: isPurchase});
+      this.setState({ is_purchase: isPurchase, quantity: ''});
     }
   }
 
@@ -67,7 +67,7 @@ export default class TransactionForm extends React.Component {
     <div>
       <div className='transaction-form-selections' id='transaction-unit'>
         <span>Shares</span>
-        <span><input type="text" placeholder='0' id='transaction-unit-input' onChange={this.update('quantity')}/></span>
+        <span><input type="text" placeholder='0' id='transaction-unit-input' onChange={this.update('quantity')} required /></span>
       </div>
 
       <div className='transaction-form-selections'>
@@ -91,7 +91,7 @@ export default class TransactionForm extends React.Component {
     <div>
       <div className='transaction-form-selections' id='transaction-unit'>
         <span>Amount</span>
-          <span><input type="text" placeholder='$0.00' id='transaction-unit-input' onChange={this.update('dollars')}/></span>
+          <span><input type="text" placeholder='$0.00' id='transaction-unit-input' onChange={this.update('dollars')}required /></span>
       </div>
 
       <div className='transaction-confirmation'>
