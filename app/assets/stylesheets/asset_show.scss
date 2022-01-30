@@ -110,6 +110,7 @@
   color: white;
 }
 
+
 #transaction-unit-input:focus, #unit-value:focus, #unit-value:enabled {
   border: 1px solid green;
 }
@@ -154,37 +155,26 @@
   margin: 20px;
 }
 
-.transaction-form-buy-power.greenText, .transaction-form-buy-power.green {
-  color: #00C805;
-}
-.transaction-form-buy-power.redText, .transaction-form-buy-power.red {
-  color: red;
-}
-.transaction-button.green {
-  background-color: #00C805;
-}
-.transaction-button.green {
-  background-color: red;
-}
-
 .transaction-button.greenText {
   background-color: #00C805;
+  color: #1E2124;
 }
+.transaction-button.greenText:hover {
+  background-color: rgba(38,208,43,1);
+}
+
 .transaction-button.redText {
-  background-color: red;
+  background-color: #FF5000;
+  color: #1E2124;
+}
+.transaction-button.redText:hover {
+  background-color: rgba(255,106,38,1);
 }
 
-.transaction-button.greenText, .transaction-button.redText {
-  color: black;
-}
-
-.purchase-option.green {
+.transaction-form-buy-power.greenText, .purchase-option.active.greenText{
   color: #00C805;
-  border-bottom: 1px solid #00C805;
+  
 }
-
-.purchase-option.red {
-  color: red;
-  border-bottom: 1px solid red;
+.transaction-form-buy-power.redText, .purchase-option.active.redText{
+  color: #FF5000;
 }
-

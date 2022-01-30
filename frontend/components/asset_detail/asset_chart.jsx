@@ -151,9 +151,10 @@ const AssetChart = ({ name, assets, symbol }) => {
 
   const handleClick = (interval) => {
     return (e) => {
-      e.stopPropagation();
+      e.preventDefault();
       $('.chart-filter').removeClass('active-filter');
       e.currentTarget.classList.add('active-filter');
+      console.log('target', e.currentTarget)
       setChartInterval(interval);
       switch (interval) {
         case 'Today':
@@ -178,7 +179,9 @@ const AssetChart = ({ name, assets, symbol }) => {
 
     }
   }
-  if (days === 1) $('#today-asset-chart').addClass('active-filter');
+  const activeIntervalId = chartInterval.split(' ').join('-');
+  $(`#${activeIntervalId}`).addClass('active-filter');
+  console.log('rerender', chartInterval, activeIntervalId);
   let colorClass = sign === '+' ? 'greenText' : 'redText';
   // changes color for other text on page
   $('.changeColor').removeClass('greenText');
@@ -202,12 +205,12 @@ const AssetChart = ({ name, assets, symbol }) => {
       </div>
 
       <div className='chartOptions'>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Today')} id='today-asset-chart'>1D</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Week')}>1W</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Month')}>1M</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')}>3M</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Year')}>1Y</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 5 Years')}>5Y</span>
+        <span className={`chart-filter ${colorClass} active-filter`} onClick={handleClick('Today')} id='Today'>1D</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Week')} id='Past-Week'>1W</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Month')} id='Past-Month'>1M</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')} id='Past-3-Months'>3M</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Year')} id='Past-Year'>1Y</span>
+        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 5 Years')} id='Past-5-Years'>5Y</span>
       </div>
 
     </div>

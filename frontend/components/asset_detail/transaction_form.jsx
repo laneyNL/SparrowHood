@@ -11,11 +11,10 @@ export default class TransactionForm extends React.Component {
       transaction_price: this.props.currentPrice,
       symbol: this.props.symbol,
       is_stock: this.props.isStock,
-      color: 'green',
       transaction_unit: 'shares',
       isSubmitted: false,
-      valueOwned: (this.props.currentPrice * this.props.quantityOwned).toFixed(2).toLocaleString("en-US"),
-      textColor: this.props.sign === '+' ? 'green' : 'red'
+      valueOwned: this.formatDollarString((this.props.currentPrice * this.props.quantityOwned)),
+      textColor: this.props.sign === '+' ? 'greenText' : 'redText'
     }
     this.handleReturnClick = this.handleReturnClick.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
@@ -23,12 +22,14 @@ export default class TransactionForm extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ color: 'red'})
+    // this.setState({ color: 'red'})
   }
 
   handleClick(field) {
     return (e) => {
       e.preventDefault();
+      $('.purchase-option').removeClass('active');
+      e.currentTarget.classList.add('active');
       const isPurchase = (field === 'buy') ? true : false;
       this.setState({ is_purchase: isPurchase});
     }
@@ -54,9 +55,13 @@ export default class TransactionForm extends React.Component {
       .then( () => this.setState({ isSubmitted: true }))
   }
 
+  formatDollarString(num) {
+    return parseFloat(num.toFixed(2)).toLocaleString("en-US");
+  }
+
   renderSharesForm () {
     let estCost = '$0.00';
-    if (this.state.quantity) estCost = Math.abs((this.state.quantity * this.props.currentPrice).toFixed(2).toLocaleString("en-US"));
+    if (this.state.quantity) estCost = this.formatDollarString(Math.abs((this.state.quantity * this.props.currentPrice)));
     
     return (
     <div>
@@ -133,16 +138,16 @@ export default class TransactionForm extends React.Component {
 
   renderAvailable() {
     let available;
-    const buyingPower = parseFloat(this.props.user.buyingPower).toFixed(2).toLocaleString("en-US");
+    const buyingPower = this.formatDollarString(parseFloat(this.props.user.buyingPower));
     if (this.state.is_purchase) {
       available = `$${buyingPower} buying power available`;
     } else if (this.state.transaction_unit === 'shares') {
-      available = `${this.props.quantityOwned} Shares Available`;
+      available = `${this.props.quantityOwned.toFixed(6)} Shares Available`;
     } else if (this.state.transaction_unit === 'dollars') {
       available = `${this.state.valueOwned} Available`;
     }
 
-    return <div className={`transaction-form-buy-power colorChange ${this.state.textColor}`}>{available}</div>
+    return <div className={`transaction-form-buy-power changeColor ${this.state.textColor}`}>{available}</div>
   }
 
   render() {
@@ -150,13 +155,12 @@ export default class TransactionForm extends React.Component {
     if (this.state.isSubmitted) return this.renderPurchase();
     const formEnd = (this.state.transaction_unit === 'shares') ? 
       this.renderSharesForm() : this.renderDollarsForm()
-    const hoverColor = `${this.state.textColor}Text`;
     return (
       <aside className='transaction-form-container'>
         <form className='transaction-form' onSubmit={this.handleSubmit}>
           <div className='transaction-options'>
-            <div className={`changeColor purchase-option ${this.state.textColor} ${hoverColor}`} id='buy-option' onClick={this.handleClick('buy')}>Buy {this.props.symbol}</div>
-            <div className='changeColor purchase-option ${hoverColor}' id='sell-option' onClick={this.handleClick('sell')}>Sell {this.props.symbol}</div>
+            <div className={`changeColor purchase-option ${this.state.textColor} active`} id='buy-option' onClick={this.handleClick('buy')}>Buy {this.props.symbol}</div>
+            <div className={`changeColor purchase-option ${this.state.textColor}`} id='sell-option' onClick={this.handleClick('sell')}>Sell {this.props.symbol}</div>
           </div>
           <div className='transaction-form-body'>
             <div className='transaction-form-selections'><span>Order Type</span><span>Market Order</span></div>
