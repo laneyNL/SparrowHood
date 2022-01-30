@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_28_195730) do
+ActiveRecord::Schema.define(version: 2022_01_30_080706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,19 +36,7 @@ ActiveRecord::Schema.define(version: 2022_01_28_195730) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "assets", force: :cascade do |t|
-    t.string "name"
-    t.string "symbol"
-    t.boolean "is_stock"
-    t.float "current_price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_assets_on_name", unique: true
-    t.index ["symbol"], name: "index_assets_on_symbol", unique: true
-  end
-
   create_table "portfolio_transactions", force: :cascade do |t|
-    t.integer "asset_id"
     t.integer "owner_id"
     t.boolean "is_purchase"
     t.float "quantity"
@@ -58,7 +46,6 @@ ActiveRecord::Schema.define(version: 2022_01_28_195730) do
     t.float "current_total", default: 0.0
     t.string "symbol"
     t.boolean "is_stock"
-    t.index ["asset_id"], name: "index_portfolio_transactions_on_asset_id"
     t.index ["owner_id"], name: "index_portfolio_transactions_on_owner_id"
     t.index ["symbol"], name: "index_portfolio_transactions_on_symbol"
   end

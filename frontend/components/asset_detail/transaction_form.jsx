@@ -6,7 +6,6 @@ export default class TransactionForm extends React.Component {
 
     this.state = {
       owner_id: this.props.user.id,
-      asset_id: 102,
       is_purchase: true,
       quantity: '',
       transaction_price: this.props.currentPrice,

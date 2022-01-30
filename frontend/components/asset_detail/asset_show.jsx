@@ -26,6 +26,7 @@ export default class AssetShow extends React.Component {
   render() {
     if (this.state.loading || !this.props.assets['interval'] || !this.props.details || !this.props.symbolDetails) return <LoadingSpinner />
     // if (jQuery.isEmptyObject(this.props.assets)) return null;
+    
     const quantityOwned = parseFloat(this.props.symbolDetails[this.props.match.params.assetSymbol]['quantity']);
     const isStock = this.props.symbolDetails[this.props.match.params.assetSymbol]['isStock'];
     const details = this.props.details[this.state.symbol];

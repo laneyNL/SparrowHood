@@ -4,14 +4,18 @@ class Api::PortfolioTransactionsController < ApplicationController
     @transactions = PortfolioTransaction.in_interval(params[:user_id], params[:interval])
     @assets= PortfolioTransaction.where(owner_id: params[:user_id]).select('symbol', 'is_stock').distinct.map{ |asset| [asset.symbol, asset.is_stock]}
     @interval = params[:interval]
+    @average_prices = PortfolioTransaction.group('symbol').average(:transaction_price)
     render :index
   end
   
   def create
     @transaction = PortfolioTransaction.new(transaction_params)
+
+    @asset= PortfolioTransaction.where(owner_id: @transaction.owner_id, symbol: @transaction.symbol).select('symbol', 'is_stock').distinct.map{ |asset| [asset.symbol, asset.is_stock]}
+    @quantity = PortfolioTransaction.where(symbol: @transaction.symbol).sum('quantity')
+    @average_price = PortfolioTransaction.where(symbol: @transaction.symbol, is_purchase: true).average(:transaction_price)
     if @transaction.save
-      @asset = Asset.find_by(id: params[:transaction][:asset_id])
-      render '/api/assets/show'
+      render :show
     else
       render json: @transaction.errors.full_messages, status: 404
     end
@@ -20,6 +24,6 @@ class Api::PortfolioTransactionsController < ApplicationController
 
   private
   def transaction_params
-    params.require(:transaction).permit(:asset_id, :owner_id, :is_purchase, :quantity, :transaction_price, :symbol, :is_stock)
+    params.require(:transaction).permit(:owner_id, :is_purchase, :quantity, :transaction_price, :symbol, :is_stock)
   end
 end

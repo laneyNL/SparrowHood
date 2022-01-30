@@ -12,7 +12,8 @@ const transactionReducer = (state = {}, action) => {
       Object.keys(action.transactions.symbols).forEach(symbol => nextState['symbols'][symbol.toUpperCase()] = action.transactions.symbols[symbol])
       return nextState;
     case RECEIVE_TRANSACTION:
-      nextState[action.transaction.id] = action.transaction;
+      nextState['data'][action.transaction.data.id] = action.transaction.data;
+      nextState['symbols'][Object.keys(action.transaction.symbols)[0].toUpperCase()] = Object.values(action.transaction.symbols)[0];
       return nextState;
     default:
       return state;
