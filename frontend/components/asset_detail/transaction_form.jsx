@@ -4,19 +4,15 @@ export default class TransactionForm extends React.Component {
   constructor(props) {
     super(props);
 
-    const assetValues = Object.values(this.props.assets['interval'][this.props.symbol]);
     this.state = {
       owner_id: this.props.user.id,
-      asset_id: '',
-      is_purchase: '',
+      asset_id: 10,
+      is_purchase: true,
       quantity: '',
-      transaction_price: '',
+      transaction_price: this.props.currentPrice,
       symbol: this.props.symbol,
-      is_stock: '',
-      currentPrice: parseFloat(assetValues[0]["4. close"]),
-      initialPrice: parseFloat(assetValues[assetValues.length-1]["4. close"]),
+      is_stock: this.props.isStock,
       color: 'green',
-      transaction_type: 'buy',
       transaction_unit: 'shares',
       isSubmitted: false
     }
@@ -29,7 +25,8 @@ export default class TransactionForm extends React.Component {
 
   handleClick(field) {
     return (e) => {
-      this.setState({ transaction_type: field})
+      const isPurchase = field === 'buy' ? true : false;
+      this.setState({ is_purchase: isPurchase})
     }
   }
 
@@ -37,8 +34,8 @@ export default class TransactionForm extends React.Component {
     return (e) => {
       let quantity = parseFloat(e.currentTarget.value);
       if (isNaN(quantity)) return;
-      if (field === 'quantity') quantity /= this.state.currentPrice;
-      if (this.state.transaction_type === 'sell') quantity = -quantity;
+      if (field === 'quantity') quantity /= this.props.currentPrice;
+      if (!this.state.isPurchase) quantity = -quantity;
       this.setState({ [field]:  quantity})
     }
   }
@@ -67,7 +64,7 @@ export default class TransactionForm extends React.Component {
           <span>Estimated Cost</span>
           <span>Price</span>
         </div>
-        <button className='transaction-button'>Review Order</button>
+        <button className='transaction-button changeColor'>Review Order</button>
       </div>
     </div>
     )
@@ -86,7 +83,7 @@ export default class TransactionForm extends React.Component {
           <span>Est.Quantity</span>
           <span>Price</span>
         </div>
-        <button className='transaction-button'>Review Order</button>
+        <button className='transaction-button changeColor'>Review Order</button>
       </div>
     </div>
     )
@@ -98,7 +95,7 @@ export default class TransactionForm extends React.Component {
   }
 
   renderPurchase() {
-    const purchaseTotal = (this.state.quantity * this.state.currentPrice).toFixed(2);
+    const purchaseTotal = (this.state.quantity * this.props.currentPrice).toFixed(2);
     return(
       <aside className='transaction-form-container'>
         <div className='transaction-form'>
@@ -115,7 +112,7 @@ export default class TransactionForm extends React.Component {
               <span>{this.state.quantity.toFixed(10)}</span>
             </div>
             <div>Your order to market buy {purchaseTotal} of {this.props.symbol} was completed.</div>
-            <button className='transaction-button' onClick={this.handleReturnClick}>Done</button>
+            <button className='transaction-button changeColor' onClick={this.handleReturnClick}>Done</button>
           </div>
         </div>
       </aside>
@@ -130,8 +127,8 @@ export default class TransactionForm extends React.Component {
       <aside className='transaction-form-container'>
         <form className='transaction-form'>
           <div className='transaction-options'>
-            <div  id='buy-option' onClick={this.handleClick('buy')}>Buy {this.props.symbol}</div>
-            <div id='sell-option' onClick={this.handleClick('sell')}>Sell {this.props.symbol}</div>
+            <div className='changeColor' id='buy-option' onClick={this.handleClick('buy')}>Buy {this.props.symbol}</div>
+            <div className='changeColor' id='sell-option' onClick={this.handleClick('sell')}>Sell {this.props.symbol}</div>
           </div>
           <div className='transaction-form-body'>
             <div className='transaction-form-selections'><span>Order Type</span><span>Market Order</span></div>
