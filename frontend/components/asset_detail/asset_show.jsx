@@ -24,6 +24,7 @@ export default class AssetShow extends React.Component {
 
   render() {
     // if (this.state.loading || !this.props.assets || !this.props.details || !this.props.symbolDetails) return <LoadingSpinner />
+    if (jQuery.isEmptyObject(this.props.assets)) return null;
     // const details = this.props.details[this.state.symbol];
     return (
 
@@ -61,7 +62,7 @@ export default class AssetShow extends React.Component {
             <div className='stats-body'>{`insert description from api`}</div>
           </div>
           </div>
-          <TransactionForm symbol={this.props.symbol} user={this.props.user} assets={this.props.assets}/>
+          <TransactionForm symbol={this.state.symbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction}/>
         </div>
       </div>
     )

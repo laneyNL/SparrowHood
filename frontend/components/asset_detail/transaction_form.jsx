@@ -3,7 +3,8 @@ import React from 'react';
 export default class TransactionForm extends React.Component {
   constructor(props) {
     super(props);
-    const assetValues = Object.values(this.props.assets[this.props.symbol]);
+
+    const assetValues = Object.values(this.props.assets['interval'][this.props.symbol]);
     this.state = {
       owner_id: this.props.user.id,
       asset_id: '',
@@ -12,13 +13,14 @@ export default class TransactionForm extends React.Component {
       transaction_price: '',
       symbol: this.props.symbol,
       is_stock: '',
-      currentPrice: assetValues[0]["4. close"],
-      initialPrice: assetValues[assetValues.length-1]["4. close"],
+      currentPrice: parseFloat(assetValues[0]["4. close"]),
+      initialPrice: parseFloat(assetValues[assetValues.length-1]["4. close"]),
       color: 'green',
       transaction_type: 'buy',
-      transaction_unit: 'shares'
+      transaction_unit: 'shares',
+      isSubmitted: false
     }
-
+    this.handleReturnClick = this.handleReturnClick.bind(this);
   }
 
   componentDidMount() {
@@ -31,12 +33,20 @@ export default class TransactionForm extends React.Component {
     }
   }
 
-  onChange() {
-
+  update(field) {
+    return (e) => {
+      let quantity = parseFloat(e.currentTarget.value);
+      if (isNaN(quantity)) return;
+      if (field === 'quantity') quantity /= this.state.currentPrice;
+      if (this.state.transaction_type === 'sell') quantity = -quantity;
+      this.setState({ [field]:  quantity})
+    }
   }
 
-  handleSubmit() {
-
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.createTransaction(this.state)
+      .then( () => this.setState({ isSubmitted: true }))
   }
 
   renderSharesForm () {
@@ -44,7 +54,7 @@ export default class TransactionForm extends React.Component {
     <div>
       <div className='transaction-form-selections' id='transaction-unit'>
         <span>Shares</span>
-        <span><input type="text" placeholder='0' id='transaction-unit-input' /></span>
+        <span><input type="text" placeholder='0' id='transaction-unit-input' onChange={this.update('quantity')}/></span>
       </div>
 
       <div className='transaction-form-selections'>
@@ -68,7 +78,7 @@ export default class TransactionForm extends React.Component {
     <div>
       <div className='transaction-form-selections' id='transaction-unit'>
         <span>Amount</span>
-        <span><input type="text" placeholder='$0.00' id='transaction-unit-input' /></span>
+          <span><input type="text" placeholder='$0.00' id='transaction-unit-input' onChange={this.update('dollars')}/></span>
       </div>
 
       <div className='transaction-confirmation'>
@@ -82,7 +92,38 @@ export default class TransactionForm extends React.Component {
     )
   }
 
+  handleReturnClick(e) {
+    e.preventDefault();
+    this.setState({ isSubmitted: false });
+  }
+
+  renderPurchase() {
+    const purchaseTotal = (this.state.quantity * this.state.currentPrice).toFixed(2);
+    return(
+      <aside className='transaction-form-container'>
+        <div className='transaction-form'>
+          <div className='border-bottom'>
+            <div>{this.props.symbol} Order Completed</div>
+          </div>
+          <div className='transaction-form-body'>
+            <div className='transaction-form-selections'>
+              <span>Amount Invested</span>
+              <span>{purchaseTotal}</span>
+            </div>
+            <div className='transaction-form-body'>
+              <span>Esimated Shares</span>
+              <span>{this.state.quantity.toFixed(10)}</span>
+            </div>
+            <div>Your order to market buy {purchaseTotal} of {this.props.symbol} was completed.</div>
+            <button className='transaction-button' onClick={this.handleReturnClick}>Done</button>
+          </div>
+        </div>
+      </aside>
+    )
+  }
+
   render() {
+    if (this.state.isSubmitted) return renderPurchase();
     const formEnd = this.state.transaction_unit === 'share' ? 
       this.renderSharesForm() : this.renderDollarsForm()
     return (
