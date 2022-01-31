@@ -145,7 +145,6 @@ export default class TransactionForm extends React.Component {
   }
   
   render() {
-    console.log('render', this.state);
     if (this.state.isSubmitted) return this.renderPurchase();
     const formEnd = (this.state.transaction_unit === 'shares') ? 
       this.renderSharesForm() : this.renderDollarsForm()

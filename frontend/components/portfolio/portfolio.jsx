@@ -33,7 +33,6 @@ export default class Portfolio extends React.Component {
           unfetchedSymbols = unfetchedSymbols.filter(symbol => !this.props.assets['interval'][symbol]);
           unfectchedCryptos = unfectchedCryptos.filter(symbol => !this.props.assets['interval'][symbol]);
         }
-        console.log(unfetchedSymbols, unfectchedCryptos)
 
         unfetchedSymbols.forEach((symbol, idx) => {
           if ((idx === unfetchedSymbols.length - 1) && !unfectchedCryptos.length) {
