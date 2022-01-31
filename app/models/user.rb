@@ -24,7 +24,9 @@ class User < ApplicationRecord
   foreign_key: :owner_id,
   class_name: "PortfolioTransaction"
 
-  has_many :assets, through: :transactions
+  has_many :watchlists
+
+  has_many :watchlist_assets, through: :watchlists
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
