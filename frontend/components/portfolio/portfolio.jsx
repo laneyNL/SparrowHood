@@ -12,6 +12,7 @@ export default class Portfolio extends React.Component {
     this.state = {
       stockSymbols: [],
       cryptoSymbols: [],
+      watchlistSymbols: [],
       loading: true
     }
   }
@@ -126,6 +127,11 @@ export default class Portfolio extends React.Component {
               )
             }
             <p>Lists</p>
+            {
+              this.state.watchlistSymbols.map((symbol, idx) =>
+                <AssetListItem symbol={symbol} assets={this.props.assets['interval']} key={idx} closeKey="4. close" openKey="3. low" quantity={this.props.symbols[symbol].quantity} />
+              )
+            }
           </aside>
         </div>
       </div>

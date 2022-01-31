@@ -1,0 +1,2 @@
+module Api::WatchlistAssetsHelper
+end

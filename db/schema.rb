@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_31_042821) do
+ActiveRecord::Schema.define(version: 2022_01_31_052646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,26 +37,26 @@ ActiveRecord::Schema.define(version: 2022_01_31_042821) do
   end
 
   create_table "portfolio_transactions", force: :cascade do |t|
-    t.integer "owner_id"
-    t.boolean "is_purchase"
-    t.float "quantity"
-    t.float "transaction_price"
+    t.integer "owner_id", null: false
+    t.boolean "is_purchase", null: false
+    t.float "quantity", null: false
+    t.float "transaction_price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "current_total", default: 0.0
-    t.string "symbol"
-    t.boolean "is_stock"
+    t.float "current_total", default: 0.0, null: false
+    t.string "symbol", null: false
+    t.boolean "is_stock", null: false
     t.index ["owner_id"], name: "index_portfolio_transactions_on_owner_id"
     t.index ["symbol"], name: "index_portfolio_transactions_on_symbol"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "username"
-    t.string "password_digest"
-    t.string "session_token"
-    t.float "buying_power", default: 0.0
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "username", null: false
+    t.string "password_digest", null: false
+    t.string "session_token", null: false
+    t.float "buying_power", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2022_01_31_042821) do
   end
 
   create_table "watchlist_assets", force: :cascade do |t|
-    t.integer "watchlist_id"
-    t.string "symbol"
+    t.integer "watchlist_id", null: false
+    t.string "symbol", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["watchlist_id", "symbol"], name: "index_watchlist_assets_on_watchlist_id_and_symbol", unique: true
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 2022_01_31_042821) do
   end
 
   create_table "watchlists", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "name"
+    t.integer "user_id", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_watchlists_on_name"

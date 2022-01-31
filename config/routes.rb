@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end 
     resources :assets, only: [:show]
     resources :portfolio_transactions, only: [:create]
-    resources :watchlist, only: [:show, :create, :destroy]
+    resources :watchlist, only: [:show, :create, :destroy, :update]
     resources :watchlist_assets, only: [:create, :destroy]
   end
 end
