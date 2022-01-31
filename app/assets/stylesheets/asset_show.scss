@@ -112,11 +112,11 @@
 
 .value-subtitle {
   font-size: 21px;
-}
+// }
 
-#transaction-unit-input:focus, #unit-value:focus, #unit-value:enabled {
-  border: 1px solid green;
-}
+// #transaction-unit-input:focus, #unit-value:focus, #unit-value:enabled {
+//   border: 1px solid green;
+// }
 
 .transaction-form-body {
   border-bottom: 1px solid gray;
@@ -164,6 +164,7 @@
 }
 .transaction-button.greenText:hover {
   background-color: rgba(38,208,43,1);
+  color: #1E2124;
 }
 
 .transaction-button.redText {
@@ -172,6 +173,7 @@
 }
 .transaction-button.redText:hover {
   background-color: rgba(255,106,38,1);
+  color: #1E2124;
 }
 
 .transaction-form-buy-power.greenText, .purchase-option.active.greenText{
@@ -181,3 +183,12 @@
 .transaction-form-buy-power.redText, .purchase-option.active.redText{
   color: #FF5000;
 }
+ .purchase-option.active.greenText {
+  padding-bottom: 1px;
+  border-bottom: 1px solid #00C805;
+ }
+
+ .purchase-option.active.redText{
+  padding-bottom: 1px;
+  border-bottom: 1px solid #FF5000;
+ }

@@ -80,7 +80,7 @@ export default class TransactionForm extends React.Component {
           <span>{this.state.is_purchase ? 'Estimated Cost' : 'Estimated Credit'}</span>
           <span>{estCost}</span>
         </div>
-          <button className={`changeColor transaction-button ${this.state.textColor}`}>Review Order</button>
+          {this.renderButton()}
       </div>
     </div>
     )
@@ -99,7 +99,7 @@ export default class TransactionForm extends React.Component {
           <span>Est.Quantity</span>
           <span>{this.state.quantity}</span>
         </div>
-          <button className={`changeColor transaction-button ${this.state.textColor}`}>Review Order</button>
+          {this.renderButton()}
       </div>
     </div>
     )
@@ -135,7 +135,11 @@ export default class TransactionForm extends React.Component {
       </aside>
     )
   }
-
+  renderButton() {
+    return (
+      <button className={`changeColor transaction-button ${this.state.textColor}`}>Review Order</button>
+    )
+  }
   renderAvailable() {
     let available;
     const buyingPower = this.formatDollarString(parseFloat(this.props.user.buyingPower));
@@ -149,7 +153,7 @@ export default class TransactionForm extends React.Component {
 
     return <div className={`transaction-form-buy-power changeColor ${this.state.textColor}`}>{available}</div>
   }
-
+  
   render() {
     console.log('render', this.state);
     if (this.state.isSubmitted) return this.renderPurchase();
