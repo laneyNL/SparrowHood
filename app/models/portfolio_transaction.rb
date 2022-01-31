@@ -42,7 +42,7 @@ class PortfolioTransaction < ApplicationRecord
   end
 
   def update_total
-    return errors[:base] << 'Please enter a valid amount' if (self.quantity == 0)
+    return errors[:base] << 'Please enter a valid amount' if (self.quantity.nil? || self.quantity == 0)
     price = self.quantity * self.transaction_price
     owner = User.find_by(id: self.owner_id)
     lastTransaction = PortfolioTransaction.where(owner_id: self.owner_id).last

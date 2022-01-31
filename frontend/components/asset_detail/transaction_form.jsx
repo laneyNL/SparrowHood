@@ -14,7 +14,8 @@ export default class TransactionForm extends React.Component {
       transaction_unit: 'shares',
       isSubmitted: false,
       valueOwned: this.formatDollarString((this.props.currentPrice * this.props.quantityOwned)),
-      textColor: this.props.sign === '+' ? 'greenText' : 'redText'
+      textColor: this.props.sign === '+' ? 'greenText' : 'redText',
+      errors: []
     }
     this.handleReturnClick = this.handleReturnClick.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
@@ -37,7 +38,7 @@ export default class TransactionForm extends React.Component {
         dollars = -Math.abs(this.state.dollars);
       }
 
-      this.setState({ is_purchase: isPurchase, quantity: quantity, dollars: dollars});
+      this.setState({ is_purchase: isPurchase, quantity: quantity, dollars: dollars, errors: []});
     }
   }
 
@@ -64,17 +65,17 @@ export default class TransactionForm extends React.Component {
         quantity = -quantity;
         dollars = -dollars;
       }
-      this.setState({ quantity: quantity, dollars: dollars });
+      this.setState({ quantity: quantity, dollars: dollars, errors: [] });
     }
   }
   handleSelect(e) {
-    this.setState({ transaction_unit: e.currentTarget.value})
+    this.setState({ transaction_unit: e.currentTarget.value, errors: []})
   }
 
   handleSubmit(e) {
     e.preventDefault();
     this.props.createTransaction(this.state)
-      .then( () => this.setState({ isSubmitted: true }))
+      .then(() => this.setState({ isSubmitted: true }), () => this.setState({ errors: this.props.errors }))
   }
 
   handleReturnClick(e) {
@@ -174,6 +175,10 @@ export default class TransactionForm extends React.Component {
     if (this.state.isSubmitted) return this.renderPurchase();
     const formEnd = (this.state.transaction_unit === 'shares') ? 
       this.renderSharesForm() : this.renderDollarsForm()
+    let errors = '';
+    if (this.state.errors[0]) {
+      errors = <div className='transaction-errors'><i className="fas fa-exclamation-circle"></i> {`${this.state.errors[0]}`} </div>
+    }
     return (
       <aside className='transaction-form-container'>
         <form className='transaction-form' onSubmit={this.handleSubmit}>
@@ -191,9 +196,10 @@ export default class TransactionForm extends React.Component {
               </select>
             </div>
             {formEnd}
-            <div><i className="fas fa-exclamation-circle"></i>{`${this.props.errors[0]}`}
+            { errors }
+            <div className='transaction-button-div'>
+              <button className={`changeColor transaction-button ${this.state.textColor}`}>Review Order</button>
             </div>
-            <button className={`changeColor transaction-button ${this.state.textColor}`}>Review Order</button>
           </div>
           {this.renderAvailable()}
         </form>

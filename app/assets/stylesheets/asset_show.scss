@@ -75,6 +75,10 @@
   margin-bottom: 20px;
 }
 
+.transaction-button-div {
+  width: 100%;
+}
+
 .transaction-options {
   display: flex;
   border-bottom: 1px solid gray;
@@ -204,4 +208,9 @@ border-bottom: 1px solid #00C805;
 .purchase-option.active.redText{
 padding-bottom: 1px;
 border-bottom: 1px solid #FF5000;
+}
+
+.transaction-errors {
+  text-align: center;
+  padding-bottom: 20px;
 }
