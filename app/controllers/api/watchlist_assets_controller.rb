@@ -15,6 +15,7 @@ class Api::WatchlistAssetsController < ApplicationController
       render :show
     else  
       render json: @asset.errors.full_messages, status: 404
+    end
   end
 
   private
