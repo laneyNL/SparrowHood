@@ -27,20 +27,38 @@ export default class TransactionForm extends React.Component {
       e.preventDefault();
       $('.purchase-option').removeClass('active');
       e.currentTarget.classList.add('active');
-      const isPurchase = (field === 'buy') ? true : false;
-      this.setState({ is_purchase: isPurchase});
+      let isPurchase, quantity, dollars;
+      if (field === 'buy') {
+        isPurchase = true;
+        quantity = Math.abs(this.state.quantity);
+        dollars = Math.abs(this.state.dollars);
+      } else {
+        isPurchase = false;
+        quantity = -Math.abs(this.state.quantity);
+        dollars = -Math.abs(this.state.dollars);
+      }
+
+      this.setState({ is_purchase: isPurchase, quantity: quantity, dollars: dollars});
     }
   }
 
   update(field) {
     return (e) => {
+      let value = e.currentTarget.value.split('$').join('').split(',').join('');
+      if (isNaN(value)) return;
+
+      if (value === '') {
+        this.setState({ quantity: 0, dollars: 0 })
+        return
+      }
+      
       let dollars;
       let quantity;
       if (field === 'dollars') {
-        dollars = parseFloat(e.currentTarget.value);
+        dollars = parseFloat(value);
         quantity = dollars/this.props.currentPrice;
       } else {
-        quantity = parseFloat(e.currentTarget.value);
+        quantity = parseFloat(value);
         dollars = quantity * this.props.currentPrice;
       }
       if (!this.state.is_purchase) {
@@ -77,7 +95,7 @@ export default class TransactionForm extends React.Component {
     <div>
       <div className='transaction-form-selections' id='transaction-unit'>
         <span>Shares</span>
-        <span><input type="number" placeholder='0' id='transaction-unit-input' onChange={this.update('quantity')} required value={Math.abs(this.state.quantity)}/></span>
+        <span><input type="text" placeholder='0' id='transaction-unit-input' onChange={this.update('quantity')} required value={Math.abs(this.state.quantity)}/></span>
       </div>
 
       <div className='transaction-form-selections'>
@@ -100,13 +118,13 @@ export default class TransactionForm extends React.Component {
     <div>
       <div className='transaction-form-selections' id='transaction-unit'>
         <span>Amount</span>
-          <span><input type="number" placeholder='$0.00' id='transaction-unit-input' onChange={this.update('dollars')} required value={Math.abs(this.state.dollars)}/></span>
+          <span><input type="text" placeholder='$0.00' id='transaction-unit-input' onChange={this.update('dollars')} required value={`$${Math.abs(this.state.dollars).toLocaleString("en-US")}`}/></span>
       </div>
 
       <div className='transaction-confirmation'>
         <div className='transaction-form-selections'>
           <span>Est.Quantity</span>
-          <span>{this.state.quantity}</span>
+          <span>{Math.abs(this.state.quantity)}</span>
         </div>
       </div>
     </div>
@@ -154,7 +172,6 @@ export default class TransactionForm extends React.Component {
   }
   
   render() {
-    console.log('render form', this.state)
     if (this.state.isSubmitted) return this.renderPurchase();
     const formEnd = (this.state.transaction_unit === 'shares') ? 
       this.renderSharesForm() : this.renderDollarsForm()

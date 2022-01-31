@@ -16,11 +16,6 @@ export default class AssetShow extends React.Component {
   }
 
   componentDidMount() {
-  //  this.props.fetchTransactions(this.props.user.id)
-  //    .then(() => this.props.fetchAssetInterval(this.state.symbol))
-  //    .then(() => this.props.fetchAssetDetails(this.state.symbol))
-  //    .then(() => this.props.fetchAssetFull(this.state.symbol))
-  //    .then(() => this.setState({ loading: false, symbolDetails: this.props.symbolDetails[this.props.match.params.assetSymbol]}));
 
    this.props.fetchTransactions(this.props.user.id)
      .then(() => {
@@ -30,6 +25,10 @@ export default class AssetShow extends React.Component {
          this.setState({ loading: false, symbolDetails: this.props.symbolDetails[this.props.match.params.assetSymbol] })
        });
      })
+    
+    setTimeout(() => { 
+      if (this.state.loading) this.setState({ loading: false });
+     }, 10000);
 
   }
 
@@ -75,7 +74,7 @@ export default class AssetShow extends React.Component {
             <div className='assetDetailsDiv' >
               <div className='assetDetails'>
                 <p>Your market value</p>
-                <p>{marketValue}</p>
+                <p className='value-subtitle'>{marketValue}</p>
                 <div className='asset-detail-row border-bottom'><span >Today's return</span><span>{this.formatDollarString(todayReturn)}</span></div>
                 <div className='asset-detail-row'><span>Total return</span><span>{this.formatDollarString(totalReturn)}</span></div>
                 

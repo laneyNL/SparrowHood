@@ -51,6 +51,10 @@ export default class Portfolio extends React.Component {
         })
 
         if(!unfetchedSymbols.length && !unfectchedCryptos.length) this.setState({ loading: false });
+
+        setTimeout(() => {
+          if (this.state.loading) this.setState({ loading: false });
+        }, 10000);
       })
   }
 
