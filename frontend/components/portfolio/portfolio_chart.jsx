@@ -25,7 +25,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
 
   const timeLabel = (tooltipItem) => {
     let time = new Date(tooltipItem.label)
-    let hour = time.getHours();
+    let hour = time.getHours() + 8;
     let minutes = time.getMinutes();
     if (minutes < 10) minutes = `0${minutes}`;
     let dayTime = 'AM';
@@ -33,6 +33,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
       dayTime = 'PM';
       hour -= 12;
     }
+
     const timeString = `${hour}:${minutes} ${dayTime}`
     const dateString = time.toDateString().toUpperCase().split(' ').slice(1).join(' ');
     const dateStringSplit = dateString.split(' ')

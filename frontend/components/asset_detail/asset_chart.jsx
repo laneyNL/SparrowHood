@@ -11,8 +11,8 @@ const AssetChart = ({ name, assets, symbol }) => {
 
   const assetKeys = Object.keys(assetObject);
   const values = Object.values(assetObject);
-  let labels = assetKeys;
-  let data = values.map(value => value["4. close"]);
+  let labels = assetKeys.reverse();
+  let data = values.map(value => value["4. close"]).reverse();
 
   if (days > 1) {
     let start = assetKeys.length - 1 - days;
@@ -20,8 +20,8 @@ const AssetChart = ({ name, assets, symbol }) => {
     data = data.slice(start, assetKeys.length);
   }
   
-  let currentValue = data[data.length - 1];
-  const initial = data[0];
+  let currentValue = parseFloat(data[data.length - 1]);
+  const initial = parseFloat(data[0]);
 
   const difference = currentValue - initial;
   const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
@@ -183,6 +183,11 @@ const AssetChart = ({ name, assets, symbol }) => {
 
     }
   }
+
+  const formatDollarString = (num) => {
+    return parseFloat(num.toFixed(2)).toLocaleString("en-US");
+  }
+
   let colorClass = sign === '+' ? 'greenText' : 'redText';
   // changes color for transaction form
   $('.changeColor').removeClass('greenText');
@@ -193,11 +198,11 @@ const AssetChart = ({ name, assets, symbol }) => {
     <div className='chart'>
       <div className='chart-name'>{name}</div>
       <div className='totalValue chart-name' id='currentValue'>
-        {`$${currentValue.toLocaleString("en-US")}`}
+        {`$${formatDollarString(currentValue)}`}
       </div>
       <div className='difference'>
         <span id='difference-value'>
-          {sign}${Math.abs(difference).toLocaleString("en-US")} ({sign}{`${percDiff}%`})
+          {sign}${formatDollarString(Math.abs(difference))} ({sign}{`${percDiff}%`})
         </span>
         <span id='interval'> {chartInterval}</span>
       </div>

@@ -25,24 +25,33 @@ export default class Portfolio extends React.Component {
           cryptoSymbols: Object.keys(this.props.symbols)
             .filter(symbol => !this.props.symbols[symbol].isStock),
         })
-        // commented out to reduce fetches
-        this.state.stockSymbols.forEach((symbol, idx) => {
-          if ((idx === this.state.stockSymbols.length - 1) && !this.state.cryptoSymbols.length) {
-            this.props.fetchAssetDaily(symbol).then(() => this.setState({ loading: false }));
+        
+        let unfetchedSymbols = this.state.stockSymbols;
+        let unfectchedCryptos = this.state.cryptoSymbols;
+
+        if (this.props.assets['interval']) {
+          unfetchedSymbols = unfetchedSymbols.filter(symbol => !this.props.assets['interval'][symbol]);
+          unfectchedCryptos = unfectchedCryptos.filter(symbol => !this.props.assets['interval'][symbol]);
+        }
+        console.log(unfetchedSymbols, unfectchedCryptos)
+
+        unfetchedSymbols.forEach((symbol, idx) => {
+          if ((idx === unfetchedSymbols.length - 1) && !unfectchedCryptos.length) {
+            this.props.fetchAssetInterval(symbol).then(() => this.setState({ loading: false }));
           } else {
-            this.props.fetchAssetDaily(symbol);
-          }
-        })
-        this.state.cryptoSymbols.forEach((symbol, idx) => {
-          if (idx === this.state.cryptoSymbols.length-1) {
-            this.props.fetchCryptoDaily(symbol).then(() => this.setState({ loading: false }));
-          } else {
-            this.props.fetchCryptoDaily(symbol);
+            this.props.fetchAssetInterval(symbol);
           }
         })
 
-        // delete after fetches turned back on
-        // this.setState({ loading: false });
+        unfectchedCryptos.forEach((symbol, idx) => {
+          if (idx === unfectchedCryptos.length-1) {
+            this.props.fetchCryptoInterval(symbol).then(() => this.setState({ loading: false }));
+          } else {
+            this.props.fetchCryptoInterval(symbol);
+          }
+        })
+
+        if(!unfetchedSymbols.length && !unfectchedCryptos.length) this.setState({ loading: false });
       })
   }
 
@@ -104,13 +113,13 @@ export default class Portfolio extends React.Component {
             <p>Stocks</p>
             {
               this.state.stockSymbols.map((symbol, idx) =>
-                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} closeKey="4. close" openKey="3. low" quantity={this.props.symbols[symbol].quantity}/>
+                <AssetListItem symbol={symbol} assets={this.props.assets['interval']} key={idx} closeKey="4. close" openKey="3. low" quantity={this.props.symbols[symbol].quantity}/>
                 )
             }
             <p>Cryptocurrencies</p>
             {
               this.state.cryptoSymbols.map((symbol, idx) =>
-                <AssetListItem symbol={symbol} assets={this.props.assets} key={idx} closeKey="4b. close (USD)" openKey="3b. low (USD)" quantity={this.props.symbols[symbol].quantity}/>
+                <AssetListItem symbol={symbol} assets={this.props.assets['interval']} key={idx} closeKey="4. close" openKey="3. low" quantity={this.props.symbols[symbol].quantity}/>
               )
             }
             <p>Lists</p>

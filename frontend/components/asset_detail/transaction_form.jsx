@@ -21,10 +21,6 @@ export default class TransactionForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    // this.setState({ color: 'red'})
-  }
-
   handleClick(field) {
     return (e) => {
       e.preventDefault();
@@ -55,6 +51,11 @@ export default class TransactionForm extends React.Component {
       .then( () => this.setState({ isSubmitted: true }))
   }
 
+  handleReturnClick(e) {
+    e.preventDefault();
+    this.setState({ isSubmitted: false });
+  }
+
   formatDollarString(num) {
     return parseFloat(num.toFixed(2)).toLocaleString("en-US");
   }
@@ -67,12 +68,12 @@ export default class TransactionForm extends React.Component {
     <div>
       <div className='transaction-form-selections' id='transaction-unit'>
         <span>Shares</span>
-        <span><input type="text" placeholder='0' id='transaction-unit-input' onChange={this.update('quantity')} required /></span>
+        <span><input type="number" placeholder='0' id='transaction-unit-input' onChange={this.update('quantity')} required /></span>
       </div>
 
       <div className='transaction-form-selections'>
         <span>Market Price</span>
-        <span>{this.props.currentPrice}</span>
+        <span>{`$${this.props.currentPrice.toFixed(2)}`}</span>
       </div>
 
       <div className='transaction-confirmation'>
@@ -80,7 +81,6 @@ export default class TransactionForm extends React.Component {
           <span>{this.state.is_purchase ? 'Estimated Cost' : 'Estimated Credit'}</span>
           <span>{estCost}</span>
         </div>
-          {this.renderButton()}
       </div>
     </div>
     )
@@ -99,15 +99,9 @@ export default class TransactionForm extends React.Component {
           <span>Est.Quantity</span>
           <span>{this.state.quantity}</span>
         </div>
-          {this.renderButton()}
       </div>
     </div>
     )
-  }
-
-  handleReturnClick(e) {
-    e.preventDefault();
-    this.setState({ isSubmitted: false });
   }
 
   renderPurchase() {
@@ -135,11 +129,7 @@ export default class TransactionForm extends React.Component {
       </aside>
     )
   }
-  renderButton() {
-    return (
-      <button className={`changeColor transaction-button ${this.state.textColor}`}>Review Order</button>
-    )
-  }
+
   renderAvailable() {
     let available;
     const buyingPower = this.formatDollarString(parseFloat(this.props.user.buyingPower));
@@ -176,6 +166,7 @@ export default class TransactionForm extends React.Component {
               </select>
             </div>
             {formEnd}
+            <button className={`changeColor transaction-button ${this.state.textColor}`}>Review Order</button>
           </div>
           {this.renderAvailable()}
         </form>

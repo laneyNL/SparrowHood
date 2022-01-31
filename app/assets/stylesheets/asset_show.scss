@@ -60,7 +60,7 @@
 .transaction-form-selections {
   display: flex;
   justify-content: space-between;
-  padding: 20px 0;
+  padding: 20px 0 10px 0;
 }
 
 .transaction-button {
@@ -72,6 +72,7 @@
   vertical-align: center;
   border: none;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .transaction-options {
@@ -112,7 +113,7 @@
 
 .value-subtitle {
   font-size: 21px;
-// }
+}
 
 // #transaction-unit-input:focus, #unit-value:focus, #unit-value:enabled {
 //   border: 1px solid green;
@@ -126,7 +127,18 @@
 .transaction-confirmation {
   width: 100%;
   padding-bottom: 20px;
-  
+  border-top: 1px solid gray;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+select > options {
+  background-color: #30363A;
+  color: white;
 }
 
 .transaction-form-buy-power {
@@ -178,17 +190,18 @@
 
 .transaction-form-buy-power.greenText, .purchase-option.active.greenText{
   color: #00C805;
-  
 }
+
 .transaction-form-buy-power.redText, .purchase-option.active.redText{
   color: #FF5000;
 }
- .purchase-option.active.greenText {
-  padding-bottom: 1px;
-  border-bottom: 1px solid #00C805;
- }
 
- .purchase-option.active.redText{
-  padding-bottom: 1px;
-  border-bottom: 1px solid #FF5000;
- }
+.purchase-option.active.greenText {
+padding-bottom: 1px;
+border-bottom: 1px solid #00C805;
+}
+
+.purchase-option.active.redText{
+padding-bottom: 1px;
+border-bottom: 1px solid #FF5000;
+}

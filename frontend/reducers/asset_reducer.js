@@ -9,26 +9,26 @@ const assetReducer = (state = {}, action) => {
       nextState[action.payload["Meta Data"]["2. Symbol"]] = action.payload['Time Series (Daily)'];
       return nextState;
     case RECEIVE_ASSET_FULL: // 20 years of data
-      nextState['full'] = {};
+      nextState['full'] ||= {};
       nextState['full'][action.payload["Meta Data"]["2. Symbol"]] = action.payload['Time Series (Daily)'];
       return nextState;
     case RECEIVE_ASSET_INTERVAL:
-      nextState['interval'] = {}
+      nextState['interval'] = nextState['interval'] || {}
       nextState['interval'][action.payload["Meta Data"]["2. Symbol"]] = action.payload["Time Series (5min)"];
       return nextState;
     case RECEIVE_ASSET_DETAILS:
-      nextState['details'] = {};
+      nextState['details'] ||= {};
       nextState['details'][action.payload["Symbol"]] = action.payload;
       return nextState;
     case RECEIVE_CRYPTO_DAILY: // last 100 days
       nextState[action.payload["Meta Data"]["2. Digital Currency Code"]] = action.payload["Time Series (Digital Currency Daily)"];
       return nextState;
     case RECEIVE_CRYPTO_FULL: // 20 years of data
-      nextState['full'] = {};
+      nextState['full'] ||= {};
       nextState['full'][action.payload["Meta Data"]["2. Digital Currency Code"]] = action.payload["Time Series (Digital Currency Daily)"];
       return nextState;
     case RECEIVE_CRYPTO_INTERVAL:
-      nextState['interval'] = {}
+      nextState['interval'] ||= {}
       nextState['interval'][action.payload["Meta Data"]["2. Digital Currency Code"]] = action.payload["Time Series Crypto (5min)"];
       return nextState;
     default:

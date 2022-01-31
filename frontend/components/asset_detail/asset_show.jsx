@@ -16,15 +16,27 @@ export default class AssetShow extends React.Component {
   }
 
   componentDidMount() {
+  //  this.props.fetchTransactions(this.props.user.id)
+  //    .then(() => this.props.fetchAssetInterval(this.state.symbol))
+  //    .then(() => this.props.fetchAssetDetails(this.state.symbol))
+  //    .then(() => this.props.fetchAssetFull(this.state.symbol))
+  //    .then(() => this.setState({ loading: false, symbolDetails: this.props.symbolDetails[this.props.match.params.assetSymbol]}));
+
    this.props.fetchTransactions(this.props.user.id)
-     .then(() => this.props.fetchAssetInterval(this.state.symbol))
-     .then(() => this.props.fetchAssetDetails(this.state.symbol))
-     .then(() => this.props.fetchAssetFull(this.state.symbol))
-     .then(() => this.setState({ loading: false, symbolDetails: this.props.symbolDetails[this.props.match.params.assetSymbol]}));
+     .then(() => {
+       if (!this.props.assets['interval'] || !this.props.assets['interval'][this.state.symbol]) this.props.fetchAssetInterval(this.state.symbol);
+       if (!this.props.assets['full'] || !this.props.assets['full'][this.state.symbol]) this.props.fetchAssetFull(this.state.symbol);
+       this.props.fetchAssetDetails(this.state.symbol).then(() => {
+         this.setState({ loading: false, symbolDetails: this.props.symbolDetails[this.props.match.params.assetSymbol] })
+       });
+     })
+
   }
 
   formatDollarString(num) {
-    return parseFloat(num.toFixed(2)).toLocaleString("en-US");
+    const sign = (num > 0) ? '+' : '-';
+    let numberFixed = parseFloat(Math.abs(num).toFixed(2))
+    return `${sign}$${numberFixed.toLocaleString("en-US")}`;
   }
 
   render() {
@@ -33,17 +45,21 @@ export default class AssetShow extends React.Component {
 
     const quantityOwned = parseFloat(this.state.symbolDetails['quantity']);
     const isStock = this.state.symbolDetails['isStock'];
-    const details = this.props.details[this.state.symbol];
+    const details = this.props.details[this.state.symbol] || {};
 
     const assetValues = Object.values(this.props.assets['interval'][this.state.symbol]);
     const currentPrice = parseFloat(assetValues[0]["4. close"]);
     const initialPrice = parseFloat(assetValues[assetValues.length - 1]["4. close"]);
     const marketValue = this.formatDollarString((currentPrice * quantityOwned));
-    const todayReturn = this.formatDollarString(((currentPrice - initialPrice) * quantityOwned));
+    const todayReturn = ((currentPrice - initialPrice) * quantityOwned);
     const averageCost = parseFloat(this.state.symbolDetails.averagePrice);
-    const totalReturn = this.formatDollarString(((currentPrice - averageCost) * quantityOwned));
-    const sign = (todayReturn > 0 ) ? '+' : '-';
+    const totalReturn = ((currentPrice - averageCost) * quantityOwned);
 
+    const sign = ((currentPrice - initialPrice) > 0 ) ? '+' : '-';
+
+    const allSharesArr = Object.values(this.props.symbolDetails).map(value => parseFloat(value.quantity));
+    const allShares = allSharesArr.reduce((num, total) => (num + total));
+    const diversity = ((quantityOwned/allShares)*100).toFixed(2);
 
     return (
 
@@ -59,16 +75,16 @@ export default class AssetShow extends React.Component {
             <div className='assetDetailsDiv' >
               <div className='assetDetails'>
                 <p>Your market value</p>
-                <p>{`$${marketValue}`}</p>
-                <div className='asset-detail-row border-bottom'><span >Today's return</span><span>{`$${todayReturn}`}</span></div>
-                <div className='asset-detail-row'><span>Total return</span><span>{`$${totalReturn}`}</span></div>
+                <p>{marketValue}</p>
+                <div className='asset-detail-row border-bottom'><span >Today's return</span><span>{this.formatDollarString(todayReturn)}</span></div>
+                <div className='asset-detail-row'><span>Total return</span><span>{this.formatDollarString(totalReturn)}</span></div>
                 
               </div>
               <div className='assetDetails'>
                 <p>Your average cost</p>
                 <p className='value-subtitle'>{`$${averageCost.toFixed(2)}`}</p>
                 <div className='asset-detail-row border-bottom'><span>Shares</span><span>{quantityOwned}</span></div>
-                <div className='asset-detail-row'><span>Portfolio diversity</span><span>{'value'}</span></div>
+                <div className='asset-detail-row'><span>Portfolio diversity</span><span>{`${diversity}%`}</span></div>
               </div>
             </div>
 
