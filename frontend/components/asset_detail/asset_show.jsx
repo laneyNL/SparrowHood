@@ -16,19 +16,26 @@ export default class AssetShow extends React.Component {
   }
 
   componentDidMount() {
-
-   this.props.fetchTransactions(this.props.user.id)
-     .then(() => {
-       if (!this.props.assets['interval'] || !this.props.assets['interval'][this.state.symbol]) this.props.fetchAssetInterval(this.state.symbol);
-       if (!this.props.assets['full'] || !this.props.assets['full'][this.state.symbol]) this.props.fetchAssetFull(this.state.symbol);
-       this.props.fetchAssetDetails(this.state.symbol).then(() => {
-         this.setState({ loading: false, symbolDetails: this.props.symbolDetails[this.props.match.params.assetSymbol] })
-       });
-     })
+    this.props.fetchTransactions(this.props.user.id)
+      .then(() => {
+        if (this.props.symbolDetails[this.props.match.params.assetSymbol]['isStock']) {
+          if (!this.props.assets['interval'] || !this.props.assets['interval'][this.state.symbol]) this.props.fetchAssetInterval(this.state.symbol);
+          if (!this.props.assets['full'] || !this.props.assets['full'][this.state.symbol]) this.props.fetchAssetFull(this.state.symbol);
+          this.props.fetchAssetDetails(this.state.symbol).then(() => {
+            this.setState({ loading: false, symbolDetails: this.props.symbolDetails[this.props.match.params.assetSymbol] })
+          });
+        } else {
+          if (!this.props.assets['interval'] || !this.props.assets['interval'][this.state.symbol]) this.props.fetchCryptoInterval(this.state.symbol);
+          if (!this.props.assets['full'] || !this.props.assets['full'][this.state.symbol]) this.props.fetchCryptoFull(this.state.symbol);
+          this.props.fetchAssetDetails(this.state.symbol).then(() => {
+            this.setState({ loading: false, symbolDetails: this.props.symbolDetails[this.props.match.params.assetSymbol] })
+          });
+        } 
+      })
     
     setTimeout(() => { 
       if (this.state.loading) this.setState({ loading: false });
-     }, 10000);
+     }, 5000);
 
   }
 
@@ -39,12 +46,16 @@ export default class AssetShow extends React.Component {
   }
 
   render() {
+    console.log('show render', this.state)
     if (this.state.loading || !this.props.assets['interval'] || !this.props.details || !this.state.symbolDetails) return <LoadingSpinner />
     // if (jQuery.isEmptyObject(this.props.assets)) return null;
 
     const quantityOwned = parseFloat(this.state.symbolDetails['quantity']);
     const isStock = this.state.symbolDetails['isStock'];
     const details = this.props.details[this.state.symbol] || {};
+    if (!this.state.symbolDetails['isStock']) {
+      details['Name'] = this.props.assets['cryptoName']
+    }
 
     const assetValues = Object.values(this.props.assets['interval'][this.state.symbol]);
     const currentPrice = parseFloat(assetValues[0]["4. close"]);
