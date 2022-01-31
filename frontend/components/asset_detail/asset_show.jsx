@@ -35,8 +35,8 @@ export default class AssetShow extends React.Component {
 
   formatDollarString(num) {
     const sign = (num > 0) ? '+' : '-';
-    let numberFixed = parseFloat(Math.abs(num).toFixed(2))
-    return `${sign}$${numberFixed.toLocaleString("en-US")}`;
+    let numberFixed = parseFloat(Math.abs(num).toFixed(2));
+    return `${sign}$${numberFixed.toLocaleString("en-US")}`
   }
 
   render() {
