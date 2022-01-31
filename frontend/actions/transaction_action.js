@@ -1,8 +1,8 @@
 import * as TransactionApiUtil from '../util/transaction_api_util';
-import { RECEIVE_SESSION_ERRORS } from './session_actions';
 
 export const RECEIVE_TRANSACTIONS = 'RECEIVE_TRANSACTIONS';
 export const RECEIVE_TRANSACTION = 'RECEIVE_TRANSACTION';
+export const RECEIVE_TRANSACTION_ERRORS = 'RECEIVE_TRANSACTION_ERRORS';
 
 const receiveTransactions= (transactions) => ({
   type: RECEIVE_TRANSACTIONS,
@@ -14,7 +14,7 @@ const receiveTransaction= (transaction) => ({
 })
 
 const receiveErrors = (errors) => ({
-  type: RECEIVE_SESSION_ERRORS,
+  type: RECEIVE_TRANSACTION_ERRORS,
   errors
 })
 

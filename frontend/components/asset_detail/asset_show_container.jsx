@@ -4,12 +4,15 @@ import { logout } from '../../actions/session_actions';
 import { createTransaction, fetchTransactions } from '../../actions/transaction_action';
 import AssetShow from './asset_show';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps) => {
+  return {
   user: state.entities.users[state.session.id],
   assets: state.entities.assets,
   symbolDetails: state.entities.transactions.symbols,
   details: state.entities.assets.details,
-})
+  errors: state.errors.transaction
+}
+}
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),

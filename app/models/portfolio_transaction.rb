@@ -21,7 +21,7 @@ class PortfolioTransaction < ApplicationRecord
   foreign_key: :owner_id,
   class_name: "User"
 
-  before_validation :update_total
+  validate :update_total
 
   def self.in_interval(owner_id, interval)
     case interval
@@ -41,16 +41,17 @@ class PortfolioTransaction < ApplicationRecord
     PortfolioTransaction.where(owner_id: owner_id).where("created_at > ?", days_ago)
   end
 
-  def update_total()
+  def update_total
+    return errors[:base] << 'Please enter a valid amount' if (self.quantity == 0)
     price = self.quantity * self.transaction_price
     owner = User.find_by(id: self.owner_id)
     lastTransaction = PortfolioTransaction.where(owner_id: self.owner_id).last
     lastTransaction ? prev_price = lastTransaction.current_total : prev_price = 0
-
+    quantityOwned =  PortfolioTransaction.where(owner_id: self.owner_id, symbol: self.symbol).sum(:quantity)
     if (quantity > 0)
-      errors[:message] << 'Insufficent Funds' if (owner.buying_power < price)
+      return errors[:base] << 'Not Enough Buying Power' if (owner.buying_power < price)
     else
-      # errors[:message] << 'Not Enough Shares' if (owner.quantity < -self.quantity)
+      return errors[:base] << 'Not Enough Shares' if (quantityOwned < -self.quantity)
     end
 
     owner.buying_power = owner.buying_power - price

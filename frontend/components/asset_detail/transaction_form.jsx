@@ -3,7 +3,6 @@ import React from 'react';
 export default class TransactionForm extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       owner_id: this.props.user.id,
       is_purchase: true,
@@ -192,6 +191,8 @@ export default class TransactionForm extends React.Component {
               </select>
             </div>
             {formEnd}
+            <div><i className="fas fa-exclamation-circle"></i>{`${this.props.errors[0]}`}
+            </div>
             <button className={`changeColor transaction-button ${this.state.textColor}`}>Review Order</button>
           </div>
           {this.renderAvailable()}

@@ -28,7 +28,10 @@ ActiveRecord::Base.transaction do
   tran5 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 3, transaction_price: 80.12, symbol: 'DIS', is_stock: true)
 
   tran6 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 3, transaction_price: 300.12, symbol: 'BTC', is_stock: false)
+  
   tran7 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: -1, transaction_price: 500.13, symbol: 'BTC', is_stock: false)
+
+  tran7 = PortfolioTransaction.create!(owner_id: 41, is_purchase: true, quantity: -3, transaction_price: 500.13, symbol: 'BTC', is_stock: false)
 
   tran1.created_at = 500.days.ago
   tran1.save
