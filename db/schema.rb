@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_30_080706) do
+ActiveRecord::Schema.define(version: 2022_01_31_042821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,25 @@ ActiveRecord::Schema.define(version: 2022_01_30_080706) do
     t.datetime "updated_at", null: false
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  create_table "watchlist_assets", force: :cascade do |t|
+    t.integer "watchlist_id"
+    t.string "symbol"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["watchlist_id", "symbol"], name: "index_watchlist_assets_on_watchlist_id_and_symbol", unique: true
+    t.index ["watchlist_id"], name: "index_watchlist_assets_on_watchlist_id"
+  end
+
+  create_table "watchlists", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_watchlists_on_name"
+    t.index ["user_id", "name"], name: "index_watchlists_on_user_id_and_name", unique: true
+    t.index ["user_id"], name: "index_watchlists_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

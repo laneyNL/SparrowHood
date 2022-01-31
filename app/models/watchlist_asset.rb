@@ -1,0 +1,2 @@
+class WatchlistAsset < ApplicationRecord
+end
