@@ -54,7 +54,7 @@ export const updateWatchList = (watchlist) => dispatch => {
 }
 export const deleteWatchList = (watchlistId) => dispatch => {
   return WatchlistApiUtil.deleteWatchlist(watchlistId)
-    .then(watchlistId => dispatch(deleteWatchlist(watchlistId)))
+    .then(() => dispatch(deleteWatchlist(watchlistId)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
 export const createWatchListAsset = (asset) => dispatch => {
@@ -64,6 +64,6 @@ export const createWatchListAsset = (asset) => dispatch => {
 }
 export const deleteWatchListAsset = (assetId) => dispatch => {
   return WatchlistApiUtil.deleteWatchlistAsset(assetId)
-    .then(assetId => dispatch(deleteWatchlistAsset(assetId)))
+    .then(() => dispatch(deleteWatchlistAsset(assetId)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }

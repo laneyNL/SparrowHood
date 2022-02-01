@@ -14,10 +14,10 @@ const watchlistReducer = (state = {}, action) => {
       delete nextState[action.watchlistId];
       return nextState;
     case RECEIVE_WATCHLIST_ASSET:
-      nextState[action.asset.watchlistId][action.asset.id] = action.asset;
+      nextState[action.asset.watchlistId]['assets'][action.asset.id] = action.asset.symbol;
       return nextState;
     case DELETE_WATCHLIST_ASSET:  
-      delete nextState[action.asset.watchlistId][action.asset.id];
+      delete nextState[action.asset.watchlistId]['assets'][action.assetId];
       return nextState;
     default:
       return state;
@@ -25,4 +25,3 @@ const watchlistReducer = (state = {}, action) => {
 }
 
 export default watchlistReducer;
-
