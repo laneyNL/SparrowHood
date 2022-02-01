@@ -1,18 +1,12 @@
-json.set! :data do
-  @transactions.each do |transaction|
-    json.set! transaction.id do
-      json.extract! transaction, :id, :owner_id, :is_purchase, :quantity, :transaction_price, :current_total, :created_at, :symbol
+@watchlists.each do |watchlist|
+  json.set! watchlist.id do
+    json.extract! watchlist, :id, :name
+    json.set! assets do 
+      watchlist.assets.each do |asset|
+        json.set! asset.id do 
+          asset.symbol
+        end
+      end
     end
   end
 end
-
-json.set! :symbols do 
-  @assets.each do |asset|
-    json.set! asset.first do
-      json.quantity @transactions.where(symbol: asset.first).sum('quantity')
-      json.is_stock asset.last
-      json.average_price @average_prices[asset.first]
-    end
-  end
-end
-json.interval @interval

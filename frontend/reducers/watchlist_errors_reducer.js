@@ -1,4 +1,4 @@
-import { RECEIVE_WATCHLIST_ERRORS, RECEIVE_WATCHLISTS, RECEIVE_WATCHLIST} from "../actions/transaction_action";
+import { RECEIVE_WATCHLIST_ERRORS, RECEIVE_WATCHLISTS, RECEIVE_WATCHLIST} from "../actions/watchlist_actions";
 
 const watchlistErrorsReducer = (state = [], action) => {
   Object.freeze(state);

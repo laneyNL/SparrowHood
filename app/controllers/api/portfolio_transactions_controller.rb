@@ -11,10 +11,10 @@ class Api::PortfolioTransactionsController < ApplicationController
   def create
     @transaction = PortfolioTransaction.new(transaction_params)
 
-    @asset= PortfolioTransaction.where(owner_id: @transaction.owner_id, symbol: @transaction.symbol).select('symbol', 'is_stock').distinct.map{ |asset| [asset.symbol, asset.is_stock]}
-    @quantity = PortfolioTransaction.where(symbol: @transaction.symbol).sum('quantity')
-    @average_price = PortfolioTransaction.where(symbol: @transaction.symbol, is_purchase: true).average(:transaction_price)
     if @transaction.save
+      @asset= PortfolioTransaction.where(owner_id: @transaction.owner_id, symbol: @transaction.symbol).select('symbol', 'is_stock').distinct.map{ |asset| [asset.symbol, asset.is_stock]}
+      @quantity = PortfolioTransaction.where(symbol: @transaction.symbol).sum('quantity')
+      @average_price = PortfolioTransaction.where(symbol: @transaction.symbol, is_purchase: true).average(:transaction_price)
       render :show
     else
       render json: @transaction.errors.full_messages, status: 404

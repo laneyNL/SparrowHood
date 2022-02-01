@@ -1,7 +1,8 @@
 class Api::WatchlistsController < ApplicationController
 
   def index
-    @watchlists = Watchlist.where(user_id: params[:user_id]).include(:assets)
+    @watchlists = Watchlist.include(:assets).where(user_id: params[:user_id])
+    lists = Watchlist.where(user_id: 41)
     render :index
   end
 

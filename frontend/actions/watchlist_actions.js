@@ -15,16 +15,16 @@ const receiveWatchlist =  (watchlist) => ({
   type: RECEIVE_WATCHLIST,
   watchlist
 })
-const deleteWatchlist = (watchlistId) => ({
+const removeWatchlist = (watchlistId) => ({
   type: DELETE_WATCHLIST,
   watchlistId
 })
 const receiveWatchlistAsset =  (asset) => ({
-  type: RECEIVE_WATCHLIST,
+  type: RECEIVE_WATCHLIST_ASSET,
   asset
 })
-const deleteWatchlist = (assetId) => ({
-  type: DELETE_WATCHLIST,
+const removeWatchlistAsset = (assetId) => ({
+  type: DELETE_WATCHLIST_ASSET,
   assetId
 })
 const receiveErrors = (errors) => ({
@@ -54,7 +54,7 @@ export const updateWatchList = (watchlist) => dispatch => {
 }
 export const deleteWatchList = (watchlistId) => dispatch => {
   return WatchlistApiUtil.deleteWatchlist(watchlistId)
-    .then(() => dispatch(deleteWatchlist(watchlistId)))
+    .then(() => dispatch(removeWatchlist(watchlistId)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
 export const createWatchListAsset = (asset) => dispatch => {
@@ -64,6 +64,6 @@ export const createWatchListAsset = (asset) => dispatch => {
 }
 export const deleteWatchListAsset = (assetId) => dispatch => {
   return WatchlistApiUtil.deleteWatchlistAsset(assetId)
-    .then(() => dispatch(deleteWatchlistAsset(assetId)))
+    .then(() => dispatch(removeWatchlistAsset(assetId)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }

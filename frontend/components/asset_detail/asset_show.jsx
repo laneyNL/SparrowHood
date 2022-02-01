@@ -11,7 +11,6 @@ export default class AssetShow extends React.Component {
     this.state = {
       symbol: this.props.match.params.assetSymbol,
       loading: true,
-      symbolDetails: {}
     }
   }
 
@@ -22,13 +21,13 @@ export default class AssetShow extends React.Component {
           if (!this.props.assets['interval'] || !this.props.assets['interval'][this.state.symbol]) this.props.fetchAssetInterval(this.state.symbol);
           if (!this.props.assets['full'] || !this.props.assets['full'][this.state.symbol]) this.props.fetchAssetFull(this.state.symbol);
           this.props.fetchAssetDetails(this.state.symbol).then(() => {
-            this.setState({ loading: false, symbolDetails: this.props.symbolDetails[this.props.match.params.assetSymbol] })
+            this.setState({ loading: false })
           });
         } else {
           if (!this.props.assets['interval'] || !this.props.assets['interval'][this.state.symbol]) this.props.fetchCryptoInterval(this.state.symbol);
           if (!this.props.assets['full'] || !this.props.assets['full'][this.state.symbol]) this.props.fetchCryptoFull(this.state.symbol);
           this.props.fetchAssetDetails(this.state.symbol).then(() => {
-            this.setState({ loading: false, symbolDetails: this.props.symbolDetails[this.props.match.params.assetSymbol] })
+            this.setState({ loading: false })
           });
         } 
       })
@@ -47,13 +46,14 @@ export default class AssetShow extends React.Component {
 
   render() {
     console.log('show render', this.state)
-    if (this.state.loading || !this.props.assets['interval'] || !this.props.details || !this.state.symbolDetails) return <LoadingSpinner />
+    if (this.state.loading || !this.props.assets['interval'] || !this.props.details || !this.props.symbolDetails[this.props.match.params.assetSymbol]) return <LoadingSpinner />
     // if (jQuery.isEmptyObject(this.props.assets)) return null;
 
-    const quantityOwned = parseFloat(this.state.symbolDetails['quantity']);
-    const isStock = this.state.symbolDetails['isStock'];
+    const symbolDetails = this.props.symbolDetails[this.props.match.params.assetSymbol];
+    const quantityOwned = parseFloat(symbolDetails['quantity']);
+    const isStock = symbolDetails['isStock'];
     const details = this.props.details[this.state.symbol] || {};
-    if (!this.state.symbolDetails['isStock']) {
+    if (!symbolDetails['isStock']) {
       details['Name'] = this.props.assets['cryptoName']
     }
 
@@ -62,7 +62,7 @@ export default class AssetShow extends React.Component {
     const initialPrice = parseFloat(assetValues[assetValues.length - 1]["4. close"]);
     const marketValue = this.formatDollarString((currentPrice * quantityOwned));
     const todayReturn = ((currentPrice - initialPrice) * quantityOwned);
-    const averageCost = parseFloat(this.state.symbolDetails.averagePrice);
+    const averageCost = parseFloat(symbolDetails.averagePrice);
     const totalReturn = ((currentPrice - averageCost) * quantityOwned);
 
     const sign = ((currentPrice - initialPrice) > 0 ) ? '+' : '-';

@@ -69,7 +69,7 @@ export default class TransactionForm extends React.Component {
     }
   }
   handleSelect(e) {
-    this.setState({ transaction_unit: e.currentTarget.value, errors: []})
+    this.setState({ transaction_unit: e.currentTarget.value, errors: [], quantity: '', dollars: ''})
   }
 
   handleSubmit(e) {
@@ -149,8 +149,10 @@ export default class TransactionForm extends React.Component {
               <span>Esimated Shares</span>
               <span>{this.state.quantity}</span>
             </div>
-            <div className=' complete-text'>Your order to market {transactionType} {Math.abs(purchaseTotal)} of {this.props.symbol} was completed.</div>
+            <div className=' complete-text'>Your order to market {transactionType} ${Math.abs(purchaseTotal)} of {this.props.symbol} was completed.</div>
+            <div className='transaction-button-div'>
             <button className={`changeColor transaction-button ${this.state.textColor} complete-button`} onClick={this.handleReturnClick}>Done</button>
+            </div>
           </div>
         </div>
       </aside>
