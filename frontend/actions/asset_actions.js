@@ -64,14 +64,17 @@ const receiveErrors = (errors) => ({
   //     .then(payload => dispatch(receiveAsset(payload)))
   //     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
   // }
+
+const apiExceeded = 'Thank you for using Alpha Vantage! Our standard API call frequency is 5 calls per minute and 500 calls per day.Please visit https://www.alphavantage.co/premium/ if you would like to target a higher API call frequency.';
+
   export const fetchAssetInterval = (symbol, interval) => dispatch => {
     if (sessionStorage.getItem(`interval-${symbol}`)) {
-      return dispatch(receiveAssetDetails(JSON.parse(sessionStorage.getItem(`interval-${symbol}`))))
+      return dispatch(receiveAssetInterval(JSON.parse(sessionStorage.getItem(`interval-${symbol}`))))
     }
     return AssetApiUtil.fetchAssetInterval(symbol, interval)
       .then(payload => {
         dispatch(receiveAssetInterval(payload));
-        if (payload !== 'Thank you for using Alpha Vantage! Our standard API call frequency is 5 calls per minute and 500 calls per day. Please visit https://www.alphavantage.co/premium/ if you would like to target a higher API call frequency.') sessionStorage.setItem(`interval-${symbol}`, JSON.stringify(payload));
+        if (payload !== apiExceeded) sessionStorage.setItem(`interval-${symbol}`, JSON.stringify(payload));
       })
       .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
   }
@@ -82,12 +85,12 @@ const receiveErrors = (errors) => ({
   // }
   export const fetchAssetFull = (symbol) => dispatch => {
     if (sessionStorage.getItem(`full-${symbol}`)) {
-      return dispatch(receiveAssetDetails(JSON.parse(sessionStorage.getItem(`full-${symbol}`))))
+      return dispatch(receiveAssetFull(JSON.parse(sessionStorage.getItem(`full-${symbol}`))))
     }
     return AssetApiUtil.fetchAssetFull(symbol)
       .then(payload => {
         dispatch(receiveAssetFull(payload));
-        if (payload !== 'Thank you for using Alpha Vantage! Our standard API call frequency is 5 calls per minute and 500 calls per day. Please visit https://www.alphavantage.co/premium/ if you would like to target a higher API call frequency.') sessionStorage.setItem(`full-${symbol}`, JSON.stringify(payload));
+        if (payload !== apiExceeded) sessionStorage.setItem(`full-${symbol}`, JSON.stringify(payload));
       })
       .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
   }
@@ -98,7 +101,7 @@ const receiveErrors = (errors) => ({
     return AssetApiUtil.fetchAssetDetails(symbol)
       .then(payload => {
         dispatch(receiveAssetDetails(payload));
-        if (payload !== 'Thank you for using Alpha Vantage! Our standard API call frequency is 5 calls per minute and 500 calls per day. Please visit https://www.alphavantage.co/premium/ if you would like to target a higher API call frequency.') sessionStorage.setItem(`details-${symbol}`, JSON.stringify(payload));
+        if (payload !== apiExceeded) sessionStorage.setItem(`details-${symbol}`, JSON.stringify(payload));
       })
       .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
   }
