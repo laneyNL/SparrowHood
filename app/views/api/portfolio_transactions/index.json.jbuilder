@@ -7,11 +7,10 @@ json.set! :data do
 end
 
 json.set! :symbols do 
-  @assets.each do |asset|
-    json.set! asset.first do
-      json.quantity @transactions.where(symbol: asset.first).sum('quantity')
-      json.is_stock asset.last
-      json.average_price @average_prices[asset.first]
+  @assets.each do |symbol|
+    json.set! symbol do
+      json.quantity @transactions.where(symbol: symbol).sum('quantity')
+      json.average_price @average_prices[symbol]
     end
   end
 end

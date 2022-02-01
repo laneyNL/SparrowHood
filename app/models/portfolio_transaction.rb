@@ -3,20 +3,18 @@
 # Table name: portfolio_transactions
 #
 #  id                :bigint           not null, primary key
-#  owner_id          :integer
-#  is_purchase       :boolean
-#  quantity          :float
-#  transaction_price :float
+#  owner_id          :integer          not null
+#  is_purchase       :boolean          not null
+#  quantity          :float            not null
+#  transaction_price :float            not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  current_total     :float            default(0.0)
-#  symbol            :string
-#  is_stock          :boolean
+#  current_total     :float            default(0.0), not null
+#  symbol            :string           not null
 #
 class PortfolioTransaction < ApplicationRecord
   validates :symbol, :owner_id, :quantity, :transaction_price, presence: true
   validates :is_purchase, inclusion: { in: [true, false] }
-  validates :is_stock, inclusion: { in: [true, false] }
   belongs_to :owner,
   foreign_key: :owner_id,
   class_name: "User"

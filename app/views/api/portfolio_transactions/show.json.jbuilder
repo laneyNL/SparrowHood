@@ -6,9 +6,8 @@ end
 
 
 json.set! :symbols do 
-  json.set! @asset.first.first do
+  json.set! @asset.first do
     json.quantity @quantity
-    json.is_stock @asset.first.last
     json.average_price @average_price
   end
 end

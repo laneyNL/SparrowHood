@@ -15,21 +15,21 @@ ActiveRecord::Base.transaction do
   user1 = User.create!(first_name: 'Demo', last_name: 'User', username: 'demo', password:'demopassword', buying_power: 11579.18)
 
   
-  tran1 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: 20.15, symbol: 'AMC', is_stock: true)
+  tran1 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: 20.15, symbol: 'AMC')
 
-  tran2 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: -5, transaction_price: 18.25, symbol: 'AMC', is_stock: true)
+  tran2 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: -5, transaction_price: 18.25, symbol: 'AMC')
 
-  tran3 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: 200.34, symbol: 'GME', is_stock: true)
+  tran3 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: 200.34, symbol: 'GME')
 
-  tran4 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: -3, transaction_price: 150, symbol: 'GME', is_stock: true)
+  tran4 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: -3, transaction_price: 150, symbol: 'GME')
 
-  tran5 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: 77.23, symbol: 'DIS', is_stock: true)
+  tran5 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: 77.23, symbol: 'DIS')
 
-  tran5 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 3, transaction_price: 80.12, symbol: 'DIS', is_stock: true)
+  tran5 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 3, transaction_price: 80.12, symbol: 'DIS')
 
-  # tran6 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 3, transaction_price: 300.12, symbol: 'BTC', is_stock: false)
+  tran6 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 3, transaction_price: 300.12, symbol: 'DIS')
   
-  # tran7 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: -1, transaction_price: 500.13, symbol: 'BTC', is_stock: false)
+  tran7 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: -1, transaction_price: 500.13, symbol: 'DIS')
 
   tran1.created_at = 500.days.ago
   tran1.save

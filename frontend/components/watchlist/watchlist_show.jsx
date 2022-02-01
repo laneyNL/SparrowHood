@@ -41,40 +41,7 @@ export default class WatchlistShow extends React.Component {
             })
             this.setState({ listSymbolArray: watchlistAssets.map(asset => asset.symbol), loading: false})
           })
-        // const assetSymbols = Object.values(this.props.watchlist.assets).map(asset => asset.symbol);
-        // Promise.all(assetSymbols.map(symbol => {
-        //     if (!this.props.assets['details'] || !this.props.assets['details'][symbol]) {
-        //       this.props.fetchAssetDetails(symbol);
-        //     }
-        // }))
-        //   .then(() => {
-        //     this.setState({
-        //       stockSymbols: assetSymbols,
-        //       // stockSymbols: assetSymbols.filter(symbol => this.props.symbolDetails[symbol].isStock),
-        //       // cryptoSymbols: assetSymbols.filter(symbol => !this.props.symbolDetails[symbol].isStock),
-        //     })
-
-        //     let unfetchedSymbols = this.state.stockSymbols;
-        //     let unfectchedCryptos = this.state.cryptoSymbols;
-
-        //     if (this.props.assets['full']) {
-        //       unfetchedSymbols = unfetchedSymbols.filter(symbol => !this.props.assets['full'][symbol]);
-        //       unfectchedCryptos = unfectchedCryptos.filter(symbol => !this.props.assets['full'][symbol]);
-        //     }
-
-        //     Promise.all(unfetchedSymbols.map(symbol =>
-        //       this.props.fetchAssetFull(symbol)))
-        //       .then(() => {
-        //         Promise.all(unfectchedCryptos.map(symbol => this.props.fetchCryptoFull(symbol)))
-        //           .then(() => this.setState({ loading: false }))
-        //       })
-
-
-        //   })
       })
-    setTimeout(() => {
-      if (this.state.loading) this.setState({ loading: false });
-    }, 10000);
   }
 
   deleteListAsset(e) {
@@ -104,7 +71,7 @@ export default class WatchlistShow extends React.Component {
         <td>{symbolListDetails.name}</td>
         <td>{symbolListDetails.symbol}</td>
         <td>{symbolListDetails.price}</td>
-        <td>{`${symbolListDetails.today.toFixed(2)}%`}</td>
+        <td><div className='caret'></div>{`${symbolListDetails.today.toFixed(2)}%`}</td>
         <td>{marketCap}</td>
         <td>&times;</td>
       </tr>
@@ -120,12 +87,12 @@ export default class WatchlistShow extends React.Component {
         <PortfolioHeader logout={this.props.logout} />
         <div>
           <div className='watchlist-main'>
-            <div>Emoji</div>
+            <div className='watchlist-icon'>Icon Placeholder</div>
 
             <div className='watchlist-header'>
-              <div className='watchlist-name'>
+              <div className='watchlist-table-name'>
                 <div>{this.props.watchlist.name}</div>
-                <div>{this.state.listSymbolArray.length} items</div>
+                <div className='grayText'>{this.state.listSymbolArray.length} items</div>
               </div>
 
               <div className='watchlist-search-options'>
@@ -137,11 +104,12 @@ export default class WatchlistShow extends React.Component {
               <table>
                 <tbody>
                   <tr>
-                    <th>Name</th>
+                    <th className='watchlist-name-col'>Name</th>
                     <th>Symbol</th>
                     <th>Price</th>
-                    <th>Today</th>
+                    <th> Today</th>
                     <th>Market Cap</th>
+                    <th></th>
                   </tr>
                   {this.state.listSymbolArray.map(symbol => this.renderTableRow(symbol))}
                 </tbody>

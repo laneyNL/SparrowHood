@@ -10,7 +10,6 @@ export default class TransactionForm extends React.Component {
       dollars: '',
       transaction_price: this.props.currentPrice,
       symbol: this.props.symbol,
-      is_stock: this.props.isStock,
       transaction_unit: 'shares',
       isSubmitted: false,
       valueOwned: this.formatDollarString((this.props.currentPrice * this.props.quantityOwned)),

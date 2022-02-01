@@ -2,7 +2,7 @@ class Api::PortfolioTransactionsController < ApplicationController
 
   def index
     @transactions = PortfolioTransaction.in_interval(params[:user_id], params[:interval])
-    @assets= PortfolioTransaction.where(owner_id: params[:user_id]).select('symbol', 'is_stock').distinct.map{ |asset| [asset.symbol, asset.is_stock]}
+    @assets= PortfolioTransaction.where(owner_id: params[:user_id]).select('symbol').distinct.map(&:symbol)
     @interval = params[:interval]
     @average_prices = PortfolioTransaction.group('symbol').average(:transaction_price)
     render :index
@@ -12,7 +12,7 @@ class Api::PortfolioTransactionsController < ApplicationController
     @transaction = PortfolioTransaction.new(transaction_params)
 
     if @transaction.save
-      @asset= PortfolioTransaction.where(owner_id: @transaction.owner_id, symbol: @transaction.symbol).select('symbol', 'is_stock').distinct.map{ |asset| [asset.symbol, asset.is_stock]}
+      @asset= PortfolioTransaction.where(owner_id: @transaction.owner_id, symbol: @transaction.symbol).select('symbol').distinct.map(&:symbol)
       @quantity = PortfolioTransaction.where(symbol: @transaction.symbol).sum('quantity')
       @average_price = PortfolioTransaction.where(symbol: @transaction.symbol, is_purchase: true).average(:transaction_price)
       render :show
@@ -24,6 +24,6 @@ class Api::PortfolioTransactionsController < ApplicationController
 
   private
   def transaction_params
-    params.require(:transaction).permit(:owner_id, :is_purchase, :quantity, :transaction_price, :symbol, :is_stock)
+    params.require(:transaction).permit(:owner_id, :is_purchase, :quantity, :transaction_price, :symbol)
   end
 end

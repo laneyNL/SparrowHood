@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import AssetChart from './asset_chart'
 import PortfolioHeader from '../portfolio/portfolio_header'
 import TransactionForm from './transaction_form';
@@ -17,19 +16,11 @@ export default class AssetShow extends React.Component {
   componentDidMount() {
     this.props.fetchTransactions(this.props.user.id)
       .then(() => {
-        const isStock = this.props.symbolDetails[this.props.match.params.assetSymbol]['isStock'];
-        
-        if (!this.props.assets['interval'] || !this.props.assets['interval'][this.state.symbol]) {
-          isStock ? this.props.fetchAssetInterval(this.state.symbol) : this.props.fetchCryptoInterval(this.state.symbol);
-        }
-        if (!this.props.assets['full'] || !this.props.assets['full'][this.state.symbol]) {
-          isStock ? this.props.fetchAssetFull(this.state.symbol) : this.props.fetchCryptoFull(this.state.symbol);
-        }
-        isStock ? this.props.fetchAssetDetails(this.state.symbol).then(() => this.setState({ loading: false })) : this.props.fetchAssetDetails(this.state.symbol).then(() => this.setState({ loading: false }));
-
-        setTimeout(() => {
-          if (this.state.loading) this.setState({ loading: false });
-        }, 5000);
+        Promise.all([
+          this.props.fetchAssetInterval(this.state.symbol),
+          this.props.fetchAssetFull(this.state.symbol),
+          this.props.fetchAssetDetails(this.state.symbol)])
+          .then(() => this.setState({ loading: false }));
       })
   }
 
@@ -40,16 +31,11 @@ export default class AssetShow extends React.Component {
   }
 
   render() {
-    if (this.state.loading || !this.props.assets['interval'] || !this.props.details || !this.props.symbolDetails[this.props.match.params.assetSymbol]) return <LoadingSpinner />
-    // if (jQuery.isEmptyObject(this.props.assets)) return null;
+    if (this.state.loading) return <LoadingSpinner />
 
     const symbolDetails = this.props.symbolDetails[this.props.match.params.assetSymbol];
     const quantityOwned = parseFloat(symbolDetails['quantity']);
-    const isStock = symbolDetails['isStock'];
     const details = this.props.details[this.state.symbol] || {};
-    if (!symbolDetails['isStock']) {
-      details['Name'] = this.props.assets['cryptoName']
-    }
 
     const assetValues = Object.values(this.props.assets['interval'][this.state.symbol]);
     const currentPrice = parseFloat(assetValues[0]["4. close"]);
@@ -101,7 +87,7 @@ export default class AssetShow extends React.Component {
               <div className='stats-body'>{`insert description from api`}</div>
             </div> */}
           </div>
-          <TransactionForm symbol={this.state.symbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} isStock={isStock} quantityOwned={quantityOwned} sign={sign} errors={this.props.errors}/>
+          <TransactionForm symbol={this.state.symbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} quantityOwned={quantityOwned} sign={sign} errors={this.props.errors}/>
         </div>
       </div>
     )
