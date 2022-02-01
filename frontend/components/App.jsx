@@ -7,6 +7,7 @@ import Splash from './splash';
 import PortfolioContainer from './portfolio/portfolio_container'
 import { connect } from 'react-redux';
 import AssetShowContainter from './asset_detail/asset_show_container';
+import watchlistShowContainer from './watchlist/watchlist_show_container';
 
 const App = ({loggedIn}) => (
   <div id='App'>
@@ -14,6 +15,7 @@ const App = ({loggedIn}) => (
         <AuthRoute path='/signup' component={SignUpContainer} />
         <AuthRoute path='/login' component={LoginContainer} />
         <ProtectedRoute path='/assets/:assetSymbol' component={AssetShowContainter} />
+        <ProtectedRoute path='/watchlist/:watchlistId' component={watchlistShowContainer} />
         {(loggedIn) ?
           <ProtectedRoute exact path='/' component={PortfolioContainer} /> :
           <Route exact path='/' component={Splash} />}
