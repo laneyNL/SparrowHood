@@ -27,11 +27,9 @@ ActiveRecord::Base.transaction do
 
   tran5 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 3, transaction_price: 80.12, symbol: 'DIS', is_stock: true)
 
-  tran6 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 3, transaction_price: 300.12, symbol: 'BTC', is_stock: false)
+  # tran6 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 3, transaction_price: 300.12, symbol: 'BTC', is_stock: false)
   
-  tran7 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: -1, transaction_price: 500.13, symbol: 'BTC', is_stock: false)
-
-  tran7 = PortfolioTransaction.create!(owner_id: 41, is_purchase: true, quantity: -3, transaction_price: 500.13, symbol: 'BTC', is_stock: false)
+  # tran7 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: -1, transaction_price: 500.13, symbol: 'BTC', is_stock: false)
 
   tran1.created_at = 500.days.ago
   tran1.save
@@ -43,19 +41,19 @@ ActiveRecord::Base.transaction do
   tran4.save
   tran5.created_at = 50.days.ago
   tran5.save
-  tran6.created_at = 30.days.ago
-  tran6.save
-  tran7.created_at = 10.days.ago
-  tran7.save
+  # tran6.created_at = 30.days.ago
+  # tran6.save
+  # tran7.created_at = 10.days.ago
+  # tran7.save
 
   watch1 = Watchlist.create!(user_id: user1.id, name: 'Stock Watchlist');
-  watch2 = Watchlist.create!(user_id: user1.id, name: 'Crypt Watchlist');
+  # watch2 = Watchlist.create!(user_id: user1.id, name: 'Crypt Watchlist');
 
   # asset1 = WatchlistAsset.create!(watchlist_id: 1, symbol: 'AMC');
   asset1 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'AMC');
   asset2 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'GME');
-  asset3 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'DIS');
-  asset4 = WatchlistAsset.create!(watchlist_id: watch2.id, symbol: 'BTC');
+  # asset3 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'DIS');
+  # asset4 = WatchlistAsset.create!(watchlist_id: watch2.id, symbol: 'BTC');
   # asset5 = WatchlistAsset.create!(watchlist_id: watch2.id, symbol: 'AMC');
 
 end

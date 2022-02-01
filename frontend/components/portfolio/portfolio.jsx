@@ -34,28 +34,12 @@ export default class Portfolio extends React.Component {
           unfectchedCryptos = unfectchedCryptos.filter(symbol => !this.props.assets['interval'][symbol]);
         }
 
-        // unfetchedSymbols.forEach((symbol, idx) => {
-        //   if ((idx === unfetchedSymbols.length - 1) && !unfectchedCryptos.length) {
-        //     this.props.fetchAssetInterval(symbol).then(() => this.setState({ loading: false }));
-        //   } else {
-        //     this.props.fetchAssetInterval(symbol);
-        //   }
-        // })
-        // unfectchedCryptos.forEach((symbol, idx) => {
-        //   if (idx === unfectchedCryptos.length - 1) {
-        //     this.props.fetchCryptoInterval(symbol).then(() => this.setState({ loading: false }));
-        //   } else {
-        //     this.props.fetchCryptoInterval(symbol);
-        //   }
-        // })
         Promise.all(unfetchedSymbols.map(symbol => 
             this.props.fetchAssetInterval(symbol)))
             .then(() => {
               Promise.all(unfectchedCryptos.map(symbol => this.props.fetchCryptoInterval(symbol)))
                 .then(() => this.setState({ loading: false }))
               });
-            
-        // if(!unfetchedSymbols.length && !unfectchedCryptos.length) this.setState({ loading: false });
 
         setTimeout(() => {
           if (this.state.loading) this.setState({ loading: false });

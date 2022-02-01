@@ -9,14 +9,14 @@ export const fetchWatchlists = (userId) => {
 export const fetchWatchlist = (watchlistId) => {
   return $.ajax({
     method: 'GET',
-    url: `/api/watchlist/${watchlistId}`
+    url: `/api/watchlists/${watchlistId}`
   })
 }
 
 export const createWatchlist = (watchlist) => {
   return $.ajax({
     method: 'POST',
-    url: `/api/watchlist`,
+    url: `/api/watchlists`,
     data: { watchlist }
   })
 }
@@ -24,7 +24,7 @@ export const createWatchlist = (watchlist) => {
 export const updateWatchlist = (watchlist) => {
   return $.ajax({
     method: 'PATCH',
-    url: `/api/watchlist/${watchlist.id}`,
+    url: `/api/watchlists/${watchlist.id}`,
     data: { watchlist }
   })
 }
@@ -32,7 +32,7 @@ export const updateWatchlist = (watchlist) => {
 export const deleteWatchlist = (watchlistId) => {
   return $.ajax({
     method: 'DELETE',
-    url: `/api/watchlist/${watchlistId}`
+    url: `/api/watchlists/${watchlistId}`
   })
 }
 

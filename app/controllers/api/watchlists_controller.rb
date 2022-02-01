@@ -1,13 +1,13 @@
 class Api::WatchlistsController < ApplicationController
 
   def index
-    @watchlists = Watchlist.include(:assets).where(user_id: params[:user_id])
+    @watchlists = Watchlist.includes(:assets).where(user_id: params[:user_id])
     lists = Watchlist.where(user_id: 41)
     render :index
   end
 
   def show
-    @watchlist = Watchlist.find_by(id: params[:id])
+    @watchlist = Watchlist.includes(:assets).find_by(id: params[:id])
     render :show
   end
 
@@ -21,7 +21,7 @@ class Api::WatchlistsController < ApplicationController
   end
 
   def update
-    @watchlist = Watchlist.find_by(id: params[:id])
+    @watchlist = Watchlist.includes(:assets).find_by(id: params[:id])
     if @watchlist && @watchlist.user_id = current_user.id && @watchlist.update(watchlist_params)
       render :show
     else  

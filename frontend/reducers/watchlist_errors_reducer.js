@@ -8,7 +8,7 @@ const watchlistErrorsReducer = (state = [], action) => {
     case RECEIVE_WATCHLIST:
       return [];
     case RECEIVE_WATCHLIST_ERRORS:
-      return action.errors;
+      return action.errors || state;
     default:
       return state;
   }

@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root'
-import {fetchAssetPrice} from './util/asset_api_util'
-import {createTransaction} from './util/transaction_api_util'
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -20,10 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     store = configureStore();
   }
- 
-  // window.store = store;
-
-
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);
 });

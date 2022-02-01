@@ -32,37 +32,37 @@ const receiveErrors = (errors) => ({
   errors
 })
 
-export const fetchWatchLists = (userId) => dispatch => {
+export const fetchWatchlists = (userId) => dispatch => {
   return WatchlistApiUtil.fetchWatchlists(userId)
     .then(watchlists => dispatch(receiveWatchlists(watchlists)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
-export const fetchWatchList = (watchlistId) => dispatch => {
+export const fetchWatchlist = (watchlistId) => dispatch => {
   return WatchlistApiUtil.fetchWatchlist(watchlistId)
     .then(watchlist => dispatch(receiveWatchlist(watchlist)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
-export const createWatchList = (watchlist) => dispatch => {
+export const createWatchlist = (watchlist) => dispatch => {
   return WatchlistApiUtil.createWatchlist(watchlist)
     .then(watchlist => dispatch(receiveWatchlist(watchlist)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
-export const updateWatchList = (watchlist) => dispatch => {
+export const updateWatchlist = (watchlist) => dispatch => {
   return WatchlistApiUtil.updateWatchlist(watchlist)
     .then(watchlist => dispatch(receiveWatchlist(watchlist)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
-export const deleteWatchList = (watchlistId) => dispatch => {
+export const deleteWatchlist = (watchlistId) => dispatch => {
   return WatchlistApiUtil.deleteWatchlist(watchlistId)
     .then(() => dispatch(removeWatchlist(watchlistId)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
-export const createWatchListAsset = (asset) => dispatch => {
+export const createWatchlistAsset = (asset) => dispatch => {
   return WatchlistApiUtil.createWatchlistAsset(asset)
     .then(asset => dispatch(receiveWatchlistAsset(asset)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 }
-export const deleteWatchListAsset = (assetId) => dispatch => {
+export const deleteWatchlistAsset = (assetId) => dispatch => {
   return WatchlistApiUtil.deleteWatchlistAsset(assetId)
     .then(() => dispatch(removeWatchlistAsset(assetId)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))

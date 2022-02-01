@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
-import { fetchWatchList, updateWatchList, deleteWatchList, } from '../../actions/watchlist_actions'
+import { fetchWatchlist, updateWatchlist, deleteWatchlist, } from '../../actions/watchlist_actions';
+import { fetchAssetFull, fetchCryptoFull, fetchAssetDetails } from '../../actions/asset_actions';
 import WatchlistShow from './watchlist_show';
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,9 +19,9 @@ const mapDispatchToProps = dispatch => ({
   fetchAssetFull: (symbol) => dispatch(fetchAssetFull(symbol)),
   fetchCryptoFull: (symbol) => dispatch(fetchCryptoFull(symbol)),
   fetchAssetDetails: (symbol) => dispatch(fetchAssetDetails(symbol)),
-  fetchWatchList: (watchlistId) => dispatch(fetchWatchList(watchlistId)),
-  updateWatchList: (watchlist) => dispatch(updateWatchList(watchlist)),
-  deleteWatchList: (watchlistId) => dispatch(deleteWatchList(watchlistId))
+  fetchWatchlist: (watchlistId) => dispatch(fetchWatchlist(watchlistId)),
+  updateWatchlist: (watchlist) => dispatch(updateWatchlist(watchlist)),
+  deleteWatchlist: (watchlistId) => dispatch(deleteWatchlist(watchlistId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WatchlistShow);
