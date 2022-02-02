@@ -25,6 +25,7 @@ export default class WatchlistAssetModal extends React.Component {
     this.props.fetchWatchlists(this.props.user.id).then(()=> {
       const watchlistValues = Object.values(this.props.watchlists);
       watchlistValues.forEach(value => {
+        if (jQuery.isEmptyObject(value.assets)) this.state.listChecks[value.id] = false;
         Object.values(value.assets).forEach(asset => {
           if (asset.symbol === this.props.symbol) {
             this.state.listChecks[value.id] = true;
