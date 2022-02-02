@@ -216,3 +216,33 @@ border-bottom: 1px solid #FF5000;
   text-align: center;
   padding-bottom: 20px;
 }
+
+.transaction-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-list-button {
+  width: 200px;
+  height: 50px;
+  border-radius: 5px;
+  padding:15px 20px 20px 20px;
+  margin: 20px 0 0 50px;
+  text-align: center;
+  vertical-align: center;
+  border: none;
+  cursor: pointer;
+  // margin-bottom: 20px;
+}
+
+.add-list-button.greenText {
+  border: 1px solid #00C805;
+  background-color: transparent;
+  color: #00C805;
+}
+.add-list-button.redText {
+  border: 1px solid #FF5000;
+  background-color: transparent;
+  color: #FF5000;
+}

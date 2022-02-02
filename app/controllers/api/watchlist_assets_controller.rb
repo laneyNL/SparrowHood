@@ -1,7 +1,7 @@
 class Api::WatchlistAssetsController < ApplicationController
 
   def create
-    @asset = WatchlistAsset.new(asset_params)
+    @asset = WatchlistAsset.new(assets_params)
     if @asset.save
       render :show
     else  
@@ -20,6 +20,7 @@ class Api::WatchlistAssetsController < ApplicationController
 
   private
   def assets_params
-    params.require(:watchlist_assets).permit(:watchlist_id, :symbol, :icon)
+    p params
+    params.require(:asset).permit(:watchlist_id, :symbol)
   end
 end

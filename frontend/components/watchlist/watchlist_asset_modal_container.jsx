@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { fetchWatchlists, deleteWatchlistAsset, createWatchlistAsset, clearErrors } from '../../actions/watchlist_actions';
-import WatchlistAssetModule from './watchlist_asset_module';
+import WatchlistAssetModal from './watchlist_asset_modal';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -20,4 +20,4 @@ const mapDispatchToProps = dispatch => ({
   clearErrors: () => dispatch(clearErrors())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(WatchlistAssetModule);
+export default connect(mapStateToProps, mapDispatchToProps)(WatchlistAssetModal);

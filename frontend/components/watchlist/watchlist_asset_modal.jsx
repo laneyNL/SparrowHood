@@ -1,6 +1,6 @@
 import React from 'react';
 import MiniWatchlistItem from './mini_watchlist_item'
-export default class WatchlistAssetModule extends React.Component {
+export default class WatchlistAssetModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +22,8 @@ export default class WatchlistAssetModule extends React.Component {
           if (asset.symbol === this.props.symbol) {
             this.state.listChecks[value.id] = true;
             this.state.assetId[value.id] = asset.id;
+          } else {
+            this.state.listChecks[value.id] = false;
           }
         });
       })
@@ -36,6 +38,10 @@ export default class WatchlistAssetModule extends React.Component {
 
   toggleNewListInput() {
 
+  }
+
+  toggleModal() {
+    $('.watchlist-asset-modal-div').toggleClass('hidden');
   }
 
   renderNewListForm() {
@@ -63,7 +69,7 @@ export default class WatchlistAssetModule extends React.Component {
   }
 
   handleSaveChange() {
-    Object.keys(this.state.originalChecks).forEach(listId => {
+    Promise.all(Object.keys(this.state.originalChecks).map(listId => {
       if (this.state.originalChecks[listId] !== this.state.listChecks[listId]) {
         if (this.state.assetId[listId]) {
           this.props.deleteWatchlistAsset(this.state.assetId[listId], listId);
@@ -71,7 +77,8 @@ export default class WatchlistAssetModule extends React.Component {
           this.props.createWatchlistAsset({ watchlist_id: listId, symbol: this.props.symbol })
         }
       }
-    });
+    })).then(() => console.log('after trans'))
+    
   }
 
   renderMiniWatchlist() {
@@ -91,11 +98,11 @@ export default class WatchlistAssetModule extends React.Component {
     if (this.state.loading) return null;
     console.log('render', this.state)
     return (
-      <div className='watchlist-asset-module-div'>  
-        <div className='watchlist-asset-module'>
-          <div className='list-asset-module-title'>
+      <div className='watchlist-asset-modal-div '>
+        <div className='watchlist-asset-modal'>
+          <div className='list-asset-modal-title'>
             <div>Add {this.props.symbol} to Your Lists</div>
-            <div>&times;</div>
+            <div onClick={this.toggleModal} className='close-modal'>&times;</div>
           </div>
 
           <div className='all-watchlists'>
@@ -111,7 +118,7 @@ export default class WatchlistAssetModule extends React.Component {
           </div>
 
           {/* <div> */}
-          <button className={`asset-module-button ${this.props.color}`} disabled={!this.state.isChanged} onClick={this.handleSaveChange}>Save Changes</button>
+          <button className={`asset-modal-button ${this.props.color}`} disabled={!this.state.isChanged} onClick={this.handleSaveChange}>Save Changes</button>
           {/* </div> */}
 
         </div>

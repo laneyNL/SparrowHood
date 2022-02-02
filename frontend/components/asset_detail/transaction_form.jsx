@@ -172,7 +172,11 @@ export default class TransactionForm extends React.Component {
 
     return <div className={`transaction-form-buy-power changeColor ${this.state.textColor}`}>{available}</div>
   }
-  
+
+  toggleModal() {
+    $('.watchlist-asset-modal-div').toggleClass('hidden');
+  }
+
   render() {
     if (this.state.isSubmitted) return this.renderPurchase();
     const formEnd = (this.state.transaction_unit === 'shares') ? 
@@ -206,7 +210,7 @@ export default class TransactionForm extends React.Component {
           {this.renderAvailable()}
         </form>
 
-        <button>Add to Lists</button>
+        <button onClick={this.toggleModal} className={`add-list-button changeColor ${this.state.textColor}`}>Add to Lists</button>
       </aside>
     )
   }
