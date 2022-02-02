@@ -40,7 +40,7 @@ export default class Portfolio extends React.Component {
 
 
   render() {
-    if (this.state.loading || !this.props.transactions || !this.props.symbols) return <LoadingSpinner />;
+    if (this.state.loading) return <LoadingSpinner/>;
     return (
       <div className='portfolio-splash'>
         

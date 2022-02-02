@@ -17,7 +17,9 @@ const watchlistReducer = (state = {}, action) => {
       nextState[action.asset.watchlistId]['assets'][action.asset.id] = action.asset.symbol;
       return nextState;
     case DELETE_WATCHLIST_ASSET:  
-      delete nextState[action.asset.watchlistId]['assets'][action.assetId];
+    console.log('nex', nextState);
+    console.log('id', action)
+      delete nextState[action.watchlistId]['assets'][action.assetId];
       return nextState;
     default:
       return state;

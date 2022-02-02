@@ -52,6 +52,7 @@ ActiveRecord::Base.transaction do
   # asset1 = WatchlistAsset.create!(watchlist_id: 1, symbol: 'AMC');
   asset1 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'AMC');
   asset2 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'GME');
+  asset2 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'DIS');
   # asset3 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'DIS');
   # asset4 = WatchlistAsset.create!(watchlist_id: watch2.id, symbol: 'BTC');
   # asset5 = WatchlistAsset.create!(watchlist_id: watch2.id, symbol: 'AMC');

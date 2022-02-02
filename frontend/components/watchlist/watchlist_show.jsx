@@ -1,4 +1,5 @@
 import React from 'react';
+import { $CombinedState } from 'redux';
 import LoadingSpinner from '../loading_spinner';
 import PortfolioHeader from '../portfolio/portfolio_header';
 
@@ -7,24 +8,28 @@ export default class WatchlistShow extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      // stockSymbols: [],
-      // cryptoSymbols: [],
+      name: '',
       listSymbolArray: [],
-      listSymbolDetails: {}
+      listSymbolDetails: {},
+      id: this.props.match.params.watchlistId
     }
-    console.log(this.props)
+    this.deleteListAsset = this.deleteListAsset.bind(this);
+    this.sortTable = this.sortTable.bind(this);
+    this.sortArray = this.sortArray.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchWatchlist(this.props.match.params.watchlistId)
+    this.props.fetchWatchlist(this.state.id)
       .then(() => {
-        const watchlistAssets = Object.values(this.props.watchlist.assets);
-        Promise.all(watchlistAssets.map(asset => {
+        const watchlistAsset = this.props.watchlist.assets;
+        Promise.all(Object.values(watchlistAsset).map(asset => {
             this.props.fetchAssetDetails(asset.symbol);
             this.props.fetchAssetFull(asset.symbol);
         }))
           .then(() => {
-            watchlistAssets.forEach(asset => {
+            for (const id in watchlistAsset) {
+              const asset = watchlistAsset[id];
               const assetFullValues = Object.values(this.props.assets.full[asset.symbol]);
               const openPrice = parseFloat(assetFullValues[0]['1. open']);
               const closePrice = parseFloat(assetFullValues[0]['4. close']);
@@ -35,17 +40,97 @@ export default class WatchlistShow extends React.Component {
                 price: closePrice,
                 today: percentDiff,
                 marketCap: this.props.assets.details[asset.symbol]['MarketCapitalization'] || '-',
-                id: asset.id
+                id: id
               };
               this.state.listSymbolDetails[asset.symbol] = symbolObject;
-            })
-            this.setState({ listSymbolArray: watchlistAssets.map(asset => asset.symbol), loading: false})
+            }
+            this.setState({ listSymbolArray: Object.values(watchlistAsset).map(asset => asset.symbol), name: this.props.watchlist.name, loading: false})
+
+            $('#input-list-name').focusout((e) => {
+              this.handleSumbit(e);
+            });
           })
       })
+
+    
   }
 
-  deleteListAsset(e) {
-    this.props.deleteWatchList(this.state.listSymbolDetails['id'])
+  handleChange(e) {
+    const newName = e.currentTarget.value;
+    this.setState({ name: newName })
+  }
+
+  handleSumbit(e) {
+    e.preventDefault();
+    this.props.updateWatchlist(this.state);
+  }
+
+  deleteWatchlist(e) {
+    return this.props.deleteWatchlist(this.state.id)
+      .then(() => this.props.history.push('/'))
+  }
+
+  toggleConfirmDelete() {
+    return $('.confirm-delete-div').toggleClass('hidden');
+  }
+
+  deleteListAsset(symbol) {
+    return( e => {
+      this.props.deleteWatchlistAsset(this.state.listSymbolDetails[symbol]['id'], this.state.id)
+        .then(() => {
+          this.setState({ listSymbolArray: Object.values(this.props.watchlist.assets).map(asset => asset.symbol) })
+        })
+    })
+  }
+
+  sortTable(column) {
+    return (e) => {
+      let isReversed;
+      // const jqueryId = `#${column}`;
+      $(`.sort-caret`).html('');
+      if ($(`#${column}`).hasClass('sort')) {
+        $(`#${column}`).removeClass('sort');
+        $(`#${column}`).addClass('reverse');
+        $(`.sort-caret.${column}`).html('<i class="fas fa-angle-down"></i>');
+        isReversed = true;
+      } else if ($(`#${column}`).hasClass('reverse')) {
+        $('.watchlist-sort-columns').removeClass('reverse');
+        this.setState({ listSymbolArray: Object.values(this.props.watchlist.assets).map(asset => asset.symbol)})
+        return;
+      } else {
+        $('.watchlist-sort-columns').removeClass('reverse');
+        $('.watchlist-sort-columns').removeClass('sort');
+        $(`#${column}`).addClass('sort');
+        $(`.sort-caret.${column}`).html('<i class="fas fa-angle-up"></i>');
+        isReversed = false;
+      }
+      const sortedSymbolArray = this.sortArray(this.state.listSymbolArray.slice(), column, isReversed);
+      this.setState({ listSymbolArray: sortedSymbolArray});
+    }
+  }
+
+  sortCallback(item1, item2, column) {
+    if (column === 'name' || column === 'symbol') {
+      if (item1 > item2) return 1;
+      if (item1 < item2) return -1;
+      return 0;
+    } else {
+      if (parseFloat(item1) > parseFloat(item2)) return 1;
+      if (parseFloat(item1) < parseFloat(item2)) return -1;
+      return 0;
+    }
+  }
+
+  sortArray(symbolArray, column, isReversed) {
+    if (symbolArray.length <= 1) return symbolArray;
+    const symbolDetails = this.state.listSymbolDetails;
+    const sortCallback = this.sortCallback;
+    let pivot = symbolArray[0];
+    let left = this.sortArray(symbolArray.slice(1).filter(symbol => sortCallback(symbolDetails[pivot][column], symbolDetails[symbol][column], column) === 1), column, isReversed)
+    let right = this.sortArray(symbolArray.slice(1).filter(symbol => sortCallback(symbolDetails[pivot][column], symbolDetails[symbol][column], column) !== 1), column, isReversed)
+
+    if (isReversed) return right.concat([pivot], left);
+    return left.concat([pivot], right);
   }
 
   convertMarketCap(num) {
@@ -65,50 +150,86 @@ export default class WatchlistShow extends React.Component {
   renderTableRow(symbol) {
     const symbolListDetails = this.state.listSymbolDetails[symbol];
     const marketCap = this.convertMarketCap(symbolListDetails.marketCap);
-
+    const direction = symbolListDetails.today > 0 ? 'up' : 'down';
     return(
       <tr key={symbol}>
         <td>{symbolListDetails.name}</td>
         <td>{symbolListDetails.symbol}</td>
-        <td>{symbolListDetails.price}</td>
-        <td><div className='caret'></div>{`${symbolListDetails.today.toFixed(2)}%`}</td>
-        <td>{marketCap}</td>
-        <td>&times;</td>
+        <td>{`$${symbolListDetails.price}`}</td>
+        <td><span><span className={`caret ${direction}`}></span> {`${symbolListDetails.today.toFixed(2)}%`}</span></td>
+        <td >{marketCap}</td>
+        <td onClick={this.deleteListAsset(symbolListDetails.symbol)} className='delete-watchlist-asset'>&times;</td>
       </tr>
     )
   }
 
+  renderConfirmDelete() {
+    return (
+      <div className='confirm-delete-div hidden'>
+        <div className='confirm-delete'>
+          <div className='delete-question'>
+            <span>Are you sure you want to delete "{this.state.name}"?</span>
+            <span onClick={this.toggleConfirmDelete} className='close-delete'>&times;</span>
+          </div><br />
+          <div>If you delete this list and its {this.state.listSymbolArray.length} items, it'll be gone forever!</div><br />
+          <button className='delete-button' onClick={this.deleteWatchlist}>Delete {this.state.name}</button>
+        </div>
+      </div>
+    )
+  }
 
   render() {
-    if (this.state.loading) return <LoadingSpinner />
+    if (this.state.loading) return <LoadingSpinner clearErrors={this.props.clearErrors} errors={this.props.errors} history={this.props.history}/>
+
     return (
 
       <div className='watchlist-show'>
+        {this.renderConfirmDelete()}
         <PortfolioHeader logout={this.props.logout} />
-        <div>
+        <div className='watchlist-body'>
           <div className='watchlist-main'>
             <div className='watchlist-icon'>Icon Placeholder</div>
 
             <div className='watchlist-header'>
-              <div className='watchlist-table-name'>
-                <div>{this.props.watchlist.name}</div>
-                <div className='grayText'>{this.state.listSymbolArray.length} items</div>
+              <div className='watchlist-table-title'>
+                <input type="text" className='watchlist-table-name' value={this.state.name} onChange={this.handleChange} id='input-list-name' placeholder='Edit List Name'/>
+                <div className='watchlist-table-count'>{this.state.listSymbolArray.length} items</div>
               </div>
 
-              <div className='watchlist-search-options'>
-                Search Options
+              <div className='watchlist-sort-options'>
+                <span><i className="fas fa-filter filter-icon"></i></span> <span onClick={this.toggleConfirmDelete} ><i className="fas fa-ellipsis-h filter-icon"></i></span>
               </div>
             </div>
 
             <div className='watchlist-table'>
               <table>
                 <tbody>
-                  <tr>
-                    <th className='watchlist-name-col'>Name</th>
-                    <th>Symbol</th>
-                    <th>Price</th>
-                    <th> Today</th>
-                    <th>Market Cap</th>
+                  <tr className='table-header'>
+                    <th id='name' className='watchlist-name-col watchlist-sort-columns' onClick={this.sortTable('name')}>
+                      <span>Name</span>
+                      <span className={`sort-caret name`}></span>
+                    </th>
+
+                    <th id='symbol' className='watchlist-sort-columns' onClick={this.sortTable('symbol')}>
+                      <span>Symbol</span>
+                      <span className={`sort-caret symbol`}></span>
+                    </th>
+
+                    <th id='price' className='watchlist-sort-columns' onClick={this.sortTable('price')}>
+                      <span>Price</span>
+                      <span className={`sort-caret price`}></span>
+                    </th>
+
+                    <th id='today' className='watchlist-sort-columns' onClick={this.sortTable('today')}>
+                      <span>Today</span>
+                      <span className={`sort-caret today`}></span>
+                    </th>
+
+                    <th id='marketCap' className='watchlist-cap-col watchlist-sort-columns' onClick={this.sortTable('marketCap')}>
+                      <span>Market Cap</span>
+                      <span className={`sort-caret marketCap`}></span>
+                    </th>
+                    
                     <th></th>
                   </tr>
                   {this.state.listSymbolArray.map(symbol => this.renderTableRow(symbol))}
@@ -118,7 +239,11 @@ export default class WatchlistShow extends React.Component {
 
           </div>
           <aside className='watchlist-aside'>
+            <div className='watchlist-aside-title'><span>Lists</span><span>+</span></div>
+            <div className='all-list-names'>
 
+
+            </div>
           </aside>
         </div>
       </div>

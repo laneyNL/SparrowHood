@@ -10,6 +10,7 @@ const mapStateToProps = (state) => ({
   symbols: state.entities.transactions.symbols,
   assets: state.entities.assets,
   interval: state.entities.transactions.interval,
+  errors: state.entities.errors || []
 })
 
 const mapDispatchToProps = dispatch => ({

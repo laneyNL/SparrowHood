@@ -8,7 +8,11 @@ class Api::WatchlistsController < ApplicationController
 
   def show
     @watchlist = Watchlist.includes(:assets).find_by(id: params[:id])
-    render :show
+    if @watchlist 
+      render :show
+    else
+      render json: ['Watchlist does not exist'], status: 404
+    end
   end
 
   def create
@@ -22,7 +26,7 @@ class Api::WatchlistsController < ApplicationController
 
   def update
     @watchlist = Watchlist.includes(:assets).find_by(id: params[:id])
-    if @watchlist && @watchlist.user_id = current_user.id && @watchlist.update(watchlist_params)
+    if @watchlist && @watchlist.user_id = current_user.id && @watchlist.update({name: params[:watchlist][:name]})
       render :show
     else  
       render json: @watchlist.errors.full_messages, status: 404
