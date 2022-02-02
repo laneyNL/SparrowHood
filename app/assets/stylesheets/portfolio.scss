@@ -24,6 +24,12 @@
  margin-left: 50px;
  background-color: #1E2124;
  border-radius: 5px;
+ overflow: scroll;
+ overflow-x: hidden;
+}
+
+.asset-list::-webkit-scrollbar {
+  display: none;
 }
 
 .asset-list p {

@@ -20,7 +20,7 @@ export default class MiniWatchlistItem extends React.Component {
       <div className='mini-watchlist-item'>
         <div id='mini-icon'></div>
         <div className='mini-item-details'>
-          <div>{this.props.watchlist.name}</div>
+          <div className='mini-watchlist-name'>{this.props.watchlist.name}</div>
           <div className='mini-watchlist-itemLength'>{itemLength}</div>
         </div>
       </div>
