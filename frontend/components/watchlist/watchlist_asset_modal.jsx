@@ -5,16 +5,22 @@ export default class WatchlistAssetModal extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      // watchlistAssets: {},
       listChecks: {},
       originalChecks: {},
       isChanged: false,
-      assetId: {}
+      assetId: {},
+      icon: '&#128161',
+      errors: [],
+      user_id: this.props.user.id,
+      name: '',
     }
     this.handleCheckChange = this.handleCheckChange.bind(this);
     this.handleSaveChange = this.handleSaveChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleNewListSubmit = this.handleNewListSubmit.bind(this);
   }
   componentDidMount() {
+    $('#choose-icon').html(this.state.icon);
     this.state.assetId = {};
     this.props.fetchWatchlists(this.props.user.id).then(()=> {
       const watchlistValues = Object.values(this.props.watchlists);
@@ -38,16 +44,25 @@ export default class WatchlistAssetModal extends React.Component {
     $('.watchlist-asset-modal-div').toggleClass('hidden');
   }
   
-  handleNewForm() {
-
+  handleNameChange(e) {
+    e.preventDefault();
+    const name = e.currentTarget.value;
+    this.setState({name: name})
   }
 
-  toggleNewListInput() {
-
+  handleNewListSubmit(e) {
+    e.preventDefault();
+    this.props.createWatchlist(this.state).then((res) => {
+      console.log(res);
+    }, () => {
+      this.setState({ errors: this.props.errors})
+    })
   }
 
-  renderNewListForm() {
-
+  toggleNewListInput(e) {
+    e.preventDefault();
+    $('.create-new-list-div').toggleClass('hidden');
+    $('.create-new-list-form').toggleClass('hidden');
   }
 
   renderEmojis() {
@@ -100,9 +115,14 @@ export default class WatchlistAssetModal extends React.Component {
     })
   }
 
+  componentDidUpdate() {
+    $('#choose-icon').html(this.state.icon);
+  }
+
   render() {
     if (this.state.loading) return null;
     console.log('render', this.state)
+    let errors = (this.state.errors.length) ? <div><i className="fas fa-exclamation-circle"></i> {this.state.errors}</div> : '';
     return (
       <div className='watchlist-asset-modal-div '>
         <div className='watchlist-asset-modal'>
@@ -113,12 +133,29 @@ export default class WatchlistAssetModal extends React.Component {
 
           <div className='all-watchlists'>
 
-            <div className='mini-watchlist-item create-new-list-div'>
+            <div className='mini-watchlist-item create-new-list-div' onClick={this.toggleNewListInput}>
               <div id='plus-icon' className={this.props.color}>+</div>
               <div className='mini-item-details'>
                 <div>Create New List</div>
               </div>
             </div>
+
+            <form>
+              <div className='mini-watchlist-item create-new-list-form' >
+                <div className='new-list-inputs'>
+                  <div id='choose-icon' className={this.props.color}></div>
+                  <div className='mini-item-details'>
+                    <input type="text" placeholder="List Name" className={`${this.props.color} new-list-input`} value={this.state.name} onChange={this.handleNameChange}/>
+                  </div>
+                </div>
+                {errors}
+              
+                <div className='new-list-button-div'>
+                  <button className={`cancel-new-list-button ${this.props.color}`} onClick={this.toggleNewListInput}>Cancel</button>
+                  <button className={`create-new-list-button ${this.props.color}`} onClick={this.handleNewListSubmit}>Create List</button>
+                </div>
+              </div>
+            </form>
 
             {this.renderMiniWatchlist()}
           </div>

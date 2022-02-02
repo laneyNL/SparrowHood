@@ -37,11 +37,11 @@
 }
 
 
-.asset-modal-button.green {
+.asset-modal-button.green, .create-new-list-button.green {
   background-color: #00C805;
 }
 
-.asset-modal-button.red {
+.asset-modal-button.red, .create-new-list-button.red {
   background-color: #FF5000;
 }
 
@@ -68,10 +68,10 @@ input[type=checkbox] {
   cursor: pointer;
 }
 
-input[type=checkbox].green {
+input[type=checkbox].green, .new-list-input.green:focus {
   border: 1px solid #00C805;
 }
-input[type=checkbox].red {
+input[type=checkbox].red, .new-list-input.red:focus {
   border: 1px solid #FF5000;
 }
 
@@ -117,4 +117,69 @@ input[type=checkbox]:checked {
   cursor: pointer;
   background-color: rgb(64,73,78);
   border-radius: 5px;
+}
+
+#choose-icon {
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-list-input {
+  background-color: #30363A;
+  height: 50px;
+  width: 280px;
+  border: none;
+  border-radius: 5px;
+  padding-left: 10px;
+  color: white;
+}
+.new-list-inputs {
+  display: flex;
+}
+.create-new-list-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-list-button-div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancel-new-list-button, .create-new-list-button {
+  width: 100px;
+  height: 35px;
+  border-radius: 5px;
+  margin: 10px 5px;
+}
+
+.cancel-new-list-button.red {
+  border: 1px solid #FF5000;
+  background-color: transparent;
+  color: #FF5000;
+}
+.cancel-new-list-button.green {
+  border: 1px solid #00C805;
+  background-color: transparent;
+  color: #00C805;
+}
+.create-new-list-button {
+  color: #1E2124;
+}
+
+.cancel-new-list-button.red:hover {
+  background-color: rgba(206, 97, 46, 0.308);
+}
+.cancel-new-list-button.green:hover {
+  background-color: rgba(9, 197, 15, 0.2);
+}
+.create-new-list-button.red:hover {
+  background-color: #e97844;
+}
+.create-new-list-button.green:hover {
+  background-color: #88c58a;
 }
