@@ -2,8 +2,9 @@ import * as SearchApiUtil from '../util/search_api_util';
 
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH';
 
-const receiveSearch = (payload) => ({
+const receiveSearch = (keyword, payload) => ({
   type: RECEIVE_SEARCH,
+  keyword,
   payload
 })
 
@@ -13,9 +14,9 @@ export const fetchSearch = (keyword) => dispatch => {
   if (sessionStorage.getItem(`search-${keyword}`)) {
     return dispatch(receiveSearch(JSON.parse(sessionStorage.getItem(`search-${keyword}`))))
   }
-  return AssetApiUtil.fetchSearch(keyword)
+  return SearchApiUtil.fetchSearch(keyword)
     .then(payload => {
-      dispatch(receiveSearch(payload));
+      dispatch(receiveSearch(keyword, payload));
       if (payload !== apiExceeded) sessionStorage.setItem(`search-${keyword}`, JSON.stringify(payload));
     })
 }
