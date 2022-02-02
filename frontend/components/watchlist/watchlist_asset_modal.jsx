@@ -53,11 +53,13 @@ export default class WatchlistAssetModal extends React.Component {
 
   handleNewListSubmit(e) {
     e.preventDefault();
-    this.props.createWatchlist(this.state).then((res) => {
-      console.log(res);
-    }, () => {
-      this.setState({ errors: this.props.errors})
-    })
+    console.log('in submit')
+    this.props.createWatchlist(this.state)
+      .then((res) => {
+        this.props.history.push(`/watchlist/${res.watchlist.id}`);
+      }, () => {
+        this.setState({ errors: this.props.errors})
+      })
   }
 
   toggleNewListInput(e) {
@@ -127,44 +129,47 @@ export default class WatchlistAssetModal extends React.Component {
     return (
       <div className='watchlist-asset-modal-div '>
         <div className='watchlist-asset-modal'>
-          <div className='list-asset-modal-title'>
-            <div>Add {this.props.symbol} to Your Lists</div>
-            <div onClick={this.toggleModal} className='close-modal'>&times;</div>
-          </div>
-
-          <div className='all-watchlists'>
-
-            <div className='mini-watchlist-item create-new-list-div' onClick={this.toggleNewListInput}>
-              <div id='plus-icon' className={this.props.color}>+</div>
-              <div className='mini-item-details'>
-                <div>Create New List</div>
-              </div>
+          
+            <div className='list-asset-modal-title'>
+              <div>Add {this.props.symbol} to Your Lists</div>
+              <div onClick={this.toggleModal} className='close-modal'>&times;</div>
             </div>
 
-            <form>
-              <div className='mini-watchlist-item create-new-list-form' >
-                <div className='new-list-inputs'>
-                  <div id='choose-icon' className={this.props.color}></div>
-                  <div className='mini-item-details'>
-                    <input type="text" placeholder="List Name" className={`${this.props.color} new-list-input`} value={this.state.name} onChange={this.handleNameChange}/>
-                  </div>
-                </div>
-                {errors}
-              
-                <div className='new-list-button-div'>
-                  <button className={`cancel-new-list-button ${this.props.color}`} onClick={this.toggleNewListInput}>Cancel</button>
-                  <button className={`create-new-list-button ${this.props.color}`} onClick={this.handleNewListSubmit}>Create List</button>
+            <div className='all-watchlists'>
+
+              <div className='mini-watchlist-item create-new-list-div' onClick={this.toggleNewListInput}>
+                <div id='plus-icon' className={this.props.color}>+</div>
+                <div className='mini-item-details'>
+                  <div>Create New List</div>
                 </div>
               </div>
-            </form>
 
-            {this.renderMiniWatchlist()}
-          </div>
+              <form>
+                <div className='mini-watchlist-item create-new-list-form' >
+                  <div className='new-list-inputs'>
+                    <div id='choose-icon' className={this.props.color}></div>
+                    <div className='mini-item-details'>
+                      <input type="text" placeholder="List Name" className={`${this.props.color} new-list-input`} value={this.state.name} onChange={this.handleNameChange}/>
+                    </div>
+                  </div>
+                  {errors}
+                
+                  <div className='new-list-button-div'>
+                    <button className={`cancel-new-list-button ${this.props.color}`} onClick={this.toggleNewListInput}>Cancel</button>
+                    <button className={`create-new-list-button ${this.props.color}`} onClick={this.handleNewListSubmit}>Create List</button>
+                  </div>
+                </div>
+              </form>
+            <div className='mini-watchlist-div'>
 
-          {/* <div> */}
-          <button className={`asset-modal-button ${this.props.color}`} disabled={!this.state.isChanged} onClick={this.handleSaveChange}>Save Changes</button>
-          {/* </div> */}
+              {this.renderMiniWatchlist()}
+            </div>
+            </div>
 
+            {/* <div> */}
+            <button className={`asset-modal-button ${this.props.color}`} disabled={!this.state.isChanged} onClick={this.handleSaveChange}>Save Changes</button>
+            {/* </div> */}
+          
         </div>
       </div>
     )

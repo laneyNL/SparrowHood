@@ -50,7 +50,8 @@
 }
 
 .all-watchlists {
-  max-height: 350px;
+  max-height: 300px;
+  overflow: scroll;
 }
 
 .mini-watchlist-input {
@@ -131,7 +132,7 @@ input[type=checkbox]:checked {
 .new-list-input {
   background-color: #30363A;
   height: 50px;
-  width: 280px;
+  width: 250px;
   border: none;
   border-radius: 5px;
   padding-left: 10px;
