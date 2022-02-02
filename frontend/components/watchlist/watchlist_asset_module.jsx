@@ -12,7 +12,13 @@ export default class WatchlistAssetModule extends React.Component {
       this.setState({loading: false })
     })
   }
+  renderEmojis() {
+    return (
+      <div>
 
+      </div>
+    )
+  }
 
   render() {
     if (this.state.loading) return null;
@@ -28,13 +34,6 @@ export default class WatchlistAssetModule extends React.Component {
       )
     })
 
-    renderEmojis() {
-      return (
-        <div>
-          
-        </div>
-      )
-    }
     return (
       <div className='watchlist-asset-module-div'>  
         <div className='watchlist-asset-module'>
