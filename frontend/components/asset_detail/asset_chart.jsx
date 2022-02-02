@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 const AssetChart = ({ name, assets, symbol }) => {
   
   if (jQuery.isEmptyObject(assets) || !assets['interval'] || !assets['full']) return null;
-  
+
   const [days, setDays] = useState(1);
   const [chartInterval, setChartInterval] = useState('Today');
+
   const period = (days === 1) ? 'interval' : 'full';
   const assetObject = assets[period][symbol];
 
@@ -13,20 +14,27 @@ const AssetChart = ({ name, assets, symbol }) => {
   const values = Object.values(assetObject);
   let labels = assetKeys.reverse();
   let data = values.map(value => value["4. close"]).reverse();
-
   if (days > 1) {
     let start = assetKeys.length - 1 - days;
     labels = assetKeys.slice(start, assetKeys.length);
     data = data.slice(start, assetKeys.length);
   }
   
-  let currentValue = parseFloat(data[data.length - 1]);
-  const initial = parseFloat(data[0]);
+  const [currentValue, setCurrentValue] = useState(parseFloat(data[data.length - 1]));
+  const [initial, setInitial] = useState(parseFloat(data[0]));
+  // const initial = parseFloat(data[data.length - 1]);
+  const [difference, setDifference] = useState(currentValue - initial);
+  const [percDiff, setPercDiff] = useState(Math.abs((difference / initial) * 100).toFixed(2));
 
-  const difference = currentValue - initial;
-  const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
-  let sign = ''
-  if (Math.floor(percDiff) !== 0) sign = (difference > 0 ? '+' : '-');
+  // let currentValue = parseFloat(data[data.length - 1]);
+  
+
+  // const difference = currentValue - initial;
+  // const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
+  // let sign = ''
+  const [sign, setSign] = useState((difference > 0) ? '+' : '-');
+  // if (Math.floor(percDiff) !== 0) ;
+  // if (Math.floor(percDiff) !== 0) sign = (difference > 0 ? '+' : '-');
 
   const chartData = {
     labels: labels,
@@ -80,13 +88,14 @@ const AssetChart = ({ name, assets, symbol }) => {
     },
     onHover: (e, legendItem, legend) => {
       if (legendItem[0]) {
-        currentValue = parseFloat(data[legendItem[0].index]);
-        const difference = (currentValue) - initial;
-        const percDiff = Math.abs((difference / initial) * 100).toFixed(2).toLocaleString("en-US");
-        let sign = '';
-        if (Math.floor(difference) !== 0) sign = (difference > 0 ? '+' : '-');
-        document.getElementById('currentValue').innerHTML = `$${currentValue.toFixed(2).toLocaleString("en-US")}`;
-        document.getElementById('difference-value').innerHTML = `${sign}$${Math.abs(difference).toLocaleString("en-US")} (${sign}${percDiff.toLocaleString("en-US")}%)`
+        const currHoverValue = parseFloat(data[legendItem[0].index]);
+        const hoverDiff = (currHoverValue) - initial;
+        const hoverPercDiff = Math.abs((hoverDiff / initial) * 100).toFixed(2).toLocaleString("en-US");
+        let hoverSign = '';
+        if (Math.floor(hoverDiff) !== 0) hoverSign = (hoverDiff > 0 ? '+' : '-');
+
+        document.getElementById('currentValue').innerHTML = `$${currHoverValue.toFixed(2).toLocaleString("en-US")}`;
+        document.getElementById('difference-value').innerHTML = `${hoverSign}$${Math.abs(hoverDiff).toLocaleString("en-US")} (${hoverSign}${hoverPercDiff.toLocaleString("en-US")}%)`
       }
     },
     hover: {
@@ -141,6 +150,15 @@ const AssetChart = ({ name, assets, symbol }) => {
       plugins: [tooltipLine]
     };
 
+    setCurrentValue(parseFloat(data[data.length - 1]));
+    setInitial(parseFloat(data[0]));
+    setDifference(currentValue - initial);
+    setPercDiff(Math.abs((difference / initial) * 100).toFixed(2));
+    setSign((difference > 0) ? '+' : '-');
+
+    $('#currentValue').html(`$${formatDollarString(currentValue)}`)
+    $('#difference-value').html(`${sign}${formatDollarString(Math.abs(difference))} (${sign}${ percDiff } %)`)
+
     $('#assetChart').remove();
     $(`#assetChartDiv`).append("<canvas id='assetChart' width={600} height={200}/>");
     const canvas = document.getElementById('assetChart');
@@ -160,6 +178,7 @@ const AssetChart = ({ name, assets, symbol }) => {
       $('.chart-filter').removeClass('active-filter');
       e.currentTarget.classList.add('active-filter');
       setChartInterval(interval);
+
       switch (interval) {
         case 'Today':
           setDays(1);
@@ -171,15 +190,17 @@ const AssetChart = ({ name, assets, symbol }) => {
           setDays(30);
           break;
         case 'Past 3 Months':
-          setDays(90);
+          setDays(64);
           break;
         case 'Past Year':
-          setDays(365);
+          setDays(250);
           break;
         case 'Past 5 Years':
-          setDays(1825);
+          setDays(1300);
           break;
       }
+
+      
 
     }
   }
@@ -189,11 +210,11 @@ const AssetChart = ({ name, assets, symbol }) => {
   }
 
   let colorClass = sign === '+' ? 'greenText' : 'redText';
-  // changes color for transaction form
+  // changes color for transaction form and modal
   $('.changeColor').removeClass('greenText');
   $('.changeColor').removeClass('redText');
   $('.changeColor').addClass(colorClass);
-
+  
   return (
     <div className='chart'>
       <div className='chart-name'>{name}</div>

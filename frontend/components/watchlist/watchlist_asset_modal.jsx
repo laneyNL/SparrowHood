@@ -98,12 +98,9 @@ export default class WatchlistAssetModal extends React.Component {
 
   render() {
     if (this.state.loading) return null;
-    console.log('color', this.state.color)
-    console.log('sign', this.props.sign)
     
-
     return (
-      <div className='watchlist-asset-modal-div '>
+      <div className='watchlist-asset-modal-div hidden'>
         <div className='watchlist-asset-modal'>
           
             <div className='list-asset-modal-title'>
