@@ -41,9 +41,24 @@
 
 .mini-watchlist-input {
   display: flex;
+  align-items: center;
   cursor: pointer;
 }
 
 .create-new-list-div {
   padding-left: 26px;
+}
+
+#plus-icon {
+  font-size: 30px;
+  width: 50px;
+  height: 60px;
+  background-color:rgba(0,200,5,0.2);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  color: #00C805;
+  padding: 0;
 }

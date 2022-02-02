@@ -12,6 +12,19 @@ export default class WatchlistAssetModule extends React.Component {
       this.setState({loading: false })
     })
   }
+  
+  handleNewForm() {
+
+  }
+
+  toggleNewListInput() {
+
+  }
+
+  renderNewListForm() {
+
+  }
+
   renderEmojis() {
     return (
       <div>
@@ -20,20 +33,21 @@ export default class WatchlistAssetModule extends React.Component {
     )
   }
 
-  render() {
-    if (this.state.loading) return null;
-    const miniWatchList = Object.values(this.props.watchlists).map(watchlist => {
-
-      return(
+  renderMiniWatchlist() {
+    return Object.values(this.props.watchlists).map(watchlist => {
+      return (
         <div key={watchlist.id}>
           <label className='mini-watchlist-input'>
             <input type="checkbox" id={`${watchlist.id}`} name="watchlists" value={watchlist.id} />
-            <MiniWatchlistItem watchlist={watchlist}/>
+            <MiniWatchlistItem watchlist={watchlist} />
           </label>
         </div>
       )
     })
+  }
 
+  render() {
+    if (this.state.loading) return null;
     return (
       <div className='watchlist-asset-module-div'>  
         <div className='watchlist-asset-module'>
@@ -45,13 +59,13 @@ export default class WatchlistAssetModule extends React.Component {
           <div className='all-watchlists'>
 
             <div className='mini-watchlist-item create-new-list-div'>
-              <div>Icon &#128516; &#66; &#67;</div>
-              <div>
+              <div id='plus-icon'>+</div>
+              <div className='mini-item-details'>
                 <div>Create New List</div>
               </div>
             </div>
 
-            {miniWatchList}
+            {this.renderMiniWatchlist()}
           </div>
 
           {/* <div> */}

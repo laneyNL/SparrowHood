@@ -1,6 +1,7 @@
 .mini-watchlist-item {
   display: flex;
   margin: 5px 0;
+  cursor: pointer;
 }
 .mini-watchlist-item div {
   padding-left: 10px;
@@ -27,4 +28,19 @@ input[type=checkbox]:checked {
   background-color: #00C805;
   text-align: center;
   line-height: 15px;
+}
+.mini-item-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#mini-icon {
+  font-size: 30px;
+  width: 50px;
+  height: 60px;
+  background-color: #30363A;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
 }
