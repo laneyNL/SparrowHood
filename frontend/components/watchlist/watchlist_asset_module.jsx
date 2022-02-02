@@ -5,19 +5,25 @@ export default class WatchlistAssetModule extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      watchlistAssets: {},
+      // watchlistAssets: {},
       listChecks: {},
       originalChecks: {},
       isChanged: false,
+      assetId: {}
     }
     this.handleCheckChange = this.handleCheckChange.bind(this);
+    this.handleSaveChange = this.handleSaveChange.bind(this);
   }
   componentDidMount() {
     this.props.fetchWatchlists(this.props.user.id).then(()=> {
       const watchlistValues = Object.values(this.props.watchlists);
       watchlistValues.forEach(value => {
-        const assetSymbols = Object.values(value.assets).map(asset => asset.symbol);
-        this.state.listChecks[value.id] = assetSymbols.includes(this.props.symbol);
+        Object.values(value.assets).forEach(asset => {
+          if (asset.symbol === this.props.symbol) {
+            this.state.listChecks[value.id] = true;
+            this.state.assetId[value.id] = asset.id;
+          }
+        });
       })
   
       this.setState({loading: false, originalChecks: this.state.listChecks })
@@ -53,9 +59,20 @@ export default class WatchlistAssetModule extends React.Component {
         isChanged = true;
       }
     })
-    this.setState({ listChecks: newListCheck, isChanged: isChanged})
+    this.setState({ listChecks: newListCheck, isChanged: isChanged })
   }
 
+  handleSaveChange() {
+    Object.keys(this.state.originalChecks).forEach(listId => {
+      if (this.state.originalChecks[listId] !== this.state.listChecks[listId]) {
+        if (this.state.assetId[listId]) {
+          this.props.deleteWatchlistAsset(this.state.assetId[listId], listId);
+        } else {
+          this.props.createWatchlistAsset({ watchlist_id: listId, symbol: this.props.symbol })
+        }
+      }
+    });
+  }
 
   renderMiniWatchlist() {
     return Object.values(this.props.watchlists).map(watchlist => {
@@ -94,7 +111,7 @@ export default class WatchlistAssetModule extends React.Component {
           </div>
 
           {/* <div> */}
-          <button className={`asset-module-button ${this.props.color}`}disabled={!this.state.isChanged}>Save Changes</button>
+          <button className={`asset-module-button ${this.props.color}`} disabled={!this.state.isChanged} onClick={this.handleSaveChange}>Save Changes</button>
           {/* </div> */}
 
         </div>
