@@ -15,6 +15,7 @@ export default class WatchlistAssetModal extends React.Component {
     this.handleSaveChange = this.handleSaveChange.bind(this);
   }
   componentDidMount() {
+    this.state.assetId = {};
     this.props.fetchWatchlists(this.props.user.id).then(()=> {
       const watchlistValues = Object.values(this.props.watchlists);
       watchlistValues.forEach(value => {
@@ -28,8 +29,13 @@ export default class WatchlistAssetModal extends React.Component {
         });
       })
   
-      this.setState({loading: false, originalChecks: this.state.listChecks })
+      this.setState({loading: false, originalChecks: this.state.listChecks, isChanged: false })
     })
+  }
+  
+  
+  toggleModal() {
+    $('.watchlist-asset-modal-div').toggleClass('hidden');
   }
   
   handleNewForm() {
@@ -38,10 +44,6 @@ export default class WatchlistAssetModal extends React.Component {
 
   toggleNewListInput() {
 
-  }
-
-  toggleModal() {
-    $('.watchlist-asset-modal-div').toggleClass('hidden');
   }
 
   renderNewListForm() {
@@ -72,12 +74,16 @@ export default class WatchlistAssetModal extends React.Component {
     Promise.all(Object.keys(this.state.originalChecks).map(listId => {
       if (this.state.originalChecks[listId] !== this.state.listChecks[listId]) {
         if (this.state.assetId[listId]) {
-          this.props.deleteWatchlistAsset(this.state.assetId[listId], listId);
+          return this.props.deleteWatchlistAsset(this.state.assetId[listId], listId);
         } else {
-          this.props.createWatchlistAsset({ watchlist_id: listId, symbol: this.props.symbol })
+          return this.props.createWatchlistAsset({ watchlist_id: listId, symbol: this.props.symbol })
         }
       }
-    })).then(() => console.log('after trans'))
+    }))
+      .then(() => {
+        this.toggleModal();
+        this.componentDidMount();
+      })
     
   }
 
