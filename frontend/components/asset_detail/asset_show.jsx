@@ -55,7 +55,7 @@ export default class AssetShow extends React.Component {
     return (
 
       <div className='asset-show'>
-        <WatchlistAssetModuleContainer symbol={this.state.symbol}/>
+        <WatchlistAssetModuleContainer symbol={this.state.symbol} sign='sign'/>
         <PortfolioHeader logout={this.props.logout} />
 
         <div className='asset-show-body'>

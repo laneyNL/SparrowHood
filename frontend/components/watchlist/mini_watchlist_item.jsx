@@ -13,7 +13,6 @@ export default class MiniWatchlistItem extends React.Component {
   }
 
   render() {
-    console.log(this.props.watchlist)
     const assetLength = Object.keys(this.props.watchlist.assets).length;
     const itemLength = assetLength > 9 ? `${assetLength} itemLength` : `${assetLength} item`;
     const icon =128161

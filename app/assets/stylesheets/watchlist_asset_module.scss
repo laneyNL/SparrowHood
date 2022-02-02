@@ -35,6 +35,19 @@
   margin: 0 auto;
 }
 
+
+.asset-module-button.green {
+  background-color: #00C805;
+}
+
+.asset-module-button.red {
+  background-color: #FF5000;
+}
+
+.asset-module-button:disabled {
+  background-color: gray;
+}
+
 .all-watchlists {
   max-height: 350px;
 }
@@ -45,6 +58,34 @@
   cursor: pointer;
 }
 
+input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+input[type=checkbox].green {
+  border: 1px solid #00C805;
+}
+input[type=checkbox].red {
+  border: 1px solid #FF5000;
+}
+
+input[type=checkbox]:checked.green {
+  background-color: #00C805;
+}
+input[type=checkbox]:checked.red {
+  background-color: #FF5000;
+}
+
+input[type=checkbox]:checked {
+  text-align: center;
+  line-height: 15px;
+}
+
 .create-new-list-div {
   padding-left: 26px;
 }
@@ -53,12 +94,20 @@
   font-size: 30px;
   width: 50px;
   height: 60px;
-  background-color:rgba(0,200,5,0.2);
+  
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 10px;
-  color: #00C805;
   padding: 0;
+}
+
+#plus-icon.green {
+  background-color:rgba(0,200,5,0.2);
+  color: #00C805;
+}
+#plus-icon.red {
+  background-color:rgba(255,80,0,0.2);
+  color: #FF5000;
 }

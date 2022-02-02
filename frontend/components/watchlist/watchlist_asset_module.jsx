@@ -4,12 +4,23 @@ export default class WatchlistAssetModule extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true
+      loading: true,
+      watchlistAssets: {},
+      listChecks: {},
+      originalChecks: {},
+      isChanged: false,
     }
+    this.handleCheckChange = this.handleCheckChange.bind(this);
   }
   componentDidMount() {
     this.props.fetchWatchlists(this.props.user.id).then(()=> {
-      this.setState({loading: false })
+      const watchlistValues = Object.values(this.props.watchlists);
+      watchlistValues.forEach(value => {
+        const assetSymbols = Object.values(value.assets).map(asset => asset.symbol);
+        this.state.listChecks[value.id] = assetSymbols.includes(this.props.symbol);
+      })
+  
+      this.setState({loading: false, originalChecks: this.state.listChecks })
     })
   }
   
@@ -33,12 +44,25 @@ export default class WatchlistAssetModule extends React.Component {
     )
   }
 
+  handleCheckChange(e) {
+    let newListCheck = Object.assign({}, this.state.listChecks);
+    newListCheck[e.target.value] = !this.state.listChecks[e.target.value]
+    let isChanged = false;
+    Object.keys(this.state.originalChecks).forEach(listId => {
+      if (this.state.originalChecks[listId] !== newListCheck[listId]) {
+        isChanged = true;
+      }
+    })
+    this.setState({ listChecks: newListCheck, isChanged: isChanged})
+  }
+
+
   renderMiniWatchlist() {
     return Object.values(this.props.watchlists).map(watchlist => {
       return (
         <div key={watchlist.id}>
           <label className='mini-watchlist-input'>
-            <input type="checkbox" id={`${watchlist.id}`} name="watchlists" value={watchlist.id} />
+            <input type="checkbox" className={this.props.color}id={`${watchlist.id}`} name="watchlists" value={watchlist.id} defaultChecked={this.state.listChecks[watchlist.id]} onChange={this.handleCheckChange}/>
             <MiniWatchlistItem watchlist={watchlist} />
           </label>
         </div>
@@ -48,6 +72,7 @@ export default class WatchlistAssetModule extends React.Component {
 
   render() {
     if (this.state.loading) return null;
+    console.log('render', this.state)
     return (
       <div className='watchlist-asset-module-div'>  
         <div className='watchlist-asset-module'>
@@ -59,7 +84,7 @@ export default class WatchlistAssetModule extends React.Component {
           <div className='all-watchlists'>
 
             <div className='mini-watchlist-item create-new-list-div'>
-              <div id='plus-icon'>+</div>
+              <div id='plus-icon' className={this.props.color}>+</div>
               <div className='mini-item-details'>
                 <div>Create New List</div>
               </div>
@@ -69,7 +94,7 @@ export default class WatchlistAssetModule extends React.Component {
           </div>
 
           {/* <div> */}
-            <button className='asset-module-button'>Save Changes</button>
+          <button className={`asset-module-button ${this.props.color}`}disabled={!this.state.isChanged}>Save Changes</button>
           {/* </div> */}
 
         </div>

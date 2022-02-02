@@ -13,22 +13,6 @@
   font-size: 13px;
 }
 
-
-input[type=checkbox] {
-  width: 20px;
-  height: 20px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 1px solid #00C805;
-  cursor: pointer;
-}
-
-input[type=checkbox]:checked {
-  background-color: #00C805;
-  text-align: center;
-  line-height: 15px;
-}
 .mini-item-details {
   display: flex;
   flex-direction: column;
