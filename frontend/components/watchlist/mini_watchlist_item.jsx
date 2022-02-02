@@ -6,10 +6,10 @@ export default class MiniWatchlistItem extends React.Component {
 
   }
   componentDidMount() {
-    $('#mini-icon').html(this.props.watchlist.icon)
+    $(`#mini-icon-${this.props.watchlist.id}`).html(this.props.watchlist.icon)
   }
   componentDidUpdate() {
-    $('#mini-icon').html(this.props.watchlist.icon)
+    $(`#mini-icon-${this.props.watchlist.id}`).html(this.props.watchlist.icon)
   }
 
   render() {
@@ -18,7 +18,7 @@ export default class MiniWatchlistItem extends React.Component {
     const icon =128161
     return (
       <div className='mini-watchlist-item'>
-        <div id='mini-icon'></div>
+        <div className='mini-icon' id={`mini-icon-${this.props.watchlist.id}`}></div>
         <div className='mini-item-details'>
           <div className='mini-watchlist-name'>{this.props.watchlist.name}</div>
           <div className='mini-watchlist-itemLength'>{itemLength}</div>

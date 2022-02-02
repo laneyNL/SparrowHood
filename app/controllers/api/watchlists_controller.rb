@@ -35,8 +35,8 @@ class Api::WatchlistsController < ApplicationController
 
   def destroy
     @watchlist = Watchlist.find_by(id: params[:id])
-    if @watchlist.user_id = current_user.id && @watchlist.destroy
-      render :show
+    if @watchlist.user_id == current_user.id && @watchlist.destroy
+      render json: ['Watchlist deleted'], status: 200
     else  
       render json: @watchlist.errors.full_messages, status: 404
     end

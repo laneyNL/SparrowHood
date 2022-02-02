@@ -55,8 +55,8 @@ export default class WatchlistAssetModal extends React.Component {
     e.preventDefault();
     console.log('in submit')
     this.props.createWatchlist(this.state)
-      .then((res) => {
-        this.props.history.push(`/watchlist/${res.watchlist.id}`);
+      .then(() => {
+        this.componentDidMount()
       }, () => {
         this.setState({ errors: this.props.errors})
       })

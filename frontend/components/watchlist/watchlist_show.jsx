@@ -17,6 +17,7 @@ export default class WatchlistShow extends React.Component {
     this.sortTable = this.sortTable.bind(this);
     this.sortArray = this.sortArray.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.deleteWatchlist = this.deleteWatchlist.bind(this);
   }
 
   componentDidMount() {

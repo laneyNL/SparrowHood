@@ -15,7 +15,8 @@ class Watchlist < ApplicationRecord
   belongs_to :user
 
   has_many :assets,
-  class_name: "WatchlistAsset"
+  class_name: "WatchlistAsset",
+  dependent: :destroy
 
 
 end

@@ -18,7 +18,6 @@ export default class Portfolio extends React.Component {
   }
 
   componentDidMount() {
-
     this.props.fetchTransactions(this.props.user.id)
       .then( () => {
         this.props.fetchWatchlists(this.props.user.id)
@@ -34,7 +33,6 @@ export default class Portfolio extends React.Component {
               .then(() => this.setState({ loading: false }));
           })
       })
-      
   }
 
   clickBuyPower(e) {
