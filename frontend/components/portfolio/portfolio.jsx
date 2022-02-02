@@ -53,7 +53,7 @@ export default class Portfolio extends React.Component {
     return (
       <div className='portfolio-splash'>
         
-        <AddFundsForm addFunds={this.props.addFunds} user={this.props.user} />
+        <AddFundsForm addFunds={this.props.addFunds} user={this.props.user} fetchTransactions={this.props.fetchTransactions} user={this.props.user}/>
         <PortfolioHeader logout={this.props.logout}/>
 
         <div className='portfolio'>

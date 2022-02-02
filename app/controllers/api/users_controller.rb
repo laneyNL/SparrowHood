@@ -24,6 +24,8 @@ class Api::UsersController < ApplicationController
     @user = current_user
     @user.buying_power += params[:amount].to_i
     if @user.save
+      last_transaction = PortfolioTransaction.where(owner_id: params[:id]).last
+      last_transaction.update({ current_total: last_transaction.current_total + params[:amount].to_i })
       render :show
     else
       render json: @user.errors.full_messages, status: 404

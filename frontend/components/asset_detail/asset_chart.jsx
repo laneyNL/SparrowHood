@@ -22,19 +22,10 @@ const AssetChart = ({ name, assets, symbol }) => {
   
   const [currentValue, setCurrentValue] = useState(parseFloat(data[data.length - 1]));
   const [initial, setInitial] = useState(parseFloat(data[0]));
-  // const initial = parseFloat(data[data.length - 1]);
   const [difference, setDifference] = useState(currentValue - initial);
   const [percDiff, setPercDiff] = useState(Math.abs((difference / initial) * 100).toFixed(2));
-
-  // let currentValue = parseFloat(data[data.length - 1]);
-  
-
-  // const difference = currentValue - initial;
-  // const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
-  // let sign = ''
   const [sign, setSign] = useState((difference > 0) ? '+' : '-');
-  // if (Math.floor(percDiff) !== 0) ;
-  // if (Math.floor(percDiff) !== 0) sign = (difference > 0 ? '+' : '-');
+
 
   const chartData = {
     labels: labels,

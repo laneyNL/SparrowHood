@@ -24,7 +24,12 @@ export default class AddFundsForm extends React.Component {
     numValue = numValue.split(',').join('');
     numValue = parseInt(numValue);
 
-    this.props.addFunds(this.props.user.id, numValue).then(() => document.querySelector('.funds-modal').classList.toggle('hidden'), (error) => {
+    this.props.addFunds(this.props.user.id, numValue)
+      .then(() => {
+        this.props.fetchTransactions(this.props.user.id)
+        document.querySelector('.funds-modal').classList.toggle('hidden')
+      }, 
+      (error) => {
       $('#add-amount').append(`<div>{error.responseJSON.map(err => <div>err</div>)}</div>`)
     });
     ;
