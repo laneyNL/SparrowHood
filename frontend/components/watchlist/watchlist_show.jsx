@@ -1,7 +1,8 @@
 import React from 'react';
-import { $CombinedState } from 'redux';
+import { Link } from 'react-router-dom';
 import LoadingSpinner from '../loading_spinner';
 import PortfolioHeader from '../portfolio/portfolio_header';
+import MiniWatchlistItem from './mini_watchlist_item';
 
 export default class WatchlistShow extends React.Component {
   constructor(props) {
@@ -11,7 +12,11 @@ export default class WatchlistShow extends React.Component {
       name: '',
       listSymbolArray: [],
       listSymbolDetails: {},
-      id: this.props.match.params.watchlistId
+      id: '',
+      icon: '&#128161',
+      errors: [],
+      user_id: this.props.user.id,
+      name: '',
     }
     this.deleteListAsset = this.deleteListAsset.bind(this);
     this.sortTable = this.sortTable.bind(this);
@@ -21,7 +26,7 @@ export default class WatchlistShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchWatchlist(this.state.id)
+    this.props.fetchWatchlists(this.props.user.id)
       .then(() => {
         const watchlistAsset = this.props.watchlist.assets;
         Promise.all(Object.values(watchlistAsset).map(asset => {
@@ -45,7 +50,7 @@ export default class WatchlistShow extends React.Component {
               };
               this.state.listSymbolDetails[asset.symbol] = symbolObject;
             }
-            this.setState({ listSymbolArray: Object.values(watchlistAsset).map(asset => asset.symbol), name: this.props.watchlist.name, loading: false})
+            this.setState({ listSymbolArray: Object.values(watchlistAsset).map(asset => asset.symbol), name: this.props.watchlist.name, id: this.props.match.params.watchlistId, loading: false})
 
             $('#input-list-name').focusout((e) => {
               this.handleSumbit(e);
@@ -148,6 +153,13 @@ export default class WatchlistShow extends React.Component {
     return `${(marketCap/divisor).toFixed(2)}${endUnit}`
   }
 
+  componentDidUpdate(prevProps) {
+    $(`#watchlist-icon-${this.state.id}`).html(this.props.watchlist.icon);
+    if (prevProps.match.params.watchlistId !== this.props.match.params.watchlistId) {
+      this.componentDidMount();
+    }
+  }
+
   renderTableRow(symbol) {
     const symbolListDetails = this.state.listSymbolDetails[symbol];
     const marketCap = this.convertMarketCap(symbolListDetails.marketCap);
@@ -182,6 +194,11 @@ export default class WatchlistShow extends React.Component {
   render() {
     if (this.state.loading) return <LoadingSpinner clearErrors={this.props.clearErrors} errors={this.props.errors} history={this.props.history}/>
 
+    const emptyTable = (this.state.listSymbolArray.length > 0) ?  '' : 
+      <div className='empty-table'>
+        <div className='empty-table-title'>Feels a little empty in here...</div>
+        <div className='empty-table-text'>Search for companies to add and stay up to date.</div>
+      </div>;
     return (
 
       <div className='watchlist-show'>
@@ -189,7 +206,7 @@ export default class WatchlistShow extends React.Component {
         <PortfolioHeader logout={this.props.logout} />
         <div className='watchlist-body'>
           <div className='watchlist-main'>
-            <div className='watchlist-icon'>Icon Placeholder</div>
+            <div className='watchlist-icon' id={`watchlist-icon-${this.state.id}`}></div>
 
             <div className='watchlist-header'>
               <div className='watchlist-table-title'>
@@ -198,7 +215,8 @@ export default class WatchlistShow extends React.Component {
               </div>
 
               <div className='watchlist-sort-options'>
-                <span><i className="fas fa-filter filter-icon"></i></span> <span onClick={this.toggleConfirmDelete} ><i className="fas fa-ellipsis-h filter-icon"></i></span>
+                {/* <span><i className="fas fa-filter filter-icon"></i></span>  */}
+                <span onClick={this.toggleConfirmDelete} ><i className="fas fa-ellipsis-h filter-icon"></i></span>
               </div>
             </div>
 
@@ -237,13 +255,34 @@ export default class WatchlistShow extends React.Component {
                 </tbody>
               </table>
             </div>
-
+            {emptyTable}
           </div>
           <aside className='watchlist-aside'>
             <div className='watchlist-aside-title'><span>Lists</span><span>+</span></div>
             <div className='all-list-names'>
 
+              {/* <form>
+                <div className='mini-watchlist-item create-new-list-form' >
+                  <div className='new-list-inputs'>
+                    <div id='choose-icon' className='green'></div>
+                    <div className='mini-item-details'>
+                      <input type="text" placeholder="List Name" className={`$'green' new-list-input`} value={this.state.name} onChange={this.handleNameChange} />
+                    </div>
+                  </div>
+                  {errors}
 
+                  <div className='new-list-button-div'>
+                    <button className={`cancel-new-list-button ${this.props.color}`} onClick={this.toggleNewListInput}>Cancel</button>
+                    <button className={`create-new-list-button ${this.props.color}`} onClick={this.handleNewListSubmit}>Create List</button>
+                  </div>
+                </div>
+              </form> */}
+
+              {
+                Object.values(this.props.watchlists).map((watchlist) =>
+                  <Link to={`/watchlist/${watchlist.id}`} key={watchlist.id}><MiniWatchlistItem watchlist={watchlist} /></Link>
+                )
+              }
             </div>
           </aside>
         </div>

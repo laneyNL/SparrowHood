@@ -35,11 +35,11 @@
   margin: 20px auto;
 }
 
-.asset-modal-button.green, .create-new-list-button.green {
+.asset-modal-button.greenText, .create-new-list-button.greenText {
   background-color: #00C805;
 }
 
-.asset-modal-button.red, .create-new-list-button.red {
+.asset-modal-button.redText, .create-new-list-button.redText {
   background-color: #FF5000;
 }
 
@@ -68,17 +68,17 @@ input[type=checkbox] {
   cursor: pointer;
 }
 
-input[type=checkbox].green, .new-list-input.green:focus {
+input[type=checkbox].greenText, .new-list-input.greenText:focus {
   border: 1px solid #00C805;
 }
-input[type=checkbox].red, .new-list-input.red:focus {
+input[type=checkbox].redText, .new-list-input.redText:focus {
   border: 1px solid #FF5000;
 }
 
-input[type=checkbox]:checked.green {
+input[type=checkbox]:checked.greenText {
   background-color: #00C805;
 }
-input[type=checkbox]:checked.red {
+input[type=checkbox]:checked.redText {
   background-color: #FF5000;
 }
 
@@ -104,11 +104,11 @@ input[type=checkbox]:checked {
   padding: 0;
 }
 
-#plus-icon.green {
+#plus-icon.greenText {
   background-color:rgba(0,200,5,0.2);
   color: #00C805;
 }
-#plus-icon.red {
+#plus-icon.redText {
   background-color:rgba(255,80,0,0.2);
   color: #FF5000;
 }
@@ -157,12 +157,12 @@ input[type=checkbox]:checked {
   margin: 10px 5px;
 }
 
-.cancel-new-list-button.red {
+.cancel-new-list-button.redText {
   border: 1px solid #FF5000;
   background-color: transparent;
   color: #FF5000;
 }
-.cancel-new-list-button.green {
+.cancel-new-list-button.greenText {
   border: 1px solid #00C805;
   background-color: transparent;
   color: #00C805;
@@ -171,15 +171,15 @@ input[type=checkbox]:checked {
   color: #1E2124;
 }
 
-.cancel-new-list-button.red:hover {
+.cancel-new-list-button.redText:hover {
   background-color: rgba(206, 97, 46, 0.308);
 }
-.cancel-new-list-button.green:hover {
+.cancel-new-list-button.greenText:hover {
   background-color: rgba(9, 197, 15, 0.2);
 }
 .create-new-list-button.red:hover {
   background-color: #e97844;
 }
-.create-new-list-button.green:hover {
+.create-new-list-button.greenText:hover {
   background-color: #88c58a;
 }

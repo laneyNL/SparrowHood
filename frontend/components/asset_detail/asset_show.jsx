@@ -51,11 +51,10 @@ export default class AssetShow extends React.Component {
     const allSharesArr = Object.values(this.props.symbolDetails).map(value => parseFloat(value.quantity));
     const allShares = allSharesArr.reduce((num, total) => (num + total));
     const diversity = ((quantityOwned/allShares)*100).toFixed(2);
-
     return (
 
       <div className='asset-show'>
-        <WatchlistAssetModalContainer symbol={this.state.symbol} sign='sign'/>
+        <WatchlistAssetModalContainer symbol={this.state.symbol} sign={sign}/>
         <PortfolioHeader logout={this.props.logout} />
 
         <div className='asset-show-body'>
