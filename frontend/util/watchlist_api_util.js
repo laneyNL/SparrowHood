@@ -2,7 +2,7 @@
 export const fetchWatchlists = (userId) => {
   return $.ajax({
     method: 'GET',
-    url: `/api/users/${userId}/watchlist`
+    url: `/api/users/${userId}/watchlists`
   })
 }
 

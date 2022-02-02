@@ -1,0 +1,30 @@
+.mini-watchlist-item {
+  display: flex;
+  margin: 5px 0;
+}
+.mini-watchlist-item div {
+  padding-left: 10px;
+}
+
+.mini-watchlist-itemLength {
+  line-height: 2;
+  color: #919FA6;
+  font-size: 13px;
+}
+
+
+input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid #00C805;
+  cursor: pointer;
+}
+
+input[type=checkbox]:checked {
+  background-color: #00C805;
+  text-align: center;
+  line-height: 15px;
+}

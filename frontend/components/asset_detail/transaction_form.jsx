@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export default class TransactionForm extends React.Component {
   constructor(props) {
     super(props);
@@ -204,6 +205,8 @@ export default class TransactionForm extends React.Component {
           </div>
           {this.renderAvailable()}
         </form>
+
+        <button>Add to Lists</button>
       </aside>
     )
   }

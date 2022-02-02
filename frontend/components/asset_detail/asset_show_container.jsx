@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetchCryptoInterval, fetchAssetDetails } from '../../actions/asset_actions';
 import { logout } from '../../actions/session_actions';
 import { createTransaction, fetchTransactions } from '../../actions/transaction_action';
+import { createWatchlistAsset } from '../../actions/watchlist_actions';
 import AssetShow from './asset_show';
 
 const mapStateToProps = (state, ownProps) => {
@@ -23,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
   createTransaction: (transaction) => dispatch(createTransaction(transaction)),
   fetchTransactions: (userId, interval) => dispatch(fetchTransactions(userId, interval)),
   fetchAssetDetails: (symbol) => dispatch(fetchAssetDetails(symbol)),
+  createWatchlistAsset: (asset) => dispatch(createWatchlistAsset(asset))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssetShow);
