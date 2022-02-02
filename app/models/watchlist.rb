@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 class Watchlist < ApplicationRecord
-  validates :user_id, :name, presence: true
+  validates :user_id, :name, :icon, presence: true
   validates :user_id, uniqueness: { scope: :name }
   
   belongs_to :user

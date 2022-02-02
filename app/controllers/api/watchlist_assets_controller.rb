@@ -20,6 +20,6 @@ class Api::WatchlistAssetsController < ApplicationController
 
   private
   def assets_params
-    params.require(:watchlist_assets).permit(:watchlist_id, :symbol)
+    params.require(:watchlist_assets).permit(:watchlist_id, :symbol, :icon)
   end
 end
