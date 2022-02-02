@@ -1,4 +1,4 @@
-import { RECEIVE_SEARCH } from '../actions/watchlist_actions';
+import { RECEIVE_SEARCH } from '../actions/search_actions';
 
 const searchReducer = (state = {}, action) => {
   Object.freeze(state);

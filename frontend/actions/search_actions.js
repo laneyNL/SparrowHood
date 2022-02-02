@@ -12,7 +12,7 @@ const apiExceeded = 'Thank you for using Alpha Vantage! Our standard API call fr
 
 export const fetchSearch = (keyword) => dispatch => {
   if (sessionStorage.getItem(`search-${keyword}`)) {
-    return dispatch(receiveSearch(JSON.parse(sessionStorage.getItem(`search-${keyword}`))))
+    return dispatch(receiveSearch(keyword, JSON.parse(sessionStorage.getItem(`search-${keyword}`))))
   }
   return SearchApiUtil.fetchSearch(keyword)
     .then(payload => {
