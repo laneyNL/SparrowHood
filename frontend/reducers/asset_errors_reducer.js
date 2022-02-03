@@ -4,7 +4,7 @@ const assetErrorsReducer = (state = [], action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_ASSET_ERRORS:
-      return ['Invalid stock symbol.'] || state;
+      return ['Invalid stock symbol.'];
     case CLEAR_ASSET_ERRORS:
       return [];
     default:

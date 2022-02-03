@@ -1,15 +1,18 @@
 import React from 'react';
 
 const LoadingSpinner = (props) => {
+  console.log('loading', props.errors);
   let errors;
   if (props.errors && props.errors.length) {
     errors = <div>
       {props.errors[0]}
     </div>;
     setTimeout(() => {
-      props.clearErrors()
       props.history.push('/');
-    }, 200)
+    }, 3000)
+    setTimeout(() => {
+      props.clearErrors()
+    }, 4000)
   }
   return (
     <div id='spinner-div'>

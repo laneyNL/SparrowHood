@@ -61,9 +61,10 @@ export default class AssetShow extends React.Component {
   }
 
   render() {
-    console.log(this.props.assetErrors)
-    console.log(this.props.assetErrors.length)
-    if (this.state.loading || this.props.assetErrors.length) return <LoadingSpinner errors={this.props.assetErrors} clearErrors={this.props.clearErrors} history={this.props.history}/>
+    console.log('show', this.props.assetErrors)
+    console.log('length', this.props.assetErrors.length)
+    if (this.state.loading) return <LoadingSpinner/>
+    if (this.props.assetErrors.length) return <LoadingSpinner errors={this.props.assetErrors} clearErrors={this.props.clearErrors} history={this.props.history}/>
 
     const symbolDetails = this.props.symbolDetails[this.props.match.params.assetSymbol];
     const quantityOwned = symbolDetails ? parseFloat(symbolDetails['quantity']) : 0;
