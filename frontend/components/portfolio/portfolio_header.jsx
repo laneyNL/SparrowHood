@@ -75,10 +75,12 @@ export default class PortfolioHeader extends React.Component {
           
         </div>
 
-
-        <Link to='/' className='white'>Portfolio</Link>
-        <button onClick={this.props.logout}>Logout</button>
-        <Link to='/'>Cash</Link>
+        <div className='portfolio-nav-links'div>
+          <Link to='/' className='portfolio-nav-links'>Portfolio</Link>
+          <a href="https://github.com/laneyNL" className='portfolio-nav-links'>GitHub <i className="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/laneyluong/" className='portfolio-nav-links'>LinkedIn <i className="fab fa-linkedin"></i></a>
+          <button onClick={this.props.logout} className='portfolio-nav-links'>Logout</button>
+        </div>
       </nav>
     )
   }

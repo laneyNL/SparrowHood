@@ -71,3 +71,22 @@
 .no-results {
   padding-left: 25px;
 }
+
+.portfolio-nav-links {
+white-space: nowrap;
+
+}
+.portfolio-nav-links {
+  color: white;
+  padding: 0 20px;
+  font-size: 13px;
+}
+
+button.portfolio-nav-links {
+  background-color: transparent;
+  border: none;
+}
+
+.port-nav {
+  justify-content: space-between;
+}

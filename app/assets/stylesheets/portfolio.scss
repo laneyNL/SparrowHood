@@ -1,6 +1,7 @@
 .portfolio-splash, .port-nav, .asset-show {
   background-color: black;
   color: white;
+  border: none;
 }
 
 .portfolio-splash, .asset-show {
@@ -19,7 +20,8 @@
 
 .asset-list {
  border: 1px solid grey;
- width: 275px;
+ min-width: 275px;
+ max-width: 275px;
  max-height: 550px;
  margin-left: 50px;
  background-color: #1E2124;
