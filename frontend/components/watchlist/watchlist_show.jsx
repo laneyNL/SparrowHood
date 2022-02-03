@@ -204,12 +204,12 @@ export default class WatchlistShow extends React.Component {
     const marketCap = this.convertMarketCap(symbolListDetails.marketCap);
     const direction = symbolListDetails.today > 0 ? 'up' : 'down';
     return(
-      <tr key={symbol} onClick={this.redirectAssetShow(symbol)} className='table-row'>
-        <td>{symbolListDetails.name}</td>
-        <td>{symbolListDetails.symbol}</td>
-        <td>{`$${symbolListDetails.price}`}</td>
-        <td><span><span className={`caret ${direction}`}></span> {`${symbolListDetails.today.toFixed(2)}%`}</span></td>
-        <td >{marketCap}</td>
+      <tr key={symbol} className='table-row'>
+        <td onClick={this.redirectAssetShow(symbol)}>{symbolListDetails.name}</td>
+        <td onClick={this.redirectAssetShow(symbol)}>{symbolListDetails.symbol}</td>
+        <td onClick={this.redirectAssetShow(symbol)}>{`$${symbolListDetails.price}`}</td>
+        <td onClick={this.redirectAssetShow(symbol)}><span><span className={`caret ${direction}`}></span> {`${symbolListDetails.today.toFixed(2)}%`}</span></td>
+        <td onClick={this.redirectAssetShow(symbol)}>{marketCap}</td>
         <td onClick={this.deleteListAsset(symbolListDetails.symbol)} className='delete-watchlist-asset'>&times;</td>
       </tr>
     )
