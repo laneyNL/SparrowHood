@@ -24,8 +24,8 @@ const receiveErrors = (errors) => ({
   errors
 })
 
-const clearErrors = () => ({
-  type: RECEIVE_ASSET_DETAILS
+export const clearErrors = () => ({
+  type: CLEAR_ASSET_ERRORS
 })
 
   export const fetchAssetInterval = (symbol, interval) => dispatch => {
@@ -51,6 +51,7 @@ const clearErrors = () => ({
     return AssetApiUtil.fetchAssetFull(symbol)
       .then(payload => {
         console.log('payload full', payload)
+        if (payload['Error Message']) return dispatch(receiveErrors(payload['Error Message']));
         dispatch(receiveAssetFull(payload));
         if (!payload['Note']) sessionStorage.setItem(`full-${symbol}`, JSON.stringify(payload));
       })
@@ -68,6 +69,7 @@ const clearErrors = () => ({
     return AssetApiUtil.fetchAssetDetails(symbol)
       .then(payload => {
         console.log('payload details', payload)
+        if (payload['Error Message']) return dispatch(receiveErrors(payload['Error Message']));
         dispatch(receiveAssetDetails(payload));
         if (!payload['Note']) sessionStorage.setItem(`details-${symbol}`, JSON.stringify(payload));
       })

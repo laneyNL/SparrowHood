@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchAssetFull, fetchCryptoFull, fetchAssetInterval, fetchCryptoInterval, fetchAssetDetails } from '../../actions/asset_actions';
+import { fetchAssetFull, fetchAssetInterval, fetchAssetDetails, clearErrors } from '../../actions/asset_actions';
 import { logout } from '../../actions/session_actions';
 import { createTransaction, fetchTransactions } from '../../actions/transaction_action';
 import { createWatchlistAsset } from '../../actions/watchlist_actions';
@@ -11,20 +11,20 @@ const mapStateToProps = (state, ownProps) => {
   assets: state.entities.assets,
   symbolDetails: state.entities.transactions.symbols,
   details: state.entities.assets.details,
-  errors: state.errors.transaction
+  errors: state.errors.transaction,
+  assetErrors: state.errors.asset
 }
 }
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
   fetchAssetFull: (symbol) => dispatch(fetchAssetFull(symbol)),
-  fetchCryptoFull: (symbol) => dispatch(fetchCryptoFull(symbol)),
   fetchAssetInterval: (symbol) => dispatch(fetchAssetInterval(symbol)),
-  fetchCryptoInterval: (symbol) => dispatch(fetchCryptoInterval(symbol)),
   createTransaction: (transaction) => dispatch(createTransaction(transaction)),
   fetchTransactions: (userId, interval) => dispatch(fetchTransactions(userId, interval)),
   fetchAssetDetails: (symbol) => dispatch(fetchAssetDetails(symbol)),
-  createWatchlistAsset: (asset) => dispatch(createWatchlistAsset(asset))
+  createWatchlistAsset: (asset) => dispatch(createWatchlistAsset(asset)),
+  clearErrors: () => dispatch(clearErrors())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssetShow);

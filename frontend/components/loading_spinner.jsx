@@ -9,7 +9,7 @@ const LoadingSpinner = (props) => {
     setTimeout(() => {
       props.clearErrors()
       props.history.push('/');
-    }, 1500)
+    }, 200)
   }
   return (
     <div id='spinner-div'>

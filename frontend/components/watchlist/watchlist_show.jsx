@@ -233,7 +233,7 @@ export default class WatchlistShow extends React.Component {
   }
 
   render() {
-    if (this.state.loading) return <LoadingSpinner clearErrors={this.props.clearErrors} errors={this.props.errors} history={this.props.history}/>
+    if (this.state.loading || this.props.errors.length) return <LoadingSpinner clearErrors={this.props.clearErrors} errors={this.props.errors} history={this.props.history}/>
 
     const emptyTable = (this.state.listSymbolArray.length > 0) ?  '' : 
       <div className='empty-table'>

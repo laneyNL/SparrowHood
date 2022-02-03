@@ -15,14 +15,14 @@ export default class AssetShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchTransactions(this.props.user.id)
-      .then(() => {
-        Promise.all([
-          this.props.fetchAssetInterval(this.state.symbol),
-          this.props.fetchAssetFull(this.state.symbol),
-          this.props.fetchAssetDetails(this.state.symbol)])
-          .then(() => this.setState({ loading: false }));
-      })
+      this.props.fetchTransactions(this.props.user.id)
+        .then(() => {
+          Promise.all([
+            this.props.fetchAssetInterval(this.state.symbol),
+            this.props.fetchAssetFull(this.state.symbol),
+            this.props.fetchAssetDetails(this.state.symbol)])
+            .then(() => this.setState({ loading: false }));
+        })
   }
 
   formatDollarString(num) {
@@ -61,7 +61,9 @@ export default class AssetShow extends React.Component {
   }
 
   render() {
-    if (this.state.loading) return <LoadingSpinner />
+    console.log(this.props.assetErrors)
+    console.log(this.props.assetErrors.length)
+    if (this.state.loading || this.props.assetErrors.length) return <LoadingSpinner errors={this.props.assetErrors} clearErrors={this.props.clearErrors} history={this.props.history}/>
 
     const symbolDetails = this.props.symbolDetails[this.props.match.params.assetSymbol];
     const quantityOwned = symbolDetails ? parseFloat(symbolDetails['quantity']) : 0;
