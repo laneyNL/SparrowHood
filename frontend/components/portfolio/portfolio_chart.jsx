@@ -149,7 +149,6 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
   }
 
   let colorClass = sign === '+' ? 'greenText' : 'redText';
-  console.log('re redner')
   return (
       <div className='chart'>
       <div className='totalValue' id ='currentTotal'>

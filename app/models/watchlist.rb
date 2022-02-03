@@ -18,5 +18,4 @@ class Watchlist < ApplicationRecord
   class_name: "WatchlistAsset",
   dependent: :destroy
 
-
 end

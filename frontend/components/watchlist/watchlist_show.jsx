@@ -38,7 +38,7 @@ export default class WatchlistShow extends React.Component {
   componentDidMount() {
     this.props.fetchWatchlists(this.props.user.id)
       .then(() => {
-        const watchlistAsset = this.props.watchlist.assets;
+        const watchlistAsset = this.props.watchlist.assets || {};
         Promise.all(Object.values(watchlistAsset).map(asset => {
             this.props.fetchAssetDetails(asset.symbol);
             this.props.fetchAssetFull(asset.symbol);

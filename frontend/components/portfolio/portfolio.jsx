@@ -22,7 +22,6 @@ export default class Portfolio extends React.Component {
       .then( () => {
         this.props.fetchWatchlists(this.props.user.id)
           .then(() => {
-            console.log(this.props.watchlists)
             this.setState({
               stockSymbols: Object.keys(this.props.symbols),
               watchlistValues: Object.values(this.props.watchlists)
@@ -54,6 +53,7 @@ export default class Portfolio extends React.Component {
       <div className='portfolio-splash'>
         
         <AddFundsForm addFunds={this.props.addFunds} user={this.props.user} fetchTransactions={this.props.fetchTransactions} user={this.props.user}/>
+        
         <PortfolioHeaderContainer />
 
         <div className='portfolio'>

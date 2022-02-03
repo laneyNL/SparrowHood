@@ -8,7 +8,11 @@
 
 .watchlist-body, .delete-question {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.watchlist-body {
+  margin: 5%;
 }
 
 .watchlist-main {
