@@ -19,6 +19,14 @@ export default class WatchlistShow extends React.Component {
       user_id: this.props.user.id,
       name: '',
     }
+
+    document.addEventListener('mouseup', (e) => {
+      const confirmDelete = document.querySelector('.confirm-delete');
+      if (!confirmDelete.contains(e.target)) {
+        $('.confirm-delete-div').addClass('hidden');
+      }
+    });
+
     this.deleteListAsset = this.deleteListAsset.bind(this);
     this.sortTable = this.sortTable.bind(this);
     this.sortArray = this.sortArray.bind(this);
@@ -296,7 +304,10 @@ export default class WatchlistShow extends React.Component {
               <NewWatchlistFormContainer color='greenText' toggleNewListInput={this.toggleNewListInput} />
               {
                 Object.values(this.props.watchlists).map((watchlist) =>
-                  <Link to={`/watchlist/${watchlist.id}`} key={watchlist.id}><MiniWatchlistItem watchlist={watchlist} /></Link>
+                  <Link to={`/watchlist/${watchlist.id}`} key={watchlist.id}>
+                    <MiniWatchlistItem watchlist={watchlist} />
+                    {/* <span onClick={this.toggleConfirmDelete(watchlist.id)} ><i className="fas fa-ellipsis-h filter-icon"></i></span> */}
+                    </Link>
                 )
               }
             </div>
