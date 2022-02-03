@@ -10,21 +10,14 @@ export default class PortfolioHeader extends React.Component {
       results: '',
     }
     this.handleSearch = this.handleSearch.bind(this);
-    this.listener = (e) => {
-      const searchBar = document.getElementById('search-bar');
-      const results = document.querySelector('.search-results-div')
-      if (searchBar.contains(e.target)) {
-        $('.search-results-div').removeClass('hidden');
-      } else {
-        $('.search-results-div').addClass('hidden');
-      }
-    }
-    document.addEventListener('mouseup', this.listener);
-
   }
 
   componentWillUnmount() {
     document.removeEventListener('mouseup', this.listener);
+  }
+
+  toggleSearchResults() {
+    $('.search-results-div').toggleClass('hidden');
   }
 
   handleSearch(e) {
@@ -56,7 +49,9 @@ export default class PortfolioHeader extends React.Component {
         </Link>
       )
     })
-    return searchRow;
+    return (
+      searchRow
+    );
   }
 
   render() {
@@ -67,7 +62,7 @@ export default class PortfolioHeader extends React.Component {
         <div className='search-bar-div'>
           <div className='search-bar-flex'>
             <div><i className="fas fa-search"></i></div>
-            <input type="text" placeholder='Search' value={this.state.keyword} onChange={this.handleSearch} id='search-bar' autoComplete="off"/>
+            <input type="text" placeholder='Search' value={this.state.keyword} onChange={this.handleSearch} id='search-bar' onFocus={this.toggleSearchResults} onBlur={this.toggleSearchResults} autoComplete="off"/>
           </div>
           <div className='search-results-div hidden'>
           { this.renderSearchResults()}

@@ -11,8 +11,8 @@ export default class AssetListItem extends React.Component {
     if (!this.props.assets || !this.props.symbol || !this.props.assets[this.props.symbol]) return null;
     const quote = Object.values(this.props.assets[this.props.symbol]);
 
-    const closePrice = parseFloat(quote[0][this.props.closeKey]);
-    const openPrice = parseFloat(quote[0][this.props.openKey]);
+    const closePrice = parseFloat(quote[0]["4. close"]);
+    const openPrice = parseFloat(quote[quote.length - 1]["1. open"]);
     const percentDiff = ((closePrice - openPrice) / openPrice) * 100;
 
     const colorClass = percentDiff < 0 ? 'negative' : 'positive';

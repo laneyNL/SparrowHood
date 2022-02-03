@@ -33,7 +33,7 @@ export default class AssetShow extends React.Component {
 
   renderAssetDetails(symbolDetails, quantityOwned, currentPrice, initialPrice) {
     if (!symbolDetails) return '';
-    const marketValue = this.formatDollarString((currentPrice * quantityOwned));
+    const marketValue = `$${(currentPrice * quantityOwned).toFixed(2)}`;
     const todayReturn = ((currentPrice - initialPrice) * quantityOwned);
     const averageCost = parseFloat(symbolDetails.averagePrice);
     const totalReturn = ((currentPrice - averageCost) * quantityOwned);
