@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AssetListItem from './asset_list_item';
 import PortfolioChart from './portfolio_chart';
 import AddFundsForm from './add_funds_form';
-import PortfolioHeader from './portfolio_header';
+import PortfolioHeaderContainer from './portfolio_header_container';
 import LoadingSpinner from '../loading_spinner';
 import MiniWatchlistItem from '../watchlist/mini_watchlist_item';
 
@@ -54,7 +54,7 @@ export default class Portfolio extends React.Component {
       <div className='portfolio-splash'>
         
         <AddFundsForm addFunds={this.props.addFunds} user={this.props.user} fetchTransactions={this.props.fetchTransactions} user={this.props.user}/>
-        <PortfolioHeader logout={this.props.logout}/>
+        <PortfolioHeaderContainer />
 
         <div className='portfolio'>
           <div className='main-chart'>

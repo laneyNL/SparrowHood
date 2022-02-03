@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../loading_spinner';
-import PortfolioHeader from '../portfolio/portfolio_header';
+import PortfolioHeaderContainer from '../portfolio/portfolio_header';
 import MiniWatchlistItem from './mini_watchlist_item';
 import NewWatchlistFormContainer from './new_watchlist_form_container';
 
@@ -243,7 +243,7 @@ export default class WatchlistShow extends React.Component {
 
       <div className='watchlist-show'>
         {this.renderConfirmDelete()}
-        <PortfolioHeader logout={this.props.logout} />
+        <PortfolioHeaderContainer />
         <div className='watchlist-body'>
           <div className='watchlist-main'>
             <div className='watchlist-icon' id={`watchlist-icon-${this.state.id}`} onClick={this.toggleIconBox}></div>

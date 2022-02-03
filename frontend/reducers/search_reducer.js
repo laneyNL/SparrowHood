@@ -5,7 +5,7 @@ const searchReducer = (state = {}, action) => {
   const nextState = Object.assign({}, state);
   switch (action.type) {
     case RECEIVE_SEARCH:
-      nextState[action.keyword] = action.payload;
+      nextState[action.keyword] = action.payload["bestMatches"];
       return nextState;
     default:
       return state;

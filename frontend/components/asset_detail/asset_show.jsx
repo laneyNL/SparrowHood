@@ -1,6 +1,6 @@
 import React from 'react';
 import AssetChart from './asset_chart'
-import PortfolioHeader from '../portfolio/portfolio_header'
+import PortfolioHeaderContainer from '../portfolio/portfolio_header_container';
 import TransactionForm from './transaction_form';
 import LoadingSpinner from '../loading_spinner';
 import WatchlistAssetModalContainer from '../watchlist/watchlist_asset_modal_container';
@@ -31,31 +31,53 @@ export default class AssetShow extends React.Component {
     return `${sign}$${numberFixed.toLocaleString("en-US")}`
   }
 
-  render() {
-    if (this.state.loading) return <LoadingSpinner />
-
-    const symbolDetails = this.props.symbolDetails[this.props.match.params.assetSymbol];
-    const quantityOwned = parseFloat(symbolDetails['quantity']);
-    const details = this.props.details[this.state.symbol] || {};
-
-    const assetValues = Object.values(this.props.assets['interval'][this.state.symbol]);
-    const currentPrice = parseFloat(assetValues[0]["4. close"]);
-    const initialPrice = parseFloat(assetValues[assetValues.length - 1]["4. close"]);
+  renderAssetDetails(symbolDetails, quantityOwned, currentPrice, initialPrice) {
+    if (!symbolDetails) return '';
     const marketValue = this.formatDollarString((currentPrice * quantityOwned));
     const todayReturn = ((currentPrice - initialPrice) * quantityOwned);
     const averageCost = parseFloat(symbolDetails.averagePrice);
     const totalReturn = ((currentPrice - averageCost) * quantityOwned);
 
-    const sign = ((currentPrice - initialPrice) > 0 ) ? '+' : '-';
-
     const allSharesArr = Object.values(this.props.symbolDetails).map(value => parseFloat(value.quantity));
     const allShares = allSharesArr.reduce((num, total) => (num + total));
-    const diversity = ((quantityOwned/allShares)*100).toFixed(2);
+    const diversity = ((quantityOwned / allShares) * 100).toFixed(2);
+    return (
+      <div className='assetDetailsDiv' >
+        <div className='assetDetails'>
+          <p>Your market value</p>
+          <p className='value-subtitle'>{marketValue}</p>
+          <div className='asset-detail-row border-bottom'><span >Today's return</span><span>{this.formatDollarString(todayReturn)}</span></div>
+          <div className='asset-detail-row'><span>Total return</span><span>{this.formatDollarString(totalReturn)}</span></div>
+
+        </div>
+        <div className='assetDetails'>
+          <p>Your average cost</p>
+          <p className='value-subtitle'>{`$${averageCost.toFixed(2)}`}</p>
+          <div className='asset-detail-row border-bottom'><span>Shares</span><span>{quantityOwned}</span></div>
+          <div className='asset-detail-row'><span>Portfolio diversity</span><span>{`${diversity}%`}</span></div>
+        </div>
+      </div>
+    )
+  }
+
+  render() {
+    if (this.state.loading) return <LoadingSpinner />
+
+    const symbolDetails = this.props.symbolDetails[this.props.match.params.assetSymbol];
+    const quantityOwned = symbolDetails ? parseFloat(symbolDetails['quantity']) : 0;
+    const details = this.props.details[this.state.symbol] || {};
+
+    const assetValues = Object.values(this.props.assets['interval'][this.state.symbol]);
+    const currentPrice = parseFloat(assetValues[0]["4. close"]);
+    const initialPrice = parseFloat(assetValues[assetValues.length - 1]["4. close"]);
+    const sign = ((currentPrice - initialPrice) > 0 ) ? '+' : '-';
+
+    
     return (
 
       <div className='asset-show'>
         <WatchlistAssetModalContainer symbol={this.state.symbol} sign={sign}/>
-        <PortfolioHeader logout={this.props.logout} />
+        <PortfolioHeaderContainer />
 
         <div className='asset-show-body'>
           <div className='main-asset-chart'>
@@ -63,21 +85,7 @@ export default class AssetShow extends React.Component {
               <AssetChart assets={this.props.assets} name={details['Name']} symbol={this.state.symbol} />
             </div>
 
-            <div className='assetDetailsDiv' >
-              <div className='assetDetails'>
-                <p>Your market value</p>
-                <p className='value-subtitle'>{marketValue}</p>
-                <div className='asset-detail-row border-bottom'><span >Today's return</span><span>{this.formatDollarString(todayReturn)}</span></div>
-                <div className='asset-detail-row'><span>Total return</span><span>{this.formatDollarString(totalReturn)}</span></div>
-                
-              </div>
-              <div className='assetDetails'>
-                <p>Your average cost</p>
-                <p className='value-subtitle'>{`$${averageCost.toFixed(2)}`}</p>
-                <div className='asset-detail-row border-bottom'><span>Shares</span><span>{quantityOwned}</span></div>
-                <div className='asset-detail-row'><span>Portfolio diversity</span><span>{`${diversity}%`}</span></div>
-              </div>
-            </div>
+            {this.renderAssetDetails(symbolDetails, quantityOwned, currentPrice, initialPrice)}
 
             <div className='about'>
               <div className='about-title'>About Company</div>
