@@ -36,10 +36,18 @@ export default class WatchlistShow extends React.Component {
   }
 
   componentDidMount() {
+
+
     this.props.fetchWatchlists(this.props.user.id)
       .then(() => {
+        if (!this.props.watchlist) {
+          this.setState({ loading: false, errors: ['Watchlist does not exist.'] });
+          return;
+        }
         const watchlistAsset = this.props.watchlist.assets || {};
         const watchlistAssetValues = Object.values(watchlistAsset);
+
+
         Promise.all(watchlistAssetValues.map(asset => this.props.fetchAssetDetails(asset.symbol)))
           .then(() => {
             Promise.all(watchlistAssetValues.map(asset =>
@@ -233,7 +241,8 @@ export default class WatchlistShow extends React.Component {
   }
 
   render() {
-    if (this.state.loading || this.props.errors.length) return <LoadingSpinner clearErrors={this.props.clearErrors} errors={this.props.errors} history={this.props.history}/>
+    if (this.state.loading) return <LoadingSpinner />
+    if (!this.state.loading && this.state.errors.length) return <LoadingSpinner errors={this.state.errors} history={this.props.history}/>
 
     const emptyTable = (this.state.listSymbolArray.length > 0) ?  '' : 
       <div className='empty-table'>
