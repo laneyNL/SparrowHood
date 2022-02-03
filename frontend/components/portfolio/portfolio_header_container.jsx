@@ -5,7 +5,7 @@ import PortfolioHeader from './portfolio_header';
 
 const mapStateToProps = (state) => ({
   user: state.entities.users[state.session.id],
-  results: state.entities.search,
+  results: state.entities.search || [],
   errors: state.entities.errors || []
 })
 

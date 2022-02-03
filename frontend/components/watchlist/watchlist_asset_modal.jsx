@@ -17,13 +17,13 @@ export default class WatchlistAssetModal extends React.Component {
     }
     this.handleCheckChange = this.handleCheckChange.bind(this);
     this.handleSaveChange = this.handleSaveChange.bind(this);
-
-    document.addEventListener('mouseup', (e) => {
+    this.listener = (e) => {
       const modal = document.querySelector('.watchlist-asset-modal');
       if (!modal.contains(e.target)) {
         $('.watchlist-asset-modal-div').addClass('hidden');
       }
-    });
+    }
+    document.addEventListener('mouseup', this.listener);
   }
 
   componentDidMount() {
@@ -51,6 +51,10 @@ export default class WatchlistAssetModal extends React.Component {
     if (Object.keys(prevProps.watchlists).length !== Object.keys(this.props.watchlists).length) {
       this.componentDidMount();
     }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mouseup', this.listener);
   }
   
   toggleModal() {

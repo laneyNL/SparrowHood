@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../loading_spinner';
-import PortfolioHeaderContainer from '../portfolio/portfolio_header';
+import PortfolioHeaderContainer from '../portfolio/portfolio_header_container';
 import MiniWatchlistItem from './mini_watchlist_item';
 import NewWatchlistFormContainer from './new_watchlist_form_container';
 
@@ -19,13 +19,13 @@ export default class WatchlistShow extends React.Component {
       user_id: this.props.user.id,
       name: '',
     }
-
-    document.addEventListener('mouseup', (e) => {
+    this.listener = (e) => {
       const confirmDelete = document.querySelector('.confirm-delete');
       if (!confirmDelete.contains(e.target)) {
         $('.confirm-delete-div').addClass('hidden');
       }
-    });
+    }
+    document.addEventListener('mouseup', this.listener);
 
     this.deleteListAsset = this.deleteListAsset.bind(this);
     this.sortTable = this.sortTable.bind(this);
@@ -79,8 +79,8 @@ export default class WatchlistShow extends React.Component {
   }
 
   componentWillUnmount() {
-    $('.create-new-list-form').removeClass('hidden');
     $('.create-new-list-form').addClass('hidden');
+    document.removeEventListener('mouseup', this.listener);
   }
 
   chooseIcon(e) {

@@ -76,4 +76,4 @@ const MiniChart = ({ symbol, dailyValues, colorClass, closeKey}) => {
 }
 
 
-export default MiniChart
+export default React.memo(MiniChart);

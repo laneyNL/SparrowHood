@@ -10,6 +10,21 @@ export default class PortfolioHeader extends React.Component {
       results: '',
     }
     this.handleSearch = this.handleSearch.bind(this);
+    this.listener = (e) => {
+      const searchBar = document.getElementById('search-bar');
+      const results = document.querySelector('.search-results-div')
+      if (searchBar.contains(e.target)) {
+        $('.search-results-div').removeClass('hidden');
+      } else {
+        $('.search-results-div').addClass('hidden');
+      }
+    }
+    document.addEventListener('mouseup', this.listener);
+
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mouseup', this.listener);
   }
 
   handleSearch(e) {
@@ -17,47 +32,46 @@ export default class PortfolioHeader extends React.Component {
     if (!keyword) {
       this.setState({ keyword: '', results: '' });
     } else {
-      Promise.all([this.props.fetchSearch(keyword)])
-        .then(() => {
-          this.setState({ keyword: keyword, results: this.props.results })
-        })
+      this.setState({ keyword: keyword }, () => {
+        Promise.all([this.props.fetchSearch(keyword)])
+          .then(() => {
+            this.setState({ results: this.props.results || []})
+          })
+      })
     }
   }
 
   renderSearchResults() {
     if (!this.state.results && !this.state.keyword) return '';
-    if (!this.state.results[this.state.keyword].length) return (
-      <div className='search-results-div'>
+    if (!this.state.results[this.state.keyword] || !this.state.results[this.state.keyword].length) return (
         <div className='no-results'>We were unable to find any results for your search.</div>
-      </div>
     )
     const searchRow = this.state.results[this.state.keyword].map((result, idx) => {
+      const symbol = result["1. symbol"];
+      if (symbol.includes('.')) return '';
       return (
-        <Link to={`/assets/${result["1. symbol"]}`} key={idx} className='search-result'>
-          <div className='search-result-symbol'>{result["1. symbol"]}</div>
+        <Link to={`/assets/${symbol}`} key={idx} className='search-result'>
+          <div className='search-result-symbol'>{symbol}</div>
           <div>{result["2. name"]}</div>
         </Link>
       )
     })
-    return (
-      <div className='search-results-div'>
-        {searchRow}
-      </div>
-    )
+    return searchRow;
   }
 
   render() {
-
-    console.log('render', this.state)
     return (
       <nav className='port-nav'>
         <Link to='/'><img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png'} alt="green feather" id='feather' /></Link>
 
         <div className='search-bar-div'>
-          <div><i className="fas fa-search"></i></div>
-          <input type="text" placeholder='Search' value={this.state.keyword} onChange={this.handleSearch} id='search-bar' autoComplete="off"/>
-          
-          {this.renderSearchResults()}
+          <div className='search-bar-flex'>
+            <div><i className="fas fa-search"></i></div>
+            <input type="text" placeholder='Search' value={this.state.keyword} onChange={this.handleSearch} id='search-bar' autoComplete="off"/>
+          </div>
+          <div className='search-results-div hidden'>
+          { this.renderSearchResults()}
+          </div>
           
         </div>
 

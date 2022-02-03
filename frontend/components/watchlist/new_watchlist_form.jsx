@@ -12,14 +12,7 @@ export default class NewWatchlistForm extends React.Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNewListSubmit = this.handleNewListSubmit.bind(this);
     this.chooseIcon = this.chooseIcon.bind(this);
-
-  }
-
-  componentDidMount() {
-    $('#choose-icon').html(this.state.icon);
-    this.renderIcons();
-
-    document.addEventListener('mouseup', (e) => {
+    this.listener = (e) => {
       const box = document.querySelector('.emoji-box');
       const iconButton = document.getElementById('choose-icon');
       const listIcon = document.querySelector('.watchlist-icon');
@@ -31,11 +24,21 @@ export default class NewWatchlistForm extends React.Component {
           $('.emoji-box').addClass('hidden');
         }
       }
-    });
+    }
+    document.addEventListener('mouseup', this.listener);
+  }
+
+  componentDidMount() {
+    $('#choose-icon').html(this.state.icon);
+    this.renderIcons();
   }
 
   componentDidUpdate() {
     $('#choose-icon').html(this.state.icon);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mouseup', this.listener);
   }
 
   handleNameChange(e) {

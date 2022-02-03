@@ -8,15 +8,6 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
   const [difference, setDifference] = useState(currentTotal - initial);
   const [percDiff, setPercDiff] = useState(Math.abs((difference / initial) * 100).toFixed(2));
   const [sign, setSign] = useState((difference > 0) ? '+' : '-');
-
-
-  // let currentTotal = transactions[transactions.length - 1].currentTotal;
-  // const initial = transactions[0].currentTotal;
-
-  // const difference = currentTotal - initial;
-  // const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
-  // let sign = ''
-  // if (Math.floor(percDiff) !== 0) symbol = (difference > 0 ? '+' : '-');
   
   const chartData = {
     labels: transactions.map(action => action.createdAt),
@@ -158,6 +149,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
   }
 
   let colorClass = sign === '+' ? 'greenText' : 'redText';
+  console.log('re redner')
   return (
       <div className='chart'>
       <div className='totalValue' id ='currentTotal'>

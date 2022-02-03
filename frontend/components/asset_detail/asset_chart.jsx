@@ -112,7 +112,7 @@ const AssetChart = ({ name, assets, symbol }) => {
     },
     elements: {
       point: { radius: 0 }
-    },
+    }
   }
 
   useEffect(() => {
@@ -141,26 +141,26 @@ const AssetChart = ({ name, assets, symbol }) => {
       plugins: [tooltipLine]
     };
 
-    setCurrentValue(parseFloat(data[data.length - 1]));
-    setInitial(parseFloat(data[0]));
-    setDifference(currentValue - initial);
-    setPercDiff(Math.abs((difference / initial) * 100).toFixed(2));
-    setSign((difference > 0) ? '+' : '-');
+    if (true) {
+      setCurrentValue(parseFloat(data[data.length - 1]));
+      setInitial(parseFloat(data[0]));
+      setDifference(currentValue - initial);
+      setPercDiff(Math.abs((difference / initial) * 100).toFixed(2));
+      setSign((difference > 0) ? '+' : '-');
 
-    $('#currentValue').html(`$${formatDollarString(currentValue)}`)
-    $('#difference-value').html(`${sign}${formatDollarString(Math.abs(difference))} (${sign}${ percDiff } %)`)
+      $('#currentValue').html(`$${formatDollarString(currentValue)}`)
+      $('#difference-value').html(`${sign}${formatDollarString(Math.abs(difference))} (${sign}${percDiff} %)`)
 
-    $('#assetChart').remove();
-    $(`#assetChartDiv`).append("<canvas id='assetChart' width={600} height={200}/>");
-    const canvas = document.getElementById('assetChart');
-    if (canvas) {
-      const myChart = new Chart(canvas, config)
+      $('#assetChart').remove();
+      $(`#assetChartDiv`).append("<canvas id='assetChart' width={600} height={200}/>");
+      const canvas = document.getElementById('assetChart');
+      if (canvas) {
+        const myChart = new Chart(canvas, config)
+      }
+
+      const activeIntervalId = `#${chartInterval.split(' ').join('-')}`;
+      $(activeIntervalId).addClass('active-filter');
     }
-    
-    
-   
-    const activeIntervalId = `#${chartInterval.split(' ').join('-')}`;
-    $(activeIntervalId).addClass('active-filter');
   })
 
   const handleClick = (interval) => {
@@ -190,9 +190,6 @@ const AssetChart = ({ name, assets, symbol }) => {
           setDays(1300);
           break;
       }
-
-      
-
     }
   }
 
@@ -205,7 +202,7 @@ const AssetChart = ({ name, assets, symbol }) => {
   $('.changeColor').removeClass('greenText');
   $('.changeColor').removeClass('redText');
   $('.changeColor').addClass(colorClass);
-  
+
   return (
     <div className='chart'>
       <div className='chart-name'>{name}</div>
@@ -236,4 +233,4 @@ const AssetChart = ({ name, assets, symbol }) => {
   )
 }
 
-export default AssetChart
+export default AssetChart;
