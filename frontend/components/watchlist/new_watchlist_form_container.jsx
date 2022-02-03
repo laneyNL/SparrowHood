@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   createWatchlist: (watchlist) => dispatch(createWatchlist(watchlist)),
+  fetchWatchlists: (userId) => dispatch(fetchWatchlists(userId)),
   clearErrors: () => dispatch(clearErrors())
 })
 

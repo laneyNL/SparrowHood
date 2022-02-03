@@ -39,6 +39,14 @@ export default class WatchlistAssetModal extends React.Component {
       this.setState({loading: false, originalChecks: this.state.listChecks, isChanged: false })
     })
   }
+
+  componentDidUpdate(prevProps) {
+    console.log('prev', Object.keys(prevProps.watchlists))
+    console.log(Object.keys(this.props.watchlists))
+    if (Object.keys(prevProps.watchlists).length !== Object.keys(this.props.watchlists).length) {
+      this.componentDidMount();
+    }
+  }
   
   toggleModal() {
     $('.watchlist-asset-modal-div').toggleClass('hidden');
@@ -90,10 +98,6 @@ export default class WatchlistAssetModal extends React.Component {
         </div>
       )
     })
-  }
-
-  componentDidUpdate() {
-    $('#choose-icon').html(this.state.icon);
   }
 
   render() {

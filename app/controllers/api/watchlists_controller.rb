@@ -26,7 +26,7 @@ class Api::WatchlistsController < ApplicationController
 
   def update
     @watchlist = Watchlist.includes(:assets).find_by(id: params[:id])
-    if @watchlist && @watchlist.user_id = current_user.id && @watchlist.update({name: params[:watchlist][:name]})
+    if @watchlist && @watchlist.user_id = current_user.id && @watchlist.update(watchlist_params)
       render :show
     else  
       render json: @watchlist.errors.full_messages, status: 404

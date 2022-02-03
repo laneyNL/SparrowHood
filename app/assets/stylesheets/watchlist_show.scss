@@ -221,3 +221,31 @@ th:hover, .filter-icon:hover {
 .empty-table-text {
   font-size: 15px;
 }
+
+.table-row:hover {
+  cursor: pointer;
+  background-color: #1E2124;
+}
+
+.toggle-show-new-form {
+  font-size: 20px;
+}
+
+.toggle-show-new-form:hover {
+  color: #00C805;
+  cursor: pointer;
+}
+
+.watchlist-show .new-list-input {
+  width: 170px;
+  height: 35px;
+}
+
+.watchlist-show .cancel-new-list-button, .watchlist-show .create-new-list-button {
+  border-radius: 20px;
+}
+
+.watchlist-main .emoji-box {
+  left: 2%;
+  top: 15%;
+}

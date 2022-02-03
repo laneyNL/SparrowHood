@@ -11,7 +11,31 @@ export default class NewWatchlistForm extends React.Component {
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNewListSubmit = this.handleNewListSubmit.bind(this);
+    this.chooseIcon = this.chooseIcon.bind(this);
 
+  }
+
+  componentDidMount() {
+    $('#choose-icon').html(this.state.icon);
+    this.renderIcons();
+
+    document.addEventListener('mouseup', (e) => {
+      const box = document.querySelector('.emoji-box');
+      const iconButton = document.getElementById('choose-icon');
+      const listIcon = document.querySelector('.watchlist-icon');
+
+      if (!box.contains(e.target) && !iconButton.contains(e.target)) {
+        if (listIcon) {
+          if (!listIcon.contains(e.target)) $('.emoji-box').addClass('hidden');
+        } else {
+          $('.emoji-box').addClass('hidden');
+        }
+      }
+    });
+  }
+
+  componentDidUpdate() {
+    $('#choose-icon').html(this.state.icon);
   }
 
   handleNameChange(e) {
@@ -24,18 +48,30 @@ export default class NewWatchlistForm extends React.Component {
     e.preventDefault();
     this.props.createWatchlist(this.state)
       .then(() => {
-        this.setState({ name: '', errors: [] })
+        // this.props.fetchWatchlists(this.props.user.id);
+        this.setState({ name: '', errors: [], icon: '&#128161' })
       }, () => {
         this.setState({ errors: this.props.errors })
       })
   }
 
-  renderEmojis() {
-    return (
-      <div>
+  toggleIconBox() {
+    $('.new-list.emoji-box').toggleClass('hidden');
+  }
 
-      </div>
-    )
+  renderIcons() {
+    $('.emoji-box').append(`<span class='emoji'>&#128161</span>`)
+    const emojiCodeRanges = [128005, 128063]
+    for (let i = emojiCodeRanges[0]; i < emojiCodeRanges[1]; i++) {
+      $('.emoji-box').append(`<span class='emoji' id='&#${i}'>&#${i}</span>`) 
+    }
+  }
+
+  chooseIcon(e) {
+    if (e.target.id) {
+      $('.emoji-box').addClass('hidden');
+      this.setState({ icon: e.target.id})
+    }
   }
 
   render() {
@@ -44,7 +80,10 @@ export default class NewWatchlistForm extends React.Component {
       <form>
         <div className='mini-watchlist-item create-new-list-form hidden' >
           <div className='new-list-inputs'>
-            <div id='choose-icon' className={`changeColor ${this.props.color}`}></div>
+            <div id='choose-icon' className={`changeColor ${this.props.color}`} onClick={this.toggleIconBox}>
+            </div>
+            <div className='new-list emoji-box hidden' onClick={this.chooseIcon}></div>
+
             <div className='mini-item-details'>
               <input type="text" placeholder="List Name" className={`${this.props.color} changeColor new-list-input`} value={this.state.name} onChange={this.handleNameChange} />
             </div>
