@@ -141,7 +141,7 @@ const AssetChart = ({ name, assets, symbol }) => {
       plugins: [tooltipLine]
     };
 
-    if (true) {
+    // if (true) {
       setCurrentValue(parseFloat(data[data.length - 1]));
       setInitial(parseFloat(data[0]));
       setDifference(currentValue - initial);
@@ -156,7 +156,7 @@ const AssetChart = ({ name, assets, symbol }) => {
       const canvas = document.getElementById('assetChart');
       if (canvas) {
         const myChart = new Chart(canvas, config)
-      }
+      // }
 
       const activeIntervalId = `#${chartInterval.split(' ').join('-')}`;
       $(activeIntervalId).addClass('active-filter');

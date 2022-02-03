@@ -39,36 +39,41 @@ export default class WatchlistShow extends React.Component {
     this.props.fetchWatchlists(this.props.user.id)
       .then(() => {
         const watchlistAsset = this.props.watchlist.assets || {};
-        Promise.all(Object.values(watchlistAsset).map(asset => {
-            this.props.fetchAssetDetails(asset.symbol);
-            this.props.fetchAssetFull(asset.symbol);
-        }))
+        const watchlistAssetValues = Object.values(watchlistAsset);
+        Promise.all(watchlistAssetValues.map(asset => this.props.fetchAssetFull(asset.symbol)))
           .then(() => {
-            for (const id in watchlistAsset) {
-              const asset = watchlistAsset[id];
-              const assetFullValues = Object.values(this.props.assets.full[asset.symbol]);
-              const openPrice = parseFloat(assetFullValues[0]['1. open']);
-              const closePrice = parseFloat(assetFullValues[0]['4. close']);
-              const percentDiff = ((closePrice-openPrice)/openPrice)*100;
-              const symbolObject = {
-                symbol: asset.symbol,
-                name: this.props.assets.details[asset.symbol]['Name'],
-                price: closePrice,
-                today: percentDiff,
-                marketCap: this.props.assets.details[asset.symbol]['MarketCapitalization'] || '-',
-                id: id
-              };
-              this.state.listSymbolDetails[asset.symbol] = symbolObject;
-            }
-            this.setState({ listSymbolArray: Object.values(watchlistAsset).map(asset => asset.symbol), name: this.props.watchlist.name, id: this.props.match.params.watchlistId, icon: this.props.watchlist.icon, loading: false})
+            Promise.all(watchlistAssetValues.map(asset => {
+              this.props.fetchAssetDetails(asset.symbol);
+            }))
+            .then(() => {
+                for (const id in watchlistAsset) {
+                  const asset = watchlistAsset[id];
+                  if (!this.props.assets.full || !this.props.assets.full[asset.symbol] || !this.props.assets.details || !this.props.assets.details[asset.symbol]) {
+                    this.componentDidMount();
+                    return;
+                  }
+                  const assetFullValues = Object.values(this.props.assets.full[asset.symbol]);
+                  const openPrice = parseFloat(assetFullValues[0]['1. open']);
+                  const closePrice = parseFloat(assetFullValues[0]['4. close']);
+                  const percentDiff = ((closePrice - openPrice) / openPrice) * 100;
+                  const symbolObject = {
+                    symbol: asset.symbol,
+                    name: this.props.assets.details[asset.symbol]['Name'],
+                    price: closePrice,
+                    today: percentDiff,
+                    marketCap: this.props.assets.details[asset.symbol]['MarketCapitalization'] || '-',
+                    id: id
+                  };
+                  this.state.listSymbolDetails[asset.symbol] = symbolObject;
+                }
+                this.setState({ listSymbolArray: Object.values(watchlistAsset).map(asset => asset.symbol), name: this.props.watchlist.name, id: this.props.match.params.watchlistId, icon: this.props.watchlist.icon, loading: false })
 
-            $('#input-list-name').focusout((e) => {
-              this.handleSumbit(e);
-            });
+                $('#input-list-name').focusout((e) => {
+                  this.handleSumbit(e);
+                });
+            })
           })
       })
-
-    
   }
 
   componentDidUpdate(prevProps) {

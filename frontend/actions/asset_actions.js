@@ -65,7 +65,7 @@ const receiveErrors = (errors) => ({
   //     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
   // }
 
-const apiExceeded = 'Thank you for using Alpha Vantage! Our standard API call frequency is 5 calls per minute and 500 calls per day.Please visit https://www.alphavantage.co/premium/ if you would like to target a higher API call frequency.';
+// export const apiExceeded = 'Thank you for using Alpha Vantage! Our standard API call frequency is 5 calls per minute and 500 calls per day.Please visit https://www.alphavantage.co/premium/ if you would like to target a higher API call frequency.';
 
   export const fetchAssetInterval = (symbol, interval) => dispatch => {
     if (sessionStorage.getItem(`interval-${symbol}`)) {
@@ -74,7 +74,7 @@ const apiExceeded = 'Thank you for using Alpha Vantage! Our standard API call fr
     return AssetApiUtil.fetchAssetInterval(symbol, interval)
       .then(payload => {
         dispatch(receiveAssetInterval(payload));
-        if (payload !== apiExceeded) sessionStorage.setItem(`interval-${symbol}`, JSON.stringify(payload));
+        if (payload['Note']) sessionStorage.setItem(`interval-${symbol}`, JSON.stringify(payload));
       })
       .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
   }
@@ -90,7 +90,7 @@ const apiExceeded = 'Thank you for using Alpha Vantage! Our standard API call fr
     return AssetApiUtil.fetchAssetFull(symbol)
       .then(payload => {
         dispatch(receiveAssetFull(payload));
-        if (payload !== apiExceeded) sessionStorage.setItem(`full-${symbol}`, JSON.stringify(payload));
+        if (payload['Note']) sessionStorage.setItem(`full-${symbol}`, JSON.stringify(payload));
       })
       .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
   }
@@ -101,7 +101,7 @@ const apiExceeded = 'Thank you for using Alpha Vantage! Our standard API call fr
     return AssetApiUtil.fetchAssetDetails(symbol)
       .then(payload => {
         dispatch(receiveAssetDetails(payload));
-        if (payload !== apiExceeded) sessionStorage.setItem(`details-${symbol}`, JSON.stringify(payload));
+        if (payload['Note']) sessionStorage.setItem(`details-${symbol}`, JSON.stringify(payload));
       })
       .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
   }
