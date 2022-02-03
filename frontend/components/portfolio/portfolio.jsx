@@ -1,28 +1,37 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AssetListItem from './asset_list_item';
 import PortfolioChart from './portfolio_chart';
 import AddFundsForm from './add_funds_form';
 import PortfolioHeader from './portfolio_header';
 import LoadingSpinner from '../loading_spinner';
+import MiniWatchlistItem from '../watchlist/mini_watchlist_item';
 
 export default class Portfolio extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       stockSymbols: [],
-      watchlistSymbols: [],
+      watchlistValues: [],
       loading: true
     }
   }
 
   componentDidMount() {
-    this.props.fetchTransactions(this.props.user.id).then( 
-      () => {
-        this.setState({ stockSymbols: Object.keys(this.props.symbols)});
+    this.props.fetchTransactions(this.props.user.id)
+      .then( () => {
+        this.props.fetchWatchlists(this.props.user.id)
+          .then(() => {
+            console.log(this.props.watchlists)
+            this.setState({
+              stockSymbols: Object.keys(this.props.symbols),
+              watchlistValues: Object.values(this.props.watchlists)
+            });
 
-        Promise.all(this.state.stockSymbols.map(symbol => 
-            this.props.fetchAssetInterval(symbol)))
-            .then(() => this.setState({ loading: false }));
+            Promise.all(this.state.stockSymbols.map(symbol =>
+              this.props.fetchAssetInterval(symbol)))
+              .then(() => this.setState({ loading: false }));
+          })
       })
   }
 
@@ -44,7 +53,7 @@ export default class Portfolio extends React.Component {
     return (
       <div className='portfolio-splash'>
         
-        <AddFundsForm addFunds={this.props.addFunds} user={this.props.user} />
+        <AddFundsForm addFunds={this.props.addFunds} user={this.props.user} fetchTransactions={this.props.fetchTransactions} user={this.props.user}/>
         <PortfolioHeader logout={this.props.logout}/>
 
         <div className='portfolio'>
@@ -83,13 +92,13 @@ export default class Portfolio extends React.Component {
             <p>Stocks</p>
             {
               this.state.stockSymbols.map((symbol, idx) =>
-                <AssetListItem symbol={symbol} assets={this.props.assets['interval']} key={idx} closeKey="4. close" openKey="3. low" quantity={this.props.symbols[symbol].quantity}/>
+                <AssetListItem symbol={symbol} assets={this.props.assets['interval']} key={idx} closeKey="4. close" openKey="4. close" quantity={this.props.symbols[symbol].quantity}/>
                 )
             }
             <p>Lists</p>
             {
-              this.state.watchlistSymbols.map((symbol, idx) =>
-                <AssetListItem symbol={symbol} assets={this.props.assets['interval']} key={idx} closeKey="4. close" openKey="3. low" quantity={this.props.symbols[symbol].quantity} />
+              this.state.watchlistValues.map((watchlist) =>
+                <Link to={`/watchlist/${watchlist.id}`} key={watchlist.id}><MiniWatchlistItem watchlist={watchlist}  /></Link>
               )
             }
           </aside>

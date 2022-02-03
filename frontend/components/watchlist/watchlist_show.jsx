@@ -1,7 +1,9 @@
 import React from 'react';
-import { $CombinedState } from 'redux';
+import { Link } from 'react-router-dom';
 import LoadingSpinner from '../loading_spinner';
 import PortfolioHeader from '../portfolio/portfolio_header';
+import MiniWatchlistItem from './mini_watchlist_item';
+import NewWatchlistFormContainer from './new_watchlist_form_container';
 
 export default class WatchlistShow extends React.Component {
   constructor(props) {
@@ -11,16 +13,30 @@ export default class WatchlistShow extends React.Component {
       name: '',
       listSymbolArray: [],
       listSymbolDetails: {},
-      id: this.props.match.params.watchlistId
+      id: '',
+      icon: '',
+      errors: [],
+      user_id: this.props.user.id,
+      name: '',
     }
+
+    document.addEventListener('mouseup', (e) => {
+      const confirmDelete = document.querySelector('.confirm-delete');
+      if (!confirmDelete.contains(e.target)) {
+        $('.confirm-delete-div').addClass('hidden');
+      }
+    });
+
     this.deleteListAsset = this.deleteListAsset.bind(this);
     this.sortTable = this.sortTable.bind(this);
     this.sortArray = this.sortArray.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.deleteWatchlist = this.deleteWatchlist.bind(this);
+    this.chooseIcon = this.chooseIcon.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchWatchlist(this.state.id)
+    this.props.fetchWatchlists(this.props.user.id)
       .then(() => {
         const watchlistAsset = this.props.watchlist.assets;
         Promise.all(Object.values(watchlistAsset).map(asset => {
@@ -44,7 +60,7 @@ export default class WatchlistShow extends React.Component {
               };
               this.state.listSymbolDetails[asset.symbol] = symbolObject;
             }
-            this.setState({ listSymbolArray: Object.values(watchlistAsset).map(asset => asset.symbol), name: this.props.watchlist.name, loading: false})
+            this.setState({ listSymbolArray: Object.values(watchlistAsset).map(asset => asset.symbol), name: this.props.watchlist.name, id: this.props.match.params.watchlistId, icon: this.props.watchlist.icon, loading: false})
 
             $('#input-list-name').focusout((e) => {
               this.handleSumbit(e);
@@ -55,6 +71,25 @@ export default class WatchlistShow extends React.Component {
     
   }
 
+  componentDidUpdate(prevProps) {
+    $(`#watchlist-icon-${this.state.id}`).html(this.state.icon);
+    if (prevProps.match.params.watchlistId !== this.props.match.params.watchlistId) {
+      this.componentDidMount();
+    }
+  }
+
+  componentWillUnmount() {
+    $('.create-new-list-form').removeClass('hidden');
+    $('.create-new-list-form').addClass('hidden');
+  }
+
+  chooseIcon(e) {
+    if (e.target.id) {
+      $('.emoji-box').addClass('hidden');
+      this.setState({ icon: e.target.id }, () => this.handleSumbit(e));
+    }
+  }
+
   handleChange(e) {
     const newName = e.currentTarget.value;
     this.setState({ name: newName })
@@ -63,6 +98,10 @@ export default class WatchlistShow extends React.Component {
   handleSumbit(e) {
     e.preventDefault();
     this.props.updateWatchlist(this.state);
+  }
+
+  toggleIconBox() {
+    $('.emoji-show.emoji-box').toggleClass('hidden');
   }
 
   deleteWatchlist(e) {
@@ -133,6 +172,11 @@ export default class WatchlistShow extends React.Component {
     return left.concat([pivot], right);
   }
 
+  toggleNewListInput(e) {
+    e.preventDefault();
+    $('.create-new-list-form').toggleClass('hidden');
+  }
+
   convertMarketCap(num) {
     let marketCap = parseInt(num);
     let divisor = 1;
@@ -147,12 +191,20 @@ export default class WatchlistShow extends React.Component {
     return `${(marketCap/divisor).toFixed(2)}${endUnit}`
   }
 
+
+
+  redirectAssetShow(symbol) {
+    return () => {
+      this.props.history.push(`/assets/${symbol}`)
+    }
+  }
+
   renderTableRow(symbol) {
     const symbolListDetails = this.state.listSymbolDetails[symbol];
     const marketCap = this.convertMarketCap(symbolListDetails.marketCap);
     const direction = symbolListDetails.today > 0 ? 'up' : 'down';
     return(
-      <tr key={symbol}>
+      <tr key={symbol} onClick={this.redirectAssetShow(symbol)} className='table-row'>
         <td>{symbolListDetails.name}</td>
         <td>{symbolListDetails.symbol}</td>
         <td>{`$${symbolListDetails.price}`}</td>
@@ -181,6 +233,12 @@ export default class WatchlistShow extends React.Component {
   render() {
     if (this.state.loading) return <LoadingSpinner clearErrors={this.props.clearErrors} errors={this.props.errors} history={this.props.history}/>
 
+    const emptyTable = (this.state.listSymbolArray.length > 0) ?  '' : 
+      <div className='empty-table'>
+        <div className='empty-table-title'>Feels a little empty in here...</div>
+        <div className='empty-table-text'>Search for companies to add and stay up to date.</div>
+      </div>;
+
     return (
 
       <div className='watchlist-show'>
@@ -188,7 +246,8 @@ export default class WatchlistShow extends React.Component {
         <PortfolioHeader logout={this.props.logout} />
         <div className='watchlist-body'>
           <div className='watchlist-main'>
-            <div className='watchlist-icon'>Icon Placeholder</div>
+            <div className='watchlist-icon' id={`watchlist-icon-${this.state.id}`} onClick={this.toggleIconBox}></div>
+            <div className='emoji-show emoji-box hidden' onClick={this.chooseIcon}></div>
 
             <div className='watchlist-header'>
               <div className='watchlist-table-title'>
@@ -197,7 +256,8 @@ export default class WatchlistShow extends React.Component {
               </div>
 
               <div className='watchlist-sort-options'>
-                <span><i className="fas fa-filter filter-icon"></i></span> <span onClick={this.toggleConfirmDelete} ><i className="fas fa-ellipsis-h filter-icon"></i></span>
+                {/* <span><i className="fas fa-filter filter-icon"></i></span>  */}
+                <span onClick={this.toggleConfirmDelete} ><i className="fas fa-ellipsis-h filter-icon"></i></span>
               </div>
             </div>
 
@@ -236,13 +296,20 @@ export default class WatchlistShow extends React.Component {
                 </tbody>
               </table>
             </div>
-
+            {emptyTable}
           </div>
           <aside className='watchlist-aside'>
-            <div className='watchlist-aside-title'><span>Lists</span><span>+</span></div>
+            <div className='watchlist-aside-title'><span>Lists</span><span onClick={this.toggleNewListInput} className='toggle-show-new-form'>+</span></div>
             <div className='all-list-names'>
-
-
+              <NewWatchlistFormContainer color='greenText' toggleNewListInput={this.toggleNewListInput} />
+              {
+                Object.values(this.props.watchlists).map((watchlist) =>
+                  <Link to={`/watchlist/${watchlist.id}`} key={watchlist.id}>
+                    <MiniWatchlistItem watchlist={watchlist} />
+                    {/* <span onClick={this.toggleConfirmDelete(watchlist.id)} ><i className="fas fa-ellipsis-h filter-icon"></i></span> */}
+                    </Link>
+                )
+              }
             </div>
           </aside>
         </div>

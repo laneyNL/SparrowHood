@@ -1,0 +1,107 @@
+#choose-icon {
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-list-input {
+  background-color: #30363A;
+  height: 50px;
+  width: 250px;
+  border: none;
+  border-radius: 5px;
+  padding-left: 10px;
+  color: white;
+}
+.new-list-inputs {
+  display: flex;
+}
+.create-new-list-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-list-button-div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancel-new-list-button, .create-new-list-button {
+  width: 100px;
+  height: 35px;
+  border-radius: 5px;
+  margin: 10px 5px;
+}
+
+.cancel-new-list-button.redText {
+  border: 1px solid #FF5000;
+  background-color: transparent;
+  color: #FF5000;
+}
+.cancel-new-list-button.greenText {
+  border: 1px solid #00C805;
+  background-color: transparent;
+  color: #00C805;
+}
+.create-new-list-button {
+  color: #1E2124;
+}
+
+.cancel-new-list-button.redText:hover {
+  background-color: rgba(206, 97, 46, 0.308);
+}
+.cancel-new-list-button.greenText:hover {
+  background-color: rgba(9, 197, 15, 0.2);
+}
+.create-new-list-button.red:hover {
+  background-color: #e97844;
+}
+.create-new-list-button.greenText:hover {
+  background-color: #88c58a;
+}
+
+#choose-icon {
+  position: relative;
+}
+
+.emoji-box {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 1px solid gray;
+  background-color: #1E2124;
+  z-index: 5;
+  overflow: scroll;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.emoji-box::-webkit-scrollbar {
+  display: none;
+}
+
+.watchlist-show .emoji-box {
+  top: 20%;
+  right: 20%;
+}
+
+.asset-show .emoji-box {
+  top: 30%;
+  left: 20%;
+}
+
+.emoji {
+  display: inline-block;
+  font-size: 25px;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.emoji:hover {
+  background-color: #606870;
+  border-radius: 5px;
+  cursor: pointer;
+}

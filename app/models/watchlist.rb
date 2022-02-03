@@ -9,13 +9,14 @@
 #  updated_at :datetime         not null
 #
 class Watchlist < ApplicationRecord
-  validates :user_id, :name, presence: true
-  validates :user_id, uniqueness: { scope: :name }
+  validates :user_id, :name, :icon, presence: true
+  validates :name, uniqueness: { scope: :user_id }
   
   belongs_to :user
 
   has_many :assets,
-  class_name: "WatchlistAsset"
+  class_name: "WatchlistAsset",
+  dependent: :destroy
 
 
 end

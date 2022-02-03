@@ -3,7 +3,7 @@ import AssetChart from './asset_chart'
 import PortfolioHeader from '../portfolio/portfolio_header'
 import TransactionForm from './transaction_form';
 import LoadingSpinner from '../loading_spinner';
-import WatchlistAssetModuleContainer from '../watchlist/watchlist_asset_module_container';
+import WatchlistAssetModalContainer from '../watchlist/watchlist_asset_modal_container';
 
 export default class AssetShow extends React.Component {
   constructor(props) {
@@ -51,11 +51,10 @@ export default class AssetShow extends React.Component {
     const allSharesArr = Object.values(this.props.symbolDetails).map(value => parseFloat(value.quantity));
     const allShares = allSharesArr.reduce((num, total) => (num + total));
     const diversity = ((quantityOwned/allShares)*100).toFixed(2);
-
     return (
 
       <div className='asset-show'>
-        <WatchlistAssetModuleContainer symbol={this.state.symbol}/>
+        <WatchlistAssetModalContainer symbol={this.state.symbol} sign={sign}/>
         <PortfolioHeader logout={this.props.logout} />
 
         <div className='asset-show-body'>

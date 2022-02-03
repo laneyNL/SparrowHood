@@ -1,15 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
   
   if (!transactions.length) return null;
-  let currentTotal = transactions[transactions.length - 1].currentTotal;
-  const initial = transactions[0].currentTotal;
+  const [currentTotal, setCurrentTotal] = useState(transactions[transactions.length - 1].currentTotal);
+  const [initial, setInitial] = useState(transactions[0].currentTotal);
+  const [difference, setDifference] = useState(currentTotal - initial);
+  const [percDiff, setPercDiff] = useState(Math.abs((difference / initial) * 100).toFixed(2));
+  const [sign, setSign] = useState((difference > 0) ? '+' : '-');
 
-  const difference = (currentTotal) - initial;
-  const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
-  let symbol = ''
-  if (Math.floor(percDiff) !== 0) symbol = (difference > 0 ? '+' : '-');
+
+  // let currentTotal = transactions[transactions.length - 1].currentTotal;
+  // const initial = transactions[0].currentTotal;
+
+  // const difference = currentTotal - initial;
+  // const percDiff = Math.abs((difference / initial) * 100).toFixed(2);
+  // let sign = ''
+  // if (Math.floor(percDiff) !== 0) symbol = (difference > 0 ? '+' : '-');
   
   const chartData = {
     labels: transactions.map(action => action.createdAt),
@@ -17,7 +24,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
       {
         data: transactions.map(action => action.currentTotal),
         fill: false,
-        borderColor: symbol === '+' ? 'green' : 'red',
+        borderColor: sign === '+' ? 'green' : 'red',
         tension: 0.4,
       }
     ]
@@ -65,13 +72,13 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
     onHover: (e, legendItem, legend) => {
 
       if(legendItem[0]) {
-        currentTotal = transactions[legendItem[0].index].currentTotal;
-        const difference = (currentTotal) - initial;
-        const percDiff = Math.abs((difference / initial) * 100).toFixed(2).toLocaleString("en-US");
-        let symbol = '';
-        if (Math.floor(difference) !== 0) symbol = (difference > 0 ? '+' : '-');
-        document.getElementById('currentTotal').innerHTML = `$${currentTotal.toFixed(2).toLocaleString("en-US")}`;
-        document.getElementById('difference').innerHTML = `${symbol}$${Math.abs(difference).toLocaleString("en-US")} (${symbol}${percDiff.toLocaleString("en-US")}%)`
+        let hoverTotal = transactions[legendItem[0].index].currentTotal;
+        const hoverDiff = (hoverTotal) - initial;
+        const hoverPercDiff = Math.abs((hoverDiff / initial) * 100).toFixed(2).toLocaleString("en-US");
+        let hoverSign = '';
+        if (Math.floor(hoverDiff) !== 0) hoverSign = (hoverDiff > 0 ? '+' : '-');
+        document.getElementById('currentTotal').innerHTML = `$${parseFloat(hoverTotal.toFixed(2)).toLocaleString("en-US")}`;
+        document.getElementById('difference').innerHTML = `${hoverSign}$${Math.abs(hoverDiff).toLocaleString("en-US")} (${hoverSign}${hoverPercDiff.toLocaleString("en-US")}%)`
       }
     },
     hover: {
@@ -126,6 +133,14 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
       plugins: [tooltipLine]
     };
 
+    setCurrentTotal(transactions[transactions.length - 1].currentTotal);
+    setInitial(transactions[0].currentTotal);
+    setDifference(currentTotal - initial);
+    setPercDiff(Math.abs((difference / initial) * 100).toFixed(2));
+    setSign((difference > 0) ? '+' : '-');
+    $('#currentTotal').html(`$${currentTotal.toLocaleString("en-US")}`)
+    $('#difference').html(`${sign}${Math.abs(difference).toLocaleString("en-US")} (${sign}${percDiff} %)`)
+
     $('#myChart').remove();
     $(`#chartDiv`).append("<canvas id='myChart' width={600} height={200}/>");
     const canvas = document.getElementById('myChart');
@@ -142,7 +157,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
     }
   }
 
-  let colorClass = symbol === '+' ? 'greenText' : 'redText';
+  let colorClass = sign === '+' ? 'greenText' : 'redText';
   return (
       <div className='chart'>
       <div className='totalValue' id ='currentTotal'>
@@ -150,7 +165,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
         </div>
       <div className='difference'>
         <span id='difference'>
-          {symbol}${Math.abs(difference).toLocaleString("en-US")} ({symbol}{`${percDiff}%`})
+          {sign}${Math.abs(difference).toLocaleString("en-US")} ({sign}{`${percDiff}%`})
         </span>
         <span id='interval'> {interval}</span>
       </div>

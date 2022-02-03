@@ -15,7 +15,7 @@ ActiveRecord::Base.transaction do
   user1 = User.create!(first_name: 'Demo', last_name: 'User', username: 'demo', password:'demopassword', buying_power: 11579.18)
 
   
-  tran1 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: 20.15, symbol: 'AMC')
+  tran1 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: 20.15, symbol: 'AMC', current_total: user1.buying_power)
 
   tran2 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: -5, transaction_price: 18.25, symbol: 'AMC')
 

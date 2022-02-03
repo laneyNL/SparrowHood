@@ -26,7 +26,7 @@ class Api::WatchlistsController < ApplicationController
 
   def update
     @watchlist = Watchlist.includes(:assets).find_by(id: params[:id])
-    if @watchlist && @watchlist.user_id = current_user.id && @watchlist.update({name: params[:watchlist][:name]})
+    if @watchlist && @watchlist.user_id = current_user.id && @watchlist.update(watchlist_params)
       render :show
     else  
       render json: @watchlist.errors.full_messages, status: 404
@@ -35,8 +35,8 @@ class Api::WatchlistsController < ApplicationController
 
   def destroy
     @watchlist = Watchlist.find_by(id: params[:id])
-    if @watchlist.user_id = current_user.id && @watchlist.destroy
-      render :show
+    if @watchlist.user_id == current_user.id && @watchlist.destroy
+      render json: ['Watchlist deleted'], status: 200
     else  
       render json: @watchlist.errors.full_messages, status: 404
     end
@@ -44,6 +44,6 @@ class Api::WatchlistsController < ApplicationController
 
   private
   def watchlist_params
-    params.require(:watchlist).permit(:user_id, :name)
+    params.require(:watchlist).permit(:user_id, :name, :icon)
   end
 end

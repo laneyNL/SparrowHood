@@ -1,6 +1,7 @@
 .mini-watchlist-item {
   display: flex;
   margin: 5px 0;
+  cursor: pointer;
 }
 .mini-watchlist-item div {
   padding-left: 10px;
@@ -12,19 +13,22 @@
   font-size: 13px;
 }
 
-
-input[type=checkbox] {
-  width: 20px;
-  height: 20px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 1px solid #00C805;
-  cursor: pointer;
+.mini-item-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.mini-icon {
+  font-size: 30px;
+  width: 50px;
+  height: 60px;
+  background-color: #30363A;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
 }
 
-input[type=checkbox]:checked {
-  background-color: #00C805;
-  text-align: center;
-  line-height: 15px;
+.mini-watchlist-name {
+  color: white;
 }
