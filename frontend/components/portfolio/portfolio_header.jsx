@@ -10,6 +10,7 @@ export default class PortfolioHeader extends React.Component {
       results: '',
     }
     this.handleSearch = this.handleSearch.bind(this);
+    this.debounceSearch = this.debounceSearch.bind(this)();
   }
 
   componentWillUnmount() {
@@ -20,26 +21,37 @@ export default class PortfolioHeader extends React.Component {
     $('.search-results-div').toggleClass('hidden');
   }
 
+
+  debounceSearch() {
+    let timer;
+    return (keyword) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        Promise.all([this.props.fetchSearch(keyword)])
+          .then(() => {
+            this.setState({ results: this.props.results[keyword] || [] })
+          })
+      }, 1000);
+    }
+  }
+
   handleSearch(e) {
     const keyword = e.currentTarget.value;
     if (!keyword) {
       this.setState({ keyword: '', results: '' });
     } else {
-      this.setState({ keyword: keyword }, () => {
-        Promise.all([this.props.fetchSearch(keyword)])
-          .then(() => {
-            this.setState({ results: this.props.results || []})
-          })
-      })
+      this.setState({ keyword: keyword }, 
+        this.debounceSearch(keyword)
+        )
     }
   }
 
   renderSearchResults() {
     if (!this.state.results && !this.state.keyword) return '';
-    if (!this.state.results[this.state.keyword] || !this.state.results[this.state.keyword].length) return (
+    if (this.state.keyword && !this.state.results.length) return (
         <div className='no-results'>We were unable to find any results for your search.</div>
     )
-    const searchRow = this.state.results[this.state.keyword].map((result, idx) => {
+    const searchRow = this.state.results.map((result, idx) => {
       const symbol = result["1. symbol"];
       if (symbol.includes('.') || symbol.length >=5 ) return '';
       return (
