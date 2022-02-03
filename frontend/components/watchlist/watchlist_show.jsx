@@ -40,41 +40,38 @@ export default class WatchlistShow extends React.Component {
       .then(() => {
         const watchlistAsset = this.props.watchlist.assets || {};
         const watchlistAssetValues = Object.values(watchlistAsset);
-        Promise.all(watchlistAssetValues.map(asset => this.props.fetchAssetFull(asset.symbol)))
+        Promise.all(watchlistAssetValues.map(asset => this.props.fetchAssetDetails(asset.symbol)))
           .then(() => {
-            Promise.all(watchlistAssetValues.map(asset => {
-              this.props.fetchAssetDetails(asset.symbol);
-            }))
-            .then(() => {
-                for (const id in watchlistAsset) {
-                  const asset = watchlistAsset[id];
-                  if (!this.props.assets.full || !this.props.assets.full[asset.symbol] || !this.props.assets.details || !this.props.assets.details[asset.symbol]) {
-                    this.componentDidMount();
-                    return;
+            Promise.all(watchlistAssetValues.map(asset =>
+              this.props.fetchAssetInterval(asset.symbol)))
+              .then(() => {
+                  for (const id in watchlistAsset) {
+                    const asset = watchlistAsset[id];
+                    const assetIntervalValues = Object.values(this.props.assets.interval[asset.symbol]);
+                    const openPrice = parseFloat(assetIntervalValues[assetIntervalValues.length - 1]['1. open']);
+                    const closePrice = parseFloat(assetIntervalValues[0]['4. close']);
+                    const percentDiff = ((closePrice - openPrice) / openPrice) * 100;
+                    const symbolObject = {
+                      symbol: asset.symbol,
+                      name: this.props.assets.details[asset.symbol]['Name'],
+                      price: closePrice,
+                      today: percentDiff,
+                      marketCap: this.props.assets.details[asset.symbol]['MarketCapitalization'] || '-',
+                      id: id
+                    };
+                    this.state.listSymbolDetails[asset.symbol] = symbolObject;
                   }
-                  const assetFullValues = Object.values(this.props.assets.full[asset.symbol]);
-                  const openPrice = parseFloat(assetFullValues[0]['1. open']);
-                  const closePrice = parseFloat(assetFullValues[0]['4. close']);
-                  const percentDiff = ((closePrice - openPrice) / openPrice) * 100;
-                  const symbolObject = {
-                    symbol: asset.symbol,
-                    name: this.props.assets.details[asset.symbol]['Name'],
-                    price: closePrice,
-                    today: percentDiff,
-                    marketCap: this.props.assets.details[asset.symbol]['MarketCapitalization'] || '-',
-                    id: id
-                  };
-                  this.state.listSymbolDetails[asset.symbol] = symbolObject;
-                }
-                this.setState({ listSymbolArray: Object.values(watchlistAsset).map(asset => asset.symbol), name: this.props.watchlist.name, id: this.props.match.params.watchlistId, icon: this.props.watchlist.icon, loading: false })
-
-                $('#input-list-name').focusout((e) => {
-                  this.handleSumbit(e);
-                });
+                  this.setState({ listSymbolArray: Object.values(watchlistAsset).map(asset => asset.symbol), name: this.props.watchlist.name, id: this.props.match.params.watchlistId, icon: this.props.watchlist.icon, loading: false })
+                  $('#input-list-name').focusout((e) => {
+                    this.handleSumbit(e);
+                  })
             })
-          })
+        })
       })
   }
+
+    // if (!this.props.assets.full || !this.props.assets.full[asset.symbol] || !this.props.assets.details || !this.props.assets.details[asset.symbol]) {
+  // }
 
   componentDidUpdate(prevProps) {
     $(`#watchlist-icon-${this.state.id}`).html(this.state.icon);
@@ -212,7 +209,7 @@ export default class WatchlistShow extends React.Component {
       <tr key={symbol} className='table-row'>
         <td onClick={this.redirectAssetShow(symbol)}>{symbolListDetails.name}</td>
         <td onClick={this.redirectAssetShow(symbol)}>{symbolListDetails.symbol}</td>
-        <td onClick={this.redirectAssetShow(symbol)}>{`$${symbolListDetails.price}`}</td>
+        <td onClick={this.redirectAssetShow(symbol)}>{`$${symbolListDetails.price.toFixed(2)}`}</td>
         <td onClick={this.redirectAssetShow(symbol)}><span><span className={`caret ${direction}`}></span> {`${symbolListDetails.today.toFixed(2)}%`}</span></td>
         <td onClick={this.redirectAssetShow(symbol)}>{marketCap}</td>
         <td onClick={this.deleteListAsset(symbolListDetails.symbol)} className='delete-watchlist-asset'>&times;</td>

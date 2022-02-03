@@ -92,7 +92,7 @@ export default class Portfolio extends React.Component {
             <p>Stocks</p>
             {
               this.state.stockSymbols.map((symbol, idx) =>
-                <AssetListItem symbol={symbol} assets={this.props.assets['interval']} key={idx} closeKey="4. close" openKey="4. close" quantity={this.props.symbols[symbol].quantity}/>
+                <AssetListItem symbol={symbol} assets={this.props.assets['interval']} key={idx} closeKey="4. close" openKey="3. low" quantity={this.props.symbols[symbol].quantity}/>
                 )
             }
             <p>Lists</p>
