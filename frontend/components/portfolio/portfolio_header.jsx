@@ -48,7 +48,7 @@ export default class PortfolioHeader extends React.Component {
     )
     const searchRow = this.state.results[this.state.keyword].map((result, idx) => {
       const symbol = result["1. symbol"];
-      if (symbol.includes('.')) return '';
+      if (symbol.includes('.') || symbol.length >=5 ) return '';
       return (
         <Link to={`/assets/${symbol}`} key={idx} className='search-result'>
           <div className='search-result-symbol'>{symbol}</div>
