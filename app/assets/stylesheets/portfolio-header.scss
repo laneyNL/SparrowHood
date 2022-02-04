@@ -86,6 +86,10 @@ white-space: nowrap;
   color: white;
   padding: 0 20px;
   font-size: 13px;
+  cursor: pointer;
+}
+.portfolio-nav-links:hover {
+  color: #00C805;
 }
 
 button.portfolio-nav-links {

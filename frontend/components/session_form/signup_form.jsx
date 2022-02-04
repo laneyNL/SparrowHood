@@ -50,7 +50,7 @@ export default class SignUpForm extends React.Component {
       <div className ='signup'>
         
           <div className='left-signup'>
-            <h2 className='header'>Sparrowhood</h2>
+            <h2 className='header'><Link to='/'>Sparrowhood</Link></h2>
             <h2 className='title-left'>Make Your Money Move</h2><br />
             <p>Sparrowhood lets you invest in companies you love, commission-free.</p><br/><br />
             <p className='font13 bold'>Please enter your full legal name. Your legal name should match any form of government ID.</p><br />

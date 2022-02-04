@@ -62,9 +62,9 @@ export default class Splash extends React.Component {
           </div>
           <div className='right-banner'>
             <img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/splash-phone.png'} alt="phone and credit card" id='splashPhone'/>
-            <div className='video'>
+            {/* <div className='video'> */}
               <video src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/videos/splash-video.mp4'} autoPlay loop muted preload='auto' id='splashVideo'></video></div>
-          </div>
+          {/* </div> */}
         </div>
 
         <div className='fee'>See our <span className='underline'><a href="https://github.com/laneyNL" target="_blank">GitHub</a></span> to learn more about Sparrowhood.</div>

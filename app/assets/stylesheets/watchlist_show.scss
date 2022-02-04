@@ -6,13 +6,15 @@
   font-size: 13px;
 }
 
-.watchlist-body, .delete-question {
+.watchlist-body{
   display: flex;
-  justify-content: center;
+  width: fit-content;
+  margin: 5% auto;
 }
 
-.watchlist-body {
-  margin: 5%;
+.delete-question {
+  display: flex;
+  justify-content: center;
 }
 
 .watchlist-main {

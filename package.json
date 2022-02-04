@@ -48,5 +48,8 @@
   "engines": {
     "node": "14.18.1",
     "npm": "6.14.15"
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
   }
 }

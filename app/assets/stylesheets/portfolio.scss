@@ -12,10 +12,11 @@
 .portfolio, .asset-show-body {
   background-color: black;
   display: flex;
-  justify-content: center;
-  width: 100%;
+  width: fit-content;
   height: 100%;
   padding: 5%;
+  margin: 0 auto;
+  
 }
 
 .asset-list {

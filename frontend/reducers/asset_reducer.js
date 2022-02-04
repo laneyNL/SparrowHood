@@ -1,7 +1,6 @@
 import { RECEIVE_ASSET_FULL, RECEIVE_ASSET_INTERVAL, RECEIVE_ASSET_DETAILS} from "../actions/asset_actions"
 
 const assetReducer = (state = {}, action) => {
-  console.log(process.env.REACT_APP_ALPHA_KEY)
   Object.freeze(state);
   const nextState = Object.assign({}, state);
   if (!action.payload || action.payload['Note'] || (!action.payload["Meta Data"] && action.type !== RECEIVE_ASSET_DETAILS)) return state;

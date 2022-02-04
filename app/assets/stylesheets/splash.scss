@@ -111,16 +111,20 @@ a {
 .banner {
   background-color: rgb(195,245,60);
 }
+
 .left-banner {
   background-color: rgb(195,245,60);
   display: flex;
   flex-direction: column;
   padding: 9px;
+  max-height: 700px;
+
 }
 
 .right-banner {
   position: relative;
   width: 100%;
+  max-height: 700px;
 }
 
 #splashPhone {
@@ -128,16 +132,18 @@ a {
   z-index: 2;
   width: 100%;
   object-fit: contain;
+  max-height: 100%;
 }
 
 .video {
   width: 100%;
+  max-height: 700px;
 }
 
 #splashVideo {
   position: absolute;
   width: 100%;
-  // height: auto;
+  height: 100%;
   object-fit: contain;
   left: 0;
   top: 0;
