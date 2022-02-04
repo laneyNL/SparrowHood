@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 export default class Splash extends React.Component {
   constructor(props) {
     super(props);
+    document.body.style.backgroundColor = 'white';
   }
   
   dropdown() {
