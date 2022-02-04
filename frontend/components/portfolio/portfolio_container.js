@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { addFunds, logout } from '../../actions/session_actions'
 import { fetchTransactions } from '../../actions/transaction_action';
-import { fetchAssetInterval, fetchCryptoInterval } from '../../actions/asset_actions';
+import { fetchAssetInterval} from '../../actions/asset_actions';
 import { fetchWatchlists } from '../../actions/watchlist_actions'; 
 import Portfolio from './portfolio';
 
@@ -20,7 +20,6 @@ const mapDispatchToProps = dispatch => ({
   fetchTransactions: (userId, interval) => dispatch(fetchTransactions(userId, interval)),
   fetchAssetInterval: (symbol) => dispatch(fetchAssetInterval(symbol)),
   addFunds: (userId, amount) => dispatch(addFunds(userId, amount)),
-  fetchCryptoInterval: (symbol) => dispatch(fetchCryptoInterval(symbol)),
   fetchWatchlists: (userId) => dispatch(fetchWatchlists(userId))
 })
 
