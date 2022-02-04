@@ -14,7 +14,7 @@ export default class LoginForm extends React.Component {
   }
 
   componentDidMount() {
-    document.title = "Log In | Sparrowhood"
+    document.title = "Log In | Sparrowhood";
   }
 
   handleSubmit(e) {

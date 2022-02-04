@@ -16,6 +16,7 @@ export default class AssetShow extends React.Component {
   }
 
   componentDidMount() {
+    document.title = `${this.props.match.params.assetSymbol} | Sparrowhood`;
       this.props.fetchTransactions(this.props.user.id)
         .then(() => {
           Promise.all([

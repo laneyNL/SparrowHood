@@ -257,3 +257,12 @@ th:hover, .filter-icon:hover {
   left: 2%;
   top: 15%;
 }
+.watchlist-side-bar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.watchlist-side-bar-item .fa-ellipsis-h {
+  padding: 10px;
+}

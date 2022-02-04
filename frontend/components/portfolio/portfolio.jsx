@@ -19,6 +19,7 @@ export default class Portfolio extends React.Component {
   }
 
   componentDidMount() {
+    document.title = "Portfolio | Sparrowhood"
     this.props.fetchTransactions(this.props.user.id)
       .then( () => {
         this.props.fetchWatchlists(this.props.user.id)

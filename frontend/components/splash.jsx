@@ -44,13 +44,6 @@ export default class Splash extends React.Component {
                 <li className='sublist-item'><a href="https://github.com/laneyNL" className='nav-link' target="_blank">GitHub</a></li>
                 <li className='sublist-item'><a href="https://www.linkedin.com/in/laneyluong/" className='nav-link' target="_blank">LinkedIn</a></li>
                 </ul>
-              
-
-              <li className='sublist nav-link' onClick={this.toggleList('learn-list')}><div className='flex'><span>Learn</span><span><i className="fas fa-angle-down" id='learn-list-caret'></i></span></div></li>
-                <ul className='toggle-list' id="learn-list">
-                  <li className='sublist-item'>Support</li>
-                  <li className='sublist-item'>Who we are</li>
-                </ul>
 
               <li className='sublist nav-link' onClick={this.toggleList('login-list')}><div className='flex'><span>Sign In to View More Features</span><span><i className="fas fa-angle-down" id='login-list-caret'></i></span></div></li>
                 <ul className='toggle-list' id="login-list">

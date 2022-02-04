@@ -13,15 +13,16 @@ export default class WatchlistShow extends React.Component {
       name: '',
       listSymbolArray: [],
       listSymbolDetails: {},
-      id: '',
+      id: this.props.match.params.watchlistId,
       icon: '',
       errors: [],
       user_id: this.props.user.id,
       name: '',
+      targetListId: this.props.match.params.watchlistId
     }
     this.listener = (e) => {
       const confirmDelete = document.querySelector('.confirm-delete');
-      if (!confirmDelete.contains(e.target)) {
+      if (confirmDelete && !confirmDelete.contains(e.target)) {
         $('.confirm-delete-div').addClass('hidden');
       }
     }
@@ -36,8 +37,6 @@ export default class WatchlistShow extends React.Component {
   }
 
   componentDidMount() {
-
-
     this.props.fetchWatchlists(this.props.user.id)
       .then(() => {
         if (!this.props.watchlist) {
@@ -69,7 +68,8 @@ export default class WatchlistShow extends React.Component {
                     };
                     this.state.listSymbolDetails[asset.symbol] = symbolObject;
                   }
-                  this.setState({ listSymbolArray: Object.values(watchlistAsset).map(asset => asset.symbol), name: this.props.watchlist.name, id: this.props.match.params.watchlistId, icon: this.props.watchlist.icon, loading: false })
+                this.setState({ listSymbolArray: Object.values(watchlistAsset).map(asset => asset.symbol), name: this.props.watchlist.name, icon: this.props.watchlist.icon, loading: false })
+                  document.title = `${this.props.watchlist.name} | Sparrowhood`;
                   $('#input-list-name').focusout((e) => {
                     this.handleSumbit(e);
                   })
@@ -115,12 +115,17 @@ export default class WatchlistShow extends React.Component {
   }
 
   deleteWatchlist(e) {
-    return this.props.deleteWatchlist(this.state.id)
-      .then(() => this.props.history.push('/'))
+    return this.props.deleteWatchlist(this.state.targetListId)
+      .then(() => {
+        if (this.state.id === this.state.targetListId) this.props.history.push('/');
+      })
   }
 
-  toggleConfirmDelete() {
-    return $('.confirm-delete-div').toggleClass('hidden');
+  toggleConfirmDelete(watchlistId) {
+    return () => {
+      this.setState({targetListId: watchlistId})
+      $('.confirm-delete-div').toggleClass('hidden');
+    }
   }
 
   deleteListAsset(symbol) {
@@ -226,12 +231,13 @@ export default class WatchlistShow extends React.Component {
   }
 
   renderConfirmDelete() {
+    if (!this.props.watchlists[this.state.targetListId]) return null;
     return (
       <div className='confirm-delete-div hidden'>
         <div className='confirm-delete'>
           <div className='delete-question'>
-            <span>Are you sure you want to delete "{this.state.name}"?</span>
-            <span onClick={this.toggleConfirmDelete} className='close-delete'>&times;</span>
+            <span>Are you sure you want to delete "{this.props.watchlists[this.state.targetListId].name}"?</span>
+            <span onClick={this.toggleConfirmDelete(this.state.id)} className='close-delete'>&times;</span>
           </div><br />
           <div>If you delete this list and its {this.state.listSymbolArray.length} items, it'll be gone forever!</div><br />
           <button className='delete-button' onClick={this.deleteWatchlist}>Delete {this.state.name}</button>
@@ -241,6 +247,7 @@ export default class WatchlistShow extends React.Component {
   }
 
   render() {
+    
     if (this.state.loading) return <LoadingSpinner />
     if (!this.state.loading && this.state.errors.length) return <LoadingSpinner errors={this.state.errors} history={this.props.history}/>
 
@@ -268,7 +275,7 @@ export default class WatchlistShow extends React.Component {
 
               <div className='watchlist-sort-options'>
                 {/* <span><i className="fas fa-filter filter-icon"></i></span>  */}
-                <span onClick={this.toggleConfirmDelete} ><i className="fas fa-ellipsis-h filter-icon"></i></span>
+                <span onClick={this.toggleConfirmDelete(this.state.id)} ><i className="fas fa-ellipsis-h filter-icon"></i></span>
               </div>
             </div>
 
@@ -315,10 +322,13 @@ export default class WatchlistShow extends React.Component {
               <NewWatchlistFormContainer color='greenText' toggleNewListInput={this.toggleNewListInput} />
               {
                 Object.values(this.props.watchlists).map((watchlist) =>
-                  <Link to={`/watchlist/${watchlist.id}`} key={watchlist.id}>
-                    <MiniWatchlistItem watchlist={watchlist} />
-                    {/* <span onClick={this.toggleConfirmDelete(watchlist.id)} ><i className="fas fa-ellipsis-h filter-icon"></i></span> */}
+                  <div className='watchlist-side-bar-item' key={watchlist.id}>
+                    <Link to={`/watchlist/${watchlist.id}`}>
+                      <MiniWatchlistItem watchlist={watchlist} />
                     </Link>
+                    <span onClick={this.toggleConfirmDelete(watchlist.id)} ><i className="fas fa-ellipsis-h filter-icon"></i></span>
+                  </div>
+
                 )
               }
             </div>
