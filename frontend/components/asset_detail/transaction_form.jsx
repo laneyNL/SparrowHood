@@ -138,7 +138,7 @@ export default class TransactionForm extends React.Component {
           </div>
           <div className=''>
             <div className='complete-body'>
-              <span>Amount Invested</span>
+              <span>Amount {this.state.is_purchase ? 'Invested' : 'Sold'}</span>
               <span>{purchaseTotal}</span>
             </div>
             <div className='complete-body'>
@@ -159,7 +159,7 @@ export default class TransactionForm extends React.Component {
     let available;
     const buyingPower = formatDollarString(parseFloat(this.props.user.buyingPower));
     if (this.state.is_purchase) {
-      available = `$${buyingPower} buying power available`;
+      available = `${buyingPower} buying power available`;
     } else if (this.state.transaction_unit === 'shares') {
       available = `${this.props.quantityOwned.toFixed(6)} Shares Available`;
     } else if (this.state.transaction_unit === 'dollars') {
