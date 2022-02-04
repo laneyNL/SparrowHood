@@ -73,7 +73,7 @@
 }
 
 .emoji-box {
-  position: absolute;
+  position: fixed;
   width: 200px;
   height: 200px;
   border: 1px solid gray;
@@ -86,16 +86,6 @@
 
 .emoji-box::-webkit-scrollbar {
   display: none;
-}
-
-.watchlist-show .emoji-box {
-  top: 20%;
-  right: 20%;
-}
-
-.asset-show .emoji-box {
-  top: 30%;
-  left: 20%;
 }
 
 .emoji {
