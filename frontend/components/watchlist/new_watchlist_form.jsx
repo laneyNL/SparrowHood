@@ -88,7 +88,7 @@ export default class NewWatchlistForm extends React.Component {
             <div className='new-list emoji-box hidden' onClick={this.chooseIcon}></div>
 
             <div className='mini-item-details'>
-              <input type="text" placeholder="List Name" className={`${this.props.color} changeColor new-list-input`} value={this.state.name} onChange={this.handleNameChange} />
+              <input type="text" placeholder="List Name" className={`${this.props.color} changeColor new-list-input`} value={this.state.name} onChange={this.handleNameChange} id='new-list-input'/>
             </div>
           </div>
           {errors}

@@ -91,6 +91,7 @@
 #buy-option, #sell-option {
   padding: 15px 5px;
   height: 100%;
+  margin-bottom: -1px;
 }
 
 #transaction-unit-input {
@@ -246,4 +247,12 @@ border-bottom: 1px solid #FF5000;
   border: 1px solid #FF5000;
   background-color: transparent;
   color: #FF5000;
+}
+
+input[type=checkbox].watchlist-checkbox:checked:before {
+  content: '✓';
+  color: black;
+  position: absolute;
+  margin-left: -5px;
+  margin-top: 1px;
 }

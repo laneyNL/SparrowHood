@@ -65,18 +65,18 @@ export default class Portfolio extends React.Component {
             <div className='buying-power-div' >
               <div className='buying-power flex-between' onClick={this.clickBuyPower}>
                 <div>Buying Power</div>
-                <div>${formatDollarString(this.props.user.buyingPower)}</div>
+                <div>{formatDollarString(this.props.user.buyingPower)}</div>
               </div>
 
               <div id='add-funds' className='row hidden'>
                 <div className='deposit-funds'>
                   <div className='flex-between'>
                     <div>Instant Available</div>
-                    <div>${formatDollarString(this.props.user.buyingPower)}</div>
+                    <div>{formatDollarString(this.props.user.buyingPower)}</div>
                   </div>
                   <div className='flex-between border-grey'>
                     <div>Buying Power</div>
-                    <div>${formatDollarString(this.props.user.buyingPower)}</div>
+                    <div>{formatDollarString(this.props.user.buyingPower)}</div>
                   </div>
                   <div className='width-full'>
                     <button className='deposit-button' onClick={this.clickDeposit}>Deposit Funds</button>

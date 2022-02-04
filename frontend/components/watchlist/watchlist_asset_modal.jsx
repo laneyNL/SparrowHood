@@ -101,7 +101,7 @@ export default class WatchlistAssetModal extends React.Component {
       return (
         <div key={watchlist.id}>
           <label className='mini-watchlist-input'>
-            <input type="checkbox" className={`changeColor ${this.props.color}`} id={`${watchlist.id}`} name="watchlists" value={watchlist.id} defaultChecked={this.state.listChecks[watchlist.id]} onChange={this.handleCheckChange}/>
+            <input type="checkbox" className={`changeColor ${this.props.color} watchlist-checkbox`} id={`${watchlist.id}`} name="watchlists" value={watchlist.id} defaultChecked={this.state.listChecks[watchlist.id]} onChange={this.handleCheckChange}/>
             <MiniWatchlistItem watchlist={watchlist} />
           </label>
         </div>
@@ -137,9 +137,7 @@ export default class WatchlistAssetModal extends React.Component {
             </div>
             </div>
 
-            {/* <div> */}
           <button className={`asset-modal-button changeColor ${this.props.color}`} disabled={!this.state.isChanged} onClick={this.handleSaveChange}>Save Changes</button>
-            {/* </div> */}
           
         </div>
       </div>
