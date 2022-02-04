@@ -30,10 +30,8 @@ export default class Splash extends React.Component {
       <div className='splash'>
         <nav>
           <Link to='/' className='nav-home'>Sparrowhood <img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png'}alt="feather" id='feather' /></Link>
-          <div className='hide-nav'><a href="https://github.com/laneyNL">GitHub <i className="fab fa-github"></i></a></div>
-          <div className='hide-nav'><a href="https://www.linkedin.com/in/laneyluong/">LinkedIn <i className="fab fa-linkedin"></i></a></div>
-          <div className='hide-nav'>Placeholder</div>
-          <div className='hide-nav'>Placeholder</div>
+          <div className='hide-nav'><a href="https://github.com/laneyNL" target="_blank">GitHub <i className="fab fa-github"></i></a></div>
+          <div className='hide-nav'><a href="https://www.linkedin.com/in/laneyluong/" target="_blank">LinkedIn <i className="fab fa-linkedin"></i></a></div>
           <div className='nav-links bold hide-nav'>
             <Link to='/login' className='nav-link'>Log In</Link>
             <Link to='/signup' className='nav-signup-link'>Sign Up</Link>
@@ -43,8 +41,8 @@ export default class Splash extends React.Component {
             <ul > 
               <li className='sublist nav-link' onClick={this.toggleList('info-list')}><div className='flex'><span>Laney's Information</span><span><i className="fas fa-angle-down" id='info-list-caret'></i></span></div></li>
                 <ul className='toggle-list' id="info-list">
-                <li className='sublist-item'><a href="https://github.com/laneyNL" className='nav-link'>GitHub</a></li>
-                <li className='sublist-item'><a href="https://www.linkedin.com/in/laneyluong/" className='nav-link'>LinkedIn</a></li>
+                <li className='sublist-item'><a href="https://github.com/laneyNL" className='nav-link' target="_blank">GitHub</a></li>
+                <li className='sublist-item'><a href="https://www.linkedin.com/in/laneyluong/" className='nav-link' target="_blank">LinkedIn</a></li>
                 </ul>
               
 
@@ -76,7 +74,7 @@ export default class Splash extends React.Component {
           </div>
         </div>
 
-        <div className='fee'>See our <span className='underline'>fee schedule</span> to learn more about cost.</div>
+        <div className='fee'>See our <span className='underline'><a href="https://github.com/laneyNL" target="_blank">GitHub</a></span> to learn more about Sparrowhood.</div>
 
         {/* <div className='balloon'>
           <div><img src={splashBalloon} alt="hot air balloon" />
@@ -93,17 +91,17 @@ export default class Splash extends React.Component {
           <div>
             <ul className='whiteText'>
               <li>About Me:</li>
-              <li><a href="https://github.com/laneyNL" className='nav-link'>GitHub</a></li>
-              <li><a href="https://www.linkedin.com/in/laneyluong/" className='nav-link'>LinkedIn</a></li>
+              <li><a href="https://github.com/laneyNL" className='nav-link' target="_blank">GitHub</a></li>
+              <li><a href="https://www.linkedin.com/in/laneyluong/" className='nav-link' target="_blank">LinkedIn</a></li>
             </ul>
           </div>
           <div>
             <ul>
               <li>Links:</li>
               <li id='icon-links'>
-                <a href="https://github.com/laneyNL" className='nav-link whiteText'><i className="fab fa-github"></i></a> 
+                <a href="https://github.com/laneyNL" className='nav-link whiteText' target="_blank"><i className="fab fa-github"></i></a>
                 <span id='icon-links'>
-                  <a href="https://www.linkedin.com/in/laneyluong/" className='nav-link whiteText'><i className="fab fa-linkedin"></i></a>
+                  <a href="https://www.linkedin.com/in/laneyluong/" className='nav-link whiteText' target="_blank"><i className="fab fa-linkedin"></i></a>
                 </span>
                 </li>
             </ul>

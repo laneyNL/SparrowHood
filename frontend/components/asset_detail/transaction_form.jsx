@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { formatDollarString } from '../../util/format_util';
 
 export default class TransactionForm extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export default class TransactionForm extends React.Component {
       symbol: this.props.symbol,
       transaction_unit: 'shares',
       isSubmitted: false,
-      valueOwned: this.formatDollarString((this.props.currentPrice * this.props.quantityOwned)),
+      valueOwned: formatDollarString((this.props.currentPrice * this.props.quantityOwned)),
       textColor: this.props.sign === '+' ? 'greenText' : 'redText',
       errors: []
     }
@@ -83,13 +83,9 @@ export default class TransactionForm extends React.Component {
     this.setState({ isSubmitted: false });
   }
 
-  formatDollarString(num) {
-    return parseFloat(num.toFixed(2)).toLocaleString("en-US");
-  }
-
   renderSharesForm () {
     let estCost = '$0.00';
-    if (this.state.quantity) estCost = this.formatDollarString(Math.abs((this.state.quantity * this.props.currentPrice)));
+    if (this.state.quantity) estCost = formatDollarString(Math.abs((this.state.quantity * this.props.currentPrice)));
     
     return (
     <div>
@@ -161,7 +157,7 @@ export default class TransactionForm extends React.Component {
 
   renderAvailable() {
     let available;
-    const buyingPower = this.formatDollarString(parseFloat(this.props.user.buyingPower));
+    const buyingPower = formatDollarString(parseFloat(this.props.user.buyingPower));
     if (this.state.is_purchase) {
       available = `$${buyingPower} buying power available`;
     } else if (this.state.transaction_unit === 'shares') {

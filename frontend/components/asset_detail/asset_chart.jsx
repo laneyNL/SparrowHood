@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { formatDollarString } from '../../util/format_util';
 
 const AssetChart = ({ name, assets, symbol }) => {
   
@@ -148,7 +149,7 @@ const AssetChart = ({ name, assets, symbol }) => {
       setPercDiff(Math.abs((difference / initial) * 100).toFixed(2));
       setSign((difference > 0) ? '+' : '-');
 
-      $('#currentValue').html(`$${formatDollarString(currentValue)}`)
+      $('#currentValue').html(`${formatDollarString(currentValue)}`)
       $('#difference-value').html(`${sign}${formatDollarString(Math.abs(difference))} (${sign}${percDiff} %)`)
 
       $('#assetChart').remove();
@@ -193,10 +194,6 @@ const AssetChart = ({ name, assets, symbol }) => {
     }
   }
 
-  const formatDollarString = (num) => {
-    return parseFloat(num.toFixed(2)).toLocaleString("en-US");
-  }
-
   let colorClass = sign === '+' ? 'greenText' : 'redText';
   // changes color for transaction form and modal
   $('.changeColor').removeClass('greenText');
@@ -207,11 +204,11 @@ const AssetChart = ({ name, assets, symbol }) => {
     <div className='chart'>
       <div className='chart-name'>{name}</div>
       <div className='totalValue chart-name' id='currentValue'>
-        {`$${formatDollarString(currentValue)}`}
+        {`${formatDollarString(currentValue)}`}
       </div>
       <div className='difference'>
         <span id='difference-value'>
-          {sign}${formatDollarString(Math.abs(difference))} ({sign}{`${percDiff}%`})
+          {sign}{formatDollarString(Math.abs(difference))} ({sign}{`${percDiff}%`})
         </span>
         <span id='interval'> {chartInterval}</span>
       </div>

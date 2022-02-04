@@ -6,6 +6,7 @@ import AddFundsForm from './add_funds_form';
 import PortfolioHeaderContainer from './portfolio_header_container';
 import LoadingSpinner from '../loading_spinner';
 import MiniWatchlistItem from '../watchlist/mini_watchlist_item';
+import { formatDollarString } from '../../util/format_util'
 
 export default class Portfolio extends React.Component {
   constructor(props) {
@@ -64,18 +65,18 @@ export default class Portfolio extends React.Component {
             <div className='buying-power-div' >
               <div className='buying-power flex-between' onClick={this.clickBuyPower}>
                 <div>Buying Power</div>
-                <div>${this.props.user.buyingPower.toLocaleString("en-US")}</div>
+                <div>${formatDollarString(this.props.user.buyingPower)}</div>
               </div>
 
               <div id='add-funds' className='row hidden'>
                 <div className='deposit-funds'>
                   <div className='flex-between'>
                     <div>Instant Available</div>
-                    <div>${this.props.user.buyingPower.toLocaleString("en-US")}</div>
+                    <div>${formatDollarString(this.props.user.buyingPower)}</div>
                   </div>
                   <div className='flex-between border-grey'>
                     <div>Buying Power</div>
-                    <div>${this.props.user.buyingPower.toLocaleString("en-US")}</div>
+                    <div>${formatDollarString(this.props.user.buyingPower)}</div>
                   </div>
                   <div className='width-full'>
                     <button className='deposit-button' onClick={this.clickDeposit}>Deposit Funds</button>

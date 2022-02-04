@@ -4,6 +4,7 @@ import PortfolioHeaderContainer from '../portfolio/portfolio_header_container';
 import TransactionForm from './transaction_form';
 import LoadingSpinner from '../loading_spinner';
 import WatchlistAssetModalContainer from '../watchlist/watchlist_asset_modal_container';
+import { formatDollarString } from '../../util/format_util';
 
 export default class AssetShow extends React.Component {
   constructor(props) {
@@ -25,10 +26,9 @@ export default class AssetShow extends React.Component {
         })
   }
 
-  formatDollarString(num) {
-    const sign = (num > 0) ? '+' : '-';
-    let numberFixed = parseFloat(Math.abs(num).toFixed(2));
-    return `${sign}$${numberFixed.toLocaleString("en-US")}`
+  formatDollarStringSign(num) {
+    const sign = (num > 0) ? '+' : '';
+    return `${sign}${formatDollarString(num)}`
   }
 
   renderAssetDetails(symbolDetails, quantityOwned, currentPrice, initialPrice) {
@@ -46,8 +46,8 @@ export default class AssetShow extends React.Component {
         <div className='assetDetails'>
           <p>Your market value</p>
           <p className='value-subtitle'>{marketValue}</p>
-          <div className='asset-detail-row border-bottom'><span >Today's return</span><span>{this.formatDollarString(todayReturn)}</span></div>
-          <div className='asset-detail-row'><span>Total return</span><span>{this.formatDollarString(totalReturn)}</span></div>
+          <div className='asset-detail-row border-bottom'><span >Today's return</span><span>{this.formatDollarStringSign(todayReturn)}</span></div>
+          <div className='asset-detail-row'><span>Total return</span><span>{this.formatDollarStringSign(totalReturn)}</span></div>
 
         </div>
         <div className='assetDetails'>

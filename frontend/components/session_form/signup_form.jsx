@@ -89,7 +89,6 @@ export default class SignUpForm extends React.Component {
             <p>Securities trading offered through Sparrowhood Financial LLC. Brokerage clearing services offered through Sparrowhood Securities, LLC. Both are subsidiaries of Sparrowhood Markets, Inc.</p><br />
             <p className='green'>Check the background of Sparrowhood Financial LLC and Sparrowhood Securities, LLC on FINRA’s BrokerCheck.</p><br />
             <p className='green'>Sparrowhood Terms & Conditions  Disclosure Library  Contact Us  FAQ</p><br />
-            <p>© 2020 Sparrowhood. All rights reserved.</p>
             </div>
         </div>
 
