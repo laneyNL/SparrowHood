@@ -63,10 +63,12 @@
   color: white;
   padding: 5px 20px; 
   display: flex;
+  z-index: 20;
 }
 
 .search-result:hover {
   background-color: #4c545c;
+  z-index: 20;
 }
 
 .search-result-symbol {

@@ -180,14 +180,13 @@ export default class WatchlistShow extends React.Component {
     const symDetails = this.state.listSymbolDetails;
     const sortCallback = this.sortCallback;
     let pivot = symbolArray[0];
-    let left = this.sortArray(symbolArray.slice(1).filter(symbol => {
-      sortCallback(symDetails[pivot][col], symDetails[symbol][col], col) === 1
-      }), col, isReversed
-    )
-    let right = this.sortArray(symbolArray.slice(1).filter(symbol => {
-      sortCallback(symDetails[pivot][col], symDetails[symbol][col], col) !== 1
-      }), col, isReversed
-    )
+    let left = this.sortArray(symbolArray.slice(1).filter(symbol => 
+      sortCallback(symDetails[pivot][col], symDetails[symbol][col], col) === 1)
+      , col, isReversed)
+    let right = this.sortArray(symbolArray.slice(1).filter(symbol => 
+      sortCallback(symDetails[pivot][col], symDetails[symbol][col], col) !== 1)
+      , col, isReversed)
+
     if (isReversed) return right.concat([pivot], left);
     return left.concat([pivot], right);
   }
