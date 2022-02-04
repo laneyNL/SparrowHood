@@ -68,7 +68,7 @@ export default class AssetShow extends React.Component {
   }
 
   render() {
-    if (this.state.loading || !this.props.details[this.state.symbol] || !this.props.assets['interval'][this.state.symbol]) return <LoadingSpinner/>
+    if (this.state.loading || !this.props.details || !this.props.assets['interval'] || !this.props.details[this.state.symbol] || !this.props.assets['interval'][this.state.symbol]) return <LoadingSpinner/>
     if (this.props.assetErrors.length) return <LoadingSpinner errors={this.props.assetErrors} clearErrors={this.props.clearErrors} history={this.props.history}/>
 
     const symbolDetails = this.props.symbolDetails[this.props.match.params.assetSymbol];
