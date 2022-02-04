@@ -20,11 +20,17 @@ export default class AssetShow extends React.Component {
       this.props.fetchTransactions(this.props.user.id)
         .then(() => {
           Promise.all([
-            this.props.fetchAssetInterval(this.state.symbol),
-            this.props.fetchAssetFull(this.state.symbol),
-            this.props.fetchAssetDetails(this.state.symbol)])
-            .then(() => this.setState({ loading: false }));
+            this.props.fetchAssetInterval(this.props.match.params.assetSymbol),
+            this.props.fetchAssetFull(this.props.match.params.assetSymbol),
+            this.props.fetchAssetDetails(this.props.match.params.assetSymbol)])
+            .then(() => this.setState({ loading: false, symbol: this.props.match.params.assetSymbol }));
         })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.assetSymbol !== this.props.match.params.assetSymbol) {
+      this.componentDidMount();
+    }
   }
 
   formatDollarStringSign(num) {
