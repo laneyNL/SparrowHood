@@ -95,7 +95,7 @@ export default class NewWatchlistForm extends React.Component {
 
           <div className='new-list-button-div'>
             <button className={`cancel-new-list-button changeColor ${this.props.color}`} onClick={this.props.toggleNewListInput}>Cancel</button>
-            <button className={`create-new-list-button changecolor ${this.props.color}`} onClick={this.handleNewListSubmit}>Create List</button>
+            <button className={`create-new-list-button changeColor ${this.props.color}`} onClick={this.handleNewListSubmit}>Create List</button>
           </div>
         </div>
       </form>
