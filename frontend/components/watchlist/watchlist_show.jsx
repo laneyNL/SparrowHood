@@ -279,7 +279,8 @@ export default class WatchlistShow extends React.Component {
 
               <div className='watchlist-sort-options'>
                 {/* <span><i className="fas fa-filter filter-icon"></i></span>  */}
-                <span onClick={this.toggleConfirmDelete(this.state.id)} ><i className="fas fa-ellipsis-h filter-icon"></i></span>
+                {/* <span onClick={this.toggleConfirmDelete(this.state.id)} ><i className="fas fa-ellipsis-h filter-icon"></i></span> */}
+                <span onClick={this.toggleConfirmDelete(this.state.id)} className='watchlist-delete-list'>&times;</span>
               </div>
             </div>
 

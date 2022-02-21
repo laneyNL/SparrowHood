@@ -45,9 +45,6 @@
   border-bottom: 1px solid gray;
 }
 
-.watchlist-icon {
-}
-
 .watchlist-sort-options {
   font-size: 18px;
 }
@@ -95,11 +92,11 @@ table, th, td {
   text-align: left;
 }
 
-th, .filter-icon {
+th, .filter-icon, .watchlist-delete-list {
   cursor: pointer;
 }
 
-th:hover, .filter-icon:hover {
+th:hover, .filter-icon:hover, .watchlist-delete-list:hover {
   color: #00C805;
 }
 
@@ -119,10 +116,10 @@ th:hover, .filter-icon:hover {
   min-width: 80px;
 }
 
-.fa-filter {
-  padding-right: 10px;
-  cursor: pointer;
-}
+// .fa-filter {
+//   padding-right: 10px;
+//   cursor: pointer;
+// }
 
 .caret {
   width: 0;
@@ -261,6 +258,17 @@ th:hover, .filter-icon:hover {
   align-items: center;
 }
 
+.watchlist-side-bar-item .watchlist-side-bar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .watchlist-side-bar-item .fa-ellipsis-h {
   padding: 10px;
+}
+
+.watchlist-delete-list {
+  padding: 10px;
+  font-size: 30px;
 }
