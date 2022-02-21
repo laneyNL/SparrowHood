@@ -83,7 +83,7 @@ export default class PortfolioHeader extends React.Component {
 
         <div className='search-bar-div'>
           <div className='search-bar-flex'>
-            <div><i className="fas fa-search"></i></div>
+            <div className='magnify-glass'><i className="fas fa-search"></i></div>
             <input type="text" placeholder='Search' value={this.state.keyword} onChange={this.handleSearch} id='search-bar' onFocus={this.toggleSearchResults} autoComplete="off"/>
           </div>
           <div className='search-results-div hidden'>

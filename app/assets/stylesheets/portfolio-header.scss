@@ -101,5 +101,10 @@ button.portfolio-nav-links {
 
 .port-nav {
   justify-content: space-around;
-  margin: 10px 5% 0 5%;
+  padding: 10px 5% 0 5%;
+}
+
+.magnify-glass {
+  display: flex;
+  align-items: center;
 }
