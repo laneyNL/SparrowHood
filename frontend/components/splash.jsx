@@ -30,7 +30,7 @@ export default class Splash extends React.Component {
     return (
       <div className='splash'>
         <nav>
-          <Link to='/' className='nav-home'>Sparrowhood <img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png'}alt="feather" id='feather' /></Link>
+          <Link to='/' className='nav-home'>Sparrowhood <img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png'}alt="feather" id='feather' className='splash-feather'/></Link>
           <div className='hide-nav'><a href="https://github.com/laneyNL" target="_blank">GitHub <i className="fab fa-github"></i></a></div>
           <div className='hide-nav'><a href="https://www.linkedin.com/in/laneyluong/" target="_blank">LinkedIn <i className="fab fa-linkedin"></i></a></div>
           <div className='nav-links bold hide-nav'>
