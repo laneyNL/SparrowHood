@@ -139,35 +139,6 @@ a {
   z-index: 1;
 }
 
-@media (max-width: 900px){
-  nav {
-    justify-content: space-between;
-    padding: 0 10px;
-  }
-  .hide-nav {
-    display: none;
-  }
-  .show {
-    display: inline;
-  }
-  #splashVideo {
-    top: 0px;
-  }
-}
-
-@media (min-width: 900px){
-  .right-banner {
-    width: calc(58.333% - 18px);
-  }
-  .left-banner {
-    width: calc(41.667% - 18px);
-  }
-}
-
-.underline {
-  text-decoration: underline;
-}
-
 .fee {
   text-align: center;
   padding: 45px;
@@ -196,10 +167,43 @@ footer li {
 .whiteText li a, .whiteText li Link, .whiteText {
   color: white;
 }
+
 #icon-links {
   padding-left: 8px;
 }
 
 .splash-feather#feather {
   height: 1.5em;
+}
+
+@media (max-width: 900px){
+  nav {
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+  .hide-nav {
+    display: none;
+  }
+  .show {
+    display: inline;
+  }
+  #splashVideo {
+    top: 0px;
+  }
+  .fee {
+    border-top: none;
+  }
+}
+
+@media (min-width: 900px){
+  .right-banner {
+    width: calc(58.333% - 18px);
+  }
+  .left-banner {
+    width: calc(41.667% - 18px);
+  }
+}
+
+.underline {
+  text-decoration: underline;
 }
