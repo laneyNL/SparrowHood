@@ -96,6 +96,7 @@ export default class PortfolioHeader extends React.Component {
           <Link to='/' className='portfolio-nav-links'>Portfolio</Link>
           <a href="https://github.com/laneyNL" className='portfolio-nav-links' target="_blank">GitHub <i className="fab fa-github"></i></a>
           <a href="https://www.linkedin.com/in/laneyluong/" className='portfolio-nav-links' target="_blank">LinkedIn <i className="fab fa-linkedin"></i></a>
+          <a href="https://angel.co/u/laney-luong" className='portfolio-nav-links' target="_blank">AngelList <i className="fab fa-angellist"></i></a>
           <button onClick={this.props.logout} className='portfolio-nav-links'>Logout</button>
         </div>
       </nav>

@@ -33,6 +33,7 @@ export default class Splash extends React.Component {
           <Link to='/' className='nav-home'>Sparrowhood <img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png'}alt="feather" id='feather' className='splash-feather'/></Link>
           <div className='hide-nav'><a href="https://github.com/laneyNL" target="_blank">GitHub <i className="fab fa-github"></i></a></div>
           <div className='hide-nav'><a href="https://www.linkedin.com/in/laneyluong/" target="_blank">LinkedIn <i className="fab fa-linkedin"></i></a></div>
+          <div className='hide-nav'><a href="https://angel.co/u/laney-luong" target="_blank">AngelList <i className="fab fa-angellist"></i></a></div>
           <div className='nav-links bold hide-nav'>
             <Link to='/login' className='nav-link'>Log In</Link>
             <Link to='/signup' className='nav-signup-link'>Sign Up</Link>
@@ -87,6 +88,7 @@ export default class Splash extends React.Component {
               <li>About Me:</li>
               <li><a href="https://github.com/laneyNL" className='nav-link' target="_blank">GitHub</a></li>
               <li><a href="https://www.linkedin.com/in/laneyluong/" className='nav-link' target="_blank">LinkedIn</a></li>
+              <li><a href="https://angel.co/u/laney-luong" className='nav-link' target="_blank">AngelList</a></li>
             </ul>
           </div>
           <div>
@@ -96,6 +98,9 @@ export default class Splash extends React.Component {
                 <a href="https://github.com/laneyNL" className='nav-link whiteText' target="_blank"><i className="fab fa-github"></i></a>
                 <span id='icon-links'>
                   <a href="https://www.linkedin.com/in/laneyluong/" className='nav-link whiteText' target="_blank"><i className="fab fa-linkedin"></i></a>
+                </span>
+                <span id='icon-links'>
+                  <a href="https://angel.co/u/laney-luong" className='nav-link whiteText' target="_blank"><i className="fab fa-angellist"></i></a>
                 </span>
                 </li>
             </ul>
