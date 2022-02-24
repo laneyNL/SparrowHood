@@ -3,7 +3,7 @@ import { formatDollarString } from '../../util/format_util';
 
 const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
   
-  if (!transactions.length) return null;
+  if (!transactions.length) return <div className='no-transactions'>Search for and purchase a stock to display a chart of your transactions.</div>;
   const [currentTotal, setCurrentTotal] = useState(transactions[transactions.length - 1].currentTotal);
   const [initial, setInitial] = useState(transactions[0].currentTotal);
   const [difference, setDifference] = useState(currentTotal - initial);

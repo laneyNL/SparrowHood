@@ -2,10 +2,16 @@
   margin-bottom: 20px;
 }
 
-.main-chart {
+.main-chart, .no-transactions {
   width: 600px;
   height: 300px;
   min-width: 400px;
+}
+
+.no-transactions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chartOptions span{

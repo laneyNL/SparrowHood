@@ -45,7 +45,8 @@ class PortfolioTransaction < ApplicationRecord
     owner = User.find_by(id: self.owner_id)
     lastTransaction = PortfolioTransaction.where(owner_id: self.owner_id).last
 
-    prev_price = lastTransaction ? lastTransaction.current_total : owner.buying_power
+    prev_price = lastTransaction ? lastTransaction.current_total : 0;
+    # prev_price = lastTransaction ? lastTransaction.current_total : owner.buying_power
     quantityOwned =  PortfolioTransaction.where(owner_id: self.owner_id, symbol: self.symbol).sum(:quantity)
     if (quantity > 0)
       return errors[:base] << 'Not Enough Buying Power' if (owner.buying_power < price)

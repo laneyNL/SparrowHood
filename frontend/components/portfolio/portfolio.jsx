@@ -52,6 +52,7 @@ export default class Portfolio extends React.Component {
 
   render() {
     if (this.state.loading) return <LoadingSpinner/>;
+    let transactions = this.props.transactions ? Object.values(this.props.transactions) : [];
     return (
       <div className='portfolio-splash'>
         
@@ -62,7 +63,7 @@ export default class Portfolio extends React.Component {
         <div className='portfolio'>
           <div className='main-chart'>
 
-            <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={Object.values(this.props.transactions)} interval={this.props.interval}/>
+            <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={transactions} interval={this.props.interval}/>
 
             <div className='buying-power-div' >
               <div className='buying-power flex-between' onClick={this.clickBuyPower}>

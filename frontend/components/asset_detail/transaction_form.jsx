@@ -80,7 +80,7 @@ export default class TransactionForm extends React.Component {
 
   handleReturnClick(e) {
     e.preventDefault();
-    this.setState({ isSubmitted: false });
+    this.setState({ isSubmitted: false, quantity: '', dollars: '' });
   }
 
   renderSharesForm () {
