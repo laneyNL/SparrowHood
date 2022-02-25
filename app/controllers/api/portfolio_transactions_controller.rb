@@ -16,9 +16,10 @@ class Api::PortfolioTransactionsController < ApplicationController
     @transaction = PortfolioTransaction.new(transaction_params)
 
     if @transaction.save
-      @asset= PortfolioTransaction.where(owner_id: @transaction.owner_id, symbol: @transaction.symbol).select('symbol').distinct.map(&:symbol)
-      @quantity = PortfolioTransaction.where(owner_id: @transaction.owner_id, symbol: @transaction.symbol).sum('quantity')
-      @average_price = PortfolioTransaction.where(owner_id: @transaction.owner_id, symbol: @transaction.symbol, is_purchase: true).average(:transaction_price)
+      transations = PortfolioTransaction.where(owner_id: @transaction.owner_id, symbol: @transaction.symbol)
+      @asset= transations.select('symbol').distinct.map(&:symbol)
+      @quantity = transations.sum('quantity')
+      @average_price = transations.where(is_purchase: true).average(:transaction_price)
       render :show
     else
       render json: @transaction.errors.full_messages, status: 404
