@@ -22,6 +22,24 @@ export default class TransactionForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.symbol !== this.props.symbol) {
+      this.setState({
+        owner_id: this.props.user.id,
+        is_purchase: true,
+        quantity: '',
+        dollars: '',
+        transaction_price: this.props.currentPrice,
+        symbol: this.props.symbol,
+        transaction_unit: 'shares',
+        isSubmitted: false,
+        valueOwned: formatDollarString((this.props.currentPrice * this.props.quantityOwned)),
+        textColor: this.props.sign === '+' ? 'greenText' : 'redText',
+        errors: []
+      })
+    }
+  }
+
   handleClick(field) {
     return (e) => {
       e.preventDefault();

@@ -25,11 +25,9 @@ ActiveRecord::Base.transaction do
 
   tran5 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 7, transaction_price: 77.23, symbol: 'DIS')
 
-  tran5 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: -6, transaction_price: 10.12, symbol: 'DIS')
-
-  tran6 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 3, transaction_price: 300.12, symbol: 'DIS')
+  tran6 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: 5, transaction_price: 30.12, symbol: 'DIS')
   
-  tran7 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: -1, transaction_price: 500.13, symbol: 'DIS')
+  tran7 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: -4, transaction_price: 12.13, symbol: 'DIS')
 
   tran8 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: 1, transaction_price: 300, symbol: 'DIS')
   tran9 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: -1, transaction_price: 1.00, symbol: 'DIS')
@@ -44,37 +42,55 @@ ActiveRecord::Base.transaction do
   tran18 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: 1, transaction_price: 200, symbol: 'DIS')
   tran19 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: -3, transaction_price: 1, symbol: 'DIS')
   tran20 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: false, quantity: 1, transaction_price: 100, symbol: 'DIS')
+  tran21 = PortfolioTransaction.create!(owner_id: user1.id, is_purchase: true, quantity: -6, transaction_price: 10.12, symbol: 'DIS')
 
-  tran1.update({created_at: 10.minutes.ago, current_total: 15000})
-  tran2.update({created_at: 20.minutes.ago, current_total: 13432.23})
-  tran3.update({created_at: 30.minutes.ago, current_total: 12023.29})
-  tran4.update({created_at: 50.minutes.ago})
-  tran5.update({created_at: 200.minutes.ago})
-  tran6.update({created_at: 300.minutes.ago, current_total: 10236.53})
-  tran7.update({created_at: 2.days.ago})
-  tran8.update({created_at: 3.days.ago})
-  tran9.update({created_at: 4.days.ago})
-  tran10.update({created_at: 3.days.ago})
-  tran11.update({created_at: 4.days.ago})
-  tran12.update({created_at: 5.days.ago})
-  tran13.update({created_at: 9.days.ago, current_total: 10454.09})
-  tran14.update({created_at: 10.days.ago, current_total: 13890.90})
-  tran15.update({created_at: 20.days.ago, current_total: 11209.98})
-  tran16.update({created_at: 50.days.ago})
-  tran17.update({created_at: 100.days.ago})
-  tran18.update({created_at: 200.days.ago})
-  tran19.update({created_at: 300.days.ago})
-  tran20.update({created_at: 500.days.ago})
+  # tran1.update({created_at: 10.minutes.ago, current_total: 15000})
+  # tran2.update({created_at: 20.minutes.ago, current_total: 13432.23})
+  # tran3.update({created_at: 30.minutes.ago, current_total: 12023.29})
+  # tran4.update({created_at: 50.minutes.ago})
+  # tran5.update({created_at: 200.minutes.ago})
+  # tran6.update({created_at: 300.minutes.ago, current_total: 10236.53})
+  # tran7.update({created_at: 2.days.ago})
+  # tran8.update({created_at: 3.days.ago})
+  # tran9.update({created_at: 4.days.ago})
+  # tran10.update({created_at: 3.days.ago})
+  # tran11.update({created_at: 4.days.ago})
+  # tran12.update({created_at: 5.days.ago})
+  # tran13.update({created_at: 9.days.ago, current_total: 10454.09})
+  # tran14.update({created_at: 10.days.ago, current_total: 13890.90})
+  # tran15.update({created_at: 20.days.ago, current_total: 11209.98})
+  # tran16.update({created_at: 50.days.ago})
+  # tran17.update({created_at: 100.days.ago})
+  # tran18.update({created_at: 200.days.ago})
+  # tran19.update({created_at: 300.days.ago})
+  # tran20.update({created_at: 500.days.ago})
+
+  tran21.update({created_at: 5.minutes.ago, current_total: 2999.24})
+  tran20.update({created_at: 10.minutes.ago})
+  tran19.update({created_at: 20.minutes.ago})
+  tran18.update({created_at: 30.minutes.ago})
+  tran17.update({created_at: 50.minutes.ago})
+  tran16.update({created_at: 200.minutes.ago})
+  tran15.update({created_at: 300.minutes.ago})
+  tran14.update({created_at: 2.days.ago})
+  tran13.update({created_at: 3.days.ago})
+  tran12.update({created_at: 3.days.ago})
+  tran11.update({created_at: 4.days.ago, current_total: 3000.24})
+  tran10.update({created_at: 4.days.ago})
+  tran9.update({created_at: 5.days.ago})
+  tran8.update({created_at: 9.days.ago, current_total: 2000.00})
+  tran7.update({created_at: 10.days.ago})
+  tran6.update({created_at: 20.days.ago})
+  tran5.update({created_at: 55.days.ago})
+  tran4.update({created_at: 100.days.ago})
+  tran3.update({created_at: 200.days.ago})
+  tran2.update({created_at: 300.days.ago})
+  tran1.update({created_at: 500.days.ago})
 
   watch1 = Watchlist.create!(user_id: user1.id, name: 'Stock Watchlist');
-  # watch2 = Watchlist.create!(user_id: user1.id, name: 'Crypt Watchlist');
 
-  # asset1 = WatchlistAsset.create!(watchlist_id: 1, symbol: 'AMC');
   asset1 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'AMC');
   asset2 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'GME');
   asset2 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'DIS');
-  # asset3 = WatchlistAsset.create!(watchlist_id: watch1.id, symbol: 'DIS');
-  # asset4 = WatchlistAsset.create!(watchlist_id: watch2.id, symbol: 'BTC');
-  # asset5 = WatchlistAsset.create!(watchlist_id: watch2.id, symbol: 'AMC');
 
 end

@@ -103,7 +103,7 @@ export default class AssetShow extends React.Component {
               <div className='stats-body'>{`insert description from api`}</div>
             </div> */}
           </div>
-          <TransactionForm symbol={this.state.symbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} quantityOwned={quantityOwned} sign={sign} errors={this.props.errors} createWatchlistAsset={this.props.createWatchlistAsset}/>
+          <TransactionForm symbol={this.props.match.params.assetSymbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} quantityOwned={quantityOwned} sign={sign} errors={this.props.errors} createWatchlistAsset={this.props.createWatchlistAsset}/>
         </div>
       </div>
     )
