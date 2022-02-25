@@ -25,16 +25,13 @@ export default class TransactionForm extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.symbol !== this.props.symbol) {
       this.setState({
-        owner_id: this.props.user.id,
         is_purchase: true,
         quantity: '',
         dollars: '',
-        transaction_price: this.props.currentPrice,
         symbol: this.props.symbol,
         transaction_unit: 'shares',
         isSubmitted: false,
         valueOwned: formatDollarString((this.props.currentPrice * this.props.quantityOwned)),
-        textColor: this.props.sign === '+' ? 'greenText' : 'redText',
         errors: []
       })
     }
@@ -192,6 +189,7 @@ export default class TransactionForm extends React.Component {
   }
 
   render() {
+    console.log('form render', this.state)
     if (this.state.isSubmitted) return this.renderPurchase();
     const formEnd = (this.state.transaction_unit === 'shares') ? 
       this.renderSharesForm() : this.renderDollarsForm()
