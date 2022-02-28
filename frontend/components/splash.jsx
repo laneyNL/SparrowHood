@@ -30,8 +30,9 @@ export default class Splash extends React.Component {
     return (
       <div className='splash'>
         <div className='splash-disclaimer-modal'>
-          <div>
-            
+          <div className='splash-disclaimer-modal-text'>
+            Disclaimer:<br /><br />
+            Sparrowhood is a clone of the website Robinhood created for learning purposes. This website does not perform real transactions.
           </div>
         </div>
         <nav>
