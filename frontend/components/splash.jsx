@@ -29,6 +29,11 @@ export default class Splash extends React.Component {
 
     return (
       <div className='splash'>
+        <div className='splash-disclaimer-modal'>
+          <div>
+            
+          </div>
+        </div>
         <nav>
           <Link to='/' className='nav-home'>Sparrowhood <img src={'https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/green-feather.png'}alt="feather" id='feather' className='splash-feather'/></Link>
           <div className='hide-nav'><a href="https://github.com/laneyNL" target="_blank">GitHub <i className="fab fa-github"></i></a></div>
