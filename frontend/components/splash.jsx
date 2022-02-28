@@ -25,14 +25,21 @@ export default class Splash extends React.Component {
     }
   }
 
+  hideModal() {
+    $('.splash-disclaimer-modal').hide();
+  }
+
   render() {
 
     return (
-      <div className='splash'>
+      <div className='splash' onClick={this.hideModal}>
         <div className='splash-disclaimer-modal'>
           <div className='splash-disclaimer-modal-text'>
-            Disclaimer:<br /><br />
-            Sparrowhood is a clone of the website Robinhood created for learning purposes. This website does not perform real transactions.
+            <div>
+              <span className='disclaimer'>Disclaimer:</span> <br /><br />
+            Sparrowhood is a clone of the website Robinhood created as as student project. <br /><br /> This website does not perform real transactions.<br /><br />
+            Click anywhere to proceed.
+          </div>
           </div>
         </div>
         <nav>

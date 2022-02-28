@@ -210,14 +210,13 @@ footer li {
 
 .splash-disclaimer-modal {
   position: absolute;
-  background-color: gray;
   width:100%;
   height: 100%;
-  color: white;
   z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .splash-disclaimer-modal-text {
@@ -227,8 +226,15 @@ footer li {
   text-align: center;
   width: 50%;
   height: 50%;
-  background-color: black;
-  font-size: 30px;
+  color: rgb(78, 74, 74);
+  background-color: rgb(211, 209, 209);
+  font-size: 20px;
   padding: 10%;
   border-radius: 5px;
+  border: 10px solid #2e302e;
+}
+
+.disclaimer {
+  font-size: 30px;
+  color: rgb(78, 74, 74);
 }
