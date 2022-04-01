@@ -225,13 +225,14 @@ footer li {
   align-items: center;
   text-align: center;
   width: 50%;
-  height: 50%;
+  height: 35%;
   color: rgb(78, 74, 74);
-  background-color: rgb(211, 209, 209);
+  background-color: rgb(252, 246, 246);
   font-size: 20px;
   padding: 10%;
   border-radius: 5px;
-  border: 10px solid #2e302e;
+  -webkit-box-shadow: 5px 5px 15px 5px #919191; 
+  box-shadow: 5px 5px 15px 5px #919191;
 }
 
 .disclaimer {
