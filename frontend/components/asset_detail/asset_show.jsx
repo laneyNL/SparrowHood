@@ -96,6 +96,7 @@ export default class AssetShow extends React.Component {
 
         <div className='asset-show-body'>
           <div className='main-asset-chart'>
+            
             <div className='assetChartContainter'>
               <AssetChart assets={this.props.assets} name={details['Name']} symbol={this.state.symbol} color={this.state.color} setColor={this.setColor}/>
             </div>
@@ -106,12 +107,11 @@ export default class AssetShow extends React.Component {
               <div className='about-title'>About Company</div>
               <div className='about-body'>{details['Description']}</div>
             </div>
-            {/* <div className='stats'>
-              <div className='stats-title'>Key statistics</div>
-              <div className='stats-body'>{`insert description from api`}</div>
-            </div> */}
+
           </div>
+
           <TransactionForm symbol={this.props.match.params.assetSymbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} quantityOwned={quantityOwned} sign={sign} errors={this.props.errors} createWatchlistAsset={this.props.createWatchlistAsset} color={this.state.color}/>
+
         </div>
       </div>
     )

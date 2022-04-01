@@ -15,6 +15,7 @@ const AssetChart = ({ name, assets, symbol, color, setColor }) => {
   const values = Object.values(assetObject);
   let labels = assetKeys.reverse();
   let data = values.map(value => value["4. close"]).reverse();
+
   if (days > 1) {
     let start = assetKeys.length - 1 - days;
     labels = assetKeys.slice(start, assetKeys.length);
@@ -26,7 +27,6 @@ const AssetChart = ({ name, assets, symbol, color, setColor }) => {
   const [difference, setDifference] = useState(currentValue - initial);
   const [percDiff, setPercDiff] = useState(Math.abs((difference / initial) * 100).toFixed(2));
   const [sign, setSign] = useState((difference > 0) ? '+' : '-');
-
 
   const chartData = {
     labels: labels,
@@ -142,24 +142,23 @@ const AssetChart = ({ name, assets, symbol, color, setColor }) => {
       plugins: [tooltipLine]
     };
 
-    // if (true) {
-      setCurrentValue(parseFloat(data[data.length - 1]));
-      setInitial(parseFloat(data[0]));
-      setDifference(currentValue - initial);
-      setPercDiff(Math.abs((difference / initial) * 100).toFixed(2));
-      setSign((difference > 0) ? '+' : '-');
-      let colorClass = sign === '+' ? 'greenText' : 'redText';
-      setColor(colorClass);
+    setCurrentValue(parseFloat(data[data.length - 1]));
+    setInitial(parseFloat(data[0]));
+    setDifference(currentValue - initial);
+    setPercDiff(Math.abs((difference / initial) * 100).toFixed(2));
+    setSign((difference > 0) ? '+' : '-');
+    let colorClass = sign === '+' ? 'greenText' : 'redText';
+    setColor(colorClass);
 
-      $('#currentValue').html(`${formatDollarString(currentValue)}`)
-      $('#difference-value').html(`${sign}${formatDollarString(Math.abs(difference))} (${sign}${percDiff} %)`)
+    $('#currentValue').html(`${formatDollarString(currentValue)}`)
+    $('#difference-value').html(`${sign}${formatDollarString(Math.abs(difference))} (${sign}${percDiff} %)`)
 
-      $('#assetChart').remove();
-      $(`#assetChartDiv`).append("<canvas id='assetChart' width={600} height={200}/>");
-      const canvas = document.getElementById('assetChart');
-      if (canvas) {
-        const myChart = new Chart(canvas, config)
-      // }
+    $('#assetChart').remove();
+    $(`#assetChartDiv`).append("<canvas id='assetChart' width={600} height={200}/>");
+    const canvas = document.getElementById('assetChart');
+
+    if (canvas) {
+      const myChart = new Chart(canvas, config)
 
       const activeIntervalId = `#${chartInterval.split(' ').join('-')}`;
       $(activeIntervalId).addClass('active-filter');
@@ -196,11 +195,6 @@ const AssetChart = ({ name, assets, symbol, color, setColor }) => {
     }
   }
 
-  // let colorClass = this.props.color === '+' ? 'greenText' : 'redText';
-  // changes color for transaction form and modal
-  // $('.changeColor').removeClass('greenText');
-  // $('.changeColor').removeClass('redText');
-  // $('.changeColor').addClass(this.useState.);
 
   return (
     <div className='chart'>
