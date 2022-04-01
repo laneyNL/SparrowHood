@@ -12,6 +12,14 @@ export default class AssetShow extends React.Component {
     this.state = {
       symbol: this.props.match.params.assetSymbol,
       loading: true,
+      color: 'greenText'
+    }
+    this.setColor = this.setColor.bind(this);
+  }
+
+  setColor(color) {
+    if (this.state.color !== color) {
+      this.setState({ color: color});
     }
   }
 
@@ -89,7 +97,7 @@ export default class AssetShow extends React.Component {
         <div className='asset-show-body'>
           <div className='main-asset-chart'>
             <div className='assetChartContainter'>
-              <AssetChart assets={this.props.assets} name={details['Name']} symbol={this.state.symbol} />
+              <AssetChart assets={this.props.assets} name={details['Name']} symbol={this.state.symbol} color={this.state.color} setColor={this.setColor}/>
             </div>
 
             {this.renderAssetDetails(symbolDetails, quantityOwned, currentPrice, initialPrice)}
@@ -103,7 +111,7 @@ export default class AssetShow extends React.Component {
               <div className='stats-body'>{`insert description from api`}</div>
             </div> */}
           </div>
-          <TransactionForm symbol={this.props.match.params.assetSymbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} quantityOwned={quantityOwned} sign={sign} errors={this.props.errors} createWatchlistAsset={this.props.createWatchlistAsset}/>
+          <TransactionForm symbol={this.props.match.params.assetSymbol} user={this.props.user} assets={this.props.assets} createTransaction={this.props.createTransaction} currentPrice={currentPrice} quantityOwned={quantityOwned} sign={sign} errors={this.props.errors} createWatchlistAsset={this.props.createWatchlistAsset} color={this.state.color}/>
         </div>
       </div>
     )

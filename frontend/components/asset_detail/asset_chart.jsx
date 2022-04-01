@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { formatDollarString } from '../../util/format_util';
 
-const AssetChart = ({ name, assets, symbol }) => {
+const AssetChart = ({ name, assets, symbol, color, setColor }) => {
   
   if (jQuery.isEmptyObject(assets) || !assets['interval'] || !assets['full']) return null;
 
@@ -148,6 +148,8 @@ const AssetChart = ({ name, assets, symbol }) => {
       setDifference(currentValue - initial);
       setPercDiff(Math.abs((difference / initial) * 100).toFixed(2));
       setSign((difference > 0) ? '+' : '-');
+      let colorClass = sign === '+' ? 'greenText' : 'redText';
+      setColor(colorClass);
 
       $('#currentValue').html(`${formatDollarString(currentValue)}`)
       $('#difference-value').html(`${sign}${formatDollarString(Math.abs(difference))} (${sign}${percDiff} %)`)
@@ -162,7 +164,7 @@ const AssetChart = ({ name, assets, symbol }) => {
       const activeIntervalId = `#${chartInterval.split(' ').join('-')}`;
       $(activeIntervalId).addClass('active-filter');
     }
-  })
+  }, [chartInterval]);
 
   const handleClick = (interval) => {
     return (e) => {
@@ -194,11 +196,11 @@ const AssetChart = ({ name, assets, symbol }) => {
     }
   }
 
-  let colorClass = sign === '+' ? 'greenText' : 'redText';
+  // let colorClass = this.props.color === '+' ? 'greenText' : 'redText';
   // changes color for transaction form and modal
-  $('.changeColor').removeClass('greenText');
-  $('.changeColor').removeClass('redText');
-  $('.changeColor').addClass(colorClass);
+  // $('.changeColor').removeClass('greenText');
+  // $('.changeColor').removeClass('redText');
+  // $('.changeColor').addClass(this.useState.);
 
   return (
     <div className='chart'>
@@ -218,12 +220,12 @@ const AssetChart = ({ name, assets, symbol }) => {
       </div>
 
       <div className='chartOptions'>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Today')} id='Today'>1D</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Week')} id='Past-Week'>1W</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Month')} id='Past-Month'>1M</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')} id='Past-3-Months'>3M</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Year')} id='Past-Year'>1Y</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 5 Years')} id='Past-5-Years'>5Y</span>
+        <span className={`chart-filter ${color}`} onClick={handleClick('Today')} id='Today'>1D</span>
+        <span className={`chart-filter ${color}`} onClick={handleClick('Past Week')} id='Past-Week'>1W</span>
+        <span className={`chart-filter ${color}`} onClick={handleClick('Past Month')} id='Past-Month'>1M</span>
+        <span className={`chart-filter ${color}`} onClick={handleClick('Past 3 Months')} id='Past-3-Months'>3M</span>
+        <span className={`chart-filter ${color}`} onClick={handleClick('Past Year')} id='Past-Year'>1Y</span>
+        <span className={`chart-filter ${color}`} onClick={handleClick('Past 5 Years')} id='Past-5-Years'>5Y</span>
       </div>
 
     </div>

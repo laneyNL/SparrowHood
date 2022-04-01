@@ -14,7 +14,6 @@ export default class TransactionForm extends React.Component {
       transaction_unit: 'shares',
       isSubmitted: false,
       valueOwned: formatDollarString((this.props.currentPrice * this.props.quantityOwned)),
-      textColor: this.props.sign === '+' ? 'greenText' : 'redText',
       errors: []
     }
     this.handleReturnClick = this.handleReturnClick.bind(this);
@@ -162,7 +161,7 @@ export default class TransactionForm extends React.Component {
             </div>
             <div className=' complete-text'>Your order to market {transactionType} ${Math.abs(purchaseTotal)} of {this.props.symbol} was completed.</div>
             <div className='transaction-button-div'>
-            <button className={`changeColor transaction-button ${this.state.textColor} complete-button`} onClick={this.handleReturnClick}>Done</button>
+            <button className={`changeColor ${this.props.color} transaction-button complete-button`} onClick={this.handleReturnClick}>Done</button>
             </div>
           </div>
         </div>
@@ -181,7 +180,7 @@ export default class TransactionForm extends React.Component {
       available = `${this.state.valueOwned} Available`;
     }
 
-    return <div className={`transaction-form-buy-power changeColor ${this.state.textColor}`}>{available}</div>
+    return <div className={`transaction-form-buy-power changeColor ${this.props.color}`}>{available}</div>
   }
 
   toggleModal() {
@@ -197,13 +196,16 @@ export default class TransactionForm extends React.Component {
     if (this.state.errors[0]) {
       errors = <div className='transaction-errors'><i className="fas fa-exclamation-circle"></i> {`${this.state.errors[0]}`} </div>
     }
+
     return (
       <aside className='transaction-form-container'>
         <form className='transaction-form' onSubmit={this.handleSubmit}>
+
           <div className='transaction-options'>
-            <div className={`changeColor purchase-option ${this.state.textColor} active`} id='buy-option' onClick={this.handleClick('buy')}>Buy {this.props.symbol}</div>
-            <div className={`changeColor purchase-option ${this.state.textColor}`} id='sell-option' onClick={this.handleClick('sell')}>Sell {this.props.symbol}</div>
+            <div className={`changeColor ${this.props.color} purchase-option active`} id='buy-option' onClick={this.handleClick('buy')}>Buy {this.props.symbol}</div>
+            <div className={`changeColor ${this.props.color} purchase-option`} id='sell-option' onClick={this.handleClick('sell')}>Sell {this.props.symbol}</div>
           </div>
+
           <div className='transaction-form-body'>
             <div className='transaction-form-selections'><span>Order Type</span><span>Market Order</span></div>
             <div className='transaction-form-selections'>
@@ -213,16 +215,20 @@ export default class TransactionForm extends React.Component {
                 <option value="dollars" className='unit-value-input'>Dollars</option>
               </select>
             </div>
+
             {formEnd}
             { errors }
+
             <div className='transaction-button-div'>
-              <button className={`changeColor transaction-button ${this.state.textColor}`}>Review Order</button>
+              <button className={`changeColor ${this.props.color} transaction-button`}>Review Order</button>
             </div>
           </div>
+
           {this.renderAvailable()}
+          
         </form>
 
-        <button onClick={this.toggleModal} className={`add-list-button changeColor ${this.state.textColor}`}>Add to Lists</button>
+        <button onClick={this.toggleModal} className={`add-list-button changeColor ${this.props.color}`}>Add to Lists</button>
       </aside>
     )
   }
