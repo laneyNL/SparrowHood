@@ -14,8 +14,10 @@ export default class Portfolio extends React.Component {
     this.state = {
       stockSymbols: [],
       watchlistValues: [],
-      loading: true
+      loading: true,
+      color: 'green'
     }
+    this.updateColor = this.updateColor.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +51,11 @@ export default class Portfolio extends React.Component {
     document.querySelector('.funds-modal').classList.toggle('hidden');
   }
 
+  updateColor(color) {
+    console.log('updating color', this.state.color, color)
+    if (this.state.color !== color) this.setState({color: color});
+  }
+
 
   render() {
     if (this.state.loading) return <LoadingSpinner/>;
@@ -56,14 +63,14 @@ export default class Portfolio extends React.Component {
     return (
       <div className='portfolio-splash'>
         
-        <AddFundsForm addFunds={this.props.addFunds} user={this.props.user} fetchTransactions={this.props.fetchTransactions} user={this.props.user}/>
+        <AddFundsForm addFunds={this.props.addFunds} user={this.props.user} fetchTransactions={this.props.fetchTransactions} user={this.props.user} color={this.state.color}/>
         
         <PortfolioHeaderContainer />
 
         <div className='portfolio'>
           <div className='main-chart'>
 
-            <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={transactions} interval={this.props.interval}/>
+            <PortfolioChart fetchTransactions={this.props.fetchTransactions} user={this.props.user} transactions={transactions} interval={this.props.interval} color={this.state.color} updateColor={this.updateColor}/>
 
             <div className='buying-power-div' >
               <div className='buying-power flex-between' onClick={this.clickBuyPower}>
@@ -96,7 +103,7 @@ export default class Portfolio extends React.Component {
             <p>Stocks</p>
             {
               this.state.stockSymbols.map((symbol, idx) =>
-                <AssetListItem symbol={symbol} assets={this.props.assets['interval']} key={idx} quantity={this.props.symbols[symbol].quantity}/>
+                <AssetListItem symbol={symbol} assets={this.props.assets['interval']} key={idx} quantity={this.props.symbols[symbol].quantity} />
                 )
             }
             <p>Lists</p>
