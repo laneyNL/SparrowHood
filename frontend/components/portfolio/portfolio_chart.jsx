@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { formatDollarString } from '../../util/format_util';
 
 const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
-  
-  if (!transactions.length) return <div className='no-transactions'>Search for and purchase a stock to display a chart of your transactions.</div>;
+  if (!transactions.length) transactions.push({'currentTotal': 0})
 
   const [currentTotal, setCurrentTotal] = useState(transactions[transactions.length - 1].currentTotal);
   const [initial, setInitial] = useState(transactions[0].currentTotal);
@@ -41,7 +40,7 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user}) => {
     if (canvas) {
       const myChart = new Chart(canvas, config)
     }
-  })
+  }, [transactions])
 
   const handleClick = (interval) => {
     return (e) => {
