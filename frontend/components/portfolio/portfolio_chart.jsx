@@ -54,12 +54,10 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user, color, 
 
   return (
     <div className='chart'>
-        <div className='totalValue' id='currentTotal'>
-          
-        </div>
+        <div className='totalValue' id='currentTotal'></div>
 
         <div className='difference'>
-        <span id='difference'>  </span>
+          <span id='difference'></span>
           <span id='interval'> {interval}</span>
         </div>
 
@@ -73,26 +71,11 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user, color, 
           <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Month')}>1M</span>
           <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past 3 Months')}>3M</span>
           <span className={`chart-filter ${colorClass}`} onClick={handleClick('Past Year')}>1Y</span>
-        <span className={`chart-filter ${colorClass}`} onClick={handleClick('All Time')} id='ALL'>ALL</span>
+          <span className={`chart-filter ${colorClass}`} onClick={handleClick('All Time')} id='ALL'>ALL</span>
         </div>
 
       </div>
   )
-}
-
-
-const getChartData = (transactions, color) => {
-  return ({
-    labels: transactions.map(action => action.createdAt),
-    datasets: [
-      {
-        data: transactions.map(action => action.currentTotal),
-        fill: false,
-        borderColor: color,
-        tension: 0.4,
-      }
-    ]
-  })
 }
 
 const setHeadings = (total, sign, diff, percDiff) => {
@@ -112,6 +95,20 @@ const setHeadings = (total, sign, diff, percDiff) => {
   diffDiv.innerHTML = subheading;
 }
 
+const getChartData = (transactions, color) => {
+  return ({
+    labels: transactions.map(action => action.createdAt),
+    datasets: [
+      {
+        data: transactions.map(action => action.currentTotal),
+        fill: false,
+        borderColor: color,
+        tension: 0.4,
+      }
+    ]
+  })
+}
+
 const getChartOptions = (transactions, initial) => {
   return (
     {
@@ -120,9 +117,7 @@ const getChartOptions = (transactions, initial) => {
           ticks: { display: false }
         },
         y: {
-          ticks: {
-            display: false,
-          },
+          ticks: { display: false,},
         }
       },
       onHover: (e, legendItem, legend) => {
@@ -209,4 +204,5 @@ const timeLabel = (tooltipItem) => {
       return `${dateStringSplit[0]} ${dateStringSplit[1]}, ${dateStringSplit[2]}`
   }
 }
+
 export default PortfolioChart
