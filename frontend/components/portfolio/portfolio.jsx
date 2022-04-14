@@ -52,7 +52,6 @@ export default class Portfolio extends React.Component {
   }
 
   updateColor(color) {
-    console.log('updating color', this.state.color, color)
     if (this.state.color !== color) this.setState({color: color});
   }
 
