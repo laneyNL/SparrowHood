@@ -12,7 +12,7 @@ export default class AssetShow extends React.Component {
     this.state = {
       symbol: this.props.match.params.assetSymbol,
       loading: true,
-      color: 'greenText'
+      color: 'green'
     }
     this.setColor = this.setColor.bind(this);
   }

@@ -210,4 +210,5 @@ const timeLabel = (tooltipItem) => {
   }
 }
 
+
 export default PortfolioChart

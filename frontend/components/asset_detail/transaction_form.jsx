@@ -161,7 +161,7 @@ export default class TransactionForm extends React.Component {
             </div>
             <div className=' complete-text'>Your order to market {transactionType} ${Math.abs(purchaseTotal)} of {this.props.symbol} was completed.</div>
             <div className='transaction-button-div'>
-            <button className={`changeColor ${this.props.color} transaction-button complete-button`} onClick={this.handleReturnClick}>Done</button>
+            <button className={`changeColor ${this.props.color+'Text'} transaction-button complete-button`} onClick={this.handleReturnClick}>Done</button>
             </div>
           </div>
         </div>
@@ -180,7 +180,7 @@ export default class TransactionForm extends React.Component {
       available = `${this.state.valueOwned} Available`;
     }
 
-    return <div className={`transaction-form-buy-power changeColor ${this.props.color}`}>{available}</div>
+    return <div className={`transaction-form-buy-power changeColor ${this.props.color + 'Text'}`}>{available}</div>
   }
 
   toggleModal() {
@@ -202,8 +202,8 @@ export default class TransactionForm extends React.Component {
         <form className='transaction-form' onSubmit={this.handleSubmit}>
 
           <div className='transaction-options'>
-            <div className={`changeColor ${this.props.color} purchase-option active`} id='buy-option' onClick={this.handleClick('buy')}>Buy {this.props.symbol}</div>
-            <div className={`changeColor ${this.props.color} purchase-option`} id='sell-option' onClick={this.handleClick('sell')}>Sell {this.props.symbol}</div>
+            <div className={`changeColor ${this.props.color + 'Text'} purchase-option active`} id='buy-option' onClick={this.handleClick('buy')}>Buy {this.props.symbol}</div>
+            <div className={`changeColor ${this.props.color + 'Text'} purchase-option`} id='sell-option' onClick={this.handleClick('sell')}>Sell {this.props.symbol}</div>
           </div>
 
           <div className='transaction-form-body'>
@@ -220,7 +220,7 @@ export default class TransactionForm extends React.Component {
             { errors }
 
             <div className='transaction-button-div'>
-              <button className={`changeColor ${this.props.color} transaction-button`}>Review Order</button>
+              <button className={`changeColor ${this.props.color + 'Text'} transaction-button`}>Review Order</button>
             </div>
           </div>
 
@@ -228,7 +228,7 @@ export default class TransactionForm extends React.Component {
           
         </form>
 
-        <button onClick={this.toggleModal} className={`add-list-button changeColor ${this.props.color}`}>Add to Lists</button>
+        <button onClick={this.toggleModal} className={`add-list-button changeColor ${this.props.color + 'Text'}`}>Add to Lists</button>
       </aside>
     )
   }
