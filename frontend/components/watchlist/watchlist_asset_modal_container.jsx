@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
     // symbolDetails: state.enti ties.transactions.symbols,
     watchlists: state.entities.watchlist,
     errors: state.errors.watchlist || [],
-    color: (ownProps.sign === '+') ? 'greenText' : 'redText'
+    color: ownProps.color === 'green' ? 'greenText' : 'redText',
   }
 }
 
