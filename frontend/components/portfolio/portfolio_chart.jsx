@@ -7,7 +7,6 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user, color, 
   const [currentTotal, setCurrentTotal] = useState(transactions[transactions.length - 1].currentTotal);
   const [initial, setInitial] = useState(transactions[0].currentTotal);
   const [target, setTarget] = useState();
-  const chartOptions = getChartOptions(transactions, initial);
 
   useEffect(() => {
     setCurrentTotal(transactions[transactions.length - 1].currentTotal);
@@ -21,6 +20,14 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user, color, 
     if (!target) setTarget(document.getElementById('ALL'));
     if (target) target.classList.add('active-filter');
 
+  }, [interval, color, target])
+
+  useEffect(() => {
+    let currColor = currentTotal - initial > 0 ? 'green' : 'red'
+    updateColor(currColor);
+
+    const chartData = getChartData(transactions, currColor);
+    const chartOptions = getChartOptions(transactions, initial);
     const config = {
       type: 'line',
       data: chartData,
@@ -31,13 +38,8 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user, color, 
     $('#myChart').remove();
     $(`#chartDiv`).append("<canvas id='myChart' width={600} height={200}/>");
     const canvas = document.getElementById('myChart');
-
     const myChart = new Chart(canvas, config);
-
-  }, [interval, color, target])
-
-  useEffect(() => {
-    updateColor(currentTotal - initial > 0 ? 'green' : 'red');
+    
   }, [initial]);
 
   const handleClick = (newInterval) => {
@@ -54,11 +56,8 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user, color, 
   let sign = (difference >= 0) ? '+' : '-';
   
   let colorClass = color === 'green' ? 'greenText' : 'redText';
-  const chartData = getChartData(transactions, color);
 
   setHeadings(currentTotal, sign, difference, percDiff);
-  // $('.chart-filter').removeClass('active-filter');
-  // if (target) target.classList.add('active-filter');
 
   return (
     <div className='chart'>
