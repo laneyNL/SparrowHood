@@ -6,16 +6,20 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user, color, 
 
   const [currentTotal, setCurrentTotal] = useState(transactions[transactions.length - 1].currentTotal);
   const [initial, setInitial] = useState(transactions[0].currentTotal);
+  const [target, setTarget] = useState();
   const chartOptions = getChartOptions(transactions, initial);
 
   useEffect(() => {
-    console.log('useEffect')
     setCurrentTotal(transactions[transactions.length - 1].currentTotal);
     setInitial(transactions[0].currentTotal);
-    updateColor(difference > 0 ? 'green' : 'red');
+
     if (document.getElementById('currentTotal').innerHTML === '') {
       setHeadings(currentTotal, sign, difference, percDiff);
     }
+
+    $('.chart-filter').removeClass('active-filter');
+    if (!target) setTarget(document.getElementById('ALL'));
+    if (target) target.classList.add('active-filter');
 
     const config = {
       type: 'line',
@@ -30,14 +34,17 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user, color, 
 
     const myChart = new Chart(canvas, config);
 
-  }, [interval, color])
+  }, [interval, color, target])
+
+  useEffect(() => {
+    updateColor(currentTotal - initial > 0 ? 'green' : 'red');
+  }, [initial]);
 
   const handleClick = (newInterval) => {
     return (e) => {
       if (newInterval !== interval) {
-        $('.chart-filter').removeClass('active-filter');
-        e.currentTarget.classList.add('active-filter');
-        fetchTransactions(user.id, newInterval);
+        fetchTransactions(user.id, newInterval)
+        setTarget(e.currentTarget);
       }
     }
   }
@@ -46,11 +53,12 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user, color, 
   let percDiff = Math.abs((difference / initial) * 100).toFixed(2);
   let sign = (difference >= 0) ? '+' : '-';
   
-
   let colorClass = color === 'green' ? 'greenText' : 'redText';
   const chartData = getChartData(transactions, color);
 
   setHeadings(currentTotal, sign, difference, percDiff);
+  // $('.chart-filter').removeClass('active-filter');
+  // if (target) target.classList.add('active-filter');
 
   return (
     <div className='chart'>
@@ -79,7 +87,6 @@ const PortfolioChart = ({transactions, interval, fetchTransactions,user, color, 
 }
 
 const setHeadings = (total, sign, diff, percDiff) => {
-  console.log(total, sign)
   let heading = `${formatDollarString(total)}`;
   let subheading = `${sign}${formatDollarString(Math.abs(diff))} (${sign}${percDiff.toLocaleString("en-US")}%)`;
 
@@ -124,7 +131,6 @@ const getChartOptions = (transactions, initial) => {
 
         if (legendItem[0]) {
           let hoverTotal = transactions[legendItem[0].index].currentTotal;
-          console.log('hovertotal', hoverTotal)
           const hoverDiff = (hoverTotal) - initial;
           const hoverPercDiff = formatDollarString(Math.abs((hoverDiff / initial) * 100));
           let hoverSign = '';
