@@ -78,9 +78,6 @@ export default class WatchlistShow extends React.Component {
       })
   }
 
-    // if (!this.props.assets.full || !this.props.assets.full[asset.symbol] || !this.props.assets.details || !this.props.assets.details[asset.symbol]) {
-  // }
-
   componentDidUpdate(prevProps) {
     $(`#watchlist-icon-${this.state.id}`).html(this.state.icon);
     if (prevProps.match.params.watchlistId !== this.props.match.params.watchlistId) {
@@ -140,7 +137,6 @@ export default class WatchlistShow extends React.Component {
   sortTable(column) {
     return (e) => {
       let isReversed;
-      // const jqueryId = `#${column}`;
       $(`.sort-caret`).html('');
       if ($(`#${column}`).hasClass('sort')) {
         $(`#${column}`).removeClass('sort');
@@ -167,13 +163,13 @@ export default class WatchlistShow extends React.Component {
     if (column === 'name' || column === 'symbol') {
       if (item1 > item2) return 1;
       if (item1 < item2) return -1;
-      return 0;
     } else {
       if (parseFloat(item1) > parseFloat(item2)) return 1;
       if (parseFloat(item1) < parseFloat(item2)) return -1;
-      return 0;
     }
+    return 0;
   }
+
 
   sortArray(symbolArray, col, isReversed) {
     if (symbolArray.length <= 1) return symbolArray;
