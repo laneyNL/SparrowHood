@@ -30,7 +30,7 @@ export default class AssetListItem extends React.Component {
           </div>
           <div className='column asset-sidebar-item'>
             <div className=''>{formatDollarString(closePrice)}</div>
-            <div className={colorClass}>{`${sign}${percentDiff.toFixed(2)}%`}</div>
+            <div className={colorClass}>{`${sign}${Math.abs(percentDiff).toFixed(2)}%`}</div>
           </div>
         </div>
       </Link>
