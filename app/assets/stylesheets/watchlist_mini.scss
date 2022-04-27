@@ -3,6 +3,11 @@
   margin: 5px 0;
   cursor: pointer;
 }
+
+.portfolio-splash .mini-watchlist-item:hover, .portfolio-splash .mini-watchlist-item:hover > .mini-icon {
+  background-color: rgba(102,109,113,1);
+}
+
 .mini-watchlist-item div {
   padding-left: 10px;
 }

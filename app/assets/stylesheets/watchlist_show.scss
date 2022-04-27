@@ -258,6 +258,10 @@ th:hover, .filter-icon:hover, .watchlist-delete-list:hover {
   align-items: center;
 }
 
+.watchlist-show .watchlist-side-bar-item:hover, .watchlist-show  .watchlist-side-bar-item:hover .mini-icon {
+  background-color: rgba(102,109,113,1);
+}
+
 .watchlist-side-bar-item .watchlist-side-bar-item {
   display: flex;
   justify-content: space-between;
